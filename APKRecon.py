@@ -3,7 +3,7 @@ import zipfile
 
 #To know the contents of a package
 def apkInfo(apk_name) :
-    apk = zipfile.ZipFile('app.apk', 'r')
+    apk = zipfile.ZipFile(apk_name, 'r')
     manifest = apk.read('AndroidManifest.xml')
     dex = apk.read('classes.dex')
 
