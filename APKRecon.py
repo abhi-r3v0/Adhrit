@@ -1,6 +1,6 @@
 import zipfile
 import os
-import subprocess
+import sys
 
 #To know the contents of a package
 def apkInfo(apk_name) :
@@ -18,6 +18,9 @@ def apkInfo(apk_name) :
     for file in os.listdir("Extracts") :
         print "\t" +file
     print "\n\n"
+    if os.path.exists('Extracts') :
+        os.chdir('Extracts')
+    dexstrings = os.system("strings classes.dex")
 
 #Main fuction starts here
 if __name__ == "__main__" :
