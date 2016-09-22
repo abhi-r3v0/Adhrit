@@ -1,4 +1,5 @@
 import zipfile
+import os
 
 
 #To know the contents of a package
@@ -13,8 +14,10 @@ def apkInfo(apk_name) :
     if manifest :
         print "Manifest found"
 
+    apk.extractall("Extracts")
+    print "Extracted the file contents to directory : Extracts"
 
 
 #Main fuction starts here
 if __name__ == "__main__" :
-    apkInfo('app.apk')
+    apkInfo("app.apk")
