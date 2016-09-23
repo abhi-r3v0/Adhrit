@@ -40,13 +40,16 @@ def apkInfo(apk_name) :
     print "\n************************  Native Libraries  ************************"
 
     if os.path.exists("lib") :
+        os.chdir("lib")
         for libs in os.listdir("lib") :
             print "[+]" +libs
     else :
         print "\n[-] No libraries found"
-        os.chdir("lib")
+
+
 
     print "\n********************************************************************"
+
 
 #Main fuction starts here
 if __name__ == "__main__" :
