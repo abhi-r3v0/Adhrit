@@ -1,5 +1,5 @@
 # Dhruva
-Dhruva is an open source Android APK ripping tool that does a basic recon on the provided APK file. Built mainly with CTFs as a focus. 
+Dhruva is an open source Android APK ripping tool that does a basic recon on the provided APK file. Built mainly with CTFs on focus. 
 
 ## Uses :
 
