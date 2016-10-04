@@ -7,6 +7,7 @@ Dhruva is an open source Android APK ripping tool that does a basic recon on the
 2. Does a strings on the dex and searches for flags.
 3. Extracts the jar out of the dex.
 4. Checks for native libraries.
+5. Extracts smali code using APKTool.
 
 ## Pre-requisites :
 
