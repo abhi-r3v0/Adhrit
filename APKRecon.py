@@ -26,6 +26,8 @@ class Dhruva :
 
         apk.extractall("Extracts")
         print "\n\t [+]  Extracted the file contents to directory : Extracts"
+        jarcpy = 'mv ' + apk_name + '-dex2jar.jar' + ' Extracts'
+        os.system(jarcpy)
         print "\n\n******************* Extracted Contents *************************"
         for file in os.listdir("Extracts") :
             print "\t" +file
@@ -59,6 +61,7 @@ class Dhruva :
 
             print "\n********************************************************************"
 
+        
 
 
 #Main fuction starts here
