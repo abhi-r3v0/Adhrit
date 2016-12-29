@@ -18,16 +18,26 @@ class Dhruva :
         print("\n")
 
         print "********************** Extracting Source ***************************"
-        dexCommand = 'sh JarConverter.sh '+apk_name
+        dexCommand = 'sh JarConverter.sh --force '+apk_name
         os.system(dexCommand)
         print "\t[+] " +apk_name + "'s source has been extracted as jar"
+
+
+
+	print "\n********************  Extracting java files  ***********************"
+	namesplit = apk_name.split('.')[0]
+	javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source' + ' 1> /dev/null 2> /dev/null'
+	os.system(javaSrc)
+	print "\n Extraction complete. Java source files can be found in ' Source ' folder."
+	
         print "********************************************************************"
 
 
         apk.extractall("Extracts")
         print "\n\t [+]  Extracted the file contents to directory : Extracts"
-        jarcpy = 'mv ' + apk_name + '-dex2jar.jar' + ' Extracts'
+        jarcpy = 'mv ' + namesplit + '-dex2jar.jar' + ' Extracts'
         os.system(jarcpy)
+
         print "\n\n******************* Extracted Contents *************************"
         for file in os.listdir("Extracts") :
             print "\t" +file
@@ -36,31 +46,33 @@ class Dhruva :
 
         print "\n********************************************************************"
         print "\n\t\t Executing Strings on classes.dex "
-        dexstrings = os.system('strings classes.dex > Strings.txt')
+        dexstrings1 = os.system('strings classes.dex > Strings1.txt')
+	if os.path.exists('classes2.dex') :
+		dexstrings2 = os.system('strings classes2.dex > Strings2.txt')
         #dexstrings = os.system('strings classes.dex | grep flag > Strings.txt')  Only for flags with 'flag'
 
         print "\n\n Output written to 'Strings.txt' found in the Extracts directory\n\n"
 
-        flagstr = [ 'flag{' ]
-        for i in flagstr :
-            if i in open('Strings.txt').read() :
-                print flagstr
-            else :
-                print "[-] Matching strings not found\n\n"
-
-
 
         print "\n************************  Native Libraries  ************************"
 
-        if os.path.exists("lib") :
-            os.chdir("lib")
-            for libs in os.listdir("lib") :
-                print "[+]" +libs
-        else :
-            print "\n[-] No libraries found"
+	if not os.path.exists("lib") :
+        	print "\n[-] No libraries found"
 
-            print "\n********************************************************************"
+        elif os.path.exists("lib") :
+        	for libdir in os.listdir("lib") :
+                	print "[+]" +libdir
+			newlibdir = libdir
+			if os.path.isdir(newlibdir) :
+				for libs in os.listdir(newlibdir) :
+					print "[++]" +libs
 
+        print "\n********************************************************************"
+
+
+	
+	
+	
         
 
 
