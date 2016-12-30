@@ -11,8 +11,9 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 
 ## Pre-requisites :
 
-1. Linux Machine
+1. Linux/Mac Machine
 2. Java JDK
+3. Python
 
 ## Usage :
 
