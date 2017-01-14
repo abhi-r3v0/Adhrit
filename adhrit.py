@@ -4,11 +4,20 @@ import sys
 import subprocess
 import shlex
 import argparse
+import webbrowser
+from Recons.apkRecon import apkRip
+
+
+
+__author__ = 'Abhishek J M  ( jmabhishek@gmail.com )'
+
 
 class Adhrit :
 
     def __init__(self) :
+
         self.apk_name = ""
+
 
     def Welcome(self) :
 	print "\n\n"
@@ -33,43 +42,8 @@ class Adhrit :
 	print "\n\n"
 
 
-
-    #Know all about the application.
-    def apkRip( self, apk_name ) :
-	
-	apk = zipfile.ZipFile(apk_name, 'r')
-	os.system("mkdir -p Analysis")
-
-	print "********************************************************************"
-	print "\n"
-        print "\n\t [+]  File input  :  " +apk.filename
-        print "\n\n"	
-
-	print "\n"
-	print "**********************  Package   ***************************"
-	print "\n"
-	labelCmd = "./aapt dump badging " + apk_name + "| grep package:\ name"
-	os.system(labelCmd)
-	print "\n\n"
-
-	print "**********************  Permissions  ***************************"
-	print "\n"
-	permCmd = "./aapt dump permissions "+apk_name + " | tee Permissions.txt"	
-    	os.system(permCmd)
-	print "\n\n"
-
-	print "************************  Manifest  *****************************"
-	print "\n"
-	confCmd = "./aapt dump badging "+apk_name+ " | tee Manifest.txt" 
-	os.system(confCmd)
-	print "\n"
-	os.system("mv Manifest.txt Analysis && mv Permissions.txt Analysis")
-	print "\n"
-	print " \t + + + + +   Manifest and permissions dump can be found in the 'Analysis' directory   + + + + +"
-	print "\n\n"    
-
-
-
+    def apkripper(self, apk_name) :
+        apkRip(apk_name)
 
 
 
@@ -78,7 +52,7 @@ class Adhrit :
 
         apk = zipfile.ZipFile(apk_name, 'r')
 
-        print "********************** Extracting Jar ***************************"
+        print "**********************  Extracting Jar  ***************************"
 	print "\n"
         dexCommand = 'sh JarConverter.sh --force '+apk_name
         os.system(dexCommand)
@@ -90,12 +64,12 @@ class Adhrit :
 
 
 	print "*******************  Extracting java files  **********************"
-	print "\n"	
+	print "\n"
 	namesplit = apk_name.split('.')[0]
 	javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source' + ' 1> /dev/null 2> /dev/null'
 	os.system(javaSrc)
 	print "\n Extraction complete. Java source files can be found in ' Source ' folder."
-	print "\n"	
+	print "\n"
         print "******************************************************************"
 	print "\n"
 
@@ -136,6 +110,7 @@ class Adhrit :
 
         print "************************  Native Libraries  ************************"
 	print "\n"
+	library = 'lib'
 	if not os.path.exists("lib") :
         	print "\n[-] No libraries found"
 
@@ -146,13 +121,12 @@ class Adhrit :
 			if os.path.isdir(newlibdir) :
 				for libs in os.listdir(newlibdir) :
 					print "[++]" +libs
+
 	print "\n"
         print "**********************************************************************"
 	print "\n\n\n"
 
-   
-    
-	
+
 
 
 
@@ -167,13 +141,13 @@ def main() :
 
     if args.a :
 	adhrit.Welcome()
-        adhrit.apkRip(args.a)
+        adhrit.apkripper(args.a)
        	adhrit.apkInfo(args.a)
-        
+
 
     elif args.r :
 	adhrit.Welcome()
-        adhrit.apkRip(args.r)
+        adhrit.apkripper(args.r)
 
 
 
