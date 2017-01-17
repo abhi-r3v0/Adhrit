@@ -1,14 +1,10 @@
 import zipfile
 import os
 import sys
-import subprocess
-import shlex
 import argparse
 import webbrowser
 
 
-'''def __init__(self) :
-    self.name = apk_name'''
 
 #Know all about the application.
 def apkRip( apk_name ) :
@@ -16,7 +12,6 @@ def apkRip( apk_name ) :
     f = open('Output.html', 'w')
     apk = zipfile.ZipFile(apk_name, 'r')
     os.system("mkdir -p Analysis")
-
 
 
     print "********************************************************************"
@@ -39,7 +34,7 @@ def apkRip( apk_name ) :
 
     print "************************  Manifest  *****************************"
     print "\n"
-    confCmd = "./aapt dump badging "+apk_name+ " | tee Manifest.txt"
+    confCmd = "./aapt dump badging "+apk_name
     os.system(confCmd)
     print "\n"
     os.system("mv Manifest.txt Analysis && mv Permissions.txt Analysis")

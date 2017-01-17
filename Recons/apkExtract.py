@@ -2,6 +2,7 @@ import zipfile
 import os
 import sys
 import argparse
+import subprocess
 import webbrowser
 
 
@@ -21,13 +22,12 @@ def apkInfo(apk_name) :
 
 
 
-
     print "*******************  Extracting java files  **********************"
     print "\n"
     namesplit = apk_name.split('.')[0]
     javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source' + ' 1> /dev/null 2> /dev/null'
     os.system(javaSrc)
-    print "\n Extraction complete. Java source files can be found in ' Source ' folder."
+    print "\n Extraction complete. Java source files can be found in ' Source ' directory."
     print "\n"
     print "******************************************************************"
     print "\n"
@@ -41,13 +41,13 @@ def apkInfo(apk_name) :
 
 
 
-
     print "******************* Extracted Contents ***************************"
     print "\n"
     for file in os.listdir("Extracts") :
         print "\t" +file
     if os.path.exists('Extracts') :
         os.chdir('Extracts')
+    os.system('cp AndroidManifest.xml ../')
     print "\n\n"
 
 
@@ -78,7 +78,19 @@ def apkInfo(apk_name) :
         if os.path.isdir(newlibdir) :
             for libs in os.listdir(newlibdir) :
                 print "[++]" +libs
+    print "\n\n"
 
+
+
+    print "********************  Dumping Manifest  ***************************"
     print "\n"
+    os.chdir('..')
+    manDmp = 'java -jar AXML.jar  AndroidManifest.xml  | tee Manifest.xml'
+    os.system(manDmp)
+    os.system('mv  Manifest.xml  Source')
+    os.system('rm AndroidManifest.xml')
+    print "\n"
+    print "The parsed Manifest can be found as Manifest.xml"
+    print "\n\n"
     print "**********************************************************************"
     print "\n\n\n"
