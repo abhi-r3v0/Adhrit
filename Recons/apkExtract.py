@@ -12,7 +12,7 @@ def apkInfo(apk_name) :
 
     apk = zipfile.ZipFile(apk_name, 'r')
 
-    print "**********************  Extracting Jar  ***************************"
+    print "***********************  Extracting Jar  ***************************"
     print "\n"
     dexCommand = 'sh JarConverter.sh --force '+apk_name
     os.system(dexCommand)
@@ -22,14 +22,14 @@ def apkInfo(apk_name) :
 
 
 
-    print "*******************  Extracting java files  **********************"
+    print "********************  Extracting java files  ***********************"
     print "\n"
     namesplit = apk_name.split('.')[0]
     javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source' + ' 1> /dev/null 2> /dev/null'
     os.system(javaSrc)
     print "\n Extraction complete. Java source files can be found in ' Source ' directory."
     print "\n"
-    print "******************************************************************"
+    print "********************************************************************"
     print "\n"
 
     apk.extractall("Extracts")
@@ -41,7 +41,7 @@ def apkInfo(apk_name) :
 
 
 
-    print "******************* Extracted Contents ***************************"
+    print "********************* Extracted Contents ***************************"
     print "\n"
     for file in os.listdir("Extracts") :
         print "\t" +file
@@ -52,9 +52,15 @@ def apkInfo(apk_name) :
 
 
 
+    print "*************************  Certificate  ****************************"
+    print "\n"
+    os.system('openssl pkcs7 -inform DER -in META-INF/CERT.RSA -noout -print_certs -text | tee Certificate.txt ')
+    print "Certificate details extracted to Certificate.txt"
+    print "\n\n"
 
 
-    print "************************  Strings  ********************************"
+
+    print "*************************  Strings  ********************************"
     print "\n\t\t Executing Strings on classes.dex "
     dexstrings1 = os.system('strings classes.dex > Strings1.txt')
     if os.path.exists('classes2.dex') :
@@ -65,7 +71,7 @@ def apkInfo(apk_name) :
 
 
 
-    print "************************  Native Libraries  ************************"
+    print "**********************  Native Libraries  **************************"
     print "\n"
     library = 'lib'
     if not os.path.exists("lib") :
@@ -82,7 +88,7 @@ def apkInfo(apk_name) :
 
 
 
-    print "********************  Dumping Manifest  ***************************"
+    print "*********************  Dumping Manifest  ***************************"
     print "\n"
     os.chdir('..')
     manDmp = 'java -jar AXML.jar  AndroidManifest.xml  | tee Manifest.xml'
@@ -92,5 +98,5 @@ def apkInfo(apk_name) :
     print "\n"
     print "The parsed Manifest can be found as Manifest.xml"
     print "\n\n"
-    print "**********************************************************************"
+    print "********************************************************************"
     print "\n\n\n"
