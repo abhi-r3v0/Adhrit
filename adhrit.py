@@ -21,25 +21,9 @@ class Adhrit :
 
 
     def Welcome(self) :
-	print "\n\n"
-
-	print "            @@@@	 @@ @@@@@@      @@		@@ @@@@@@@@ @@	 @@ @@@@@@ @@  @@@@@@@@@@@@@@@@@@@@	"
-	print "           @@  @@         @@	  @@	@@	        @@	     @@	      @@	       @@               "
-	print "          @@    @@	 @@	   @@	@@		@@	      @@      @@	       @@               "
-	print "         @@      @@	 @@	    @@	@@		@@	      @@      @@	       @@               "
-	print "        @@	 @@	 @@	     @@	@@		@@	      @@      @@	       @@               "
-	print "       @@	  @@	 @@	      @@@@		@@	     @@	      @@	       @@		"
-	print "      @@   	   @@	 @@	      @@@@ @@@@@@@@@@@@ @@ @@@@@@@@ @@	      @@	       @@		"
-	print "     @@ @@@@@@@@@@@@ @@	 @@	      @@@@      	@@	   @@	      @@	       @@		"
-	print "    @@		     @@	 @@	      @@@@		@@	    @@	      @@	       @@	        "
-	print "   @@		      @@ @@	     @@	@@		@@	     @@	      @@	       @@	        "
-	print "  @@		       @@@@	    @@	@@		@@            @@      @@	       @@		"
-	print " @@		        @@@	   @@	@@		@@	       @@     @@	       @@		"
-	print "@@			 @@ @@@@@@ @@	@@		@@		@@@ @@@@@@ @@          @@       	"
-
-	print "\n\n"
-
-	print "                                     www.github.com/abhi-r3v0/Adhrit "
+        print "\t\t"
+        os.system('toilet -F metal -f bigascii12 ADHRIT')
+        print "\t\twww.github.com/abhi-r3v0/Adhrit "
 	print "\n\n"
 
 
@@ -60,6 +44,7 @@ def main() :
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-e", help="Extract APK contents only")
+    parser.add_argument("-w", help="Just the welcome :P")
     args = parser.parse_args()
 
     if args.a :
@@ -78,6 +63,8 @@ def main() :
         adhrit.apkextractor(args.e)
 
 
+    elif args.w :
+        adhrit.Welcome()
 
 if __name__ == "__main__" :
     main()
