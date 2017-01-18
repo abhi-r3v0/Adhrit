@@ -12,7 +12,7 @@ def apkInfo(apk_name) :
 
     apk = zipfile.ZipFile(apk_name, 'r')
 
-    print "[+] -------------------  EXTRAACTING JAR  --------------------------"
+    print "[+] --------------------  EXTRACTING JAR  --------------------------"
     print "\n"
     dexCommand = 'sh JarConverter.sh --force '+apk_name
     os.system(dexCommand)
@@ -73,19 +73,12 @@ def apkInfo(apk_name) :
 
     print "[+] -------------------  NATIVE LIBRARIES  -------------------------"
     print "\n"
-    library = 'lib'
-    if not os.path.exists("lib") :
-        print "\n[-] No libraries found"
-
-    elif os.path.exists("lib") :
-        for libdir in os.listdir("lib") :
-                print "[+]" +libdir
-        newlibdir = libdir
-        if os.path.isdir(newlibdir) :
-            for libs in os.listdir(newlibdir) :
-                print "[++]" +libs
+    Dir = 'lib'
+    for libdir, subdirList, libs in os.walk(Dir):
+        print('[+] %s' % libdir)
+        for fname in libs:
+            print('\t[>] %s' % fname)
     print "\n\n"
-
 
 
     print "[+] -------------------  MANIFEST DUMP  ----------------------------"
