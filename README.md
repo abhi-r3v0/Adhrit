@@ -10,12 +10,14 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 5. Analyzes permissions used by the application.
 6. Dumps the Manifest.
 7. Dumps the certificate details.
+8. Checks for malware footprints in VirusTotal database. 
 
 
 ## Pre-requisites :
 
 1. Linux Machine or MAC
 2. Java JDK
+
 
 ## Usage :
 
