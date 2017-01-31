@@ -38,8 +38,4 @@ def apkRip( apk_name ) :
     print "\n"
     confCmd = "./aapt dump badging "+apk_name
     os.system(confCmd)
-    print "\n"
-    os.system("mv Manifest.txt Analysis && mv Permissions.txt Analysis")
-    print "\n"
-    print " \t |||||   Manifest and permissions dump can be found in the 'Analysis' directory   |||||"
     print "\n\n"

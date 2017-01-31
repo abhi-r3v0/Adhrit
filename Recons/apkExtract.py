@@ -25,7 +25,7 @@ def apkInfo(apk_name) :
     print "[+] -------------------  EXTRACTING SOURCE  ------------------------"
     print "\n"
     namesplit = apk_name.split('.')[0]
-    javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source' + ' 1> /dev/null 2> /dev/null'
+    javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source-Java' + ' 1> /dev/null 2> /dev/null'
     os.system(javaSrc)
     print "\n Extraction complete. Java source files can be found in ' Source ' directory."
     print "\n"
@@ -41,7 +41,7 @@ def apkInfo(apk_name) :
 
 
 
-    print "[+] -------------------  EXTRATED CONTENTS  ------------------------"
+    print "[+] -------------------  EXTRACTED CONTENTS  ------------------------"
     print "\n"
     for file in os.listdir("Extracts") :
         print "\t" +file
@@ -84,9 +84,10 @@ def apkInfo(apk_name) :
     print "[+] -------------------  MANIFEST DUMP  ----------------------------"
     print "\n"
     os.chdir('..')
-    manDmp = 'java -jar AXML.jar  AndroidManifest.xml  | tee Manifest.xml'
+    manDmp = 'java -jar AXML.jar  AndroidManifest.xml  >> Manifest.xml'
     os.system(manDmp)
-    os.system('mv  Manifest.xml  Source')
+    if os.path.isdir('Source-Java') :
+        os.system('mv  Manifest.xml  Source-Java')
     os.system('rm AndroidManifest.xml')
     print "\n"
     print "The parsed Manifest can be found as Manifest.xml"
