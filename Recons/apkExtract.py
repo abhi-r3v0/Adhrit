@@ -14,7 +14,7 @@ def apkInfo(apk_name) :
 
     print "[+] --------------------  EXTRACTING JAR  --------------------------"
     print "\n"
-    dexCommand = 'sh JarConverter.sh --force '+apk_name
+    dexCommand = 'sh tools/JarConverter.sh --force '+apk_name
     os.system(dexCommand)
     print "\t[+] " +apk_name + "'s source has been extracted as jar"
     print "\n\n"
@@ -25,7 +25,7 @@ def apkInfo(apk_name) :
     print "[+] -------------------  EXTRACTING SOURCE  ------------------------"
     print "\n"
     namesplit = apk_name.split('.')[0]
-    javaSrc = 'java -jar jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source-Java' + ' 1> /dev/null 2> /dev/null'
+    javaSrc = 'java -jar tools/jd-cli.jar  '+namesplit+'-dex2jar.jar' + ' -od '+ ' Source-Java' + ' 1> /dev/null 2> /dev/null'
     os.system(javaSrc)
     print "\n Extraction complete. Java source files can be found in ' Source ' directory."
     print "\n"
@@ -84,7 +84,7 @@ def apkInfo(apk_name) :
     print "[+] -------------------  MANIFEST DUMP  ----------------------------"
     print "\n"
     os.chdir('..')
-    manDmp = 'java -jar AXML.jar  AndroidManifest.xml  >> Manifest.xml'
+    manDmp = 'tools/java -jar AXML.jar  AndroidManifest.xml  >> Manifest.xml'
     os.system(manDmp)
     if os.path.isdir('Source-Java') :
         os.system('mv  Manifest.xml  Source-Java')

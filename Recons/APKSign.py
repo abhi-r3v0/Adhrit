@@ -13,7 +13,12 @@ def SignAPK (apk_name) :
             line = f.readlines()
             f.close()
             xmlparse = et.parse(ddir)
-
+            root = xmlparse.getroot()
+            for app in root.findall('application') :
+                print app.text
+                if app.attrib == '{http://schemas.android.com/apk/res/android}allowBackup' :
+                    print app.text
+                    attr = app.attrib
 
     else :
         print "\n\n"

@@ -21,13 +21,13 @@ def apkRip( apk_name ) :
 
     print "-----------------------  PACKAGE NAME  -----------------------------"
     print "\n"
-    labelCmd = "./aapt dump badging " + apk_name + "| grep package:\ name"
+    labelCmd = "./tools/aapt dump badging " + apk_name + "| grep package:\ name"
     os.system(labelCmd)
     print "\n\n"
 
     print "-----------------------  PERMISSIONS  ------------------------------"
     print "\n"
-    permCmd = "./aapt dump permissions "+apk_name + " | tee Permissions.txt"
+    permCmd = "./tools/aapt dump permissions "+apk_name + " | tee Permissions.txt"
     os.system(permCmd)
     if os.path.exists('Permissions.txt') :
         os.system('mv Permissions.txt Analysis')
@@ -36,6 +36,6 @@ def apkRip( apk_name ) :
 
     print "-----------------------  MANIFEST INFO  ----------------------------"
     print "\n"
-    confCmd = "./aapt dump badging "+apk_name
+    confCmd = "./tools/aapt dump badging "+apk_name
     os.system(confCmd)
     print "\n\n"
