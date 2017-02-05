@@ -84,7 +84,7 @@ def apkInfo(apk_name) :
     print "[+] -------------------  MANIFEST DUMP  ----------------------------"
     print "\n"
     os.chdir('..')
-    manDmp = 'tools/java -jar AXML.jar  AndroidManifest.xml  >> Manifest.xml'
+    manDmp = 'java -jar tools/AXML.jar  AndroidManifest.xml  >> Manifest.xml'
     os.system(manDmp)
     if os.path.isdir('Source-Java') :
         os.system('mv  Manifest.xml  Source-Java')
