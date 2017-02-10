@@ -22,7 +22,7 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 
 ## Usage :
 
-1. Dowload or clone the package and extract the tool.
+1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
 2. Place the application in the tool directory. 
 3. Open a terminal and cd into the directory.
 4. Run ```python Installer.py``` for installing the necessary tools.
