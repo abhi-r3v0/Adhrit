@@ -9,8 +9,6 @@ from Recons.apkRecon import apkRip
 from Recons.apkExtract import apkInfo
 from Recons.VirusTotal import APICheck
 from Recons.SmaliExtract import Smali
-from Recons.APKSign import SignAPK
-
 
 
 
