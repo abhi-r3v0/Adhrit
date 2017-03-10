@@ -75,7 +75,6 @@ def apkInfo(apk_name) :
     print "\n"
     Dir = 'lib'
     for libdir, subdirList, libs in os.walk(Dir):
-        print('[+] %s' % libdir)
         for fname in libs:
             print('\t[>] %s' % fname)
     print "\n\n"
