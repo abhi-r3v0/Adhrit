@@ -29,6 +29,21 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 5. Finally, run ```python adhrit.py -a your_app.apk```
 
 
+
 ## Screenshots :
 
+
 ![alt text](Docs/images/1.png)
+
+
+![alt text](Docs/images/2.png)
+
+
+![alt text](Docs/images/3.png)
+
+
+![alt text](Docs/images/4.png)
+
+
+![alt text](Docs/images/5.png)
+
