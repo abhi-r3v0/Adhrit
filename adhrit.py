@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+#
+#ADRITH is an open source tool for Android malware analysis
+#and CTFs to extract maximum amount of information from an apk
+#
 
 import zipfile
 import os
@@ -12,7 +16,7 @@ from Recons.apkExtract import apkInfo
 from Recons.VirusTotal import APICheck
 from Recons.SmaliExtract import Smali
 from Recons.NativeRecon import NativeDisas
-
+from Recons.Dynamic import adbCon
 
 
 __author__ = 'Abhishek J M  ( jmabhishek@gmail.com )'
@@ -46,6 +50,9 @@ class Adhrit :
     def nativedebug(self, apk_name) :
         NativeDisas(apk_name)
 
+    def dynamicanalysis(self, apk_name) :
+        adbCon(apk_name)
+
 
 #Main fuction starts here
 def main() :
@@ -59,6 +66,7 @@ def main() :
     parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
+    parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     args = parser.parse_args()
 
     if args.a :
@@ -68,6 +76,7 @@ def main() :
        	adhrit.apkextractor(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.nativedebug(args.a)
+        adhrit.dynamicanalysis(args.a)
 
 
     elif args.r :
@@ -97,6 +106,9 @@ def main() :
         adhrit.Welcome()
         adhrit.vtanalyzer(args.v)
 
+    elif args.d :
+        adhrit.Welcome()
+        adhrit.dynamicanalysis(args.d)
 
 
 if __name__ == "__main__" :
