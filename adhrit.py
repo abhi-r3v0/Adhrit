@@ -35,23 +35,30 @@ class Adhrit :
 	print "\n\n"
 
 
+    #Extract APK information without extracting the package
     def apkripper(self, apk_name) :
         apkRip(apk_name)
 
+    #Extract All the contents of the APK into a directory
     def apkextractor(self, apk_name) :
         apkInfo(apk_name)
 
+    #Check if the APK has already been identified as a malicious application in the VirusTotal database
     def vtanalyzer(self, apk_name) :
         APICheck(apk_name)
 
+    #Extract the source code of the APK in smali
     def smaliextractor(self, apk_name) :
         Smali(apk_name)
 
+    #Identify and dump the disassembly of the native libraries within the APK
     def nativedebug(self, apk_name) :
         NativeDisas(apk_name)
 
+    #Install the APK in an emulator and analyze its activities
     def dynamicanalysis(self, apk_name) :
         adbCon(apk_name)
+
 
 
 #Main fuction starts here
@@ -59,7 +66,7 @@ def main() :
 
     adhrit = Adhrit()
     parser = argparse.ArgumentParser(description = "Help")
-    parser.add_argument("-a", help="Dump package info and extract contents and perform analysis")
+    parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-x", help="Extract APK contents only")
     parser.add_argument("-s", help="Source code of the APK in Smali")
@@ -76,7 +83,6 @@ def main() :
        	adhrit.apkextractor(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.nativedebug(args.a)
-        adhrit.dynamicanalysis(args.a)
 
 
     elif args.r :

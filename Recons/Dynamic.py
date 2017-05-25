@@ -47,3 +47,5 @@ def adbCon(apk_name) :
         pkgrun = os.popen(prun1).read()
         if "Starting" in pkgrun :
             print "\n\t\t[ --> ]   Main Launched"
+            print "\n\t\t[ --> ]   Logging Activity"
+            os.system("adb logcat | grep " +pkglabel+ " 1> adbLog.txt")
