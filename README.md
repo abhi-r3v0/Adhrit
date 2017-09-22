@@ -8,10 +8,11 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 3. Extracts jar out of dex.
 4. Extracts source code in Java.
 5. Extracts source code in Smali. 
-6. Analyzes permissions used by the application.
-7. Dumps the Manifest.
-8. Dumps the certificate details.
-9. Checks for malware footprints in VirusTotal database.  
+6. Recompile smali into APK
+7. Analyzes permissions used by the application.
+8. Dumps the Manifest.
+9. Dumps the certificate details.
+10. Checks for malware footprints in VirusTotal database.  
 
 
 ## Pre-requisites :

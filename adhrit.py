@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-#ADRITH is an open source tool for Android malware analysis
+#ADRITH is an open source tool for Android apk analysis
 #and CTFs to extract maximum amount of information from an apk
 #
 
@@ -14,7 +14,8 @@ import webbrowser
 from Recons.apkRecon import apkRip
 from Recons.apkExtract import apkInfo
 from Recons.VirusTotal import APICheck
-from Recons.SmaliExtract import Smali
+from Recons.SmaliExtract import SmaliDe
+from Recons.SmaliExtract import SmaliRe
 from Recons.NativeRecon import NativeDisas
 from Recons.Dynamic import adbCon
 
@@ -40,23 +41,27 @@ class Adhrit :
         apkRip(apk_name)
 
     #Extract All the contents of the APK into a directory
-    def apkextractor(self, apk_name) :
+    def apkextractor(self, apk_name):
         apkInfo(apk_name)
 
     #Check if the APK has already been identified as a malicious application in the VirusTotal database
-    def vtanalyzer(self, apk_name) :
+    def vtanalyzer(self, apk_name):
         APICheck(apk_name)
 
     #Extract the source code of the APK in smali
-    def smaliextractor(self, apk_name) :
-        Smali(apk_name)
+    def smaliextractor(self, apk_name):
+        SmaliDe(apk_name)
+
+    #Recompile smali back into APK
+    def smalirecompile(self, apk_name):
+        SmaliRe(apk_name)
 
     #Identify and dump the disassembly of the native libraries within the APK
-    def nativedebug(self, apk_name) :
+    def nativedebug(self, apk_name):
         NativeDisas(apk_name)
 
     #Install the APK in an emulator and analyze its activities
-    def dynamicanalysis(self, apk_name) :
+    def dynamicanalysis(self, apk_name):
         adbCon(apk_name)
 
 
@@ -70,13 +75,14 @@ def main() :
     parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-x", help="Extract APK contents only")
     parser.add_argument("-s", help="Source code of the APK in Smali")
+    parser.add_argument("-b", help="Recompile smali back into APK")
     parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     args = parser.parse_args()
 
-    if args.a :
+    if args.a:
         adhrit.Welcome()
         adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
@@ -85,20 +91,23 @@ def main() :
         adhrit.nativedebug(args.a)
 
 
-    elif args.r :
+    elif args.r:
         adhrit.Welcome()
         adhrit.apkripper(args.r)
 
 
-    elif args.x :
+    elif args.x:
         adhrit.Welcome()
         adhrit.apkextractor(args.x)
 
 
-    elif args.s :
+    elif args.s:
         adhrit.Welcome()
         adhrit.smaliextractor(args.s)
 
+    elif args.b:
+        adhrit.Welcome()
+        adhrit.smalirecompile(args.b)
 
     elif args.n :
         adhrit.nativedebug(args.n)

@@ -1,13 +1,23 @@
 import os
 
 
-def Smali(apk_name) :
+def SmaliDe(apk_name) :
     print "[+] --------------  Source code extraction in Smali  ---------------"
     print "\n"
-    os.system('mkdir -p Source-Smali')
     snamesplit = apk_name.split('.')[0]
     SmaliCmd = 'java -jar tools/apktool.jar d -f '+apk_name
     os.system(SmaliCmd)
-    if os.path.isdir(snamesplit) :
-        os.system('mv '+snamesplit+ ' Source-Smali')
-        print "\n[+]  Extraction complete. Smali code available in 'Source-Smali' Directory "
+    if os.path.isdir(snamesplit):
+        print "\n[+]  Extraction complete."
+
+def SmaliRe(apk_name):
+    print "[+] ---------------  Recompiling Smali ---------------"
+    print "\n"
+    snamesplit = apk_name.split('.')[0]
+    if os.path.isdir(snamesplit):
+        SmaliCmd = 'java -jar tools/apktool.jar b -f '+snamesplit
+        os.system(SmaliCmd)
+        print "\n[+]  Recompiling complete."
+        print "\n[+]  The recompiled apk can be found in "+snamesplit+"/dist\n"
+    else:
+        print "\n[!]  smali source not found"
