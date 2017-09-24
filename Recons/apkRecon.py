@@ -1,8 +1,9 @@
+# !/usr/bin/env python
+
 import zipfile
 import os
 import sys
 import argparse
-import webbrowser
 
 
 # Know all about the application.

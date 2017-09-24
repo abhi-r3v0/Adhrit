@@ -1,9 +1,10 @@
+# !/usr/bin/env python
+
 import zipfile
 import os
 import sys
 import argparse
 import subprocess
-import webbrowser
 
 
 # To know the contents of a package

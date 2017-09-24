@@ -1,4 +1,5 @@
 # !/usr/bin/env python
+
 # ADRITH is an open source tool for Android apk analysis
 # and CTFs to extract maximum amount of information from an apk
 
@@ -6,9 +7,7 @@ import zipfile
 import os
 import sys
 import subprocess
-import shlex
 import argparse
-import webbrowser
 from Recons.apkRecon import apkRip
 from Recons.apkExtract import apkInfo
 from Recons.VirusTotal import APICheck
