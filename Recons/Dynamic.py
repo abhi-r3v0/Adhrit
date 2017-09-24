@@ -4,7 +4,7 @@ import os
 import subprocess
 
 
-def adbCon(apk_name):
+def adb_con(apk_name):
 
     found = 0
     installed = 1

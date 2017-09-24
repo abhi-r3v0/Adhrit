@@ -8,7 +8,7 @@ import subprocess
 
 
 # To know the contents of a package
-def apkInfo(apk_name):
+def apk_info(apk_name):
 
     apk = zipfile.ZipFile(apk_name, 'r')
 

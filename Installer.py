@@ -8,7 +8,7 @@ class DepInstaller():
     def __init__(self):
         pass
 
-    def Ins(self):
+    def ins(self):
         print "\n[+]  Installing necessary tools "
         try:
             os.system('sudo apt-get install toilet')
@@ -36,7 +36,7 @@ class DepInstaller():
 
 def main():
     dep = DepInstaller()
-    dep.Ins()
+    dep.ins()
 
 if __name__ == '__main__':
     main()

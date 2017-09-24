@@ -5,7 +5,7 @@ import hashlib
 import json
 
 
-def APICheck(apk_name):
+def api_check(apk_name):
     print "\n\n"
     print "[+] --------  Scanning for Malware signature  --------"
     print "\n"

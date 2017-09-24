@@ -3,7 +3,7 @@
 import os
 
 
-def SmaliDe(apk_name):
+def smali_de(apk_name):
     print "[+] ------  Source code extraction in Smali  -------"
     print "\n"
     snamesplit = apk_name.split('.')[0]
@@ -13,7 +13,7 @@ def SmaliDe(apk_name):
         print "\n[+]  Extraction complete."
 
 
-def SmaliRe(apk_name):
+def smali_re(apk_name):
     print "[+] ---------------  Recompiling Smali ---------------"
     print "\n"
     snamesplit = apk_name.split('.')[0]

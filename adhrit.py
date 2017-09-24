@@ -8,13 +8,13 @@ import os
 import sys
 import subprocess
 import argparse
-from Recons.apkRecon import apkRip
-from Recons.apkExtract import apkInfo
-from Recons.VirusTotal import APICheck
-from Recons.SmaliExtract import SmaliDe
-from Recons.SmaliExtract import SmaliRe
-from Recons.NativeRecon import NativeDisas
-from Recons.Dynamic import adbCon
+from Recons.apkRecon import apk_rip
+from Recons.apkExtract import apk_info
+from Recons.VirusTotal import api_check
+from Recons.SmaliExtract import smali_de
+from Recons.SmaliExtract import smali_re
+from Recons.NativeRecon import native_disas
+from Recons.Dynamic import adb_con
 
 __author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
 
@@ -24,38 +24,38 @@ class Adhrit:
     def __init__(self):
         self.apk_name = ""
 
-    def Welcome(self):
+    def welcome(self):
         os.system('toilet -F metal -f bigascii12 ADHRIT')
         print "\t\twww.github.com/abhi-r3v0/Adhrit "
     print "\n\n"
 
     # Extract APK information without extracting the package
     def apkripper(self, apk_name):
-        apkRip(apk_name)
+        apk_rip(apk_name)
 
     # Extract All the contents of the APK into a directory
     def apkextractor(self, apk_name):
-        apkInfo(apk_name)
+        apk_info(apk_name)
 
     # Check if the APK has been identified by VirusTotal database
     def vtanalyzer(self, apk_name):
-        APICheck(apk_name)
+        api_check(apk_name)
 
     # Extract the source code of the APK in smali
     def smaliextractor(self, apk_name):
-        SmaliDe(apk_name)
+        smali_de(apk_name)
 
     # Recompile smali back into APK
     def smalirecompile(self, apk_name):
-        SmaliRe(apk_name)
+        smali_re(apk_name)
 
     # Identify and dump the disassembly of the native libraries within the APK
     def nativedebug(self, apk_name):
-        NativeDisas(apk_name)
+        native_disas(apk_name)
 
     # Install the APK in an emulator and analyze its activities
     def dynamicanalysis(self, apk_name):
-        adbCon(apk_name)
+        adb_con(apk_name)
 
 
 # Main fuction starts here
@@ -74,7 +74,7 @@ def main():
     args = parser.parse_args()
 
     if args.a:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
@@ -82,33 +82,33 @@ def main():
         adhrit.nativedebug(args.a)
 
     elif args.r:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.apkripper(args.r)
 
     elif args.x:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.apkextractor(args.x)
 
     elif args.s:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.smaliextractor(args.s)
 
     elif args.b:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.smalirecompile(args.b)
 
     elif args.n:
         adhrit.nativedebug(args.n)
 
     elif args.w:
-        adhrit.Welcome()
+        adhrit.welcome()
 
     elif args.v:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.vtanalyzer(args.v)
 
     elif args.d:
-        adhrit.Welcome()
+        adhrit.welcome()
         adhrit.dynamicanalysis(args.d)
 
 

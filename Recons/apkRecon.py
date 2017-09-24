@@ -7,7 +7,7 @@ import argparse
 
 
 # Know all about the application.
-def apkRip(apk_name):
+def apk_rip(apk_name):
 
     apk = zipfile.ZipFile(apk_name, 'r')
     os.system("mkdir -p Analysis")

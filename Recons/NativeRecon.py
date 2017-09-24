@@ -2,10 +2,10 @@
 
 import os
 import subprocess
-from apkExtract import apkInfo
+from apkExtract import apk_info
 
 
-def NativeDisas(apk_name):
+def native_disas(apk_name):
     nlib = []
     nlibnames = []
     if os.path.exists('Extracts') and os.path.isdir('Extracts'):
