@@ -5,36 +5,32 @@ import argparse
 import webbrowser
 
 
-
-#Know all about the application.
-def apkRip( apk_name ) :
+# Know all about the application.
+def apkRip(apk_name):
 
     apk = zipfile.ZipFile(apk_name, 'r')
     os.system("mkdir -p Analysis")
 
-
-    print "--------------------------------------------------------------------"
+    print "---------------------------------------------"
     print "\n"
-    print "\n\t [+]  File input  :  " +apk.filename
+    print "\n\t [+]  File input  :  " + apk.filename
     print "\n\n"
     print "\n"
 
-    print "-----------------------  PACKAGE NAME  -----------------------------"
+    print "--------------  PACKAGE NAME  ---------------"
     print "\n"
     labelCmd = "./tools/aapt dump badging " + apk_name + "| grep package:\ name"
     os.system(labelCmd)
     print "\n\n"
 
-    print "-----------------------  PERMISSIONS  ------------------------------"
+    print "---------------  PERMISSIONS  ----------------"
     print "\n"
     permCmd = "./tools/aapt dump permissions "+apk_name + " | tee Permissions.txt"
     os.system(permCmd)
-    if os.path.exists('Permissions.txt') :
+    if os.path.exists('Permissions.txt'):
         os.system('mv Permissions.txt Analysis')
-
     print "\n\n"
-
-    print "-----------------------  MANIFEST INFO  ----------------------------"
+    print "--------------  MANIFEST INFO  ----------------"
     print "\n"
     confCmd = "./tools/aapt dump badging "+apk_name
     os.system(confCmd)
