@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-from apkExtract import apk_info
+from apk_extract import apk_info
 
 
 def native_disas(apk_name):
