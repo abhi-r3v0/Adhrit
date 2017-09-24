@@ -1,7 +1,7 @@
 # ADHRIT
 Adhrit is an open source Android APK ripping tool that does a basic recon on the provided APK file. Built mainly with CTFs on focus. 
 
-## Uses :
+## Uses:
 
 1. Extracts the apk contents.
 2. Disassembles native libraries
@@ -15,13 +15,13 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 10. Checks for malware footprints in VirusTotal database.  
 
 
-## Pre-requisites :
+## Pre-requisites:
 
 1. Linux Machine or MAC
 2. Java JDK
 
 
-## Usage :
+## Usage:
 
 1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
 2. Place the application in the tool directory. 
@@ -31,7 +31,7 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 
 
 
-## Screenshots :
+## Screenshots:
 
 
 ![alt text](Docs/images/1.png)
@@ -46,7 +46,7 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 ![alt text](Docs/images/5.png)
 
 
-## Note
+## Note:
 
 1. Filenames with two '.' may give an error. Please the apk in such cases.
 For example, if your file name is ```my.app.apk```, rename it to ```myapp.apk```

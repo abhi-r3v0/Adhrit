@@ -8,13 +8,13 @@ import os
 import sys
 import subprocess
 import argparse
-from Recons.apk_recon import apk_rip
-from Recons.apk_extract import apk_info
-from Recons.virustotal import api_check
-from Recons.smali_extract import smali_de
-from Recons.smali_extract import smali_re
-from Recons.native_recon import native_disas
-from Recons.dynamic import adb_con
+from recons.apk_recon import apk_rip
+from recons.apk_extract import apk_info
+from recons.virustotal import api_check
+from recons.smali_extract import smali_de
+from recons.smali_extract import smali_re
+from recons.native_recon import native_disas
+from recons.dynamic import adb_con
 
 __author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
 
