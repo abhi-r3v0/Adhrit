@@ -3,7 +3,7 @@
 import os
 
 
-class DepInstaller():
+class dep_installer():
 
     def __init__(self):
         pass
@@ -22,7 +22,6 @@ class DepInstaller():
             os.system('sudo apt-get install binutils-arm-linux-gnueabi')
             os.system('sudo apt-get install libncurses5-dev')
             print "\n[+]  Installation of ARM tools complete"
-
         except OSError as ose:
             print "\n[!]  Error installing ARM dependencies"
 
@@ -35,7 +34,7 @@ class DepInstaller():
 
 
 def main():
-    dep = DepInstaller()
+    dep = dep_installer()
     dep.ins()
 
 if __name__ == '__main__':
