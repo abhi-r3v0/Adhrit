@@ -9,10 +9,11 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 4. Extracts source code in Java.
 5. Extracts source code in Smali. 
 6. Recompile smali into APK
-7. Analyzes permissions used by the application.
-8. Dumps the Manifest.
-9. Dumps the certificate details.
-10. Checks for malware footprints in VirusTotal database.  
+7. Check for bytecode injection points.
+8. Analyzes permissions used by the application.
+9. Dumps the Manifest.
+10. Dumps the certificate details.
+11. Checks for malware footprints in VirusTotal database.  
 
 
 ## Pre-requisites:
@@ -57,13 +58,13 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ## Mentions:
 
-[Seclist] (http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
-[DedSec] (https://www.dedsecinside.com/security/adhrit-android-recon-tool)
-[Howucan.gr] (https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
-[HackerTor] (https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
-[tuicool] (https://www.tuicool.com/articles/r6jQzii)
-[Pinterest] (https://in.pinterest.com/pin/396246467200088526/)
-[@androidtools on Twitter] (https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
+* [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
+* [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
+* [Howucan.gr](https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
+* [HackerTor](https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
+* [tuicool](https://www.tuicool.com/articles/r6jQzii)
+* [Pinterest](https://in.pinterest.com/pin/396246467200088526/)
+* [@androidtools on Twitter](https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
 
 
 
