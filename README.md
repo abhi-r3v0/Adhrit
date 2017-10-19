@@ -51,19 +51,19 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ## Blog:
 
-[bi0s]("https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool")
+[bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
 
 
 
 ## Mentions:
 
-1. [Seclist] ("http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html")
-2. [DedSec] ("https://www.dedsecinside.com/security/adhrit-android-recon-tool")
-3. [Howucan.gr] ("https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file")
-4. [HackerTor] ("https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/")
-5. [tuicool] ("https://www.tuicool.com/articles/r6jQzii")
-6. [Pinterest] ("https://in.pinterest.com/pin/396246467200088526/")
-7. [@androidtools on Twitter] ("https://twitter.com/search?q=%23androidtools%20adhrit&src=typd")
+[Seclist] (http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
+[DedSec] (https://www.dedsecinside.com/security/adhrit-android-recon-tool)
+[Howucan.gr] (https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
+[HackerTor] (https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
+[tuicool] (https://www.tuicool.com/articles/r6jQzii)
+[Pinterest] (https://in.pinterest.com/pin/396246467200088526/)
+[@androidtools on Twitter] (https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
 
 
 
