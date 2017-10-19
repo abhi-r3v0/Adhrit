@@ -13,6 +13,7 @@ from recons.apk_extract import apk_info
 from recons.virustotal import api_check
 from recons.smali_extract import smali_de
 from recons.smali_extract import smali_re
+from recons.smali_extract import inj_check
 from recons.native_recon import native_disas
 from recons.dynamic import adb_con
 
@@ -49,6 +50,10 @@ class Adhrit:
     def smalirecompile(self, apk_name):
         smali_re(apk_name)
 
+    # Check for string injection points
+    def smali_inj(self, apk_name):
+        inj_check(apk_name)
+
     # Identify and dump the disassembly of the native libraries within the APK
     def nativedebug(self, apk_name):
         native_disas(apk_name)
@@ -67,6 +72,7 @@ def main():
     parser.add_argument("-x", help="Extract APK contents only")
     parser.add_argument("-s", help="Source code of the APK in Smali")
     parser.add_argument("-b", help="Recompile smali back into APK")
+    parser.add_argument("-i", help="Check for injection points")
     parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
@@ -96,6 +102,10 @@ def main():
     elif args.b:
         adhrit.welcome()
         adhrit.smalirecompile(args.b)
+
+    elif args.i:
+        adhrit.welcome()
+        adhrit.smali_inj(args.i)
 
     elif args.n:
         adhrit.nativedebug(args.n)

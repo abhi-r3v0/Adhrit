@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+from sys import exit
 
 
 def adb_con(apk_name):
@@ -15,6 +16,7 @@ def adb_con(apk_name):
     if adbdo == 0:
         print "\n[-] No device found. Check if the emulator is running."
         adbd.terminate()
+        exit("\n[!] Aborting")
     else:
         print "\n[+] Device found"
         found = 1
@@ -27,6 +29,7 @@ def adb_con(apk_name):
             installed = 1
         else:
             print "\n[-]  Installation failed " + adbi
+            exit("\n[!] Aborting")
 
     if installed == 1:
         labelCmd = "./tools/aapt dump permissions " + apk_name + " | egrep ^package: | cut -d ' ' -f 2-"
