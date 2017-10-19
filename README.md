@@ -3,23 +3,23 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 
 ## Uses:
 
-1. Extracts the apk contents.
-2. Disassembles native libraries
-3. Extracts jar out of dex.
-4. Extracts source code in Java.
-5. Extracts source code in Smali. 
-6. Recompile smali into APK
-7. Check for bytecode injection points.
-8. Analyzes permissions used by the application.
-9. Dumps the Manifest.
-10. Dumps the certificate details.
-11. Checks for malware footprints in VirusTotal database.  
+* Extracts the apk contents.
+* Disassembles native libraries
+* Extracts jar out of dex.
+* Extracts source code in Java.
+* Extracts source code in Smali. 
+* Recompiles smali into APK
+* Checks for bytecode injection points.
+* Analyzes permissions used by the application.
+* Dumps the Manifest.
+* Dumps the certificate details.
+* Checks for malware footprints in VirusTotal database.  
 
 
 ## Pre-requisites:
 
-1. Linux or MAC
-2. Java JDK
+* Linux or MAC
+* Java JDK
 
 
 ## Usage:
@@ -28,7 +28,7 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 2. Place the application in the tool directory. 
 3. Open a terminal and cd into the directory.
 4. Run ```python installer.py``` for installing the necessary tools.
-5. Use ```python adhrit.py -h```
+5. Use ```python adhrit.py -h``` for usage help.
 
 Example:  ```python adhrit.py -a my_app.apk```
 
@@ -68,7 +68,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 
 
-### Note:
+#### Note:
 
 1. Filenames with two '.' may give an error. Please rename the apk in such cases.
 For example, if your file name is ```my.app.apk```, rename it to ```myapp.apk```
