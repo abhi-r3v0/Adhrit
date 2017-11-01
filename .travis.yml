@@ -1,7 +1,9 @@
 language: python
 
+sudo: required
+
 python:
-  - "2.7_with_system_site_packages"
+  - "3.5"
 
 os: Linux
 
