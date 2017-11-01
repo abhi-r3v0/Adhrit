@@ -65,6 +65,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 * [tuicool](https://www.tuicool.com/articles/r6jQzii)
 * [Pinterest](https://in.pinterest.com/pin/396246467200088526/)
 * [@androidtools on Twitter](https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
+* [pcbbc](http://pcbbc.site.mobi/templates/mobile/facade_transcoder_iframe.php?u=%2Ftopics%2Fsmali%3Fimz_s%3Duresuqnlic5v64irhbuf1k8k94&lang=en)
 
 
 
