@@ -3,9 +3,9 @@ language: python
 sudo: required
 
 python:
-  - "2.7"
+  - "2.7_with_system_site_packages"
 
-cache: pip3
+cache: pip
 
 os: Linux
 
@@ -14,3 +14,5 @@ script:
 
 install:
   - python installer.py
+  - pip install requests
+
