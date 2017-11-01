@@ -1,5 +1,10 @@
-# ADHRIT  ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)
+# ADHRIT  
+---
+![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit) 
+
 Adhrit is an open source Android APK ripping tool that does a basic recon on the provided APK file. Built mainly with CTFs on focus. 
+
+---
 
 ### USES:
 
@@ -15,12 +20,14 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 * Dumps the certificate details.
 * Checks for malware footprints in VirusTotal database.  
 
+---
 
 ### PRE-REQUISITES:
 
 * Linux or MAC
 * Java JDK
 
+---
 
 ### USAGE:
 
@@ -32,7 +39,7 @@ Adhrit is an open source Android APK ripping tool that does a basic recon on the
 
 Example:  ```python adhrit.py -a my_app.apk```
 
-
+---
 
 ### SCREENSHOTS:
 
@@ -48,13 +55,13 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ![alt text](Docs/images/5.png)
 
-
+---
 
 ### BLOG:
 
 [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
 
-
+---
 
 ### MENTIONS:
 
@@ -67,7 +74,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 * [@androidtools on Twitter](https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
 * [pcbbc](http://pcbbc.site.mobi/templates/mobile/facade_transcoder_iframe.php?u=%2Ftopics%2Fsmali%3Fimz_s%3Duresuqnlic5v64irhbuf1k8k94&lang=en)
 
-
+---
 
 #### NOTE:
 
