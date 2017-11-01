@@ -1,6 +1,8 @@
 # ADHRIT
 Adhrit is an open source Android APK ripping tool that does a basic recon on the provided APK file. Built mainly with CTFs on focus. 
 
+https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master
+
 ### USES:
 
 * Extracts the apk contents.
