@@ -1,3 +1,20 @@
 language: python
 
+python:
+  - "2.7"
+  - "3.5"
+  - "pypy"
+
 os: Linux
+
+script: pytest
+
+before_install: 
+  - sudo apt-get install toilet
+  - sudo apt-get install libc6-armel-cross libc6-dev-armel-cross
+  - sudo apt-get install binutils-arm-linux-gnueabi
+  - sudo apt-get install libncurses5-dev
+  - sudo apt-get install android-tools-adb
+
+install:
+  - pip install -r requirements.txt
