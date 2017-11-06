@@ -39,6 +39,7 @@ def inj_check(apk_name):
     print "[+] CHECKING FOR BYTECODE INJECTIONS"
     print "----------------------------------------------------"
     inj_points = 0
+    check = 0
     smali_dir = 'smali'
     if os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
@@ -61,6 +62,11 @@ def inj_check(apk_name):
                     pattern1 = 'const-string'
                     if pattern1 in lines:
                         inj_points = inj_points + 1
-                        print "\n\t" + os.path.basename(f.name)
-                        print lines
-    print "\n\t[+] " + str(inj_points) + "simple injection points found\n"
+                        if inj_points > 0 and inj_points < 10:
+                            print "\n\t" + os.path.basename(f.name) + "\t:" + lines
+                        else:
+                            check = 1
+
+    print "\n\t[+] " + str(inj_points) + " Strings found. Injections possible\n"
+    if check == 1:
+        print "\n\t[+] More than 10 constant strings found. Injections possibilities high.\n"

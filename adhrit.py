@@ -85,6 +85,7 @@ def main():
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
         adhrit.smaliextractor(args.a)
+        adhrit.smali_inj(args.a)
         adhrit.nativedebug(args.a)
 
     elif args.r:

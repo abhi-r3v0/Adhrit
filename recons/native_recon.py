@@ -33,4 +33,4 @@ def native_disas(apk_name):
                 print "\n"
 
     else:
-        print "\n\t[-] Content not found. Please extract the APK and try again.\n"
+        print "\n\t[-] lib not found. Please extract the APK and try again.\n"
