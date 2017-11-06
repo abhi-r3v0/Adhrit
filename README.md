@@ -50,10 +50,16 @@ Example:  ```python adhrit.py -a my_app.apk```
 ![alt text](Docs/images/2.png)
 
 
+![alt text](Docs/images/3.png)
+
+
 ![alt text](Docs/images/4.png)
 
 
 ![alt text](Docs/images/5.png)
+
+
+![alt text](Docs/images/6.png)
 
 ---
 
