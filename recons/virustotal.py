@@ -3,12 +3,18 @@
 import requests
 import hashlib
 import json
+from prettytable import PrettyTable
+
 
 
 def api_check(apk_name):
-    print "\n\n"
-    print "[+] --------  Scanning for Malware signature  --------"
     print "\n"
+    print "--------------------------------------------------"
+    print "[+] SCANNING FOR MALWARE TRACE"
+    print "--------------------------------------------------"
+    print "\n"
+    pos = 0
+    t = PrettyTable(['ENGINE', 'MALWARE'])
     msum = hashlib.md5()
     with open(apk_name, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
@@ -24,8 +30,19 @@ def api_check(apk_name):
     response = requests.get('https://www.virustotal.com/vtapi/v2/file/report',
                             params=parameters, headers=header)
     json_response = response.json()
-    parsed_response = json.dumps(json_response, indent=4, sort_keys=True)
-    print parsed_response
-    print "\n\n"
-    print "[+][+][+]     COMPLETE     [+][+][+]"
-    print "\n\n"
+    if json_response['response_code'] == 0:
+        print "\t[!] Error Getting Details. Aborting\n"
+        return
+    if json_response['positives'] > 0:
+        print "\n\t[+] Positives Found: " + str(json_response['positives'])
+        pos = 1
+        for engine, det in json_response['scans'].iteritems():
+            if det["detected"]:
+                t.add_row([engine, det["result"]])
+    else:
+        print "\n[-] No Positives Found"
+
+    if pos == 1:
+        print t
+
+    print "\n"

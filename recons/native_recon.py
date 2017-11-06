@@ -12,16 +12,20 @@ def native_disas(apk_name):
         os.chdir('Extracts')
         Dir = 'lib'
         if os.path.exists(Dir) and os.path.isdir(Dir):
-            print 'lib found'
+            print "\n--------------------------------------------------"
+            print "[+] LIBRARIES FOUND"
             for dirList, subdirList, subfiles in os.walk(Dir):
                 for sub in subfiles:
                     nlibnames.append(sub)
                     nlib.append(os.path.join(dirList, sub))
-        print os.getcwd()
+        else:
+            print "\n[-] No native libraries found for disassembling\n."
 
         for so in nlib:
             if so.endswith(".so"):
-                print "\n\n\t\t ----- NATIVE LIBRARY DUMP FOR " + so + "----\n"
+                print "\n--------------------------------------------------"
+                print "[+] NATIVE LIBRARY DUMP FOR " + so + "\n"
+                print "----------------------------------------------------"
                 print "\n\t[+] FILE  HEADERS"
                 os.system("../tools/./arm-objdump -f \t" + so)
                 print "\n\t[+] DISASSEMBLY OF " + so + "  TO  " + so + ".txt"
@@ -29,4 +33,4 @@ def native_disas(apk_name):
                 print "\n"
 
     else:
-        print "\n\n Content not found. Please extract the APK and try again."
+        print "\n\t[-] Content not found. Please extract the APK and try again.\n"

@@ -15,4 +15,5 @@ script:
 install:
   - python installer.py
   - pip install requests
+  - pip install prettytable
 
