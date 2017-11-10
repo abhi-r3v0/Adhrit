@@ -46,7 +46,7 @@ def adb_con(apk_name):
         print "----------------------------------------------------"
         pk1 = '"'
         pk2 = '"'
-        lstcmd = 'adb shell pm dump "' + pkglabel + '" |grep -A 1 MAIN: |' + "cut -d ':' -f 2-" + "| cut -c 19- "
+        lstcmd = 'adb shell pm dump "' + pkglabel + '" |grep -A 1 MAIN: |' + "cut -d ':' -f 2-" + "| cut -c 18- "
         pkgls = os.popen(lstcmd).read()
         pkr = str(pkgls)
         mainact = str(pk1.rstrip().lstrip()) + str(pkr.lstrip().rstrip()) + str(pk2.lstrip().rstrip().replace("\n", ""))

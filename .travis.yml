@@ -16,4 +16,5 @@ install:
   - python installer.py
   - pip install requests
   - pip install prettytable
+  - pip install termcolor
 
