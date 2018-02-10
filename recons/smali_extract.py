@@ -30,6 +30,21 @@ def smali_re(apk_name):
         print "\n\t[!] smali source not found"
 
 
+def apk_sign(apk_name):
+    print "\n----------------------------------------------"
+    print "[+] SIGNING APK"
+    print "------------------------------------------------"
+    snamesplit = apk_name.split('.')[0]
+    sdir = snamesplit + '/dist/' + snamesplit + '.apk'
+    if os.path.exists(sdir):
+        signCmd = 'java -jar tools/sign.jar ' + snamesplit + '/dist/' + snamesplit + '.apk'
+        os.system(signCmd)
+        msg = "[+] Signed APK found as: " + snamesplit + "/dist/" + snamesplit + ".s.apk"
+        print msg
+    else:
+        print "\n\t[!] file not found"
+
+
 def inj_check(apk_name):
     snamesplit = apk_name.split('.')[0]
     if os.path.isdir(snamesplit) == 0:
