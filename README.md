@@ -14,6 +14,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 * Extracts source code in Java.
 * Extracts source code in Smali. 
 * Recompiles smali into APK
+* Sings the APK
 * Checks for bytecode injection points.
 * Analyzes permissions used by the application.
 * Dumps the Manifest.
@@ -85,6 +86,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 ### CREDITS:
 
 * [apktool](https://ibotpeaches.github.io/Apktool/)
+* [jarsigner](https://github.com/appium/sign)
 * [dex2jar](https://github.com/pxb1988/dex2jar)
 * [AXML2Printer](https://code.google.com/archive/p/android4me/downloads)
 * [arm-objdump](https://linux.die.net/man/1/arm-linux-gnu-objdump)
