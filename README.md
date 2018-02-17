@@ -2,7 +2,7 @@
 
 ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit) 
 
-Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnassaince of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome! 
+Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome! 
 
 ---
 
@@ -14,7 +14,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 * Extracts source code in Java.
 * Extracts source code in Smali. 
 * Recompiles smali into APK
-* Sings the APK
+* Signs the APK
 * Checks for bytecode injection points.
 * Analyzes permissions used by the application.
 * Dumps the Manifest.
