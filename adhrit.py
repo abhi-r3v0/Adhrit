@@ -85,8 +85,10 @@ def main():
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     args = parser.parse_args()
 
+    #Adhrit Welcome ASCII
+    adhrit.welcome()
+
     if args.a:
-        adhrit.welcome()
         adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
@@ -95,19 +97,15 @@ def main():
         adhrit.nativedebug(args.a)
 
     elif args.r:
-        adhrit.welcome()
         adhrit.apkripper(args.r)
 
     elif args.x:
-        adhrit.welcome()
         adhrit.apkextractor(args.x)
 
     elif args.s:
-        adhrit.welcome()
         adhrit.smaliextractor(args.s)
 
     elif args.b:
-        adhrit.welcome()
         adhrit.smalirecompile(args.b)
 
     elif args.m:
@@ -115,7 +113,6 @@ def main():
         adhrit.apk_signing(args.m)
 
     elif args.i:
-        adhrit.welcome()
         adhrit.smali_inj(args.i)
 
     elif args.n:
@@ -125,11 +122,9 @@ def main():
         adhrit.welcome()
 
     elif args.v:
-        adhrit.welcome()
         adhrit.vtanalyzer(args.v)
 
     elif args.d:
-        adhrit.welcome()
         adhrit.dynamicanalysis(args.d)
 
 
