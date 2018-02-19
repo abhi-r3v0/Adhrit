@@ -19,7 +19,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 * Analyzes permissions used by the application.
 * Dumps the Manifest.
 * Dumps the certificate details.
-* Checks for malware footprints in VirusTotal database.  
+* Checks for malware footprints in the VirusTotal database.  
 
 ---
 
@@ -72,6 +72,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ### MENTIONS:
 
+* [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
 * [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
 * [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
 * [Howucan.gr](https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
