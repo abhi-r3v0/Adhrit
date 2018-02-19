@@ -17,6 +17,7 @@ from recons.smali_extract import apk_sign
 from recons.smali_extract import inj_check
 from recons.native_recon import native_disas
 from recons.dynamic import adb_con
+from recons.clean import cleaner
 
 __author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
 
@@ -28,8 +29,13 @@ class Adhrit:
 
     def welcome(self):
         os.system('toilet -F metal -f bigascii12 ADHRIT')
-        print "\t\twww.github.com/abhi-r3v0/Adhrit "
+        print "| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit"
+        print "| Author\t\t:\t" + __author__
     print "\n\n"
+
+    # Clean the tool directory for a new project
+    def cleanproject(self, apk_name):
+        cleaner(apk_name)
 
     # Extract APK information without extracting the package
     def apkripper(self, apk_name):
@@ -72,6 +78,7 @@ class Adhrit:
 def main():
     adhrit = Adhrit()
     parser = argparse.ArgumentParser(description="Help")
+    parser.add_argument("-c", help="Clean up for a new project")
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-x", help="Extract APK contents only")
@@ -88,7 +95,11 @@ def main():
     #Adhrit Welcome ASCII
     adhrit.welcome()
 
+    if args.c:
+        adhrit.cleanproject(args.c)
+
     if args.a:
+        adhrit.cleanproject(args.a)
         adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
@@ -100,6 +111,7 @@ def main():
         adhrit.apkripper(args.r)
 
     elif args.x:
+        adhrit.cleanproject(args.x)
         adhrit.apkextractor(args.x)
 
     elif args.s:
