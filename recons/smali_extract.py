@@ -77,6 +77,11 @@ def inj_check(apk_name):
                     pattern1 = 'const-string'
                     if pattern1 in lines:
                         inj_points = inj_points + 1
+                        to_write = "\n\t" + os.path.basename(f.name) + "\t:" + lines
+                        if os.path.exists("smali_copy/str_inj.txt"):
+                            os.system("rm -r smali_copy/str_inj.txt")
+                        with open ("str_inj.txt", "a+") as strfile:
+                            strfile.write(to_write)
                         if inj_points > 0 and inj_points < 10:
                             print "\n\t" + os.path.basename(f.name) + "\t:" + lines
                         else:
@@ -84,4 +89,4 @@ def inj_check(apk_name):
 
     print "\n\t[+] " + str(inj_points) + " Strings found. Injections possible\n"
     if check == 1:
-        print "\n\t[+] More than 10 constant strings found. Injections possibilities high.\n"
+        print "\n\t[+] More than 10 constant strings found. Constants strings with file name references written to 'str_inj.txt' file in the 'smali_copy' directory\n"
