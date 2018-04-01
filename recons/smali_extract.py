@@ -10,7 +10,7 @@ def smali_de(apk_name):
     print "[+] SOURCE EXTRATION IN SMALI"
     print "----------------------------------------------------"
     snamesplit = apk_name.split('.')[0]
-    SmaliCmd = 'java -jar tools/apktool.jar d -f ' + apk_name
+    SmaliCmd = 'java -jar tools/apktool.jar d -f ' + apk_name + ' -o apk/' + snamesplit
     os.system(SmaliCmd)
     if os.path.isdir(snamesplit):
         print "\n\t[+] Extraction complete."
@@ -35,7 +35,7 @@ def apk_sign(apk_name):
     print "[+] SIGNING APK"
     print "------------------------------------------------"
     snamesplit = apk_name.split('.')[0]
-    sdir = snamesplit + '/dist/' + snamesplit + '.apk'
+    sdir = 'apk/' + snamesplit + '/' + snamesplit + '/dist/' + snamesplit + '.apk'
     if os.path.exists(sdir):
         signCmd = 'java -jar tools/sign.jar ' + snamesplit + '/dist/' + snamesplit + '.apk'
         os.system(signCmd)
