@@ -1,0 +1,10 @@
+# Built application files
+*.apk
+*.pyc
+
+# Gradle files
+smali_copy/
+Source-Java/
+Analysis/
+Extracts/
+apk/
