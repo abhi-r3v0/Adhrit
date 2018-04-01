@@ -58,7 +58,7 @@ def inj_check(apk_name):
     smali_dir = 'smali'
     if os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
-    os.system('cp -R ' + snamesplit + '/' + smali_dir + ' smali_copy')
+    os.system('cp -R ' + 'apk/' + snamesplit + '/' + smali_dir + ' smali_copy')
     if os.path.isdir('smali_copy'):
         os.chdir('smali_copy')
         ignore_dirs = ['android', 'org', 'google', 'localytics']
