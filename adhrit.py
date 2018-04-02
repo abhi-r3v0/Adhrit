@@ -1,15 +1,13 @@
 # !/usr/bin/env python
 
-# ADRITH is an open source tool for Android apk analysis
+# ADHRIT is an open source tool for Android apk analysis
 # and CTFs to extract maximum amount of information from an apk
 
-import zipfile
 import os
-import sys
-import subprocess
 import argparse
 from recons.apk_recon import apk_rip
 from recons.apk_extract import apk_info
+from recons.vapp import vapp_find
 from recons.virustotal import api_check
 from recons.smali_extract import smali_de
 from recons.smali_extract import smali_re
@@ -45,6 +43,10 @@ class Adhrit:
     def apkextractor(self, apk_name):
         apk_info(apk_name)
 
+    # Check for virtual app droppers
+    def vappsearch(self, apk_name):
+        vapp_find(apk_name)
+
     # Check if the APK has been identified by VirusTotal database
     def vtanalyzer(self, apk_name):
         api_check(apk_name)
@@ -70,7 +72,7 @@ class Adhrit:
         native_disas(apk_name)
 
     # Install the APK in an emulator and analyze its activities
-    def dynamicanalysis(self, apk_name):
+    def dynamicanalysis(apk_name):
         adb_con(apk_name)
 
 
@@ -82,6 +84,7 @@ def main():
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-x", help="Extract APK contents only")
+    parser.add_argument("-p", help="Check for virtual apps")
     parser.add_argument("-s", help="Source code of the APK in Smali")
     parser.add_argument("-b", help="Recompile smali back into APK")
     parser.add_argument("-m", help="Sign the APK")
@@ -92,7 +95,7 @@ def main():
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     args = parser.parse_args()
 
-    #Adhrit Welcome ASCII
+    # Adhrit Welcome ASCII
     adhrit.welcome()
 
     if args.c:
@@ -103,6 +106,7 @@ def main():
         adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
+        adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
         adhrit.nativedebug(args.a)
@@ -113,6 +117,9 @@ def main():
     elif args.x:
         adhrit.cleanproject(args.x)
         adhrit.apkextractor(args.x)
+
+    elif args.p:
+        adhrit.vappsearch(args.p)
 
     elif args.s:
         adhrit.smaliextractor(args.s)

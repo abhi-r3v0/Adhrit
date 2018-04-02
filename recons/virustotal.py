@@ -2,9 +2,7 @@
 
 import requests
 import hashlib
-import json
 from prettytable import PrettyTable
-
 
 
 def api_check(apk_name):
