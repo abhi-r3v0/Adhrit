@@ -1,6 +1,7 @@
 # ADHRIT  
 
-![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  ![](https://forthebadge.com/images/badges/built-for-android.svg)
+![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit)   [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/abhi-r3v0/Adhrit))   [![Twitter Follow](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow)](https://twitter.com/abhi_r3v0)   [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/cdnjs/cdnjs.svg?style=social)](https://github.com/abhi-r3v0/Adhrit)   [![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/phaser-craft.min.js.svg?style=social)](https://github.com/abhi-r3v0/Adhrit)
+
 
 Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome! 
 
