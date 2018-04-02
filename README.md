@@ -15,7 +15,8 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 * Extracts source code in Smali. 
 * Recompiles smali into APK
 * Signs the APK
-* Checks for bytecode injection points.
+* Checks for virtual apps/droppers
+* Checks for bytecode injection points and write it to a file.
 * Analyzes permissions used by the application.
 * Dumps the Manifest.
 * Dumps the certificate details.

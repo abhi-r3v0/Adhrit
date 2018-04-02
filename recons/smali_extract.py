@@ -80,7 +80,7 @@ def inj_check(apk_name):
                         to_write = "\n\t" + os.path.basename(f.name) + "\t:" + lines
                         if os.path.exists("smali_copy/str_inj.txt"):
                             os.system("rm -r smali_copy/str_inj.txt")
-                        with open ("str_inj.txt", "a+") as strfile:
+                        with open("str_inj.txt", "a+") as strfile:
                             strfile.write(to_write)
                         if inj_points > 0 and inj_points < 10:
                             print "\n\t" + os.path.basename(f.name) + "\t:" + lines

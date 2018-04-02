@@ -3,6 +3,7 @@
 
 import os
 
+
 def cleaner(apk_name):
     print "\n------------------------------------------------"
     print "[+] CLEANING PROJECT"
@@ -18,6 +19,9 @@ def cleaner(apk_name):
 
     if os.path.exists('Analysis') and os.path.isdir('Analysis'):
         os.system('rm -r Analysis')
+
+    if os.path.exists('apk') and os.path.isdir('apk'):
+        os.system('rm -r apk')
 
     if os.path.exists(namesplit) and os.path.isdir(namesplit):
         clcmd = 'rm -r ' + namesplit
