@@ -62,6 +62,7 @@ class dep_installer():
                 print "\n[+]  Installing necessary tools on Windows"
 
 
+
 def main():
     dep = dep_installer()
     dep.ins()
