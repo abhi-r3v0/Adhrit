@@ -52,7 +52,7 @@ class dep_installer():
 
             print "\n[+]  Installing Android debug tools "
             try:
-                os.system('brew install android-tools-adb')
+                os.system('brew brew cask install android-platform-tools')
                 print "\n[+]  Installation of Android tools complete"
             except OSError as ose:
                 print "\n[!]  Error installing Android tools"
