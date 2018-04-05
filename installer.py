@@ -34,7 +34,7 @@ class dep_installer():
 
         elif platform == "darwin":
 
-                print "\n[+]  Installing necessary tools on MAC"
+            print "\n[+]  Installing necessary tools on MAC"
             try:
                 os.system('sudo brew install toilet')
                 print "\n[+]  Installation of dependencies complete"
@@ -58,7 +58,9 @@ class dep_installer():
                 print "\n[!]  Error installing Android tools"
 
         elif platform == "win32":
-                #Windows installation here
+                #Windows
+                print "\n[+]  Installing necessary tools on Windows"
+
 
 def main():
     dep = dep_installer()
