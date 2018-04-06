@@ -45,14 +45,14 @@ class dep_installer():
             try:
                 os.system('brew install libc6-armel-cross libc6-dev-armel-cross')
                 os.system('brew install binutils')
-                os.system('brew install libncurses5-dev')
+                os.system('brew install ncurses')
                 print "\n[+]  Installation of ARM tools complete"
             except OSError as ose:
                 print "\n[!]  Error installing ARM dependencies"
 
             print "\n[+]  Installing Android debug tools "
             try:
-                os.system('brew brew cask install android-platform-tools')
+                os.system('brew cask install android-platform-tools')
                 print "\n[+]  Installation of Android tools complete"
             except OSError as ose:
                 print "\n[!]  Error installing Android tools"
