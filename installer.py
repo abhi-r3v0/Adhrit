@@ -43,7 +43,8 @@ class dep_installer():
 
             print "\n[+]  Installing ARM dependencies"
             try:
-                os.system('brew install libc6-armel-cross libc6-dev-armel-cross')
+                os.system('brew tap osx-cross/arm')
+                os.system('brew install arm-gcc-bin')
                 os.system('brew install binutils')
                 os.system('brew install ncurses')
                 print "\n[+]  Installation of ARM tools complete"
@@ -58,7 +59,7 @@ class dep_installer():
                 print "\n[!]  Error installing Android tools"
 
         elif platform == "win32":
-                #Windows
+                #TO-DO Windows
                 print "\n[+]  Installing necessary tools on Windows"
 
 
