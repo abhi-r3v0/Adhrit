@@ -36,7 +36,7 @@ class dep_installer():
 
             print "\n[+]  Installing necessary tools on MAC"
             try:
-                os.git system('brew install toilet')
+                os.system('brew install toilet')
                 print "\n[+]  Installation of dependencies complete"
             except OSError as ose:
                 print "\n[!]  Error installing dependency"
