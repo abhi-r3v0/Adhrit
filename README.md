@@ -96,12 +96,12 @@ Voila! Send us a PR. We'll review it and add it to the project.
 
 #### PROJECT LEAD:
 
-* Abhishek J M (jmabhishek4@gmail.com, @abhi_r3v0)
+* Abhishek J M (jmabhishek4@gmail.com, [@abhi_r3v0](https://twitter.com/abhi_r3v0))
 
 #### LEAD DEVELOPERS:
 
-* P S Narayanan (thepsnarayanan@gmail.com, @0xP5N_)
-* Heeraj Nair (heeraj123@gmail.com, @heerajnair)
+* P S Narayanan (thepsnarayanan@gmail.com, [@0xP5N_](https://twitter.com/0xP5N_))
+* Heeraj Nair (heeraj123@gmail.com, [@heerajnair](https://twitter.com/heerajnair))
 
 ---
 
