@@ -72,6 +72,37 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ---
 
+## CONTRIBUTING:
+
+* Have any cool idea? Here's how you can implement it:
+
+1. Create a ```module_name.py``` and place it in the ```recons``` directory.
+2. Define a class with a relevant name and define a function that takes```apk_name``` as a parameter. [eg: ```my_func(apk_name)```]
+3. Open ```adhrit.py``` and import the new class from recons. You can look at the already existing imports as an example.
+4. Define a new function inside the class ```Adhrit``` in this format: ```my_new_func(self, apk_name)```. Call the imported function here. [eg: ```my_func(apk_name)```]
+5. Create a new argument in the argument parser for the new included ```my_new_func```
+6. Call the function with the argument.
+
+Voila! Send us a PR. We'll review it and add it to the project.
+
+#### THINGS TO REMEMBER:
+
+* Follow the pep8 conventions.
+* Comment wherever necessary.
+
+---
+
+### PROJECT LEAD:
+
+* Abhishek J M (jmabhishek4@gmail.com)
+
+### TOP CONTRIBUTORS:
+
+* P S Narayanan (thepsnarayanan@gmail.com, @PSNAppz)
+* Heeraj Nair (heeraj123@gmail.com, @h33raj)
+
+---
+
 ### MENTIONS:
 
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
@@ -95,6 +126,9 @@ Example:  ```python adhrit.py -a my_app.apk```
 * [blackhatsecdevteam](https://blackhatsecdevteam.blogspot.in/2018/03/adhrit-android-apk-reversing-and.html)
 * [360doc](http://www.360doc.com/content/18/0330/08/31784658_741433742.shtml)
 * [Hackers Online Club](https://blog.hackersonlineclub.com/2018/04/adhrit-android-recon-tool.html?m=1)
+* [Altervista](https://hakersketajne.altervista.org/1591/adhrit-the-android-recon-tool/2018/)
+* [Xaunwulab](http://xuanwulab.github.io/cn/secnews/2018/03/30/index.html)
+
 
 ---
 
