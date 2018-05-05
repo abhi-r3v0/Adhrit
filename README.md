@@ -94,11 +94,11 @@ Voila! Send us a PR. We'll review it and add it to the project.
 
 ## THE SQUAD:
 
-### PROJECT LEAD:
+#### PROJECT LEAD:
 
 * Abhishek J M (jmabhishek4@gmail.com, @abhi_r3v0)
 
-### LEAD DEVELOPERS:
+#### LEAD DEVELOPERS:
 
 * P S Narayanan (thepsnarayanan@gmail.com, @0xP5N_)
 * Heeraj Nair (heeraj123@gmail.com, @heerajnair)
