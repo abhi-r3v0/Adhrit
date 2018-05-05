@@ -92,14 +92,16 @@ Voila! Send us a PR. We'll review it and add it to the project.
 
 ---
 
+## THE SQUAD:
+
 ### PROJECT LEAD:
 
-* Abhishek J M (jmabhishek4@gmail.com)
+* Abhishek J M (jmabhishek4@gmail.com, @abhi_r3v0)
 
-### TOP CONTRIBUTORS:
+### LEAD DEVELOPERS:
 
-* P S Narayanan (thepsnarayanan@gmail.com, @PSNAppz)
-* Heeraj Nair (heeraj123@gmail.com, @h33raj)
+* P S Narayanan (thepsnarayanan@gmail.com, @0xP5N_)
+* Heeraj Nair (heeraj123@gmail.com, @heerajnair)
 
 ---
 
