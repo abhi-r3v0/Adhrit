@@ -17,4 +17,5 @@ install:
   - pip install requests
   - pip install prettytable
   - pip install termcolor
+  - cd tests
 
