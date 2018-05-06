@@ -1,4 +1,9 @@
-![Logo](Docs/logo/logo.png)  ![banner] (Docs/logo/bannerb.png)
+![Logo](Docs/logo/banner.png | width=800)
+
+![Logo](Docs/logo/bannerb.png | width=800)
+
+![Logo](Docs/logo/bannerg.png | width=800)
+
 
 ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
 
