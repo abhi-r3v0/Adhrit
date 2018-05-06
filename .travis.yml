@@ -10,7 +10,7 @@ cache: pip
 os: Linux
 
 script: 
-  - python adhrit.py
+  - pytest
 
 install:
   - python installer.py
