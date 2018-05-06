@@ -1,3 +1,5 @@
+![Logo](Docs/logo/banner.png)
+
 # ADHRIT  
 
 ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
@@ -98,10 +100,14 @@ Voila! Send us a PR. We'll review it and add it to the project.
 
 * Abhishek J M (jmabhishek4@gmail.com, [@abhi_r3v0](https://twitter.com/abhi_r3v0))
 
-#### LEAD DEVELOPERS:
+#### LEAD CONTRIBUTORS:
 
 * P S Narayanan (thepsnarayanan@gmail.com, [@0xP5N_](https://twitter.com/0xP5N_))
 * Heeraj Nair (heeraj123@gmail.com, [@heerajnair](https://twitter.com/heerajnair))
+
+#### GRAPHIC DESIGNS:
+
+* Loyd Jayme (loydjayme1996@gmail.com, [@loydjayme25](https://github.com/loydjayme25))
 
 ---
 
