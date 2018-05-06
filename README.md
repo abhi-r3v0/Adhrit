@@ -1,4 +1,4 @@
-![Logo](Docs/logo/bannerb.png)
+![Logo](Docs/logo/banner.png)
 
 ---
 
