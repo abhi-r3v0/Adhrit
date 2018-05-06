@@ -1,4 +1,4 @@
-![Logo](Docs/logo/banner.png)
+![Logo](Docs/logo/logo.png)
 
 # ADHRIT  
 
