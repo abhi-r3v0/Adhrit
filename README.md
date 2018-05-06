@@ -1,4 +1,4 @@
-![Logo](Docs/logo/banner.png)
+![Logo](Docs/logo/bannerb.png)
 
 ---
 
@@ -97,6 +97,8 @@ Voila! Send us a PR. We'll review it and add it to the project.
 ## THE SQUAD:
 
 ![Logo](Docs/logo/logo.png)
+
+---
 
 #### PROJECT LEAD:
 
