@@ -1,6 +1,7 @@
 # Built application files
 *.apk
 *.pyc
+.cache/
 
 # Gradle files
 smali_copy/
