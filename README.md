@@ -1,6 +1,4 @@
-![Logo](Docs/logo/logo.png)
-
-# ADHRIT  
+![Logo](Docs/logo/logo.png)  ![banner] (Docs/logo/bannerb.png)
 
 ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
 
@@ -49,22 +47,22 @@ Example:  ```python adhrit.py -a my_app.apk```
 ### SCREENSHOTS:
 
 
-![alt text](Docs/images/1.png)
+![1](Docs/images/1.png)
 
 
-![alt text](Docs/images/2.png)
+![2](Docs/images/2.png)
 
 
-![alt text](Docs/images/3.png)
+![3](Docs/images/3.png)
 
 
-![alt text](Docs/images/4.png)
+![4](Docs/images/4.png)
 
 
-![alt text](Docs/images/5.png)
+![5](Docs/images/5.png)
 
 
-![alt text](Docs/images/6.png)
+![6](Docs/images/6.png)
 
 ---
 
