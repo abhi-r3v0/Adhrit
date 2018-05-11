@@ -68,6 +68,12 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ---
 
+### PRESENTATION:
+
+[Cysinfo](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+
+---
+
 ### BLOG:
 
 [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
