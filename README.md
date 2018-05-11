@@ -163,6 +163,8 @@ Voila! Send us a PR. We'll review it and add it to the project.
 1. Filenames with two '.' may give an error. Please rename the apk in such cases.
 For example, if your file name is ```my.app.apk```, rename it to ```myapp.apk```
 
+---
 
+## From India, to the world :blue_heart:
 
 
