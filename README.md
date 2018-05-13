@@ -1,6 +1,6 @@
 ![Logo](Docs/logo/banner.png)
 
-<img src="/Docs/logo/banner.png" alt="banner" style="width: 200px;"/>
+<img src="/Docs/logo/banner.png" alt="banner" style="width: 800px;"/>
 
 ---
 
