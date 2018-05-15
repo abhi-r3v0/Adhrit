@@ -1,4 +1,4 @@
-![Logo](Docs/logo/banner.png)
+![1024x512](https://user-images.githubusercontent.com/37318022/40054882-d783bc50-5878-11e8-9dbd-493404f5169f.png)
 
 ---
 
