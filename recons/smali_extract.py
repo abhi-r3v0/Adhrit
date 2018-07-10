@@ -10,7 +10,7 @@ def smali_de(apk_name):
     print "[+] SOURCE EXTRATION IN SMALI"
     print "----------------------------------------------------"
     snamesplit = apk_name.split('.')[0]
-    SmaliCmd = 'java -jar tools/apktool.jar d -f ' + apk_name + ' -o apk/' + snamesplit
+    SmaliCmd = 'java -jar tools/apktool.jar d -f ' + apk_name
     os.system(SmaliCmd)
     if os.path.isdir(snamesplit):
         print "\n\t[+] Extraction complete."
@@ -35,7 +35,7 @@ def apk_sign(apk_name):
     print "[+] SIGNING APK"
     print "------------------------------------------------"
     snamesplit = apk_name.split('.')[0]
-    sdir = 'apk/' + snamesplit + '/' + snamesplit + '/dist/' + snamesplit + '.apk'
+    sdir = snamesplit + '/dist/' + snamesplit + '.apk'
     if os.path.exists(sdir):
         signCmd = 'java -jar tools/sign.jar ' + snamesplit + '/dist/' + snamesplit + '.apk'
         os.system(signCmd)
@@ -58,7 +58,7 @@ def inj_check(apk_name):
     smali_dir = 'smali'
     if os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
-    os.system('cp -R ' + 'apk/' + snamesplit + '/' + smali_dir + ' smali_copy')
+    os.system('cp -R ' + snamesplit + '/' + smali_dir + ' smali_copy')
     if os.path.isdir('smali_copy'):
         os.chdir('smali_copy')
         ignore_dirs = ['android', 'org', 'google', 'localytics']
