@@ -109,7 +109,6 @@ def main():
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
-        adhrit.nativedebug(args.a)
 
     elif args.r:
         adhrit.apkripper(args.r)
