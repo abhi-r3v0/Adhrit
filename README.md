@@ -130,6 +130,9 @@ Example:  ```python adhrit.py -a my_app.apk```
 * [Hackers Online Club](https://blog.hackersonlineclub.com/2018/04/adhrit-android-recon-tool.html?m=1)
 * [Altervista](https://hakersketajne.altervista.org/1591/adhrit-the-android-recon-tool/2018/)
 * [Xaunwulab](http://xuanwulab.github.io/cn/secnews/2018/03/30/index.html)
+* [Prodefense](http://www.prodefence.org/adhrit-open-source-android-apk-reversing-and-analysis-tool/)
+* [Digital Munition](https://www.digitalmunition.me/2018/03/adhrit-android-apk-reversing-analysis-tool-can-help-secuity-researchers-ctf-enthusiasts-alike/)
+* [Xenicom](https://xenicom.net/post/172376521114/adhrit-android-apk-reversing-and-analysis-tool)
 
 
 ---
