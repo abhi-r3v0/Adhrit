@@ -17,6 +17,9 @@ def api_check(apk_name):
     print "[+] SCANNING FOR MALWARE TRACE"
     print "--------------------------------------------------"
     print "\n"
+    if str(vt_apikey) == '':
+        print "[!] API key not added. Please add the VirusTotal API key"
+        return
     pos = 0
     t = PrettyTable(['ENGINE', 'MALWARE'])
     msum = hashlib.md5()
