@@ -106,7 +106,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 ---
 
 ### MENTIONS:
-
+* [Neonix](https://neonix.in/2018/08/25/adhrit/)
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
 * [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
 * [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
