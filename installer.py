@@ -12,6 +12,8 @@ class dep_installer():
             print "\n[+]  Installing necessary tools on Linux"
             try:
                 os.system('sudo apt-get install toilet')
+                os.system('sudo apt-get install python-pip')
+                os.system('sudo apt-get install python3-pip')
                 os.system('sudo pip install prettytable')
                 print "\n[+]  Installation of dependencies complete"
             except OSError as ose:
