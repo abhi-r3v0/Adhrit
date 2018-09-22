@@ -13,6 +13,7 @@ class dep_installer():
             try:
                 os.system('sudo apt-get install toilet')
                 os.system('sudo apt-get install python-pip')
+                os.system('sudo apt-get install python-setuptools')
                 os.system('sudo apt-get install python3-pip')
                 os.system('sudo pip install prettytable')
                 os.system('sudo pip install requests')
