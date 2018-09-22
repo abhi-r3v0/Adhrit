@@ -15,6 +15,7 @@ class dep_installer():
                 os.system('sudo apt-get install python-pip')
                 os.system('sudo apt-get install python3-pip')
                 os.system('sudo pip install prettytable')
+                os.system('sudo pip install requests')
                 print "\n[+]  Installation of dependencies complete"
             except OSError as ose:
                 print "\n[!]  Error installing dependency"
