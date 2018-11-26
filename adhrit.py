@@ -1,150 +1,107 @@
-# !/usr/bin/env python
-
-# ADHRIT is an open source tool for Android apk analysis
-# and CTFs to extract maximum amount of information from an apk
+# !/usr/bin/python
 
 import os
-import argparse
-from recons.apk_recon import apk_rip
-from recons.apk_extract import apk_info
-from recons.vapp import vapp_find
-from recons.virustotal import api_check
-from recons.smali_extract import smali_de
-from recons.smali_extract import smali_re
-from recons.smali_extract import apk_sign
-from recons.smali_extract import inj_check
-from recons.native_recon import native_disas
-from recons.dynamic import adb_con
-from recons.clean import cleaner
-
-__author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
+import re
+from sys import exit
 
 
-class Adhrit:
+def smali_de(apk_name):
+    print "\n--------------------------------------------------"
+    print "[+] SOURCE EXTRATION IN SMALI"
+    print "----------------------------------------------------"
+    snamesplit = apk_name.split('.')[0]
+    SmaliCmd = 'java -jar tools/apktool.jar d -f ' + apk_name
+    os.system(SmaliCmd)
+    if os.path.isdir(snamesplit):
+        print "\n\t[+] Extraction complete."
 
-    def __init__(self):
-        self.apk_name = ""
 
-    def welcome(self):
-        os.system('toilet -F metal -f bigascii12 ADHRIT')
-        print "| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit"
-        print "| Author\t\t:\t" + __author__
-    print "\n\n"
+def smali_re(apk_name):
+    print "\n--------------------------------------------------"
+    print "[+] RECOMPILING SMALI"
+    print "----------------------------------------------------"
+    snamesplit = apk_name.split('.')[0]
+    if os.path.isdir(snamesplit):
+        SmaliCmd = 'java -jar tools/apktool.jar b -f ' + snamesplit
+        os.system(SmaliCmd)
+        print "\n\t[+] Recompiling complete."
+        print "\n\t[+] The recompiled apk in " + snamesplit + "/dist\n"
+    else:
+        print "\n\t[!] smali source not found"
 
-    # Clean the tool directory for a new project
-    def cleanproject(self, apk_name):
-        cleaner(apk_name)
 
-    # Extract APK information without extracting the package
-    def apkripper(self, apk_name):
-        apk_rip(apk_name)
+def apk_sign(apk_name):
+    print "\n----------------------------------------------"
+    print "[+] SIGNING APK"
+    print "------------------------------------------------"
+    snamesplit = apk_name.split('.')[0]
+    sdir = snamesplit + '/dist/' + snamesplit + '.apk'
+    if os.path.exists(sdir):
+        signCmd = 'java -jar tools/sign.jar ' + snamesplit + '/dist/' + snamesplit + '.apk'
+        os.system(signCmd)
+        msg = "[+] Signed APK found as: " + snamesplit + "/dist/" + snamesplit + ".s.apk"
+        print msg
+    else:
+        print "\n\t[!] file not found"
 
-    # Extract All the contents of the APK into a directory
-    def apkextractor(self, apk_name):
-        apk_info(apk_name)
 
-    # Check for virtual app droppers
-    def vappsearch(self, apk_name):
-        vapp_find(apk_name)
-
-    # Check if the APK has been identified by VirusTotal database
-    def vtanalyzer(self, apk_name):
-        api_check(apk_name)
-
-    # Extract the source code of the APK in smali
-    def smaliextractor(self, apk_name):
+def inj_check(apk_name):
+    snamesplit = apk_name.split('.')[0]
+    if os.path.isdir(snamesplit) == 0:
+        print "\n\t[!] bytecode not found. Extracting"
         smali_de(apk_name)
+    print "\n--------------------------------------------------"
+    print "[+] CHECKING FOR BYTECODE INJECTIONS"
+    print "----------------------------------------------------"
+    inj_points = 0
+    check = 0
+    smali_dir = 'smali'
+    flag_regex = re.compile(r'(flag|evabs){[a-z0-9]}*', re.IGNORECASE)
+    flags = []
+    if os.path.isdir('smali_copy'):
+        os.system('rm -r smali_copy')
+    os.system('cp -R ' + snamesplit + '/' + smali_dir + ' smali_copy')
+    if os.path.isdir('smali_copy'):
+        os.chdir('smali_copy')
+        ignore_dirs = ['android', 'org', 'google', 'localytics']
+        for dirList, subdirList, subfiles in os.walk(os.getcwd()):
+            for subfiles in ignore_dirs:
+                os.system('rm -r ' + subfiles + ' 2> /dev/null')
+            for subdirList in ignore_dirs:
+                os.system('rm -r ' + subdirList + ' 2> /dev/null')
+            for dirList in ignore_dirs:
+                os.system('rm -r ' + dirList + ' 2> /dev/null')
 
-    # Recompile smali back into APK
-    def smalirecompile(self, apk_name):
-        smali_re(apk_name)
+    for dirList, subdirList, subfiles in os.walk(os.getcwd()):
+        for files in subfiles:
+            with open(os.path.abspath(os.path.join(dirList, files))) as f:
+                for lines in f:
+                    pattern1 = 'const-string'
+                    if re.search(flag_regex, lines):
+                        flags.append(lines)
+                    if pattern1 in lines:
+                        inj_points = inj_points + 1
+                        to_write = "\n\t" + os.path.basename(f.name) + "\t:" + lines
+                        if os.path.exists("smali_copy/str_inj.txt"):
+                            os.system("rm -r smali_copy/str_inj.txt")
+                        with open("str_inj.txt", "a+") as strfile:
+                            strfile.write(to_write)
+                        if inj_points > 0 and inj_points < 10:
+                            print "\n\t" + os.path.basename(f.name) + "\t:" + lines
+                        else:
+                            check = 1
 
-    # Sign the apk with a generic signature. For educaational purposes only!
-    def apk_signing(self, apk_name):
-        apk_sign(apk_name)
-
-    # Check for string injection points
-    def smali_inj(self, apk_name):
-        inj_check(apk_name)
-
-    # Identify and dump the disassembly of the native libraries within the APK
-    def nativedebug(self, apk_name):
-        native_disas(apk_name)
-
-    # Install the APK in an emulator and analyze its activities
-    def dynamicanalysis(apk_name):
-        adb_con(apk_name)
-
-
-# Main fuction starts here
-def main():
-    adhrit = Adhrit()
-    parser = argparse.ArgumentParser(description="Help")
-    parser.add_argument("-c", help="Clean up for a new project")
-    parser.add_argument("-a", help="Dump package info and extract contents")
-    parser.add_argument("-r", help="Analyze APK without extraction")
-    parser.add_argument("-x", help="Extract APK contents only")
-    parser.add_argument("-p", help="Check for virtual apps")
-    parser.add_argument("-s", help="Source code of the APK in Smali")
-    parser.add_argument("-b", help="Recompile smali back into APK")
-    parser.add_argument("-m", help="Sign the APK")
-    parser.add_argument("-i", help="Check for injection points")
-    parser.add_argument("-n", help="Disassemble native libraries")
-    parser.add_argument("-w", help="Welcome :P")
-    parser.add_argument("-v", help="Check footprints in VirusTotal database")
-    parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
-    args = parser.parse_args()
-
-    # Adhrit Welcome ASCII
-    adhrit.welcome()
-
-    if args.c:
-        adhrit.cleanproject(args.c)
-
-    if args.a:
-        adhrit.cleanproject(args.a)
-        adhrit.apkripper(args.a)
-        adhrit.vtanalyzer(args.a)
-        adhrit.apkextractor(args.a)
-        adhrit.vappsearch(args.a)
-        adhrit.smaliextractor(args.a)
-        adhrit.smali_inj(args.a)
-
-    elif args.r:
-        adhrit.apkripper(args.r)
-
-    elif args.x:
-        adhrit.cleanproject(args.x)
-        adhrit.apkextractor(args.x)
-
-    elif args.p:
-        adhrit.vappsearch(args.p)
-
-    elif args.s:
-        adhrit.smaliextractor(args.s)
-
-    elif args.b:
-        adhrit.smalirecompile(args.b)
-
-    elif args.m:
-        adhrit.welcome()
-        adhrit.apk_signing(args.m)
-
-    elif args.i:
-        adhrit.smali_inj(args.i)
-
-    elif args.n:
-        adhrit.nativedebug(args.n)
-
-    elif args.w:
-        adhrit.welcome()
-
-    elif args.v:
-        adhrit.vtanalyzer(args.v)
-
-    elif args.d:
-        adhrit.dynamicanalysis(args.d)
-
-
-if __name__ == "__main__":
-    main()
+    print "\n\t[+] " + str(inj_points) + " Strings found. Injections possible\n"
+    if check == 1:
+        print "\n\t[+] More than 10 constant strings found. Constants strings with file name references written to 'str_inj.txt' file in the 'smali_copy' directory\n"
+    if flags:
+        print "\n--------------------------------------------------"
+        print "[+] FOUND FLAGS"
+        print "----------------------------------------------------"
+        formats = ['FLAG','flag','EVABS']
+        for flag in flags:
+            for form in formats:
+                i = flag.find(form)
+                o = flag[i:].find('}')+1
+                if i is not -1 and flag[i:o] != "":
+                    print flag[i:o]
