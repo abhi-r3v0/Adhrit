@@ -56,6 +56,8 @@ def inj_check(apk_name):
     inj_points = 0
     check = 0
     smali_dir = 'smali'
+    flag_regex = re.compile(r'(flag|evabs){[a-z0-9]}*', re.IGNORECASE)
+    flags = []
     if os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
     os.system('cp -R ' + snamesplit + '/' + smali_dir + ' smali_copy')
@@ -75,6 +77,8 @@ def inj_check(apk_name):
             with open(os.path.abspath(os.path.join(dirList, files))) as f:
                 for lines in f:
                     pattern1 = 'const-string'
+                    if re.search(flag_regex, lines):
+                        flags.append(lines)
                     if pattern1 in lines:
                         inj_points = inj_points + 1
                         to_write = "\n\t" + os.path.basename(f.name) + "\t:" + lines
@@ -90,3 +94,14 @@ def inj_check(apk_name):
     print "\n\t[+] " + str(inj_points) + " Strings found. Injections possible\n"
     if check == 1:
         print "\n\t[+] More than 10 constant strings found. Constants strings with file name references written to 'str_inj.txt' file in the 'smali_copy' directory\n"
+    if flags:
+        print "\n--------------------------------------------------"
+        print "[+] FOUND FLAGS"
+        print "----------------------------------------------------"
+        formats = ['FLAG','flag','EVABS']
+        for flag in flags:
+            for form in formats:
+                i = flag.find(form)
+                o = flag[i:].find('}')+1
+                if i is not -1 and flag[i:o] != "":
+                    print flag[i:o]
