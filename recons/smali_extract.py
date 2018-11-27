@@ -101,7 +101,7 @@ def inj_check(apk_name):
         formats = ['FLAG','flag','EVABS']
         for flag in flags:
             for form in formats:
-                i = flag.find(form)
-                o = flag[i:].find('}')+1
-                if i is not -1 and flag[i:o] != "":
-                    print flag[i:o]
+                start = flag.find(form)
+                end = flag[start:].find('}') + 1
+                if start is not -1 and flag[start:end] != "":
+                    print flag[start:end]
