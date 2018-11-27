@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.revo.evabs">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application android:allowBackup="false" android:debuggable="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/AppTheme">
+        <activity android:exported="true" android:name="com.revo.evabs.ExportedActivity"/>
+        <activity android:name="com.revo.evabs.Frida1"/>
+        <activity android:name="com.revo.evabs.FileRead"/>
+        <activity android:name="com.revo.evabs.DebugMe"/>
+        <activity android:name="com.revo.evabs.Welcome"/>
+        <activity android:name="com.revo.evabs.ChallengeList"/>
+        <activity android:name="com.revo.evabs.ExportedInfo"/>
+        <activity android:name="com.revo.evabs.SmaliInject"/>
+        <activity android:name="com.revo.evabs.StringsSecrets"/>
+        <activity android:name="com.revo.evabs.SharedBreach"/>
+        <activity android:name="com.revo.evabs.Decode"/>
+        <activity android:name="com.revo.evabs.BadComm"/>
+        <activity android:name="com.revo.evabs.DBLeak"/>
+        <activity android:name="com.revo.evabs.CustomAccess">
+            <intent-filter>
+                <action android:name="com.revo.evabs.action.SENSOR_KEY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.revo.evabs.Res_raw"/>
+        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>
+        <activity android:name="com.revo.evabs.Welcome0"/>
+        <activity android:name="com.revo.evabs.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="android.support.VERSION" android:value="26.1.0"/>
+        <meta-data android:name="android.arch.lifecycle.VERSION" android:value="27.0.0-SNAPSHOT"/>
+    </application>
+</manifest>
