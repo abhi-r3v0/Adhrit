@@ -45,7 +45,7 @@ def apk_sign(apk_name):
         print "\n\t[!] file not found"
 
 
-def inj_check(apk_name):
+def inj_check(apk_name, flag_format = ''):
     snamesplit = apk_name.split('.')[0]
     if os.path.isdir(snamesplit) == 0:
         print "\n\t[!] bytecode not found. Extracting"
@@ -56,7 +56,7 @@ def inj_check(apk_name):
     inj_points = 0
     check = 0
     smali_dir = 'smali'
-    flag_regex = re.compile(r'(flag|evabs){[a-z0-9]}*', re.IGNORECASE)
+    flag_regex = re.compile(r""+ str(flag_format) +"{[a-z0-9]}*", re.IGNORECASE)
     flags = []
     if os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
@@ -98,10 +98,8 @@ def inj_check(apk_name):
         print "\n--------------------------------------------------"
         print "[+] FOUND FLAGS"
         print "----------------------------------------------------"
-        formats = ['FLAG','flag','EVABS']
         for flag in flags:
-            for form in formats:
-                start = flag.find(form)
-                end = flag[start:].find('}') + 1
-                if start is not -1 and flag[start:end] != "":
-                    print flag[start:end]
+            start = flag.find(flag_format)
+            end = flag[start:].find('}') + 1
+            if start is not -1 and flag[start:end] != "":
+                print flag[start:end]
