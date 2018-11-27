@@ -31,5 +31,3 @@ def check_root():
 		print "Device is not rooted" 
 	else:
 		print "Device is not Connected"
-
-check_root()
