@@ -16,6 +16,7 @@ from recons.smali_extract import inj_check
 from recons.native_recon import native_disas
 from recons.dynamic import adb_con
 from recons.clean import cleaner
+from recons.root import check_root
 
 __author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
 
@@ -75,6 +76,11 @@ class Adhrit:
     def dynamicanalysis(apk_name):
         adb_con(apk_name)
 
+    def checkroot(self):
+        check_root()
+
+
+
 
 # Main fuction starts here
 def main():
@@ -93,6 +99,7 @@ def main():
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
+    parser.add_argument("-cr", help="Check device root status", action='store_true')
     args = parser.parse_args()
 
     # Adhrit Welcome ASCII
@@ -144,6 +151,9 @@ def main():
 
     elif args.d:
         adhrit.dynamicanalysis(args.d)
+
+    elif args.cr:
+        adhrit.checkroot()
 
 
 if __name__ == "__main__":
