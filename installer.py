@@ -1,41 +1,42 @@
 # !/usr/bin/env python
 
 import os
+import subprocess
 from sys import platform
 
 
 class dep_installer():
+
+    def __init__(self):
+        self.apt_tools = ['toilet', 'python-pip', 'python-setuptools', 'python3-pip', 'android-tools-adb']
+        self.pip_tools = ['prettytable', 'requests', 'progressbar2']
+        self.arm_tools = ['libc6-armel-cross libc6-dev-armel-cross', 'binutils-arm-linux-gnueabi', 'libncurses5-dev']
 
     def ins(self):
         if platform == "linux" or platform == "linux2":
                 # linux
             print "\n[+]  Installing necessary tools on Linux"
             try:
-                os.system('sudo apt-get install toilet')
-                os.system('sudo apt-get install python-pip')
-                os.system('sudo apt-get install python-setuptools')
-                os.system('sudo apt-get install python3-pip')
-                os.system('sudo pip install prettytable')
-                os.system('sudo pip install requests')
+                for i in self.apt_tools:
+                    subprocess.call(['sudo', 'apt-get', '-f', 'install', i], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    print "\t[+] Installed " + i
+
+                for j in self.pip_tools:
+                    subprocess.call(['sudo', 'pip', 'install', j], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    print "\t[+] Installed " + j
                 print "\n[+]  Installation of dependencies complete"
             except OSError as ose:
                 print "\n[!]  Error installing dependency"
 
             print "\n[+]  Installing ARM dependencies"
             try:
-                os.system('sudo apt-get install libc6-armel-cross libc6-dev-armel-cross')
-                os.system('sudo apt-get install binutils-arm-linux-gnueabi')
-                os.system('sudo apt-get install libncurses5-dev')
+                for k in self.arm_tools:
+                    subprocess.call(['sudo', 'apt-get', '-f', 'install', k], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    print "\t[+] Installed " + k
                 print "\n[+]  Installation of ARM tools complete"
             except OSError as ose:
                 print "\n[!]  Error installing ARM dependencies"
 
-            print "\n[+]  Installing Android debug tools "
-            try:
-                os.system('sudo apt-get install android-tools-adb')
-                print "\n[+]  Installation of Android tools complete"
-            except OSError as ose:
-                print "\n[!]  Error installing Android tools"
 
         elif platform == "darwin":
 

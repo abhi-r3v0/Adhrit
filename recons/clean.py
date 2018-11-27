@@ -29,3 +29,6 @@ def cleaner(apk_name):
 
     if os.path.exists('smali_copy') and os.path.isdir('smali_copy'):
         os.system('rm -r smali_copy')
+
+    if os.path.exists('str_inj.txt'):
+    	os.system('rm -r str_inj.txt')
