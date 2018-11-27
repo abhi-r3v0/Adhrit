@@ -80,6 +80,8 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
 
+
+
 ---
 
 ### BLOG:
@@ -96,6 +98,7 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 #### LEAD CONTRIBUTORS:
 
+* Akhil Mahendra (akhilmahendra7991@gmail.com, [@Akhil_Mahendra](https://twitter.com/akhil_mahendra))
 * P S Narayanan (thepsnarayanan@gmail.com, [@0xP5N_](https://twitter.com/0xP5N_))
 * Heeraj Nair (heeraj123@gmail.com, [@heerajnair](https://twitter.com/heerajnair))
 
