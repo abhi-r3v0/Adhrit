@@ -65,8 +65,8 @@ class Adhrit:
         apk_sign(apk_name)
 
     # Check for string injection points
-    def smali_inj(self, apk_name):
-        inj_check(apk_name)
+    def smali_inj(self, apk_name, flag_format = ''):
+        inj_check(apk_name, flag_format)
 
     # Identify and dump the disassembly of the native libraries within the APK
     def nativedebug(self, apk_name):
@@ -95,6 +95,7 @@ def main():
     parser.add_argument("-b", help="Recompile smali back into APK")
     parser.add_argument("-m", help="Sign the APK")
     parser.add_argument("-i", help="Check for injection points")
+    parser.add_argument("--flag", help="Check for CTF flags")
     parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
@@ -138,7 +139,7 @@ def main():
         adhrit.apk_signing(args.m)
 
     elif args.i:
-        adhrit.smali_inj(args.i)
+        adhrit.smali_inj(args.i, args.flag)
 
     elif args.n:
         adhrit.nativedebug(args.n)
