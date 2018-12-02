@@ -81,12 +81,23 @@ Example:  ```python adhrit.py -a my_app.apk```
 [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
 
 
-
 ---
 
 ### BLOG:
 
 [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+
+---
+
+
+### VIDEO:
+
+[![Bug Bounty Tutorial](Docs/images/7.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
+
+---
+
+[![Solving a simple mobile CTF challenge](Docs/images/8.png)](https://www.youtube.com/watch?v=yeEp-opeRjM)
+
 
 ---
 
