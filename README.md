@@ -92,9 +92,13 @@ Example:  ```python adhrit.py -a my_app.apk```
 
 ### VIDEO:
 
+#### Bug Bounty Tutorial
+
 [![Bug Bounty Tutorial](Docs/images/7.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
 
 ---
+
+#### Solving a simple mobile CTF challenge
 
 [![Solving a simple mobile CTF challenge](Docs/images/8.png)](https://www.youtube.com/watch?v=yeEp-opeRjM)
 
