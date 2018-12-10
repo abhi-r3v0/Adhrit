@@ -25,7 +25,7 @@ def apk_info(apk_name):
     print "[+] EXTRACTING SOURCE"
     print "--------------------------------------------------"
     namesplit = apk_name.split('.')[0]
-    javaSrc = 'java -jar tools/jd-cli.jar  ' + namesplit + '-dex2jar.jar' + ' -od ' + ' Source-Java' + ' 1> /dev/null 2> /dev/null'
+    javaSrc = 'java -jar tools/cfr.jar  ' + namesplit + '-dex2jar.jar' + ' --silent ' + ' --outputdir' + ' Source-Java' + ' 1> /dev/null 2> /dev/null'
     os.system(javaSrc)
     print "\n\t[+] Extraction complete. Check 'Source' directory."
 
