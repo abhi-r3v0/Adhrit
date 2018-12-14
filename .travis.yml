@@ -3,13 +3,13 @@ language: python
 sudo: required
 
 python:
-  - "2.7_with_system_site_packages"
+  - "3_with_system_site_packages"
 
 cache: pip
 
 os: Linux
 
-script: 
+script:
   - python adhrit.py
 
 install:
