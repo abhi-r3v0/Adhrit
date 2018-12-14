@@ -1,9 +1,12 @@
 language: python
 
+before_install:
+  - sudo apt-get install python3
+
 sudo: required
 
 python:
-  - "3_with_system_site_packages"
+  - "3.5"
 
 cache: pip
 
