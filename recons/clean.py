@@ -1,13 +1,12 @@
-# !/usr/bin/env python
+# !/usr/bin/env python3
 
 
 import os
 
 
 def cleaner(apk_name):
-    print "\n------------------------------------------------"
-    print "[+] CLEANING PROJECT"
-    print "--------------------------------------------------"
+    print("\n--------------------------------------------------")
+    print("[+] CLEANING PROJECT")
 
     namesplit = apk_name.split('.')[0]
 

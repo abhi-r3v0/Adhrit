@@ -13,25 +13,27 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ### USES:
 
-* Extracts the apk contents.
+* Extracts the apk contents
 * Disassembles native libraries
-* Extracts jar out of dex.
-* Extracts source code in Java.
-* Extracts source code in Smali.
+* Extracts jar out of dex
+* Extracts source code in Java
+* Extracts source code in Smali
 * Recompiles smali into APK
 * Signs the APK
 * Checks for virtual apps/droppers
-* Checks for bytecode injection points and write it to a file.
-* Analyzes permissions used by the application.
-* Dumps the Manifest.
-* Dumps the certificate details.
-* Checks for malware footprints in the VirusTotal database.
+* Checks for bytecode injection points and writes it to a file
+* Checks for CTF flags and writes it to a file
+* Analyzes permissions used by the application
+* Dumps the Manifest
+* Dumps the certificate details
+* Checks for malware footprints in the VirusTotal database
 
 ---
 
 ### PRE-REQUISITES:
 
 * Linux or MAC
+* Python3
 * Java JDK
 
 ---
@@ -41,16 +43,16 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
 2. Open ```config``` and input your VirusTotal API key without any quotes. ([Click here to know how to obtain your VT API key](https://community.mcafee.com/t5/Documents/How-to-get-a-VirusTotal-public-API-Key/ta-p/552797))
 3. Open a terminal and cd into the directory.
-4. Run ```python installer.py``` for installing the necessary tools.
+4. Run ```python3 installer.py``` for installing the necessary tools.
 
 ---
 
 ### USAGE:
 
 1. Place the application (apk file) in the tool directory.
-2. Use ```python adhrit.py -h``` for usage help.
+2. Use ```python3 adhrit.py -h``` for usage help.
 
-Example:  ```python adhrit.py -a my_app.apk```
+Example:  ```python3 adhrit.py -a my_app.apk```
 
 ---
 

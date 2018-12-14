@@ -1,4 +1,4 @@
-# !/usr/bin/python
+# !/usr/bin/env python3
 
 import subprocess
 
@@ -16,18 +16,19 @@ paths = ["/system/app/Superuser.apk",
          "/data/local/su",
          "/su/bin/su"]
 
+
 def check_root():
-	print "\n--------------------------------------------------"
-	print "[+] CHECKING ROOT STATUS"
-	print "----------------------------------------------------"
-	device = subprocess.check_output('adb devices',shell=True)
-	if len(device) is not 26:
-		for path in paths:
-			cmd = "adb shell 'if [ -f "+ path +" ];then echo 1; else echo 0; fi'"
-			check_root = subprocess.check_output(cmd, shell=True)
-			if check_root is 1:
-				print "Device is rooted"
-				break;
-		print "Device is not rooted" 
-	else:
-		print "Device is not Connected"
+    print("\n--------------------------------------------------")
+    print("[+] CHECKING ROOT STATUS\n")
+    device = subprocess.check_output('adb devices', shell=True)
+    if len(device) is not 26:
+        for path in paths:
+            cmd = "adb shell 'if [ -f " + path + " ];then echo 1; else echo 0; fi'"
+            check_root = subprocess.check_output(cmd, shell=True)
+            if check_root is 1:
+                print("\t[+] Device is rooted")
+                break;
+        print("\t[-] Device is not rooted")
+    else:
+        print("\t[!] Device is not connected")
+

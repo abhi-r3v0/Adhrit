@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+# !/usr/bin/env python3
 
 # ADHRIT is an open source tool for Android apk analysis
 # and CTFs to extract maximum amount of information from an apk
@@ -28,9 +28,9 @@ class Adhrit:
 
     def welcome(self):
         os.system('toilet -F metal -f bigascii12 ADHRIT')
-        print "| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit"
-        print "| Author\t\t:\t" + __author__
-    print "\n\n"
+        print("| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit")
+        print("| Author\t\t:\t" + __author__)
+    print("\n\n")
 
     # Clean the tool directory for a new project
     def cleanproject(self, apk_name):
@@ -85,7 +85,7 @@ class Adhrit:
 # Main fuction starts here
 def main():
     adhrit = Adhrit()
-    parser = argparse.ArgumentParser(description="Help")
+    parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
     parser.add_argument("-c", help="Clean up for a new project")
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
