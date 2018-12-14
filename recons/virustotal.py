@@ -1,24 +1,23 @@
-# !/usr/bin/env python
+# !/usr/bin/env python3
 
-import ConfigParser
+import configparser
 import requests
 import hashlib
 from prettytable import PrettyTable
 
 
 def api_check(apk_name):
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
     config.readfp((open(r'config')))
 
     vt_apikey = config.get('config-data', 'vt_api_key')
 
-    print "\n"
-    print "--------------------------------------------------"
-    print "[+] SCANNING FOR MALWARE TRACE"
-    print "--------------------------------------------------"
-    print "\n"
+    print("\n")
+    print("--------------------------------------------------")
+    print("[+] SCANNING FOR MALWARE TRACE")
+    print("\n")
     if str(vt_apikey) == '':
-        print "[!] API key not added. Please add the VirusTotal API key"
+        print("\t[!] API key not added. Please add the VirusTotal API key")
         return
     pos = 0
     t = PrettyTable(['ENGINE', 'MALWARE'])
@@ -40,21 +39,21 @@ def api_check(apk_name):
         json_response = response.json()
 
         if json_response['response_code'] == 0:
-            print "\t[!] Error Getting Details. Aborting\n"
+            print("\t[!] Error Getting Details. Aborting\n")
             return
         if json_response['positives'] > 0:
-            print "\n\t[+] Positives Found: " + str(json_response['positives'])
+            print(("\n\t[+] Positives Found: " + str(json_response['positives'])))
             pos = 1
-            for engine, det in json_response['scans'].iteritems():
+            for engine, det in list(json_response['scans'].items()):
                 if det["detected"]:
                     t.add_row([engine, det["result"]])
         else:
-            print "\n[-] No Positives Found"
+            print("\n[-] No Positives Found")
 
     except:
-        print "\n Error connecting to VirusTotal"
+        print("[!] Error connecting to VirusTotal")
 
     if pos == 1:
-        print t
+        print(t)
 
-    print "\n"
+    print("\n")
