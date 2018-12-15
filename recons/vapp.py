@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+# !/usr/bin/env python3
 
 import os
 import zipfile
@@ -10,8 +10,8 @@ def vapp_find(apk_name):
     global drop_name
     dropper = 0
     if os.path.exists("Extracts") == 0:
-        print "\n[!] Extracted content not found!"
-        print "\n[+] Extracting"
+        print("\n[!] Extracted content not found!")
+        print("\n[+] Extracting")
         apk.extractall("Extract")
         if os.path.exists("Extracts") and os.path.isdir("Extracts"):
             os.chdir("Extracts")
@@ -21,6 +21,6 @@ def vapp_find(apk_name):
                         dropper += 1
 
     if dropper >= 1:
-        print "\n[+] Virtual application found: " + drop_name
+        print("\n[+] Virtual application found: " + drop_name)
     else:
-        print "\n[+] No droppers found\n"
+        print("\n[+] No droppers found\n")
