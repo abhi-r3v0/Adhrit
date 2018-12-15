@@ -1,0 +1,14 @@
+.animation-single-int{
+	padding:20px;
+	background:#fff;
+}
+.btn.ant-nk-st{
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+    border: none;
+    outline: none !important;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #fff;
+	width:100%;
+	background:#00c292;
+}

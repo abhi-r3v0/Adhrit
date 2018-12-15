@@ -1,0 +1,212 @@
+@font-face {
+  font-family: 'notika-icon';
+  src:  url('fonts/notika-icon.eot?qzfrsz');
+  src:  url('fonts/notika-icon.eot?qzfrsz#iefix') format('embedded-opentype'),
+    url('fonts/notika-icon.ttf?qzfrsz') format('truetype'),
+    url('fonts/notika-icon.woff?qzfrsz') format('woff'),
+    url('fonts/notika-icon.svg?qzfrsz#notika-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.notika-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'notika-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.notika-menu-befores:before {
+  content: "\e93d";
+}
+.notika-menu-after:before {
+  content: "\e93b";
+}
+.notika-menu-before:before {
+  content: "\e93c";
+}
+.notika-menu-sidebar:before {
+  content: "\e93a";
+}
+.notika-skype:before {
+  content: "\e939";
+}
+.notika-app:before {
+  content: "\e936";
+}
+.notika-form:before {
+  content: "\e937";
+}
+.notika-windows:before {
+  content: "\e938";
+}
+.notika-bar-chart:before {
+  content: "\e935";
+}
+.notika-alarm:before {
+  content: "\e900";
+}
+.notika-arrow-right:before {
+  content: "\e901";
+}
+.notika-avable:before {
+  content: "\e902";
+}
+.notika-back:before {
+  content: "\e903";
+}
+.notika-calendar:before {
+  content: "\e904";
+}
+.notika-chat:before {
+  content: "\e905";
+}
+.notika-checked:before {
+  content: "\e906";
+}
+.notika-close:before {
+  content: "\e907";
+}
+.notika-cloud:before {
+  content: "\e908";
+}
+.notika-credit-card:before {
+  content: "\e909";
+}
+.notika-dollar:before {
+  content: "\e90a";
+}
+.notika-dot:before {
+  content: "\e90b";
+}
+.notika-down-arrow:before {
+  content: "\e90c";
+}
+.notika-draft:before {
+  content: "\e90d";
+}
+.notika-edit:before {
+  content: "\e90e";
+}
+.notika-eye:before {
+  content: "\e90f";
+}
+.notika-facebook:before {
+  content: "\e910";
+}
+.notika-file:before {
+  content: "\e911";
+}
+.notika-finance:before {
+  content: "\e912";
+}
+.notika-flag:before {
+  content: "\e913";
+}
+.notika-house:before {
+  content: "\e914";
+}
+.notika-ip-locator:before {
+  content: "\e915";
+}
+.notika-left-arrow:before {
+  content: "\e916";
+}
+.notika-mail:before {
+  content: "\e917";
+}
+.notika-map:before {
+  content: "\e918";
+}
+.notika-menu:before {
+  content: "\e919";
+}
+.notika-menus:before {
+  content: "\e91a";
+}
+.notika-minus-symbol:before {
+  content: "\e91b";
+}
+.notika-more-button:before {
+  content: "\e91c";
+}
+.notika-next:before {
+  content: "\e91d";
+}
+.notika-next-pro:before {
+  content: "\e91e";
+}
+.notika-paperclip:before {
+  content: "\e91f";
+}
+.notika-phone:before {
+  content: "\e920";
+}
+.notika-picture:before {
+  content: "\e921";
+}
+.notika-pinterest:before {
+  content: "\e922";
+}
+.notika-plus-symbol:before {
+  content: "\e923";
+}
+.notika-print:before {
+  content: "\e924";
+}
+.notika-promos:before {
+  content: "\e925";
+}
+.notika-refresh:before {
+  content: "\e926";
+}
+.notika-right-arrow:before {
+  content: "\e927";
+}
+.notika-search:before {
+  content: "\e928";
+}
+.notika-sent:before {
+  content: "\e929";
+}
+.notika-settings:before {
+  content: "\e92a";
+}
+.notika-social:before {
+  content: "\e92b";
+}
+.notika-star:before {
+  content: "\e92c";
+}
+.notika-success:before {
+  content: "\e92d";
+}
+.notika-support:before {
+  content: "\e92e";
+}
+.notika-tax:before {
+  content: "\e92f";
+}
+.notika-trash:before {
+  content: "\e930";
+}
+.notika-travel:before {
+  content: "\e931";
+}
+.notika-twitter:before {
+  content: "\e932";
+}
+.notika-up-arrow:before {
+  content: "\e933";
+}
+.notika-wifi:before {
+  content: "\e934";
+}

@@ -1,0 +1,141 @@
+.notification-inner{
+	padding:20px;
+	background:#fff;
+}
+.notification-hd{
+	margin-bottom:20px;
+} 
+.notification-demo h2{
+	font-size:16px;
+	color:#444;
+}
+.alert-inverse{
+    background-color:#333;
+    border-color:transparent;
+    color:#fff
+}
+.alert-inverse .alert-link{
+    color:#e6e6e6
+}
+.alert-link{
+    color:#fff!important
+}
+.alert-success{
+    background-color:#4CAF50;
+    color:#fff
+}
+.alert-success .alert-link{
+    color:#e6e6e6
+}
+.alert-info{
+    background-color:#00c292;
+    color:#fff
+}
+.alert-info .alert-link{
+    color:#e6e6e6
+}
+.alert-warning{
+    background-color:#FFC107;
+    color:#fff
+}
+.alert-warning .alert-link{
+    color:#e6e6e6
+}
+.alert-danger{
+    background-color:#F44336;
+    color:#fff
+}
+.alert-danger .alert-link{
+    color:#e6e6e6
+}
+.alert{
+    padding-left:30px;
+    font-size:14px
+}
+.alert span{
+    cursor:pointer
+}
+.alert:not(.alert-dismissible){
+    padding-right:30px
+}
+.alert.alert-dismissable{
+    padding-right:44px
+}
+.alert-inverse{
+    background-color:#333;
+    border-color:transparent;
+    color:#fff
+}
+.alert-inverse hr{
+    border-top-color:transparent
+}
+.alert-inverse .alert-link{
+    color:#e6e6e6
+}
+.growl-animated.alert-inverse{
+    box-shadow:0 0 5px rgba(51,51,51,.5)
+}
+.growl-animated.alert-info{
+    box-shadow:0 0 5px rgba(33,150,243,.5)
+}
+.growl-animated.alert-success{
+    box-shadow:0 0 5px rgba(76,175,80,.5)
+}
+.growl-animated.alert-warning{
+    box-shadow:0 0 5px rgba(255,193,7,.5)
+}
+.growl-animated.alert-danger{
+    box-shadow:0 0 5px rgba(244,67,54,.5)
+}
+.notification-demo .btn-info, .notification-demo .btn-inverse, .notification-demo .btn-success, .notification-demo .btn-warning, .notification-demo .btn-danger{
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+	border:none;
+	outline:none !important;
+	border-radius:2px;
+	font-size:14px;
+	margin-right:20px;
+	color:#fff;
+}
+.notification-demo .btn-info{
+	background:#00c292;
+}
+.notification-demo .btn-info:hover{
+	background:#00c292;
+}
+.notification-demo .btn-info:hover, .notification-demo .btn-inverse:hover, .notification-demo .btn-success:hover, .notification-demo .btn-warning:hover, .notification-demo .btn-danger:hover{
+	border:none;
+	outline:none;
+}
+.notification-demo .btn-inverse {
+    background-color: #454545;
+}
+.notification-demo .btn-inverse:hover {
+    background-color: #454545;
+}
+.notification-demo .btn-success {
+    background-color: #4CAF50;
+}
+.notification-demo .btn-success:hover {
+    background-color: #4CAF50;
+}
+.notification-demo .btn-warning {
+    background-color: #FF9800;
+}
+.notification-demo .btn-warning:hover {
+    background-color: #FF9800;
+}
+.notification-demo .btn-danger {
+    background-color: #F44336;
+}
+.notification-demo .btn-danger:hover {
+    background-color: #F44336;
+}
+.animate-nt a{
+	margin-bottom:15px;
+}
+.animate-nt a.nt-mg-btm-0 {
+    margin-bottom: 0px;
+}
+.contact-hd.notification-hd p{
+	margin-bottom:0px;
+}

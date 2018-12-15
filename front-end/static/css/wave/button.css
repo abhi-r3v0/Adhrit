@@ -1,0 +1,212 @@
+/*----------------------------------------*/
+/*  1.  Buttons CSS
+/*----------------------------------------*/
+
+.btn-demo-notika{
+	padding:20px;
+	background:#fff;
+}
+.btn-demo-notika h2{
+	font-size:20px;
+	color:#444;
+}
+.btn-demo-notika p{
+	font-size:14px;
+	color:#444;
+	line-height:24px;
+	margin-bottom:0px;
+}
+.btn-demo-notika .btn{
+	margin-right:10px;
+}
+.btn-default.notika-btn-default, .btn-info.notika-btn-info, .btn-primary.notika-btn-primary, .btn-success.notika-btn-success, .btn-warning.notika-btn-warning, .btn-danger.notika-btn-danger{
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+	border:none;
+	outline:none !important;
+	border-radius:2px;
+	font-size:14px;
+}
+.btn-default.notika-btn-default{
+	background-color: #fff;
+}
+.btn-info.notika-btn-info, .btn-info.info-icon-notika{
+	background-color: #00BCD4;
+}
+.btn-primary.notika-btn-primary, .btn-primary.notika-gp-primary, .btn-primary.primary-icon-notika{
+	background-color: #2196F3;
+}
+.btn-success.notika-btn-success, .btn-success.success-icon-notika{
+	background-color: #00c292;
+}
+.btn-warning.notika-btn-warning, .btn-warning.warning-icon-notika{
+	background-color: #FF9800;
+}
+.btn-danger.notika-btn-danger, .btn-danger.danger-icon-notika{
+	background-color: #F44336 !important;
+}
+.btn-default.notika-btn-default:hover, .btn-info.notika-btn-info:hover, .btn-primary.notika-btn-primary:hover, .btn-success.notika-btn-success:hover, .btn-warning.notika-btn-warning:hover, .btn-danger.notika-btn-danger:hover, .btn-primary.primary-icon-notika:hover, .btn-info.info-icon-notika:hover, .btn-success.success-icon-notika:hover, .btn-warning.warning-icon-notika:hover, .btn-danger.danger-icon-notika:hover, .btn-teal.teal-icon-notika:hover, .btn-orange.orange-icon-notika:hover, .btn-cyan.cyan-icon-notika:hover, .btn-lightgreen.lightgreen-icon-notika:hover, .btn-lime.lime-icon-notika:hover, .btn-amber.amber-icon-notika:hover, .btn-gray.gray-icon-notika:hover, .btn-lightblue.lightblue-icon-notika:hover, .btn-deeporange.deeporange-icon-notika:hover{
+	background:none;
+	border:none;
+	outline:none;
+}
+.btn-info.notika-btn-info:hover, .btn-info.info-icon-notika:hover{
+	background: #00BCD4;
+}
+.btn-primary.notika-btn-primary:hover, .btn-primary.notika-gp-primary:hover, .btn-primary.primary-icon-notika:hover{
+	background: #2196F3;
+}
+.btn-success.notika-btn-success:hover, .btn-success.success-icon-notika:hover{
+	background: #00c292;
+}
+.btn-warning.notika-btn-warning:hover, .btn-warning.warning-icon-notika:hover{
+	background: #FF9800;
+}
+.btn-danger.notika-btn-danger:hover, .btn-danger.danger-icon-notika:hover{
+	background: #F44336 !important;
+}
+.btn-primary.notika-gp-primary, .btn-primary.notika-gp-default{
+	margin-right:0px;
+	border:none;
+	outline:none;
+	box-shadow:none;
+}
+.btn-default.notika-gp-default{
+	box-shadow:none;
+	border:none;
+	outline:none !important;
+	background:#fff;
+	margin-right:0px;
+}
+.notika-group-btn, .material-design-btn .btn{
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+	margin-bottom:10px;
+}
+.material-design-btn .btn{
+	border:none;
+	outline:none !important;
+	border-radius:2px;
+	color:#fff;
+	padding: 5px 30px;
+	font-size:14px;
+}
+.notika-btn-cyan, .btn-cyan.cyan-icon-notika{
+	background:#00BCD4;
+}
+.btn-cyan.cyan-icon-notika:hover{
+	background:#00BCD4;
+}
+.notika-btn-teal, .btn-teal.teal-icon-notika{
+	background:#009688;
+}
+.btn-teal.teal-icon-notika:hover{
+	background:#009688;
+}
+.notika-btn-amber, .btn-amber.amber-icon-notika{
+	background:#FFC107;
+}
+.btn-amber.amber-icon-notika:hover{
+	background:#FFC107;
+}
+.notika-btn-orange, .btn-orange.orange-icon-notika{
+	background:#FF9800;
+}
+.btn-orange.orange-icon-notika:hover{
+	background:#FF9800;
+}
+.notika-btn-deeporange, .btn-deeporange.deeporange-icon-notika{
+	background:#FF5722;
+}
+.btn-deeporange.deeporange-icon-notika:hover{
+	background:#FF5722;
+}
+.notika-btn-red{
+	background:#F44336;
+}
+.notika-btn-pink{
+	background:#E91E63;
+}
+.notika-btn-lightblue, .btn-lightblue.lightblue-icon-notika{
+	background:#03A9F4;
+}
+.btn-lightblue.lightblue-icon-notika:hover{
+	background:#03A9F4;
+}
+.notika-btn-blue{
+	background:#2196F3;
+}
+.notika-btn-indigo{
+	background:#3F51B5;
+}
+.notika-btn-lime, .btn-lime.lime-icon-notika{
+	background:#CDDC39;
+}
+.btn-lime.lime-icon-notika:hover{
+	background:#CDDC39;
+}
+.notika-btn-lightgreen, .btn-lightgreen.lightgreen-icon-notika{
+	background:#8BC34A;
+}
+.btn-lightgreen.lightgreen-icon-notika:hover{
+	background:#8BC34A;
+}
+.notika-btn-green{
+	background:#4CAF50;
+}
+.notika-btn-purple{
+	background:#BA68C8;
+}
+.notika-btn-deeppurple{
+	background:#673AB7;
+}
+.notika-btn-gray, .btn-gray.gray-icon-notika{
+	background:#9E9E9E;
+}
+.btn-gray.gray-icon-notika:hover{
+	background:#9E9E9E;
+}
+.notika-btn-bluegray{
+	background:#607D8B;
+}
+.notika-btn-black{
+	background:#444;
+}
+.btn-default.btn-icon-notika{
+	border:none;
+	outline:none !important;
+	background:#fff;
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+	margin-bottom:10px;
+	font-size:14px;
+	color:#444;
+}
+.btn-default.btn-icon-notika:hover, .btn-default.btn-icon-notika:active, .btn-default.btn-icon-notika:focus{
+	box-shadow:none;
+	border:none;
+	outline:none !important;
+	background:none;
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+}
+.btn-primary.primary-icon-notika, .btn-info.info-icon-notika, .btn-success.success-icon-notika, .btn-warning.warning-icon-notika, .btn-danger.danger-icon-notika, .btn-teal.teal-icon-notika, .btn-orange.orange-icon-notika, .btn-cyan.cyan-icon-notika, .btn-lightgreen.lightgreen-icon-notika, .btn-lime.lime-icon-notika, .btn-amber.amber-icon-notika, .btn-gray.gray-icon-notika, .btn-lightblue.lightblue-icon-notika, .btn-deeporange.deeporange-icon-notika{
+	border:none;
+	outline:none !important;
+	box-shadow: 0 2px 5px rgba(0,0,0,.16), 0 2px 10px rgba(0,0,0,.12);
+	margin-bottom:10px;
+	font-size:14px;
+	color:#fff;
+}
+.button-icon-btn i {
+    font-size: 14px;
+    line-height: 24px;
+}
+.button-icon-btn-rd .btn, .button-icon-btn-cl .btn{
+	border-radius:50%;
+}
+.btn-reco-mg{
+	margin-bottom:0px !important;
+}
+.mg-t-30.butt-mg-t-20{
+	margin-top:20px;
+}
+.notika-btn-hd {
+    margin-bottom: 20px;
+}
