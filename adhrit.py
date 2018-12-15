@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+# !/usr/bin/env python3
 
 # ADHRIT is an open source tool for Android apk analysis
 # and CTFs to extract maximum amount of information from an apk
@@ -16,6 +16,7 @@ from recons.smali_extract import inj_check
 from recons.native_recon import native_disas
 from recons.dynamic import adb_con
 from recons.clean import cleaner
+from recons.root import check_root
 
 __author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
 
@@ -27,9 +28,9 @@ class Adhrit:
 
     def welcome(self):
         os.system('toilet -F metal -f bigascii12 ADHRIT')
-        print "| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit"
-        print "| Author\t\t:\t" + __author__
-    print "\n\n"
+        print("| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit")
+        print("| Author\t\t:\t" + __author__)
+    print("\n\n")
 
     # Clean the tool directory for a new project
     def cleanproject(self, apk_name):
@@ -64,8 +65,8 @@ class Adhrit:
         apk_sign(apk_name)
 
     # Check for string injection points
-    def smali_inj(self, apk_name):
-        inj_check(apk_name)
+    def smali_inj(self, apk_name, flag_format = ''):
+        inj_check(apk_name, flag_format)
 
     # Identify and dump the disassembly of the native libraries within the APK
     def nativedebug(self, apk_name):
@@ -75,11 +76,16 @@ class Adhrit:
     def dynamicanalysis(apk_name):
         adb_con(apk_name)
 
+    def checkroot(self):
+        check_root()
+
+
+
 
 # Main fuction starts here
 def main():
     adhrit = Adhrit()
-    parser = argparse.ArgumentParser(description="Help")
+    parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
     parser.add_argument("-c", help="Clean up for a new project")
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-r", help="Analyze APK without extraction")
@@ -89,10 +95,12 @@ def main():
     parser.add_argument("-b", help="Recompile smali back into APK")
     parser.add_argument("-m", help="Sign the APK")
     parser.add_argument("-i", help="Check for injection points")
+    parser.add_argument("--flag", help="Check for CTF flags")
     parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P")
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
+    parser.add_argument("-cr", help="Check device root status", action='store_true')
     args = parser.parse_args()
 
     # Adhrit Welcome ASCII
@@ -109,7 +117,6 @@ def main():
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
-        adhrit.nativedebug(args.a)
 
     elif args.r:
         adhrit.apkripper(args.r)
@@ -132,7 +139,7 @@ def main():
         adhrit.apk_signing(args.m)
 
     elif args.i:
-        adhrit.smali_inj(args.i)
+        adhrit.smali_inj(args.i, args.flag)
 
     elif args.n:
         adhrit.nativedebug(args.n)
@@ -145,6 +152,9 @@ def main():
 
     elif args.d:
         adhrit.dynamicanalysis(args.d)
+
+    elif args.cr:
+        adhrit.checkroot()
 
 
 if __name__ == "__main__":
