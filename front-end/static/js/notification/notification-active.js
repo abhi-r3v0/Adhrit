@@ -41,7 +41,7 @@
 								'<span data-growl="icon"></span>' +
 								'<span data-growl="title"></span>' +
 								'<span data-growl="message"></span>' +
-								'<a href="static/#" data-growl="url"></a>' +
+								'<a href="#" data-growl="url"></a>' +
 							'</div>'
 		});
 	};

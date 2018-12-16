@@ -144,7 +144,7 @@
 									meanMenuExist = true;
 									// add class to body so we don't need to worry about media queries here, all CSS is wrapped in '.mean-container'
 									jQuery(meanContainer).addClass("mean-container");
-									jQuery('.mean-container').prepend('<div class="mean-bar"><a href="static/#nav" class="meanmenu-reveal" style="'+meanStyles+'">Show Navigation</a><nav class="mean-nav"></nav></div>');
+									jQuery('.mean-container').prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="'+meanStyles+'">Show Navigation</a><nav class="mean-nav"></nav></div>');
 
 									//push meanMenu navigation into .mean-nav
 									var meanMenuContents = jQuery(meanMenu).html();
@@ -184,7 +184,7 @@
 											if(meanExpandableChildren){
 												jQuery('.mean-nav ul ul').each(function() {
 														if(jQuery(this).children().length){
-																jQuery(this,'li:first').parent().append('<a class="mean-expand" href="static/#" style="font-size: '+ meanMenuCloseSize +'">'+ meanExpand +'</a>');
+																jQuery(this,'li:first').parent().append('<a class="mean-expand" href="#" style="font-size: '+ meanMenuCloseSize +'">'+ meanExpand +'</a>');
 														}
 												});
 												jQuery('.mean-expand').on("click",function(e){
