@@ -115,8 +115,8 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 #### LEAD CONTRIBUTORS:
 
-* Akhil Mahendra (akhilmahendra7991@gmail.com, [@Akhil_Mahendra](https://twitter.com/akhil_mahendra))
 * P S Narayanan (thepsnarayanan@gmail.com, [@0xP5N_](https://twitter.com/0xP5N_))
+* Akhil Mahendra (akhilmahendra7991@gmail.com, [@Akhil_Mahendra](https://twitter.com/akhil_mahendra))
 * Heeraj Nair (heeraj123@gmail.com, [@heerajnair](https://twitter.com/heerajnair))
 
 #### GRAPHIC DESIGNS:
@@ -166,6 +166,8 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 * [arm-objdump](https://linux.die.net/man/1/arm-linux-gnu-objdump)
 * [jd-cli](https://github.com/kwart/jd-cmd)
 * [aapt](https://developer.android.com/studio/command-line/index.html)
+* [CFR](http://www.benf.org/other/cfr/)
+* [Enjarify](https://github.com/google/enjarify)
 
 ---
 
