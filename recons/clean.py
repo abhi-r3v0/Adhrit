@@ -1,6 +1,5 @@
 # !/usr/bin/env python3
 
-
 import os
 
 
@@ -31,3 +30,7 @@ def cleaner(apk_name):
 
     if os.path.exists('str_inj.txt'):
     	os.system('rm -r str_inj.txt')
+
+    if os.path.exists('Manifest.xml'):
+        os.system('rm -r Manifest.xml')
+

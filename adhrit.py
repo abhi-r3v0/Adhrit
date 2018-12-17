@@ -26,60 +26,71 @@ class Adhrit:
     def __init__(self):
         self.apk_name = ""
 
-    def welcome(self):
+    @staticmethod
+    def welcome():
         os.system('toilet -F metal -f bigascii12 ADHRIT')
         print("| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit")
         print("| Author\t\t:\t" + __author__)
     print("\n\n")
 
     # Clean the tool directory for a new project
-    def cleanproject(self, apk_name):
+    @staticmethod
+    def cleanproject(apk_name):
         cleaner(apk_name)
 
     # Extract APK information without extracting the package
-    def apkripper(self, apk_name):
+    @staticmethod
+    def apkripper(apk_name):
         apk_rip(apk_name)
 
     # Extract All the contents of the APK into a directory
-    def apkextractor(self, apk_name):
+    @staticmethod
+    def apkextractor(apk_name):
         apk_info(apk_name)
 
     # Check for virtual app droppers
-    def vappsearch(self, apk_name):
+    @staticmethod
+    def vappsearch(apk_name):
         vapp_find(apk_name)
 
     # Check if the APK has been identified by VirusTotal database
-    def vtanalyzer(self, apk_name):
+    @staticmethod
+    def vtanalyzer(apk_name):
         api_check(apk_name)
 
     # Extract the source code of the APK in smali
-    def smaliextractor(self, apk_name):
+    @staticmethod
+    def smaliextractor(apk_name):
         smali_de(apk_name)
 
     # Recompile smali back into APK
-    def smalirecompile(self, apk_name):
+    @staticmethod
+    def smalirecompile(apk_name):
         smali_re(apk_name)
 
     # Sign the apk with a generic signature. For educaational purposes only!
-    def apk_signing(self, apk_name):
+    @staticmethod
+    def apk_signing(apk_name):
         apk_sign(apk_name)
 
     # Check for string injection points
-    def smali_inj(self, apk_name, flag_format = ''):
+    @staticmethod
+    def smali_inj(apk_name, flag_format=''):
         inj_check(apk_name, flag_format)
 
     # Identify and dump the disassembly of the native libraries within the APK
-    def nativedebug(self, apk_name):
+    @staticmethod
+    def nativedebug(apk_name):
         native_disas(apk_name)
 
     # Install the APK in an emulator and analyze its activities
+    @staticmethod
     def dynamicanalysis(apk_name):
         adb_con(apk_name)
 
-    def checkroot(self):
+    @staticmethod
+    def checkroot():
         check_root()
-
-
 
 
 # Main fuction starts here
