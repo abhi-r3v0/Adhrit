@@ -11,23 +11,46 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-### USES:
+### FEATURES:
 
-* Extracts the apk contents
-* Disassembles native libraries
-* Extracts jar out of dex
-* Extracts source code in Java
-* Extracts source code in Smali
-* Recompiles smali into APK
-* Signs the APK
-* Checks for virtual apps/droppers
-* Checks for bytecode injection points and writes it to a file
-* Checks for CTF flags and writes it to a file
-* Analyzes permissions used by the application
-* Dumps the Manifest
-* Dumps the certificate details
-* Checks for malware footprints in the VirusTotal database
+* APK Extraction
+    * assets
+    * classes.dex
+    * native libraries
+    * jar file from dex (integrated Enjarify)
+    
+* Source Extraction
+    * Certificate/signature
+    * Java source (CFR)
+    * smali source 
+    * Parsed XML resource files 
+    * Parsed AndroidManifest
+    * Native library
 
+* Static Analysis
+    * Manifest analysis
+        * Critical permission usage analysis
+        * MainActivity identification
+        * Backup status
+        * Exported activities
+    * Bytecode analysis
+        * const-strings
+        * CTF flags
+    * Malware analysis
+        * VirusTotal scan
+        * VirtualApp droppers scan
+
+* Dynamic Analysis
+    * Automatically setting up a testing environment
+    * Launching MainActivity
+    * Checking for root access in the emulator/device
+    * Dumping the runtime log
+
+* Miscellaneous
+    * Rebuilding the APK 
+    * Signing the APK
+    * Deploying the APK into an emulator/device
+    
 ---
 
 ### PRE-REQUISITES:
@@ -126,10 +149,12 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 ---
 
 ### MENTIONS:
-* [Neonix](https://neonix.in/2018/08/25/adhrit/)
+
+* [NeOnSec](https://neonsec.com/adhrit-android-apk-analysis/)
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
 * [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
 * [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
+* [Neonix](https://neonix.in/2018/08/25/adhrit/)
 * [Howucan.gr](https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
 * [HackerTor](https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
 * [tuicool](https://www.tuicool.com/articles/r6jQzii)
@@ -140,7 +165,6 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 * [Anonymoushacker](https://www.anonymoushacker.com.br/2018/04/adhrit-android-apk-reversao-e.html)
 * [Pax0r](https://pax0r.com/feed-items/adhrit-android-apk-reversing-and-analysis-tool-that-can-help-secuity-researchers-and-ctf-enthusiasts-alike/)
 * [KitPloit](https://www.kitploit.com/2018/03/adhrit-android-apk-reversing-and.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+PentestTools+(PenTest+Tools))
-* [NeOnSec](https://neonsec.com/adhrit-android-apk-analysis/)
 * [ISEC](https://isec.ne.jp/wp-content/uploads/2018/04/120Adhrit.pdf)
 * [Prodefence](http://www.prodefence.org/adhrit-android-apk-reversing-and-analysis-tool-that-can-help-secuity-researchers-and-ctf-enthusiasts-alike/)
 * [appscan.io](https://open.appscan.io/article-905.html)
