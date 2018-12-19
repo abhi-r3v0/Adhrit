@@ -1,6 +1,6 @@
 ## FROM INDIA, TO THE WORLD :blue_heart:
 
-![Logo](Docs/logo/banner.png)
+![Logo](Docs/logo/banner.v3.png)
 
 ---
 
