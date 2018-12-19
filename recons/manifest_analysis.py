@@ -5,7 +5,10 @@ import xml.etree.ElementTree as Et
 
 
 def man_analyzer():
-    c = 0
+    c1 = 0
+    c2 = 0
+    print("\n--------------------------------------------------\n")
+    print("ANALYSIS")
     perm_severe = {"android.permission.ACCESS_SUPERUSER": "Requests for super user (SU) access.",
                    "android.permission.USE_FINGERPRINT": "Requests for fingerprint.",
                    "android.permission.MANAGE_DOCUMENTS": "Requests for managing documents.",
@@ -35,17 +38,38 @@ def man_analyzer():
                    "android.permission.WRITE_CALL_LOG": "Allows to write (but not read) the user's call log data.",
                    "android.permission.WRITE_CONTACTS": "Allows to write the user's contacts data."
                    }
-    print("\n--------------------------------------------------\n")
+
     xmlfile = 'Manifest.xml'
     if os.path.exists(xmlfile):
-        print("\n[+] Manifest found. Starting analysis\n")
+        print("\n\t[+] Manifest found. Starting analysis\n")
         tree = Et.parse(xmlfile)
         root = tree.getroot()
+        print("\n\t[+] Critical Permission Analysis\n")
         permissions = root.findall("uses-permission")
-        print("\n[+] Permission Analysis\n")
+        if len(permissions) <= 1:
+            print("\n\t\t[-] No critical permissions found. Listing all permissions.")
+            for perm in permissions:
+                for att in perm.attrib:
+                    c2 += 1
+                    print("\n\t\t\t " + str(c2) + "> " + perm.attrib[att])
+
         for perm in permissions:
             for att in perm.attrib:
                 for permname, permvalue in perm_severe.items():
                     if perm.attrib[att] == permname:
-                        c += 1
-                        print("\t " + str(c) + "> " + permvalue)
+                        c1 += 1
+                        print("\t\t " + str(c1) + "> " + permvalue)
+
+        export_acts = root.findall("application")
+        for acts in export_acts:
+            for expor in acts.attrib:
+                if expor == "{http://schemas.android.com/apk/res/android}allowBackup":
+                    if acts.attrib[expor] == "true":
+                        print("\n\n\t[+] The application allows backup.")
+                        print("\n\t\tData/files maybe left in the device even after the application is uninstalled.")
+                    else:
+                        print("\n\n\t[-] Backup disabled.")
+                        print("\n\t\tThe application doesn't leave behind data/files after uninstallation.")
+
+    else:
+        print("\n[!] Manifest not found. Please extract the APK using '-x' or '-a'.")
