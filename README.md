@@ -13,13 +13,13 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ### FEATURES:
 
-* ##### APK Extraction
+* #### APK Extraction
     * assets
     * classes.dex
     * native libraries
     * jar file from dex (integrated Enjarify)
     
-* ##### Source Extraction
+* #### Source Extraction
     * Certificate/signature
     * Java source (CFR)
     * smali source 
@@ -27,7 +27,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Parsed AndroidManifest
     * Native library
 
-* ##### Static Analysis
+* #### Static Analysis
     * Manifest analysis
         * Critical permission usage analysis
         * MainActivity identification
@@ -40,13 +40,13 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
         * VirusTotal scan
         * VirtualApp droppers scan
 
-* ##### Dynamic Analysis
+* #### Dynamic Analysis
     * Automatically setting up a testing environment
     * Launching MainActivity
     * Checking for root access in the emulator/device
     * Dumping the runtime log
 
-* ##### Miscellaneous
+* #### Miscellaneous
     * Rebuilding the APK 
     * Signing the APK
     * Deploying the APK into an emulator/device
