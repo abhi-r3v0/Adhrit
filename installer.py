@@ -9,7 +9,7 @@ class dep_installer():
 
     def __init__(self):
         self.apt_tools = ['toilet', 'python-pip', 'python-setuptools', 'python3-pip', 'android-tools-adb', 'ia32-libs']
-        self.pip_tools = ['prettytable', 'requests', 'progressbar2']
+        self.pip_tools = ['prettytable', 'requests', 'progressbar2', 'colorama']
         self.arm_tools = ['libc6-armel-cross libc6-dev-armel-cross', 'binutils-arm-linux-gnueabi', 'libncurses5-dev']
 
     def ins(self):
