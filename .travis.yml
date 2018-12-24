@@ -12,13 +12,14 @@ cache: pip
 
 os: Linux
 
-script: 
+script:
   - pytest
 
 install:
-  - python installer.py
-  - pip install requests
-  - pip install prettytable
-  - pip install termcolor
+  - python3 installer.py
+  - pip3 install requests
+  - pip3 install prettytable
+  - pip3 install termcolor
+  - pip3 install colorama
   - cd tests
 
