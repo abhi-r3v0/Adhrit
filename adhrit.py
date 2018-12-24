@@ -17,7 +17,7 @@ from recons.dynamic import adb_con
 from recons.clean import cleaner
 from recons.root import check_root
 
-__author__ = 'Abhishek J M ( jmabhishek@gmail.com, @abhi_r3v0 )'
+__author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
 
 
 class Adhrit:
