@@ -3,9 +3,8 @@
 # ADHRIT is an open source tool for Android apk analysis
 # and CTFs to extract maximum amount of information from an apk
 
-import os
 import argparse
-from recons.apk_recon import apk_rip
+from colorama import Fore, Style
 from recons.apk_extract import apk_info
 from recons.vapp import vapp_find
 from recons.virustotal import api_check
@@ -18,7 +17,7 @@ from recons.dynamic import adb_con
 from recons.clean import cleaner
 from recons.root import check_root
 
-__author__ = 'Abhishek J M ( jmabhishek@gmail.com )'
+__author__ = 'Abhishek J M ( jmabhishek@gmail.com, @abhi_r3v0 )'
 
 
 class Adhrit:
@@ -28,20 +27,28 @@ class Adhrit:
 
     @staticmethod
     def welcome():
-        os.system('toilet -F metal -f bigascii12 ADHRIT')
-        print("| Project Page\t\t:\twww.github.com/abhi-r3v0/Adhrit")
-        print("| Author\t\t:\t" + __author__)
+        print(Fore.BLUE + Style.BRIGHT)
+        print("          ####  #######      ##      ##  ########    ##  ############")
+        print("         ## ##  ##     ##    ##      ##  ##     ##   ##       ##")
+        print("        ##  ##  ##      ##   ##      ##  ##      ##  ##       ##")
+        print("       ##   ##  ##       ##  ##      ##  ##      ##  ##       ##")
+        print("      ##    ##  ##       ##  ##      ##  ##     ##   ##       ##")
+        print("     #########  ##       ##  ##########  ##   ##     ##       ##")
+        print("    ##      ##  ##       ##  ##      ##  ##  ##      ##       ##")
+        print("   ##       ##  ##       ##  ##      ##  ##   ##     ##       ##")
+        print("  ##        ##  ##      ##   ##      ##  ##    ##    ##       ##")
+        print(" ##         ##  ##     ##    ##      ##  ##     ##   ##       ##")
+        print("##          ##  #######      ##      ##  ##      ##  ##       ##")
+        print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project Page\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
+        print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
+        print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
+
     print("\n\n")
 
     # Clean the tool directory for a new project
     @staticmethod
     def cleanproject(apk_name):
         cleaner(apk_name)
-
-    # Extract APK information without extracting the package
-    @staticmethod
-    def apkripper(apk_name):
-        apk_rip(apk_name)
 
     # Extract All the contents of the APK into a directory
     @staticmethod
@@ -99,7 +106,6 @@ def main():
     parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
     parser.add_argument("-c", help="Clean up for a new project")
     parser.add_argument("-a", help="Dump package info and extract contents")
-    parser.add_argument("-r", help="Analyze APK without extraction")
     parser.add_argument("-x", help="Extract APK contents only")
     parser.add_argument("-p", help="Check for virtual apps")
     parser.add_argument("-s", help="Source code of the APK in Smali")
@@ -108,7 +114,7 @@ def main():
     parser.add_argument("-i", help="Check for injection points")
     parser.add_argument("--flag", help="Check for CTF flags")
     parser.add_argument("-n", help="Disassemble native libraries")
-    parser.add_argument("-w", help="Welcome :P")
+    parser.add_argument("-w", help="Welcome :P", action='store_true')
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     parser.add_argument("-cr", help="Check device root status", action='store_true')
@@ -122,15 +128,11 @@ def main():
 
     if args.a:
         adhrit.cleanproject(args.a)
-        adhrit.apkripper(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
-
-    elif args.r:
-        adhrit.apkripper(args.r)
 
     elif args.x:
         adhrit.cleanproject(args.x)

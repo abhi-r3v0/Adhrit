@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+from colorama import Fore
 from sys import exit
 
 
@@ -9,18 +10,18 @@ def adb_con(apk_name):
 
     found = 0
     installed = 0
-    launched = 0
+    mainlaunched = 0
 
-    print("\n--------------------------------------------------")
-    print("[+] SEARCHING FOR DEVICES\n")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SEARCHING FOR DEVICES\n")
     adbd = subprocess.Popen(['adb', 'devices'], stdout=subprocess.PIPE)
     adbdo = adbd.stdout.readline()
     if adbdo == 0:
-        print("\n\t[-] No device found. Check if the emulator is running.")
+        print(Fore.RED + "\n\t[-] No device found. Check if the emulator is running.")
         adbd.terminate()
-        exit("\n\t[!] Aborting")
+        exit(Fore.RED + "\n\t[!] Aborting")
     else:
-        print("\n\t[+] Device found")
+        print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Device found")
         found = 1
 
     if found == 1:
@@ -31,12 +32,12 @@ def adb_con(apk_name):
             print("\n\t[+] Installation successful")
             installed = 1
         else:
-            print(("\n\t[-] Installation failed " + adbi))
+            print("\n\t[-] Installation failed " + adbi)
             exit("\n\t[!] Aborting")
 
     if installed == 1:
-        labelCmd = "./tools/aapt dump permissions " + apk_name + " | egrep ^package: | cut -d ' ' -f 2-"
-        pkglabel = os.popen(labelCmd).read()
+        labelcmd = "./tools/aapt dump permissions " + apk_name + " | egrep ^package: | cut -d ' ' -f 2-"
+        pkglabel = os.popen(labelcmd).read()
         print(pkglabel)
 
         print("\n--------------------------------------------------")
@@ -47,14 +48,14 @@ def adb_con(apk_name):
         pkgls = os.popen(lstcmd).read()
         pkr = str(pkgls)
         mainact = str(pk1.rstrip().lstrip()) + str(pkr.lstrip().rstrip()) + str(pk2.lstrip().rstrip().replace("\n", ""))
-        print(("\n\t[+] MainActivity Found: " + mainact))
+        print("\n\t[+] MainActivity Found: " + mainact)
 
         print("\n--------------------------------------------------")
         print("[+] RUNNING MAINACTIVITY\n")
         prun1 = 'adb shell am start ' + mainact
         pkgrun = os.popen(prun1).read()
         if "Starting" in pkgrun:
-            launched = 1
+            mainlaunched += 1
             print("\n\t[ --> ]   Main Launched")
         else:
             exit("\n\t[!] MAIN LAUNCH FAILED. ABORTING")

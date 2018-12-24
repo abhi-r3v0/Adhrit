@@ -4,6 +4,7 @@ import collections
 import os
 import traceback
 import zipfile
+from colorama import Fore
 
 from recons.enjarify import parsedex
 from recons.enjarify.jvm import writeclass
@@ -18,8 +19,8 @@ def apk_info(apk_name):
     nlc = 0
     apk = zipfile.ZipFile(apk_name, 'r')
 
-    print("\n--------------------------------------------------")
-    print("[+] EXTRACTING JAR")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTING JAR")
     print("\n")
 
     dexs = []
@@ -48,60 +49,59 @@ def apk_info(apk_name):
         translate(data, opts=opts, classes=classes, errors=errors)
     writeToJar(outfile, classes)
     outfile.close()
-    print('Output written to', outname)
+    print(Fore.BLUE + "\t[+] " + Fore.YELLOW + 'Output written to', Fore.BLUE + outname)
 
     for name, error in sorted(errors.items()):
-        print(name)
-    print('{} classes translated successfully, {} classes had errors'.format(len(classes), len(errors)))
+        print(Fore.BLUE + "\t[!] " + Fore.RED + name + " had errors")
+    print(Fore.BLUE + "\t[+] " + Fore.YELLOW + '{} classes translated successfully, {} classes had errors'.format(len(classes), len(errors)))
 
-    print("\n\t[+] " + apk_name + "'s source has been extracted as jar")
+    print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + apk_name + "'s source has been extracted as jar")
     print("\n")
 
-    print("\n--------------------------------------------------")
-    print("[+] EXTRACTING SOURCE")
-    print("\n")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTING SOURCE")
     namesplit = apk_name.split('.')[0]
     # noinspection PyPep8
     javasrc = 'java -jar tools/cfr.jar  ' + namesplit + '-enjarify.jar' + ' --outputdir' + ' Source-Java' + ' 1> /dev/null 2> /dev/null'
     os.system(javasrc)
-    print("\n\t[+] Extraction complete. Check 'Source-Java' directory.")
+    print(Fore.BLUE + "\n\t[+]" + Fore.YELLOW + " Extraction complete. Check " + Fore.BLUE + 'Source-Java' + Fore.YELLOW + " directory.")
 
     if os.path.exists('Extracts') and os.path.isdir('Extracts'):
         os.system('rm -r Extracts')
     apk.extractall("Extracts")
-    print("\n\t[+] Extracted the file contents to directory : Extracts")
+    print(Fore.BLUE + "\n\t[+]" + Fore.YELLOW + " Extracted the file contents to directory : Extracts")
     jarcpy = 'mv ' + namesplit + '-enjarify.jar' + ' Extracts'
     os.system(jarcpy)
     print("\n")
 
-    print("--------------------------------------------------")
-    print("[+] EXTRACTED CONTENTS")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTED CONTENTS")
     print("\n")
     for content in os.listdir("Extracts"):
-        print("\t" + content)
+        print(Fore.BLUE + "\t[>] " + Fore.YELLOW + content)
     if os.path.exists('Extracts'):
         os.chdir('Extracts')
     os.system('cp AndroidManifest.xml ../')
     print("\n")
 
-    print("--------------------------------------------------")
-    print("[+] CERTIFICATE")
-    print("\n")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CERTIFICATE")
+    print(Fore.YELLOW + "\n")
     os.system('openssl pkcs7 -inform DER -in META-INF/CERT.RSA -noout -print_certs -text | tee Certificate.txt ')
-    print("\n\t[+]Certificate details extracted to Certificate.txt")
+    print(Fore.BLUE + "\n\t[+]" + Fore.YELLOW + " Certificate details extracted to Certificate.txt")
     print("\n")
 
-    print("--------------------------------------------------")
-    print("[+] STRINGS")
-    print("\n\t[+] Executing Strings on classes.dex ")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "STRINGS")
+    print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Executing Strings on classes.dex ")
     os.system('strings classes.dex > Strings1.txt')
     if os.path.exists('classes2.dex'):
         os.system('strings classes2.dex > Strings2.txt')
-    print("\n\t[+] Output written to 'Strings.txt' found in the Extracts directory")
+    print(Fore.BLUE + "\n\t[+]" + Fore.YELLOW + " Output written to " + Fore.BLUE + 'Strings.txt' + Fore.YELLOW + " found in the Extracts directory")
     print("\n")
 
-    print("--------------------------------------------------")
-    print("[+] NATIVE LIBRARIES")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "NATIVE LIBRARIES")
     print("\n")
     directory = 'lib'
     for libdir, subdirList, libs in os.walk(directory):
@@ -109,20 +109,19 @@ def apk_info(apk_name):
             if fname == '':
                 nlc += 2
             else:
-                print('\t\t[>] %s' % fname)
+                print(Fore.BLUE + '\t[>] ' + Fore.YELLOW + '%s' % fname)
     if nlc > 0:
-        print("\n\t[-] No native libraries found")
-    print("\n\n")
-
-    print("--------------------------------------------------")
-    print("[+] MANIFEST DUMP")
+        print(Fore.RED + "\n\t[-] No native libraries found")
     print("\n")
+
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "MANIFEST DUMP")
     os.chdir('..')
     mandmp = 'java -jar tools/AXML.jar  AndroidManifest.xml  >> Manifest.xml'
     os.system(mandmp)
     os.system('rm AndroidManifest.xml')
     print("\n")
-    print("\t[+] The parsed Manifest can be found as Manifest.xml")
+    print(Fore.BLUE + "\t[+]" + Fore.YELLOW + " The parsed Manifest can be found as Manifest.xml")
     print("\n")
     man_analyzer()
 
@@ -153,8 +152,6 @@ def translate(data, opts, classes=None, errors=None, allowErrors=True):
                 raise
             errors[unicode_name] = traceback.format_exc()
 
-        if not (len(classes) + len(errors)) % 1000:
-            print(len(classes) + len(errors), 'classes processed')
     return classes, errors
 
 
