@@ -1,11 +1,12 @@
 # !/usr/bin/env python3
 
 import os
+from colorama import Fore
 
 
 def cleaner(apk_name):
-    print("\n--------------------------------------------------")
-    print("[+] CLEANING PROJECT")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CLEANING PROJECT")
 
     namesplit = apk_name.split('.')[0]
 
@@ -25,12 +26,11 @@ def cleaner(apk_name):
         clcmd = 'rm -r ' + namesplit
         os.system(clcmd)
 
-    if os.path.exists('smali_copy') and os.path.isdir('smali_copy'):
-        os.system('rm -r smali_copy')
+    if os.path.exists('smali_analysis') and os.path.isdir('smali_analysis'):
+        os.system('rm -r smali_analysis')
 
     if os.path.exists('str_inj.txt'):
-    	os.system('rm -r str_inj.txt')
+        os.system('rm -r str_inj.txt')
 
     if os.path.exists('Manifest.xml'):
         os.system('rm -r Manifest.xml')
-

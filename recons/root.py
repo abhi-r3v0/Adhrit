@@ -1,6 +1,7 @@
 # !/usr/bin/env python3
 
 import subprocess
+from colorama import Fore
 
 paths = ["/system/app/Superuser.apk",
          "/system/priv-app/Superuser.apk",
@@ -18,17 +19,16 @@ paths = ["/system/app/Superuser.apk",
 
 
 def check_root():
-    print("\n--------------------------------------------------")
-    print("[+] CHECKING ROOT STATUS\n")
+    print(Fore.YELLOW + "\n--------------------------------------------------")
+    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CHECKING ROOT STATUS\n")
     device = subprocess.check_output('adb devices', shell=True)
     if len(device) is not 26:
         for path in paths:
             cmd = "adb shell 'if [ -f " + path + " ];then echo 1; else echo 0; fi'"
-            check_root = subprocess.check_output(cmd, shell=True)
-            if check_root is 1:
-                print("\t[+] Device is rooted")
-                break;
-        print("\t[-] Device is not rooted")
+            root_check = subprocess.check_output(cmd, shell=True)
+            if root_check is 1:
+                print(Fore.BLUE + "\t[+] " + Fore.YELLOW + "Device is rooted")
+                break
+        print(Fore.RED + "\t[-] Device is not rooted")
     else:
-        print("\t[!] Device is not connected")
-
+        print(Fore.RED + "\t[!] Device is not connected")

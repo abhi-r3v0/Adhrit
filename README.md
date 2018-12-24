@@ -2,12 +2,11 @@
 
 ![Logo](Docs/logo/banner.v3.png)
 
----
-
-![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
-
-
-
+![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit) 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
+[![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
+[![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/abhi-r3v0)
+[![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 
 Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome!
 
@@ -38,6 +37,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Bytecode analysis
         * const-strings
         * CTF flags
+        * URLs
     * Malware analysis
         * VirusTotal scan
         * VirtualApp droppers scan
@@ -52,6 +52,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Rebuilding the APK 
     * Signing the APK
     * Deploying the APK into an emulator/device
+    * Disassembly of native libraries
     
 ---
 
@@ -101,6 +102,9 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 ![6](Docs/images/6.png)
 
+
+![7](Docs/images/7.png)
+
 ---
 
 ### PRESENTATION:
@@ -121,13 +125,13 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 #### Bug Bounty Tutorial
 
-[![Bug Bounty Tutorial](Docs/images/7.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
+[![Bug Bounty Tutorial](Docs/images/8.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
 
 ---
 
 #### Solving a simple mobile CTF challenge
 
-[![Solving a simple mobile CTF challenge](Docs/images/8.png)](https://www.youtube.com/watch?v=yeEp-opeRjM)
+[![Solving a simple mobile CTF challenge](Docs/images/9.png)](https://www.youtube.com/watch?v=yeEp-opeRjM)
 
 
 ---

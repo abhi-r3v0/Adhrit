@@ -1,35 +1,35 @@
 # !/usr/bin/env python3
 
 import os
-import subprocess
-from .apk_extract import apk_info
+from colorama import Fore
 
 
+# noinspection PyUnusedLocal
 def native_disas(apk_name):
     nlib = []
     nlibnames = []
     if os.path.exists('Extracts') and os.path.isdir('Extracts'):
         os.chdir('Extracts')
-        Dir = 'lib'
-        if os.path.exists(Dir) and os.path.isdir(Dir):
-            print("\n--------------------------------------------------")
-            print("[+] LIBRARIES FOUND")
-            for dirList, subdirList, subfiles in os.walk(Dir):
+        directory = 'lib'
+        if os.path.exists(directory) and os.path.isdir(directory):
+            print(Fore.YELLOW + "\n--------------------------------------------------")
+            print(Fore.YELLOW + "[+] " + Fore.BLUE + "LIBRARIES FOUND")
+            for dirList, subdirList, subfiles in os.walk(directory):
                 for sub in subfiles:
                     nlibnames.append(sub)
                     nlib.append(os.path.join(dirList, sub))
         else:
-            print("\n[-] No native libraries found for disassembling\n.")
+            print(Fore.RED + "\n[-] No native libraries found for disassembling\n.")
 
         for so in nlib:
             if so.endswith(".so"):
                 print("\n--------------------------------------------------")
-                print(("[+] NATIVE LIBRARY DUMP FOR " + so + "\n"))
-                print("\n\t[+] FILE  HEADERS")
+                print(Fore.BLUE + "[+] " + Fore.YELLOW + "NATIVE LIBRARY DUMP FOR " + so + "\n")
+                print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "FILE  HEADERS")
                 os.system("../tools/./arm-objdump -f \t" + so)
-                print(("\n\t[+] DISASSEMBLY OF " + so + "  TO  " + so + ".txt"))
+                print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "DISASSEMBLY OF " + so + "  TO  " + so + ".txt")
                 os.system("../tools/./arm-objdump -d " + so + " > " + so + ".txt")
                 print("\n")
 
     else:
-        print("\n\t[-] lib not found. Please extract the APK and try again.\n")
+        print(Fore.RED + "\n\t[-] lib not found. Please extract the APK and try again.\n")
