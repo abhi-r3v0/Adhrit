@@ -10,12 +10,12 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 import adhrit
 
 def test_welcome_succesful():
-    adhrit_test = adhrit.Adhrit()    
-    author = 'Abhishek J M ( jmabhishek@gmail.com )'
+    adhrit_test = adhrit.Adhrit()
+    author = 'Abhishek J M ( jmabhishek@gmail.com, @abhi_r3v0 )'
     asserted_author =  adhrit.__author__
     assert author == asserted_author
 
 if __name__ == '__main__':
-    test_welcome_succesful()    
+    test_welcome_succesful()
 
 
