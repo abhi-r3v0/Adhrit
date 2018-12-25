@@ -36,7 +36,7 @@ class DepInstaller:
 
         elif platform == "darwin":
 
-            print("\n[+]  Installing necessary tools on MAC")
+            print("\n[+]  Installing necessary tools on OSX")
             try:
                 os.system('brew install toilet')
                 print("\n[+]  Installation of dependencies complete")
@@ -59,7 +59,14 @@ class DepInstaller:
                 print("\n[+]  Installation of Android tools complete")
             except OSError:
                 print("\n[!]  Error installing Android tools")
-
+            try:
+                for j in self.pip_tools:
+                    subprocess.check_output(['sudo', 'pip3', 'install', j], stderr=subprocess.PIPE)
+                    print("\t[+] Installed " + j)
+            except subprocess.CalledProcessError as ose:
+                print(ose)
+                print("\n[!]  Error installing dependencies")
+                       
         elif platform == "win32":
                 # TO-DO Windows
                 print("\n[+]  Installing necessary tools on Windows")
