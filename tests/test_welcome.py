@@ -11,7 +11,7 @@ import adhrit
 
 def test_welcome_succesful():
     adhrit_test = adhrit.Adhrit()
-    author = 'Abhishek J M ( jmabhishek@gmail.com, @abhi_r3v0 )'
+    author = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
     asserted_author =  adhrit.__author__
     assert author == asserted_author
 
