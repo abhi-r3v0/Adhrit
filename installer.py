@@ -8,8 +8,8 @@ from sys import platform
 class DepInstaller:
 
     def __init__(self):
-        self.apt_tools = ['python-pip', 'python-setuptools', 'python3-pip', 'android-tools-adb', 'lib32ncurses5', 'lib32z1', 'toilet']
-        self.pip_tools = ['prettytable', 'requests', 'progressbar2', 'colorama', 'urllib3']
+        self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'lib32ncurses5', 'lib32z1', 'toilet']
+        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3']
         self.arm_tools = ['libc6-armel-cross', 'libc6-dev-armel-cross', 'binutils-arm-linux-gnueabi', 'libncurses5-dev']
         self.uninstalled = []
 
