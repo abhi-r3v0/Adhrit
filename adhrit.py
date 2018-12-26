@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 
 # ADHRIT is an open source tool for Android apk analysis
-# and CTFs to extract maximum amount of information from an apk
+# to extract maximum amount of information from an apk
 
 import argparse
 from colorama import Fore, Style
@@ -39,9 +39,10 @@ class Adhrit:
         print("  ##        ##  ##      ##   ##      ##  ##    ##    ##       ##")
         print(" ##         ##  ##     ##    ##      ##  ##     ##   ##       ##")
         print("##          ##  #######      ##      ##  ##      ##  ##       ##")
-        print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project Page\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
+        print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
         print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
         print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
+        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + "0.1")
 
     print("\n\n")
 
