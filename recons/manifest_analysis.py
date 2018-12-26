@@ -9,7 +9,7 @@ def man_analyzer():
     c1 = 0
     c2 = 0
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "MANIFEST ANALYSIS")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST ANALYSIS")
     perm_severe = {"android.permission.ACCESS_SUPERUSER": "Requests for super user (SU) access.",
                    "android.permission.USE_FINGERPRINT": "Requests for fingerprint.",
                    "android.permission.MANAGE_DOCUMENTS": "Requests for managing documents.",
