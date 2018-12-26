@@ -20,7 +20,7 @@ paths = ["/system/app/Superuser.apk",
 
 def check_root():
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CHECKING ROOT STATUS\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "CHECKING ROOT STATUS\n")
     device = subprocess.check_output('adb devices', shell=True)
     if len(device) is not 26:
         for path in paths:

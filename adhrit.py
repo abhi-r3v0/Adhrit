@@ -18,6 +18,7 @@ from recons.clean import cleaner
 from recons.root import check_root
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
+version = "0.1"
 
 
 class Adhrit:
@@ -42,7 +43,7 @@ class Adhrit:
         print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
         print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
         print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
-        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + "0.1")
+        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + version)
 
     print("\n\n")
 
@@ -96,6 +97,7 @@ class Adhrit:
     def dynamicanalysis(apk_name):
         adb_con(apk_name)
 
+    # Check for root access in the emulator/device
     @staticmethod
     def checkroot():
         check_root()

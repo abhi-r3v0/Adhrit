@@ -13,7 +13,7 @@ def adb_con(apk_name):
     mainlaunched = 0
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SEARCHING FOR DEVICES\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SEARCHING FOR DEVICES\n")
     adbd = subprocess.Popen(['adb', 'devices'], stdout=subprocess.PIPE)
     adbdo = adbd.stdout.readline()
     if adbdo == 0:
@@ -25,8 +25,8 @@ def adb_con(apk_name):
         found = 1
 
     if found == 1:
-        print("\n--------------------------------------------------")
-        print("[+] INSTALLING THE APK\n")
+        print(Fore.YELLOW + "\n--------------------------------------------------")
+        print(Fore.GREEN + "[INFO] " + Fore.BLUE + "INSTALLING THE APK\n")
         adbi = subprocess.check_output(['adb', 'install', '-r', apk_name])
         if 'Success' in adbi:
             print("\n\t[+] Installation successful")
@@ -41,7 +41,7 @@ def adb_con(apk_name):
         print(pkglabel)
 
         print("\n--------------------------------------------------")
-        print("[+] IDENTIFYING MAINACTIVITY\n")
+        print(Fore.GREEN + "[INFO] " + Fore.BLUE + "IDENTIFYING MAINACTIVITY\n")
         pk1 = '"'
         pk2 = '"'
         lstcmd = 'adb shell pm dump "' + pkglabel + '" |grep -A 1 MAIN: |' + "cut -d ':' -f 2-" + "| cut -c 18- "
