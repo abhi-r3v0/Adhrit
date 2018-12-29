@@ -1,6 +1,6 @@
 [config-data]
 
 vt_api_key =
-dependencies = incomplete  # DO NOT MODIFY!
+dependencies = incomplete
 emulator_path = #optional
 

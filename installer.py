@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import configparser
 from sys import platform
 
 
@@ -9,11 +10,13 @@ class DepInstaller:
 
     def __init__(self):
         self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'lib32ncurses5', 'lib32z1', 'toilet']
-        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3']
+        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2']
         self.arm_tools = ['libc6-armel-cross', 'libc6-dev-armel-cross', 'binutils-arm-linux-gnueabi', 'libncurses5-dev']
         self.uninstalled = []
 
     def ins(self):
+        confparser = configparser.ConfigParser()
+        confparser.read('config')
         if platform == "linux" or platform == "linux2":
                 # linux
             print("\n[+]  Installing necessary tools on Linux\n")
@@ -47,7 +50,10 @@ class DepInstaller:
             if len(self.uninstalled) > 0:
                 print("\n[-] " + str(len(self.uninstalled)) + " not installed.")
             else:
-                print("\n[+] Installation of requirements complete.")
+                confparser.set('config-data', 'dependencies_status', 'complete')
+                with open('config', 'w') as updatedconf:
+                    confparser.write(updatedconf)
+                print("\n[+] Installation of requirements complete. Check with 'python3 adhrit.py -h'")
 
         elif platform == "darwin":
 
