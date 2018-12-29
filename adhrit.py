@@ -4,6 +4,7 @@
 # to extract maximum amount of information from an apk
 
 import argparse
+import configparser
 from colorama import Fore, Style
 from recons.apk_extract import apk_info
 from recons.vapp import vapp_find
@@ -18,7 +19,7 @@ from recons.clean import cleaner
 from recons.root import check_root
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
-version = "0.1"
+__version__ = "0.1"
 
 
 class Adhrit:
@@ -43,7 +44,15 @@ class Adhrit:
         print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
         print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
         print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
-        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + version)
+        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
+
+    check_deps = configparser.ConfigParser()
+    check_deps.read('config')
+    if check_deps.get('config-data', 'dependencies_status') == 'incomplete':
+        print(Fore.RED + "\n[ERROR] Not all the necessary tools are installed! Please run " + Fore.YELLOW + 'python3 installer.py' + Fore.RED + " again")
+        exit()
+    else:
+        pass
 
     print("\n\n")
 
