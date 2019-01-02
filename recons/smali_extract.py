@@ -7,7 +7,7 @@ from colorama import Fore
 
 def smali_de(apk_name):
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SOURCE EXTRATION IN SMALI\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SOURCE EXTRATION IN SMALI\n")
     snamesplit = apk_name.split('.')[0]
     print(Fore.YELLOW)
     smalicmd = 'java -jar tools/apktool.jar d -f ' + apk_name
@@ -18,7 +18,7 @@ def smali_de(apk_name):
 
 def smali_re(apk_name):
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "RECOMPILING SMALI")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "RECOMPILING SMALI")
     snamesplit = apk_name.split('.')[0]
     if os.path.isdir(snamesplit):
         smalicmd = 'java -jar tools/apktool.jar b -f ' + snamesplit
@@ -32,7 +32,7 @@ def smali_re(apk_name):
 
 def apk_sign(apk_name):
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SIGNING APK")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SIGNING APK")
     snamesplit = apk_name.split('.')[0]
     sdir = snamesplit + '/dist/' + snamesplit + '.apk'
     if os.path.exists(sdir):
@@ -52,7 +52,7 @@ def inj_check(apk_name, flag_format=''):
         print(Fore.RED + "\n\t[!] bytecode not found. Extracting")
         smali_de(apk_name)
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CHECKING FOR BYTECODE INJECTIONS\n\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "CHECKING FOR BYTECODE INJECTIONS\n\n")
     inj_points = 0
     flag_count = 0
     check = 0
@@ -105,7 +105,7 @@ def inj_check(apk_name, flag_format=''):
         print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + "Constant strings written to 'str_inj.txt' file in 'smali_analysis' directory\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SEARCHING FOR CTF FLAGS\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SEARCHING FOR CTF FLAGS\n")
     if flags:
         with open("ctf_flags.txt", "a+") as ctf_file:
             for flag in flags:
@@ -123,13 +123,13 @@ def inj_check(apk_name, flag_format=''):
         print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + "All the flags written to 'ctf_flags.txt' file in " + Fore.BLUE + "'smali_analysis'" + Fore.YELLOW + "directory")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SEARCHING FOR URLs\n\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SEARCHING FOR URLs\n\n")
     if urls:
         with open("urls.txt", "a+") as url_file:
             for foundurls in urls:
-                url_file.write(foundurls)
+                url_file.write(foundurls.split()[2][1:-1] + "\n")
                 url_count += 1
                 if 0 < url_count < 10:
-                    print(Fore.BLUE + "\t[>] " + Fore.YELLOW + foundurls)
+                    print(Fore.BLUE + "\t[>] " + Fore.YELLOW + foundurls.split()[2][1:-1])
         print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + str(url_count) + " urls found")
         print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + "All the URLs written to 'urls.txt' file in " + Fore.BLUE + "'smali_analysis'" + Fore.YELLOW + " directory")
