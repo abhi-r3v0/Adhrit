@@ -14,7 +14,7 @@ def api_check(apk_name):
     vt_apikey = config.get('config-data', 'vt_api_key')
 
     print(Fore.YELLOW + Style.BRIGHT + "\n--------------------------------------------------")
-    print(Fore.YELLOW + Style.BRIGHT + "[+] " + Fore.BLUE + "SCANNING FOR MALWARE TRACE\n")
+    print(Fore.GREEN + Style.BRIGHT + "[INFO] " + Fore.BLUE + "SCANNING FOR MALWARE TRACE\n")
     if str(vt_apikey) == '':
         print(Fore.RED + Style.BRIGHT + "\t[!] API key not added. Please add the VirusTotal API key")
         return
@@ -48,7 +48,7 @@ def api_check(apk_name):
         else:
             print(Fore.RED + Style.BRIGHT + "\n[-] " + Fore.YELLOW + "No Positives Found")
 
-    except:
+    except requests.ConnectionError:
         print(Fore.RED + Style.BRIGHT + "[!] Error connecting to VirusTotal")
 
     if pos == 1:
