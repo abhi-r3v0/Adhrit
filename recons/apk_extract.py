@@ -20,7 +20,7 @@ def apk_info(apk_name):
     apk = zipfile.ZipFile(apk_name, 'r')
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTING JAR")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "EXTRACTING JAR")
     print("\n")
 
     dexs = []
@@ -56,10 +56,9 @@ def apk_info(apk_name):
     print(Fore.BLUE + "\t[+] " + Fore.YELLOW + '{} classes translated successfully, {} classes had errors'.format(len(classes), len(errors)))
 
     print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + apk_name + "'s source has been extracted as jar")
-    print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTING SOURCE")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "EXTRACTING SOURCE")
     namesplit = apk_name.split('.')[0]
     # noinspection PyPep8
     javasrc = 'java -jar tools/cfr.jar  ' + namesplit + '-enjarify.jar' + ' --outputdir' + ' Source-Java' + ' 1> /dev/null 2> /dev/null'
@@ -75,7 +74,7 @@ def apk_info(apk_name):
     print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "EXTRACTED CONTENTS")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "EXTRACTED CONTENTS")
     print("\n")
     for content in os.listdir("Extracts"):
         print(Fore.BLUE + "\t[>] " + Fore.YELLOW + content)
@@ -85,14 +84,14 @@ def apk_info(apk_name):
     print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "CERTIFICATE")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "CERTIFICATE")
     print(Fore.YELLOW + "\n")
     os.system('openssl pkcs7 -inform DER -in META-INF/CERT.RSA -noout -print_certs -text | tee Certificate.txt ')
     print(Fore.BLUE + "\n\t[+]" + Fore.YELLOW + " Certificate details extracted to Certificate.txt")
     print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "STRINGS")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "STRINGS")
     print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Executing Strings on classes.dex ")
     os.system('strings classes.dex > Strings1.txt')
     if os.path.exists('classes2.dex'):
@@ -101,7 +100,7 @@ def apk_info(apk_name):
     print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "NATIVE LIBRARIES")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "NATIVE LIBRARIES")
     print("\n")
     directory = 'lib'
     for libdir, subdirList, libs in os.walk(directory):
@@ -115,7 +114,7 @@ def apk_info(apk_name):
     print("\n")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "MANIFEST DUMP")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST DUMP")
     os.chdir('..')
     mandmp = 'java -jar tools/AXML.jar  AndroidManifest.xml  >> Manifest.xml'
     os.system(mandmp)

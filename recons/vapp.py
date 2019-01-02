@@ -9,7 +9,7 @@ from colorama import Fore
 # noinspection PyGlobalUndefined
 def vapp_find(apk_name):
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.YELLOW + "[+] " + Fore.BLUE + "SCANNING FOR VIRTUALAPP")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SCANNING FOR VIRTUALAPP")
     apk = zipfile.ZipFile(apk_name, 'r')
     global drop_name
     dropper = 0

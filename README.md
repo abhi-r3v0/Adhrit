@@ -1,10 +1,10 @@
-## FROM INDIA, TO THE WORLD :blue_heart:
-
 ![Logo](Docs/logo/banner.v3.png)
 
-![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)   [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)  [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=103)](https://www.github.com/abhi-r3v0/Adhrit) 
+![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)  [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
 [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
+![pep8](https://img.shields.io/badge/PEP8-Optimised-yellow.svg)
+![version](https://img.shields.io/badge/version-0.1-red.svg)
 [![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/abhi-r3v0)
 [![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 
@@ -12,7 +12,7 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-### FEATURES:
+### Features:
 
 * #### APK Extraction
     * assets
@@ -56,36 +56,10 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     
 ---
 
-### PRE-REQUISITES:
-
-* Linux or MAC
-* Python3
-* Java JDK
-
----
-
-### SETUP
-
-1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
-2. Open ```config``` and input your VirusTotal API key without any quotes. ([Click here to know how to obtain your VT API key](https://community.mcafee.com/t5/Documents/How-to-get-a-VirusTotal-public-API-Key/ta-p/552797))
-3. Open a terminal and cd into the directory.
-4. Run ```python3 installer.py``` for installing the necessary tools.
-
----
-
-### USAGE:
-
-1. Place the application (apk file) in the tool directory.
-2. Use ```python3 adhrit.py -h``` for usage help.
-
-Example:  ```python3 adhrit.py -a my_app.apk```
-
----
-
-### SCREENSHOTS:
+### Screenshots:
 
 
-![1](Docs/images/1.png)
+![1](Docs/images/1.png) 
 
 
 ![2](Docs/images/2.png)
@@ -102,26 +76,54 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 ![6](Docs/images/6.png)
 
+---
 
-![7](Docs/images/7.png)
+### Pre-requisites:
+
+* Linux or MAC
+* Python3
+* Java JDK
 
 ---
 
-### PRESENTATION:
+### Quick Setup
 
-[Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
+2. Open ```config``` and input your VirusTotal API key without any quotes. ([Click here to know how to obtain your VT API key](https://community.mcafee.com/t5/Documents/How-to-get-a-VirusTotal-public-API-Key/ta-p/552797))
+3. Open a terminal and cd into the directory.
+4. Run ```python3 installer.py``` for installing the necessary tools.
+
+---
+
+### Presentation:
+
+##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+
+[![Cysinfo Cyber Security Meetup](Docs/images/slide.png)](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
 
 
 ---
 
-### BLOG:
+### Usage:
 
-[bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+1. Place the application (apk file) in the tool directory.
+2. Use ```python3 adhrit.py -h``` for usage help.
+
+Example:  ```python3 adhrit.py -a my_app.apk```
+
+Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for complete details
 
 ---
 
+### Blog:
 
-### VIDEO:
+##### [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+
+[![blog](Docs/images/bi0s.png)](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+---
+
+
+### Video:
 
 #### Bug Bounty Tutorial
 
@@ -136,25 +138,25 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 ---
 
-## THE SQUAD:
+## Team:
 
-#### PROJECT LEAD:
+#### Project Lead:
 
 * Abhishek J M (jmabhishek4@gmail.com, [@abhi_r3v0](https://twitter.com/abhi_r3v0))
 
-#### LEAD CONTRIBUTORS:
+#### Lead Contributors:
 
 * P S Narayanan (thepsnarayanan@gmail.com, [@0xP5N_](https://twitter.com/0xP5N_))
 * Akhil Mahendra (akhilmahendra7991@gmail.com, [@Akhil_Mahendra](https://twitter.com/akhil_mahendra))
 * Heeraj Nair (heeraj123@gmail.com, [@heerajnair](https://twitter.com/heerajnair))
 
-#### GRAPHIC DESIGNS:
+#### Logo:
 
 * Loyd Jayme (loydjayme1996@gmail.com, [@loydjayme25](https://github.com/loydjayme25))
 
 ---
 
-### MENTIONS:
+### Mentions:
 
 * [NeOnSec](https://neonsec.com/adhrit-android-apk-analysis/)
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
@@ -187,7 +189,7 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 ---
 
-### CREDITS:
+### Credits:
 
 * [apktool](https://ibotpeaches.github.io/Apktool/)
 * [jarsigner](https://github.com/appium/sign)
@@ -201,7 +203,7 @@ Example:  ```python3 adhrit.py -a my_app.apk```
 
 ---
 
-#### NOTE:
+#### Note:
 
 1. Filenames with two '.' may give an error. Please rename the apk in such cases.
 For example, if your file name is ```my.app.apk```, rename it to ```myapp.apk```
