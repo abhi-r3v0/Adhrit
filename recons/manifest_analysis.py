@@ -1,13 +1,19 @@
 # !/usr/bin/env python3
 
 import os
+import zipfile
 import xml.etree.ElementTree as Et
 from colorama import Fore
 
 
-def man_analyzer():
+def man_scanner():
+
+    # noinspection PyGlobalUndefined
+    global pkg_name
+    exp_status = 0
     c1 = 0
     c2 = 0
+
     print(Fore.YELLOW + "\n--------------------------------------------------")
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST ANALYSIS")
     perm_severe = {"android.permission.ACCESS_SUPERUSER": "Requests for super user (SU) access.",
@@ -45,6 +51,9 @@ def man_analyzer():
         print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Manifest found. Starting analysis\n")
         tree = Et.parse(xmlfile)
         root = tree.getroot()
+        for pkg_attribs in root.attrib:
+            if pkg_attribs == "package":
+                pkg_name = root.attrib[pkg_attribs]
         print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Critical Permission Analysis\n")
         permissions = root.findall("uses-permission")
         if len(permissions) <= 1:
@@ -61,16 +70,56 @@ def man_analyzer():
                         c1 += 1
                         print(Fore.BLUE + "\t\t " + "[>] " + Fore.YELLOW + permvalue)
 
-        export_acts = root.findall("application")
-        for acts in export_acts:
-            for expor in acts.attrib:
-                if expor == "{http://schemas.android.com/apk/res/android}allowBackup":
-                    if acts.attrib[expor] == "true":
+        backup_status = root.findall("application")
+        for acts in backup_status:
+            for bckp in acts.attrib:
+                if bckp == "{http://schemas.android.com/apk/res/android}allowBackup":
+                    if acts.attrib[bckp] == "true":
                         print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "The application allows backup.")
                         print(Fore.LIGHTRED_EX + "\n\t\tData/files maybe left in the device even after the application is uninstalled.")
                     else:
                         print(Fore.BLUE + "\n\n\t[-] " + Fore.YELLOW + "Backup disabled.")
                         print(Fore.YELLOW + "\n\t\tThe application doesn't leave behind data/files after uninstallation.")
 
-    else:
-        print(Fore.RED + "\n[!] Manifest not found. Please extract the APK using '-x' or '-a'.")
+        acts_list = root.findall("application")
+        for acts in acts_list:
+            for exp in acts:
+                for exp_tag in exp.attrib:
+                    if exp_tag == "{http://schemas.android.com/apk/res/android}exported":
+                        exp_status += 1
+                        if exp.attrib[exp_tag] == "true":
+                            exp_name = "{http://schemas.android.com/apk/res/android}name"
+                            exp_name_strip = str(exp.attrib[exp_name]).split('.')
+                            exp_name_len = len(exp_name_strip)
+                            exp_activity_name = exp_name_strip[exp_name_len-1]
+                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
+                            print(Fore.LIGHTRED_EX + "\n\t\tAny application/ADB command can launch this activity bypassing the actual application routine!")
+                            poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
+                            print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
+
+        if exp_status == 0:
+            print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "No exported activities found.")
+            print(Fore.YELLOW + "\n\t\tThe application has no activity that can be launched bypassing the actual routine of the application.\n")
+
+
+def man_analyzer(apk_name):
+
+    if os.path.exists("Manifest.xml"):
+        man_scanner()
+
+    elif os.path.exists("Extracts") and os.path.isdir("Extracts"):
+        os.system('cp Extracts/AndroidManifest.xml ../')
+        mandmp = 'java -jar tools/AXML.jar  AndroidManifest.xml  >> Manifest.xml'
+        os.system(mandmp)
+        os.system('rm AndroidManifest.xml')
+        man_scanner()
+
+    elif apk_name.lower().endswith('.apk'):
+        with zipfile.ZipFile(apk_name, 'r') as z:
+            for name in z.namelist():
+                if name.startswith('AndroidManifest') and name.endswith('.xml'):
+                    z.extract(name)
+                    mandmp = 'java -jar tools/AXML.jar  AndroidManifest.xml  >> Manifest.xml'
+                    os.system(mandmp)
+                    os.system('rm AndroidManifest.xml')
+                    man_scanner()

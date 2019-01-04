@@ -1,4 +1,4 @@
-![Logo](Docs/logo/banner.v3.png)
+![Logo](Docs/logo/bannernew.png)
 
 ![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)  [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
@@ -29,16 +29,17 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Native library
 
 * #### Static Analysis
-    * Manifest analysis
+    * **Manifest analysis**
         * Critical permission usage analysis
         * MainActivity identification
         * Backup status
         * Exported activities
-    * Bytecode analysis
+        * Automated ADB payload generation for exported activities       
+    * **Bytecode analysis**
         * const-strings
         * CTF flags
-        * URLs
-    * Malware analysis
+        * URLs      
+    * **Malware analysis**
         * VirusTotal scan
         * VirtualApp droppers scan
 
@@ -152,6 +153,7 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 #### Logo:
 
+* Vaisakh (vaisakhjnr@gmail.com, [@vaisakhjnr](https://github.com/vaisakhjnr)) (*new*)
 * Loyd Jayme (loydjayme1996@gmail.com, [@loydjayme25](https://github.com/loydjayme25))
 
 ---
