@@ -14,9 +14,11 @@ from recons.smali_extract import smali_re
 from recons.smali_extract import apk_sign
 from recons.smali_extract import inj_check
 from recons.native_recon import native_disas
+from recons.manifest_analysis import man_analyzer
 from recons.dynamic import adb_con
 from recons.clean import cleaner
 from recons.root import check_root
+
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
 __version__ = "0.1"
@@ -66,6 +68,10 @@ class Adhrit:
     def apkextractor(apk_name):
         apk_info(apk_name)
 
+    @staticmethod
+    def manifestanalyzer(apk_name):
+        man_analyzer(apk_name)
+
     # Check for virtual app droppers
     @staticmethod
     def vappsearch(apk_name):
@@ -112,7 +118,6 @@ class Adhrit:
         check_root()
 
 
-# Main fuction starts here
 def main():
     adhrit = Adhrit()
     parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
@@ -130,6 +135,7 @@ def main():
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     parser.add_argument("-cr", help="Check device root status", action='store_true')
+    parser.add_argument("-man", help="Extract, parse and analyze manifest")
     args = parser.parse_args()
 
     # Adhrit Welcome ASCII
@@ -142,6 +148,7 @@ def main():
         adhrit.cleanproject(args.a)
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
+        adhrit.manifestanalyzer(args.a)
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
@@ -180,6 +187,9 @@ def main():
 
     elif args.cr:
         adhrit.checkroot()
+
+    elif args.man:
+        adhrit.manifestanalyzer(args.man)
 
 
 if __name__ == "__main__":
