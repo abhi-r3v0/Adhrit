@@ -110,7 +110,17 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 1. Place the application (apk file) in the tool directory.
 2. Use ```python3 adhrit.py -h``` for usage help.
 
-Example:  ```python3 adhrit.py -a my_app.apk```
+Example:  ```python3 adhrit.py -a myapp.apk```
+
+ADHRIT can now be run in two modes:
+
+#### Pentest Mode
+
+```python3 adhrit.py -pen myapp.apk```
+
+#### Malware Analysis Mode
+
+```python3 adhrit.py -mal myapp.apk```
 
 Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for complete details
 
@@ -168,6 +178,7 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 * [Howucan.gr](https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
 * [HackerTor](https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
 * [tuicool](https://www.tuicool.com/articles/r6jQzii)
+* [Tuisec](https://paper.tuisec.win/detail/1ce710b90a90efb)
 * [Pinterest](https://in.pinterest.com/pin/396246467200088526/)
 * [@androidtools on Twitter](https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
 * [pcbbc](http://pcbbc.site.mobi/templates/mobile/facade_transcoder_iframe.php?u=%2Ftopics%2Fsmali%3Fimz_s%3Duresuqnlic5v64irhbuf1k8k94&lang=en)
