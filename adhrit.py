@@ -121,6 +121,8 @@ class Adhrit:
 def main():
     adhrit = Adhrit()
     parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
+    parser.add_argument("-pen", help="Run ADHRIT in pentest mode")
+    parser.add_argument("-mal", help="Run ADHRIT in malware analysis mode")
     parser.add_argument("-c", help="Clean up for a new project")
     parser.add_argument("-a", help="Dump package info and extract contents")
     parser.add_argument("-x", help="Extract APK contents only")
@@ -140,6 +142,17 @@ def main():
 
     # Adhrit Welcome ASCII
     adhrit.welcome()
+
+    if args.pen:
+        adhrit.cleanproject(args.pen)
+        adhrit.apkextractor(args.pen)
+        adhrit.manifestanalyzer(args.pen)
+        adhrit.smaliextractor(args.pen)
+        adhrit.smali_inj(args.pen)
+
+    if args.mal:
+        adhrit.vtanalyzer(args.mal)
+        adhrit.vappsearch(args.mal)
 
     if args.c:
         adhrit.cleanproject(args.c)
