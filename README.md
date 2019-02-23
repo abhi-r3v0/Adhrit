@@ -10,6 +10,10 @@
 
 Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome!
 
+<p align="center">
+  <img width="600" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
+</p>
+
 ---
 
 ### Features:
@@ -59,38 +63,22 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ### Screenshots:
 
-<p align="center">
-  <img width="650" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
-</p>
-
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/1.png">
-</p>
+![1](Docs/images/1.png) 
 
 
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/2.png">
-</p>
+![2](Docs/images/2.png)
 
 
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/3.png">
-</p>
+![3](Docs/images/3.png)
 
 
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/4.png">
-</p>
+![4](Docs/images/4.png)
 
 
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/5.png">
-</p>
+![5](Docs/images/5.png)
 
 
-<p align="center">
-  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/6.png">
-</p>
+![6](Docs/images/6.png)
 
 ---
 
