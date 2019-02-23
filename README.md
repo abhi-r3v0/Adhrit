@@ -12,10 +12,6 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-<p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
-</p>
-
 ### Features:
 
 * #### APK Extraction
@@ -63,23 +59,38 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ### Screenshots:
 
+<p align="center">
+  <img width="650" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
+</p>
 
-![1](Docs/images/1.png) 
-
-
-![2](Docs/images/2.png)
-
-
-![3](Docs/images/3.png)
-
-
-![4](Docs/images/4.png)
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/1.png">
+</p>
 
 
-![5](Docs/images/5.png)
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/2.png">
+</p>
 
 
-![6](Docs/images/6.png)
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/3.png">
+</p>
+
+
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/4.png">
+</p>
+
+
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/5.png">
+</p>
+
+
+<p align="center">
+  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/6.png">
+</p>
 
 ---
 
