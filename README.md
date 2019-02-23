@@ -12,8 +12,9 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-![](Docs/images/adhrit.gif)
-
+<p align="center">
+  <img width="560" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
+</p>
 
 ### Features:
 
