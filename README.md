@@ -12,6 +12,9 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
+![](Docs/images/adhrit.gif)
+
+
 ### Features:
 
 * #### APK Extraction
@@ -126,11 +129,10 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 ---
 
-### Blog:
+### Blogs:
 
-##### [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
-
-[![blog](Docs/images/bi0s.png)](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+* #####  [bi0s: Android APK Reconnaissance Tool](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+* #####  [NeOnSec: Android APK Analysis](https://neonsec.com/adhrit-android-apk-analysis/)
 ---
 
 
@@ -170,7 +172,6 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 ### Mentions:
 
-* [NeOnSec](https://neonsec.com/adhrit-android-apk-analysis/)
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
 * [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
 * [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
