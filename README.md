@@ -64,32 +64,32 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 </p>
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/1.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/1.png">
 </p>
 
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/2.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/2.png">
 </p>
 
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/3.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/3.png">
 </p>
 
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/4.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/4.png">
 </p>
 
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/5.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/5.png">
 </p>
 
 
 <p align="center">
-  <img width="630" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/6.png">
+  <img width="880" height="400" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/6.png">
 </p>
 
 ---
