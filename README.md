@@ -10,10 +10,6 @@
 
 Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome!
 
-<p align="center">
-  <img width="600" height="300" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/adhrit.gif">
-</p>
-
 ---
 
 ### Features:
