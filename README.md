@@ -99,7 +99,9 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 * #####  [OWASP Seasides](Docs/files/ADHRIT_OWASP.pdf)
 
-<img src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/slidess.png" width="48">
+<p align="center">
+  <img width="460" height="300" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/slidess.png">
+</p>
 
 * ##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
 
@@ -137,10 +139,16 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 * #### [Bug Bounty Tutorial](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
 
-[![Bug Bounty Tutorial](Docs/images/8.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/slidess.png">
+</p>
 
 
 * #### [Solving a simple mobile CTF challenge](https://www.youtube.com/watch?v=yeEp-opeRjM)
+
+<p align="center">
+  <img width="460" height="300" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/8.png">
+</p>
 
 
 ---
