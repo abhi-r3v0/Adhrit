@@ -95,12 +95,13 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-### Presentation:
+### Presentations / Conferences:
 
-##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+* #####  [OWASP Seasides](Docs/files/ADHRIT_OWASP.pdf)
 
-[![Cysinfo Cyber Security Meetup](Docs/images/slide.png)](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+[![OWASP Seasides](Docs/images/slidess.png)](Docs/files/ADHRIT_OWASP.pdf)
 
+* ##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
 
 ---
 
@@ -198,6 +199,8 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 
 ---
+
+
 
 ### Credits:
 
