@@ -13,6 +13,8 @@ def man_scanner():
     exp_status = 0
     c1 = 0
     c2 = 0
+    c3 = 0
+    global main_act_name
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST ANALYSIS")
@@ -45,6 +47,7 @@ def man_scanner():
                    "android.permission.WRITE_CALL_LOG": "Allows to write (but not read) the user's call log data.",
                    "android.permission.WRITE_CONTACTS": "Allows to write the user's contacts data."
                    }
+
 
     xmlfile = 'Manifest.xml'
     if os.path.exists(xmlfile):
@@ -81,6 +84,17 @@ def man_scanner():
                         print(Fore.BLUE + "\n\n\t[-] " + Fore.YELLOW + "Backup disabled.")
                         print(Fore.YELLOW + "\n\t\tThe application doesn't leave behind data/files after uninstallation.")
 
+        for debugattrib in backup_status:
+            for dbgstatus in debugattrib.attrib:
+                if dbgstatus == "{http://schemas.android.com/apk/res/android}debuggable":
+                    if debugattrib.attrib[dbgstatus] == "true":
+                        print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "The application is debuggable.")
+                        print(Fore.LIGHTRED_EX + "\n\t\tSensitive data can be logged while the application runs.")
+                    else:
+                        print(Fore.BLUE + "\n\n\t[-] " + Fore.YELLOW + "Debugging disabled.")
+                        print(Fore.YELLOW + "\n\t\tThe application doesn't allow logging data from the application.")
+
+
         acts_list = root.findall("application")
         for acts in acts_list:
             for exp in acts:
@@ -91,15 +105,57 @@ def man_scanner():
                             exp_name = "{http://schemas.android.com/apk/res/android}name"
                             exp_name_strip = str(exp.attrib[exp_name]).split('.')
                             exp_name_len = len(exp_name_strip)
-                            exp_activity_name = exp_name_strip[exp_name_len-1]
+                            exp_activity_name = exp_name_strip[exp_name_len - 1]
                             print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
                             print(Fore.LIGHTRED_EX + "\n\t\tAny application/ADB command can launch this activity bypassing the actual application routine!")
                             poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
                             print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
 
+                        else:
+                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " has not been explicitly mentioned false, which might allow access to it from other components.")
+
         if exp_status == 0:
             print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "No exported activities found.")
             print(Fore.YELLOW + "\n\t\tThe application has no activity that can be launched bypassing the actual routine of the application.\n")
+
+
+        for cust_perm in acts_list:
+            for cust in cust_perm:
+                for activity in cust:
+                    if activity.tag == "intent-filter":
+                        for intentname, intentvalue in cust.attrib.items():
+                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "Intent filter found for ACTIVITY: " + Fore.RED + str(intentvalue))
+                            for child in activity:
+                                if child.tag == "action":
+                                    for name, value in child.attrib.items():
+                                        if value.startswith("android.intent.action"):
+                                            if value == "android.intent.action.MAIN":
+                                                main_act_strip = intentvalue.split('.')
+                                                main_act_len = len(main_act_strip)
+                                                main_act_name = main_act_strip[main_act_len - 1]
+                                            c3 += 1
+                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.RED + str(value))
+                                        else:
+                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.RED + str(value))
+                                if child.tag == "category":
+                                    for catname, catvalue in child.attrib.items():
+                                        print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "CATEGORY: " + Fore.RED + str(catvalue))
+
+                                if child.tag == "data":
+                                    for dname, dvalue in child.attrib.items():
+                                        print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "TYPE: " + Fore.RED + str(dvalue))
+
+        print(Fore.YELLOW + "\n\n\t[+] Main Activity: " + Fore.GREEN + pkg_name + "/." + main_act_name)
+        poc_cmd_main = "adb shell am start -n " + pkg_name + "/." + main_act_name
+        print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd_main)
+
+        if c3 > 1:
+            print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "Intent filters found. The app maybe communicating with other apps/app components")
+            print(Fore.YELLOW + "\n\t\tThe application maybe communicating with other applications' components.\n")
+
+        if c3 == 0:
+            print(Fore.YELLOW + "\n\n\t[+] Intent filters not found. The app may not be communicating with other apps/app components")
+            print(Fore.YELLOW + "\n\t\tThe application may not be communicating with other applications' components.\n")
 
 
 def man_analyzer(apk_name):
@@ -114,7 +170,7 @@ def man_analyzer(apk_name):
         os.system('rm AndroidManifest.xml')
         man_scanner()
 
-    elif apk_name.lower().endswith('.apk'):
+    elif os.path.abspath(apk_name).lower().endswith('.apk'):
         with zipfile.ZipFile(apk_name, 'r') as z:
             for name in z.namelist():
                 if name.startswith('AndroidManifest') and name.endswith('.xml'):
@@ -123,3 +179,6 @@ def man_analyzer(apk_name):
                     os.system(mandmp)
                     os.system('rm AndroidManifest.xml')
                     man_scanner()
+
+    else:
+        exit("Input not found")

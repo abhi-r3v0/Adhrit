@@ -137,7 +137,7 @@ def main():
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     parser.add_argument("-cr", help="Check device root status", action='store_true')
-    parser.add_argument("-man", help="Extract, parse and analyze manifest")
+    parser.add_argument("-l", help="Extract, parse and analyze manifest")
     args = parser.parse_args()
 
     # Adhrit Welcome ASCII
@@ -201,8 +201,8 @@ def main():
     elif args.cr:
         adhrit.checkroot()
 
-    elif args.man:
-        adhrit.manifestanalyzer(args.man)
+    elif args.l:
+        adhrit.manifestanalyzer(args.l)
 
 
 if __name__ == "__main__":
