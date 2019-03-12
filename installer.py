@@ -11,7 +11,6 @@ class DepInstaller:
     def __init__(self):
         self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'lib32ncurses5', 'lib32z1', 'toilet']
         self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2']
-        self.arm_tools = ['libc6-armel-cross', 'libc6-dev-armel-cross', 'binutils-arm-linux-gnueabi', 'libncurses5-dev']
         self.uninstalled = []
 
     def ins(self):
@@ -36,15 +35,6 @@ class DepInstaller:
                 except subprocess.CalledProcessError:
                     print("\t\t[!] Error installing " + j + ". Please install manually: 'sudo pip3 install " + j + "'")
                     self.uninstalled.append(j)
-                    pass
-
-            for k in self.arm_tools:
-                try:
-                    subprocess.check_output(['sudo', 'apt-get', '-f', 'install', k], stderr=subprocess.PIPE)
-                    print("\t[+] Installed " + k)
-                except subprocess.CalledProcessError:
-                    print("\t\t[!] Error installing " + k + ". Please install manually: 'sudo apt-get -f install " + k + "'")
-                    self.uninstalled.append(k)
                     pass
 
             if len(self.uninstalled) > 0:
