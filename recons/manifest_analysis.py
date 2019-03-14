@@ -111,9 +111,6 @@ def man_scanner():
                             poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
                             print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
 
-                        else:
-                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " has not been explicitly mentioned false, which might allow access to it from other components.")
-
         if exp_status == 0:
             print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "No exported activities found.")
             print(Fore.YELLOW + "\n\t\tThe application has no activity that can be launched bypassing the actual routine of the application.\n")
