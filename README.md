@@ -1,7 +1,7 @@
 ![Logo](Docs/logo/bannernew.png)
 
 ![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)  [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
 ![pep8](https://img.shields.io/badge/PEP8-Optimised-yellow.svg)
 ![version](https://img.shields.io/badge/version-0.1-red.svg)
@@ -19,12 +19,12 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * classes.dex
     * native libraries
     * jar file from dex (integrated Enjarify)
-    
+
 * #### Source Extraction
     * Certificate/signature
     * Java source (CFR)
-    * smali source 
-    * Parsed XML resource files 
+    * smali source
+    * Parsed XML resource files
     * Parsed AndroidManifest
     * Native library
 
@@ -34,11 +34,12 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
         * MainActivity identification
         * Backup status
         * Exported activities
-        * Automated ADB payload generation for exported activities       
+        * Identify intent filters
+        * Automated ADB payload generation for exported activities
     * **Bytecode analysis**
         * const-strings
         * CTF flags
-        * URLs      
+        * URLs
     * **Malware analysis**
         * VirusTotal scan
         * VirtualApp droppers scan
@@ -50,16 +51,16 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Dumping the runtime log
 
 * #### Miscellaneous
-    * Rebuilding the APK 
+    * Rebuilding the APK
     * Signing the APK
     * Deploying the APK into an emulator/device
     * Disassembly of native libraries
-    
+
 ---
 
 ### Screenshots:
 
-![1](Docs/images/1.png) 
+![1](Docs/images/1.png)
 
 
 ![2](Docs/images/2.png)
