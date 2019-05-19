@@ -25,10 +25,7 @@ def native_disas(apk_name):
             if so.endswith(".so"):
                 print("\n--------------------------------------------------")
                 print(Fore.BLUE + "[+] " + Fore.YELLOW + "NATIVE LIBRARY DUMP FOR " + so + "\n")
-                print(Fore.BLUE + "\n\t[>] " + Fore.YELLOW + "FILE  HEADERS")
-                os.system("../tools/./arm-objdump -f \t" + so)
                 print(Fore.BLUE + "\n\t[>] " + Fore.YELLOW + "DISASSEMBLY OF " + so + "  TO  " + so + ".txt")
-                os.system("../tools/./arm-objdump -d " + so + " > " + so + ".txt")
                 print("\n")
 
     else:
