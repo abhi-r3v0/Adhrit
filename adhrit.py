@@ -13,7 +13,6 @@ from recons.smali_extract import smali_de
 from recons.smali_extract import smali_re
 from recons.smali_extract import apk_sign
 from recons.smali_extract import inj_check
-from recons.native_recon import native_disas
 from recons.manifest_analysis import man_analyzer
 from recons.dynamic import adb_con
 from recons.clean import cleaner
@@ -102,11 +101,6 @@ class Adhrit:
     def smali_inj(apk_name, flag_format=''):
         inj_check(apk_name, flag_format)
 
-    # Identify and dump the disassembly of the native libraries within the APK
-    @staticmethod
-    def nativedebug(apk_name):
-        native_disas(apk_name)
-
     # Install the APK in an emulator and analyze its activities
     @staticmethod
     def dynamicanalysis(apk_name):
@@ -132,7 +126,6 @@ def main():
     parser.add_argument("-m", help="Sign the APK")
     parser.add_argument("-i", help="Check for injection points")
     parser.add_argument("--flag", help="Check for CTF flags")
-    parser.add_argument("-n", help="Disassemble native libraries")
     parser.add_argument("-w", help="Welcome :P", action='store_true')
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
@@ -185,9 +178,6 @@ def main():
 
     elif args.i:
         adhrit.smali_inj(args.i, args.flag)
-
-    elif args.n:
-        adhrit.nativedebug(args.n)
 
     elif args.w:
         adhrit.welcome()
