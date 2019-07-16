@@ -2,11 +2,15 @@
 *.apk
 *.pyc
 .cache/
+.DS_Store
 
-# Gradle files
+#Other generated files
 smali_copy/
 Source-Java/
 Analysis/
 Extracts/
 apk/
 .idea/
+smali_analysis/*
+Manifest.xml
+settings.json
