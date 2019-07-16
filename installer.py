@@ -16,8 +16,9 @@ class DepInstaller:
     def ins(self):
         confparser = configparser.ConfigParser()
         confparser.read('config')
+
+        # *nix Dependency Config
         if platform == "linux" or platform == "linux2":
-                # linux
             print("\n[+]  Installing necessary tools on Linux\n")
             for i in self.apt_tools:
                 try:
@@ -44,7 +45,8 @@ class DepInstaller:
                 with open('config', 'w') as updatedconf:
                     confparser.write(updatedconf)
                 print("\n[+] Installation of requirements complete. Check with 'python3 adhrit.py -h'")
-
+       
+        # MacOS Dependency Config             
         elif platform == "darwin":
 
             print("\n[+]  Installing necessary tools on MAC")
@@ -63,6 +65,7 @@ class DepInstaller:
                 print("\n[+]  Installation of ARM tools complete")
             except OSError:
                 print("\n[!]  Error installing ARM dependencies")
+                self.uninstalled.append("ARM dependencies for MacOS")
 
             print("\n[+]  Installing Android debug tools ")
             try:
@@ -70,6 +73,7 @@ class DepInstaller:
                 print("\n[+]  Installation of Android tools complete")
             except OSError:
                 print("\n[!]  Error installing Android tools")
+                self.uninstalled.append("Android Debug Tools")
 
             try:
                 for j in self.pip_tools:
@@ -79,9 +83,18 @@ class DepInstaller:
                 print(ose)
                 print("\n[!]  Error installing dependencies")
 
+            if len(self.uninstalled) > 0:
+                print("\n[-] " + str(len(self.uninstalled)) + " not installed.")
+            else:
+                confparser.set('config-data', 'dependencies_status', 'complete')
+                with open('config', 'w') as updatedconf:
+                    confparser.write(updatedconf)
+                print("\n[+] Installation of MacOS dependencies complete. Check with 'python3 adhrit.py -h'")
+       
+        # TO-DO: Windows Config            
         elif platform == "win32":
-                # TO-DO Windows
                 print("\n[+]  Installing necessary tools on Windows")
+
 
 
 def main():
