@@ -1,7 +1,7 @@
-![Logo](Docs/logo/banner.v3.png)
+![Logo](Docs/logo/bannernew.png)
 
 ![INDIA](https://img.shields.io/badge/From-India-orange.svg) ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)  [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
 ![pep8](https://img.shields.io/badge/PEP8-Optimised-yellow.svg)
 ![version](https://img.shields.io/badge/version-0.1-red.svg)
@@ -19,26 +19,28 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * classes.dex
     * native libraries
     * jar file from dex (integrated Enjarify)
-    
+
 * #### Source Extraction
     * Certificate/signature
     * Java source (CFR)
-    * smali source 
-    * Parsed XML resource files 
+    * smali source
+    * Parsed XML resource files
     * Parsed AndroidManifest
     * Native library
 
 * #### Static Analysis
-    * Manifest analysis
+    * **Manifest analysis**
         * Critical permission usage analysis
         * MainActivity identification
         * Backup status
         * Exported activities
-    * Bytecode analysis
+        * Identify intent filters
+        * Automated ADB payload generation for exported activities
+    * **Bytecode analysis**
         * const-strings
         * CTF flags
         * URLs
-    * Malware analysis
+    * **Malware analysis**
         * VirusTotal scan
         * VirtualApp droppers scan
 
@@ -49,17 +51,16 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Dumping the runtime log
 
 * #### Miscellaneous
-    * Rebuilding the APK 
+    * Rebuilding the APK
     * Signing the APK
     * Deploying the APK into an emulator/device
     * Disassembly of native libraries
-    
+
 ---
 
 ### Screenshots:
 
-
-![1](Docs/images/1.png) 
+![1](Docs/images/1.png)
 
 
 ![2](Docs/images/2.png)
@@ -95,12 +96,19 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 
 ---
 
-### Presentation:
+### Presentations / Conferences:
 
-##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+* #####  [OWASP Seasides](Docs/files/ADHRIT_OWASP.pdf)
 
-[![Cysinfo Cyber Security Meetup](Docs/images/slide.png)](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+<p align="left">
+  <img width="500" height="310" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/slidess.png">
+</p>
 
+* ##### [Cysinfo Cyber Security Meetup](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
+
+<p align="left">
+  <img width="500" height="310" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/slide.png">
+</p>
 
 ---
 
@@ -109,32 +117,39 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
 1. Place the application (apk file) in the tool directory.
 2. Use ```python3 adhrit.py -h``` for usage help.
 
-Example:  ```python3 adhrit.py -a my_app.apk```
+Example:  ```python3 adhrit.py -a myapp.apk```
+
+ADHRIT can now be run in two modes:
+
+#### Pentest Mode
+
+```python3 adhrit.py -pen myapp.apk```
+
+#### Malware Analysis Mode
+
+```python3 adhrit.py -mal myapp.apk```
 
 Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for complete details
 
 ---
 
-### Blog:
+### Blogs:
 
-##### [bi0s](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
-
-[![blog](Docs/images/bi0s.png)](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+* #####  [bi0s: Android APK Reconnaissance Tool](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
+* #####  [NeOnSec: Android APK Analysis](https://neonsec.com/adhrit-android-apk-analysis/)
 ---
 
 
 ### Video:
 
-#### Bug Bounty Tutorial
+* #### [Bug Bounty Tutorial](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
 
-[![Bug Bounty Tutorial](Docs/images/8.png)](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
+<p align="left">
+  <img width="500" height="310" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/8.png">
+</p>
 
----
 
-#### Solving a simple mobile CTF challenge
-
-[![Solving a simple mobile CTF challenge](Docs/images/9.png)](https://www.youtube.com/watch?v=yeEp-opeRjM)
-
+* #### [Solving a simple mobile CTF challenge](https://www.youtube.com/watch?v=yeEp-opeRjM)
 
 ---
 
@@ -152,13 +167,13 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 #### Logo:
 
+* Vaisakh (vaisakhjnr@gmail.com, [@vaisakhjnr](https://github.com/vaisakhjnr)) (*new*)
 * Loyd Jayme (loydjayme1996@gmail.com, [@loydjayme25](https://github.com/loydjayme25))
 
 ---
 
 ### Mentions:
 
-* [NeOnSec](https://neonsec.com/adhrit-android-apk-analysis/)
 * [Troopers](https://twitter.com/WEareTROOPERS/status/965291867519770624)
 * [Seclist](http://seclist.us/adhrit-is-an-open-source-android-apk-ripping-tool.html)
 * [DedSec](https://www.dedsecinside.com/security/adhrit-android-recon-tool)
@@ -166,6 +181,7 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 * [Howucan.gr](https://howucan.gr/scripts-tools/1531-adhrit-android-apk-ripping-tool-that-does-a-basic-recon-on-the-provided-apk-file)
 * [HackerTor](https://hackertor.com/2016/12/30/adhrit-is-an-open-source-android-apk-ripping-tool/)
 * [tuicool](https://www.tuicool.com/articles/r6jQzii)
+* [Tuisec](https://paper.tuisec.win/detail/1ce710b90a90efb)
 * [Pinterest](https://in.pinterest.com/pin/396246467200088526/)
 * [@androidtools on Twitter](https://twitter.com/search?q=%23androidtools%20adhrit&src=typd)
 * [pcbbc](http://pcbbc.site.mobi/templates/mobile/facade_transcoder_iframe.php?u=%2Ftopics%2Fsmali%3Fimz_s%3Duresuqnlic5v64irhbuf1k8k94&lang=en)
@@ -188,6 +204,8 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 
 ---
+
+
 
 ### Credits:
 

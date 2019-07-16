@@ -10,7 +10,6 @@ from recons.enjarify import parsedex
 from recons.enjarify.jvm import writeclass
 from recons.enjarify.jvm.optimization import options
 from recons.enjarify.mutf8 import decode
-from recons.manifest_analysis import man_analyzer
 
 
 # To know the contents of a package
@@ -122,7 +121,6 @@ def apk_info(apk_name):
     print("\n")
     print(Fore.BLUE + "\t[+]" + Fore.YELLOW + " The parsed Manifest can be found as Manifest.xml")
     print("\n")
-    man_analyzer()
 
 
 def read(fname, mode='rb'):
