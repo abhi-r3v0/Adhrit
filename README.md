@@ -4,7 +4,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
 ![pep8](https://img.shields.io/badge/PEP8-Optimised-yellow.svg)
-![version](https://img.shields.io/badge/version-0.1-red.svg)
+![version](https://img.shields.io/badge/version-0.2-red.svg)
 [![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/abhi-r3v0)
 [![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 
@@ -40,6 +40,11 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
         * const-strings
         * CTF flags
         * URLs
+    * **Native Library analysis**
+        * Library info
+        * Sections
+        * Base64 Decoding of strings from .data
+
     * **Malware analysis**
         * VirusTotal scan
         * VirtualApp droppers scan
@@ -54,7 +59,6 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
     * Rebuilding the APK
     * Signing the APK
     * Deploying the APK into an emulator/device
-    * Disassembly of native libraries
 
 ---
 

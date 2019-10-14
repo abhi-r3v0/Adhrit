@@ -21,7 +21,7 @@ from recons.root import check_root
 
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
-__version__ = "0.1"
+__version__ = "0.2"
 
 
 class Adhrit:
