@@ -10,7 +10,7 @@ class DepInstaller:
 
     def __init__(self):
         self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'toilet']
-        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2']
+        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2', 'r2pipe']
         self.uninstalled = []
 
     def ins(self):
@@ -51,21 +51,12 @@ class DepInstaller:
 
             print("\n[+]  Installing necessary tools on MAC")
             try:
+                os.system('brew cask install xquartz')
                 os.system('brew install toilet')
                 print("\n[+]  Installation of dependencies complete")
             except OSError:
                 print("\n[!]  Error installing dependency")
 
-            print("\n[+]  Installing ARM dependencies")
-            try:
-                os.system('brew tap osx-cross/arm')
-                os.system('brew install arm-gcc-bin')
-                os.system('brew install binutils')
-                os.system('brew install ncurses')
-                print("\n[+]  Installation of ARM tools complete")
-            except OSError:
-                print("\n[!]  Error installing ARM dependencies")
-                self.uninstalled.append("ARM dependencies for MacOS")
 
             print("\n[+]  Installing Android debug tools ")
             try:

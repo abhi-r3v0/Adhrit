@@ -14,6 +14,7 @@ from recons.smali_extract import smali_re
 from recons.smali_extract import apk_sign
 from recons.smali_extract import inj_check
 from recons.manifest_analysis import man_analyzer
+from recons.native_recon import lib_pwn
 from recons.dynamic import adb_con
 from recons.clean import cleaner
 from recons.root import check_root
@@ -30,7 +31,7 @@ class Adhrit:
 
     @staticmethod
     def welcome():
-        print(Fore.BLUE + Style.BRIGHT)
+        print(Fore.RED + Style.BRIGHT)
         print("          ####  #######      ##      ##  ########    ##  ############")
         print("         ## ##  ##     ##    ##      ##  ##     ##   ##       ##")
         print("        ##  ##  ##      ##   ##      ##  ##      ##  ##       ##")
@@ -46,6 +47,7 @@ class Adhrit:
         print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
         print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
         print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
+        print(Fore.YELLOW + Style.BRIGHT + "| Portfolio\t\t:\t" + Fore.GREEN + "https://www.hawkspawn.com")
 
     check_deps = configparser.ConfigParser()
     check_deps.read('config')
@@ -101,6 +103,11 @@ class Adhrit:
     def smali_inj(apk_name, flag_format=''):
         inj_check(apk_name, flag_format)
 
+    # Analyze native library
+    @staticmethod
+    def native_recon():
+        lib_pwn()
+
     # Install the APK in an emulator and analyze its activities
     @staticmethod
     def dynamicanalysis(apk_name):
@@ -131,6 +138,7 @@ def main():
     parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
     parser.add_argument("-cr", help="Check device root status", action='store_true')
     parser.add_argument("-l", help="Extract, parse and analyze manifest")
+    parser.add_argument("-r", help="Analyze native library", action='store_true')
     args = parser.parse_args()
 
     # Adhrit Welcome ASCII
@@ -142,6 +150,7 @@ def main():
         adhrit.manifestanalyzer(args.pen)
         adhrit.smaliextractor(args.pen)
         adhrit.smali_inj(args.pen)
+        adhrit.native_recon()
 
     if args.mal:
         adhrit.vtanalyzer(args.mal)
@@ -155,6 +164,7 @@ def main():
         adhrit.vtanalyzer(args.a)
         adhrit.apkextractor(args.a)
         adhrit.manifestanalyzer(args.a)
+        adhrit.native_recon()
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
@@ -178,6 +188,9 @@ def main():
 
     elif args.i:
         adhrit.smali_inj(args.i, args.flag)
+
+    elif args.r:
+        adhrit.native_recon()
 
     elif args.w:
         adhrit.welcome()
