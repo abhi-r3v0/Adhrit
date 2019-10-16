@@ -108,7 +108,7 @@ def man_scanner():
                             exp_activity_name = exp_name_strip[exp_name_len - 1]
                             print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
                             print(Fore.LIGHTRED_EX + "\n\t\tAny application/ADB command can launch this activity bypassing the actual application routine!")
-                            poc_cmd = "adb shell am start -n " + str(exp.attrib[exp_name]) + "/." + exp_activity_name
+                            poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
                             print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
 
         if exp_status == 0:
