@@ -20,7 +20,7 @@ from recons.clean import cleaner
 from recons.root import check_root
 
 
-__author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @abhi_r3v0 )'
+__author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @HawkSpawn )'
 __version__ = "0.2"
 
 
