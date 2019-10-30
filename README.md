@@ -162,7 +162,7 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 #### Project Lead:
 
-* Abhishek J M (jmabhishek4@gmail.com, [@abhi_r3v0](https://twitter.com/abhi_r3v0))
+* Abhishek J M (jmabhishek4@gmail.com, [@HawkSpawn](https://twitter.com/HawkSpawn))
 
 #### Lead Contributors:
 
