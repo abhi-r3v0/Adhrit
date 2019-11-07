@@ -10,7 +10,7 @@ def smali_de(apk_name):
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SOURCE EXTRATION IN SMALI\n")
     snamesplit = apk_name.split('.')[0]
     print(Fore.YELLOW)
-    smalicmd = 'java -jar tools/apktool.jar d -f ' + apk_name
+    smalicmd = 'java -jar tools/apktool.jar d -f ' + apk_name + ' -o Bytecode'
     os.system(smalicmd)
     if os.path.isdir(snamesplit):
         print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Extraction complete")
@@ -21,11 +21,11 @@ def smali_re(apk_name):
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "RECOMPILING SMALI")
     snamesplit = apk_name.split('.')[0]
     if os.path.isdir(snamesplit):
-        smalicmd = 'java -jar tools/apktool.jar b -f ' + snamesplit
+        smalicmd = 'java -jar tools/apktool.jar b -f Bytecode' 
         os.system(smalicmd)
         print(Fore.YELLOW)
         print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Recompiling complete.")
-        print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "The recompiled apk in " + snamesplit + "/dist\n")
+        print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "The recompiled apk in Bytecode/dist/Bytecode.apk\n")
     else:
         print(Fore.RED + "\n\t[!] smali source not found")
 
@@ -36,10 +36,10 @@ def apk_sign(apk_name):
     snamesplit = apk_name.split('.')[0]
     sdir = snamesplit + '/dist/' + snamesplit + '.apk'
     if os.path.exists(sdir):
-        signcmd = 'java -jar tools/sign.jar ' + snamesplit + '/dist/' + snamesplit + '.apk'
+        signcmd = 'java -jar tools/sign.jar Bytecode/dist/Bytecode.apk'
         os.system(signcmd)
         print(Fore.YELLOW)
-        msg = "Signed APK found as: " + snamesplit + "/dist/" + snamesplit + ".s.apk"
+        msg = "Signed APK found as: " + snamesplit + "/dist/Bytecode.s.apk"
         print(Fore.BLUE + "[+] " + Fore.YELLOW + msg)
     else:
         print(Fore.RED + "\n\t[!] file not found")
@@ -48,7 +48,7 @@ def apk_sign(apk_name):
 # noinspection PyUnusedLocal,PyUnusedLocal,PyUnusedLocal
 def inj_check(apk_name, flag_format=''):
     snamesplit = apk_name.split('.')[0]
-    if os.path.isdir(snamesplit) == 0:
+    if os.path.isdir('Bytecode') == 0:
         print(Fore.RED + "\n\t[!] bytecode not found. Extracting")
         smali_de(apk_name)
     print(Fore.YELLOW + "\n--------------------------------------------------")
@@ -64,7 +64,7 @@ def inj_check(apk_name, flag_format=''):
     flags = []
     if os.path.isdir('smali_analysis'):
         os.system('rm -r smali_analysis')
-    os.system('cp -R ' + snamesplit + '/' + smali_dir + ' smali_analysis')
+    os.system('cp -R Bytecode/' + smali_dir + ' smali_analysis')
     if os.path.isdir('smali_analysis'):
         os.chdir('smali_analysis')
         ignore_dirs = ['android', 'org', 'google', 'localytics']

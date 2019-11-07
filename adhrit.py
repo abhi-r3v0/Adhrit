@@ -14,6 +14,7 @@ from recons.smali_extract import smali_re
 from recons.smali_extract import apk_sign
 from recons.smali_extract import inj_check
 from recons.manifest_analysis import man_analyzer
+from recons.smarser.parser import parser
 from recons.native_recon import lib_pwn
 from recons.dynamic import adb_con
 from recons.clean import cleaner
@@ -47,7 +48,7 @@ class Adhrit:
         print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
         print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
         print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
-        print(Fore.YELLOW + Style.BRIGHT + "| Portfolio\t\t:\t" + Fore.GREEN + "https://www.hawkspawn.com")
+
 
     check_deps = configparser.ConfigParser()
     check_deps.read('config')
@@ -87,6 +88,11 @@ class Adhrit:
     @staticmethod
     def smaliextractor(apk_name):
         smali_de(apk_name)
+
+    # Bytecode Analysis
+    @staticmethod
+    def bytecodeanalyzer():
+        parser()
 
     # Recompile smali back into APK
     @staticmethod
@@ -132,6 +138,7 @@ def main():
     parser.add_argument("-b", help="Recompile smali back into APK")
     parser.add_argument("-m", help="Sign the APK")
     parser.add_argument("-i", help="Check for injection points")
+    parser.add_argument("-pwn", help="Scan for vulnerabilities", action="store_true")
     parser.add_argument("--flag", help="Check for CTF flags")
     parser.add_argument("-w", help="Welcome :P", action='store_true')
     parser.add_argument("-v", help="Check footprints in VirusTotal database")
@@ -147,10 +154,11 @@ def main():
     if args.pen:
         adhrit.cleanproject(args.pen)
         adhrit.apkextractor(args.pen)
+        adhrit.native_recon()
         adhrit.manifestanalyzer(args.pen)
         adhrit.smaliextractor(args.pen)
+        adhrit.bytecodeanalyzer()
         adhrit.smali_inj(args.pen)
-        adhrit.native_recon()
 
     if args.mal:
         adhrit.vtanalyzer(args.mal)
@@ -168,6 +176,7 @@ def main():
         adhrit.vappsearch(args.a)
         adhrit.smaliextractor(args.a)
         adhrit.smali_inj(args.a)
+        adhrit.bytecodeanalyzer()
 
     elif args.x:
         adhrit.cleanproject(args.x)
@@ -188,6 +197,9 @@ def main():
 
     elif args.i:
         adhrit.smali_inj(args.i, args.flag)
+
+    elif args.pwn:
+        adhrit.bytecodeanalyzer()
 
     elif args.r:
         adhrit.native_recon()

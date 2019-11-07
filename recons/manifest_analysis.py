@@ -11,6 +11,7 @@ def man_scanner():
     # noinspection PyGlobalUndefined
     global pkg_name
     exp_status = 0
+    act_count = 0
     c1 = 0
     c2 = 0
     c3 = 0
@@ -95,21 +96,114 @@ def man_scanner():
                         print(Fore.YELLOW + "\n\t\tThe application doesn't allow logging data from the application.")
 
 
+         # List of critical permissions
+        print(Fore.RED + "\n\t\t[+] " + Fore.YELLOW + "Listing critical permissions.")
+        for perm in permissions:
+            for att in perm.attrib:
+                if perm.attrib[att] in perm_severe:
+                    print(Fore.BLUE + "\n\t\t\t " + "[!] " + Fore.RED + perm.attrib[att])
+                    c3 += 1
+                    # JSON DATA
+                    # scanned_critical_perms.append(perm.attrib[att])
+                    # json_critical_perms = json.dumps(scanned_critical_perms)
+
+
+        # List of all permissions
+        print(Fore.RED + "\n\t\t[+] " + Fore.YELLOW + "Listing all permissions.")
+        for perm in permissions:
+            for att in perm.attrib:
+                c2 += 1
+                print(Fore.BLUE + "\n\t\t\t " + "[" + str(c2) + "] " + Fore.YELLOW + perm.attrib[att])
+                # JSON DATA
+                # scanned_perms.append(perm.attrib[att])
+                # json_perms = json.dumps(scanned_perms)
+
+
+        # List of activities
+        print(Fore.RED + "\n\n\t\t[+] " + Fore.YELLOW + "List of Activities\n")
+        acts_list = root.findall("application")
+        exp_name = "{http://schemas.android.com/apk/res/android}name"
+        for acts in acts_list:
+            for exp in acts:
+                if(exp.tag == 'activity'):
+                    act_count += 1 
+                    print(Fore.BLUE + "\n\t\t\t" + "[" + str(act_count) + "] " + Fore.YELLOW + str(exp.attrib[exp_name]))
+                    # JSON DATA
+                    # scanned_acts.append(str(exp.attrib[exp_name]))
+                    # json_acts = json.dumps(scanned_acts)
+
+
+        # Checking for receivers
+        print(Fore.RED + "\n\n\t\t[+] " + Fore.YELLOW + "Checking for BroadcastReceivers\n")
+        rec_count = 0
+        exp_rec_status = 0
+        cust_perm_stat = 0
+        cust_perm_act_name = None
+        cust_perm_perm_name = None
+        cust_rec_name = None
+        acts_list = root.findall("application")
+        exp_name = "{http://schemas.android.com/apk/res/android}name"
+        exp_perm_tag = '{http://schemas.android.com/apk/res/android}permission'
+        exp_name_strip = str(exp.attrib[exp_name]).split('.')
+        exp_name_len = len(exp_name_strip)
+        exp_activity_name = exp_name_strip[exp_name_len - 1]
+        for acts in acts_list:
+            for exp in acts:
+                if exp.tag == 'receiver':
+                    rec_count += 1
+                    cust_rec_name = exp.attrib[exp_name]
+                    print(Fore.GREEN + "\n\t\t\t[" + str(rec_count) + "] " + cust_rec_name)
+                    for exp_tag in exp.attrib:
+                        if exp_tag == "{http://schemas.android.com/apk/res/android}exported":
+                            if exp.attrib[exp_tag] == "true":
+                                exp_rec_status = 1
+                            else:
+                                exp_rec_status = 2
+
+                            
+                    cust_perm_act_name = exp.attrib[exp_name]
+                    for ktag, kattr in exp.attrib.items():
+                        if not ktag == exp_perm_tag:
+                            cust_perm_stat = 1
+                        else:
+                            cust_perm_perm_name = exp.attrib[exp_perm_tag]
+                            cust_perm_stat = 2
+        
+        if exp_rec_status == 1:
+            print(Fore.RED + "\n\t\t\t\t[!] " + Fore.YELLOW + "The BroadcastReceiver " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
+            print(Fore.LIGHTRED_EX + "\n\t\t\t\t\tAny application/ADB command can launch this broadcast receiver")
+            poc_cmd = "adb shell am broadcast -n " + cust_rec_name
+            print(Fore.BLUE + "\n\t\t\t\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
+
+
+        if cust_perm_stat == 1:
+            print(Fore.RED + "\n\t\t\t\t[!] Custom Permission Not Found for : " + Fore.YELLOW + str(cust_perm_act_name))
+
+        if cust_perm_stat == 2:
+            print(Fore.BLUE + "\n\t\t\t\t[+] Custom Permission Found : " + Fore.YELLOW + str(cust_perm_perm_name))
+                            
+            
+
+        # List of exported activities
         acts_list = root.findall("application")
         for acts in acts_list:
             for exp in acts:
-                for exp_tag in exp.attrib:
-                    if exp_tag == "{http://schemas.android.com/apk/res/android}exported":
-                        exp_status += 1
-                        if exp.attrib[exp_tag] == "true":
-                            exp_name = "{http://schemas.android.com/apk/res/android}name"
-                            exp_name_strip = str(exp.attrib[exp_name]).split('.')
-                            exp_name_len = len(exp_name_strip)
-                            exp_activity_name = exp_name_strip[exp_name_len - 1]
-                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
-                            print(Fore.LIGHTRED_EX + "\n\t\tAny application/ADB command can launch this activity bypassing the actual application routine!")
-                            poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
-                            print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
+                if exp.tag == 'activity':
+                    for exp_tag in exp.attrib:
+                        if exp_tag == "{http://schemas.android.com/apk/res/android}exported":
+                            if exp.attrib[exp_tag] == "true":
+                                exp_status += 1
+                                exp_name = "{http://schemas.android.com/apk/res/android}name"
+                                exp_name_strip = str(exp.attrib[exp_name]).split('.')
+                                exp_name_len = len(exp_name_strip)
+                                exp_activity_name = exp_name_strip[exp_name_len - 1]
+                                print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "The activity " + Fore.RED + str(exp.attrib[exp_name]) + Fore.YELLOW + " is exported")
+                                #JSON DATA
+                                # scanned_exported_acts.append(exp.attrib[exp_name])
+                                # json_export_acts = json.dumps(scanned_exported_acts)
+                                print(Fore.LIGHTRED_EX + "\n\t\tAny application/ADB command can launch this activity bypassing the actual application routine!")
+                                poc_cmd = "adb shell am start -n " + pkg_name + "/." + exp_activity_name
+                                print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd)
 
         if exp_status == 0:
             print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "No exported activities found.")
@@ -121,38 +215,43 @@ def man_scanner():
                 for activity in cust:
                     if activity.tag == "intent-filter":
                         for intentname, intentvalue in cust.attrib.items():
-                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "Intent filter found for ACTIVITY: " + Fore.RED + str(intentvalue))
-                            for child in activity:
-                                if child.tag == "action":
-                                    for name, value in child.attrib.items():
-                                        if value.startswith("android.intent.action"):
-                                            if value == "android.intent.action.MAIN":
-                                                main_act_strip = intentvalue.split('.')
-                                                main_act_len = len(main_act_strip)
-                                                main_act_name = main_act_strip[main_act_len - 1]
-                                            c3 += 1
-                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.RED + str(value))
-                                        else:
-                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.RED + str(value))
-                                if child.tag == "category":
-                                    for catname, catvalue in child.attrib.items():
-                                        print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "CATEGORY: " + Fore.RED + str(catvalue))
+                            if intentname == '{http://schemas.android.com/apk/res/android}name':
+                                print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "Intent filter found for ACTIVITY: " + Fore.BLUE + str(intentvalue))
+                                for child in activity:
+                                    if child.tag == "action":
+                                        for name, value in child.attrib.items():
+                                            if value.startswith("android.intent.action"):
+                                                if value == "android.intent.action.MAIN":
+                                                    main_act_strip = intentvalue.split('.')
+                                                    main_act_len = len(main_act_strip)
+                                                    main_act_name = main_act_strip[main_act_len - 1]
+                                                c3 += 1
+                                                print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.BLUE + str(value))
+                                            else:
+                                                print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.BLUE + str(value))
+                                    if child.tag == "category":
+                                        for catname, catvalue in child.attrib.items():
+                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "CATEGORY: " + Fore.BLUE + str(catvalue))
 
-                                if child.tag == "data":
-                                    for dname, dvalue in child.attrib.items():
-                                        print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "TYPE: " + Fore.RED + str(dvalue))
+                                    if child.tag == "data":
+                                        for dname, dvalue in child.attrib.items():
+                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "TYPE: " + Fore.BLUE + str(dvalue))
 
-        print(Fore.YELLOW + "\n\n\t[+] Main Activity: " + Fore.GREEN + pkg_name + "/." + main_act_name)
-        poc_cmd_main = "adb shell am start -n " + pkg_name + "/." + main_act_name
-        print(Fore.BLUE + "\n\t\t[+] POC ADB COMMAND: " + Fore.GREEN + poc_cmd_main)
 
-        if c3 > 1:
-            print(Fore.RED + "\n\n\t[+] " + Fore.YELLOW + "Intent filters found. The app maybe communicating with other apps/app components")
-            print(Fore.YELLOW + "\n\t\tThe application maybe communicating with other applications' components.\n")
+    # REPORT
+    print("\n\n\n\t" + Fore.GREEN + "[INFO] " + " REPORT")
+    if c3 > 0:
+        print(Fore.RED + "\n\t\t[!] " + str(c3) + Fore.RED + " Critical permissions found")
 
-        if c3 == 0:
-            print(Fore.YELLOW + "\n\n\t[+] Intent filters not found. The app may not be communicating with other apps/app components")
-            print(Fore.YELLOW + "\n\t\tThe application may not be communicating with other applications' components.\n")
+    if exp_status > 0:
+            print(Fore.RED + "\n\t\t[!] " + str(exp_status) + Fore.RED + " activities are exported.")
+
+    if c2 > 0:
+        print(Fore.GREEN + "\n\t\t[!] " + str(c2) + Fore.BLUE + " permissions found")
+
+    if act_count > 0:
+        print(Fore.GREEN + "\n\t\t[!] " + str(act_count) + Fore.BLUE + " Activities found")
+
 
 
 def man_analyzer(apk_name):
