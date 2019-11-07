@@ -231,13 +231,11 @@ Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for co
 
 * [apktool](https://ibotpeaches.github.io/Apktool/)
 * [jarsigner](https://github.com/appium/sign)
-* [dex2jar](https://github.com/pxb1988/dex2jar)
 * [AXML2Printer](https://code.google.com/archive/p/android4me/downloads)
-* [arm-objdump](https://linux.die.net/man/1/arm-linux-gnu-objdump)
 * [jd-cli](https://github.com/kwart/jd-cmd)
 * [aapt](https://developer.android.com/studio/command-line/index.html)
-* [CFR](http://www.benf.org/other/cfr/)
 * [Enjarify](https://github.com/google/enjarify)
+* [Ghera](https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/)
 
 ---
 
