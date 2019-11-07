@@ -9,7 +9,7 @@
 [![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fabhi-r3v0%2FAdhrit)
 
-Adhrit is an open source Android APK reversing and analysis suite. The tool is an effort to find an efficient solution to all the needs of mobile security testing and automation. Adhrit has been built with a focus on flexibility and mudularization. The project is subject to continuous updations and will incorporate the latest available methodologies and tools. Adhrit has been presented at conferences like OWASP Seasides, ThreatCon and Cysinfo. Feature requests and bug reports are always welcome!
+Adhrit is an open source Android APK reversing and analysis suite. The tool is an effort to find an efficient solution to all the needs of mobile security testing and automation. Adhrit has been built with a focus on flexibility and mudularization. Adhrit currently uses the [Ghera](https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/) benchmarks to identify vulnerability patterns in Android applications. The project is subject to continuous updations and will incorporate the latest available methodologies and tools. Adhrit has been presented at conferences like OWASP Seasides, ThreatCon and Cysinfo. Feature requests and bug reports are always welcome!
 
 ---
 
