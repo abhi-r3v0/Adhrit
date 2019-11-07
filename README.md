@@ -9,7 +9,7 @@
 [![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fabhi-r3v0%2FAdhrit)
 
-Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome!
+Adhrit is an open source Android APK reversing and analysis tool that can help security researchers and CTF enthusiasts alike. The tool is an effort to cut down on the amount of time spent on reversing and basic reconnaissance of Android applications. Currently, the project uses [Ghera](https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/) benchmarks to scan for vulnerability patterns in Android applications. The project is still under progress and will continually incorporate features with time. Feel free to report the issues. Feature requests and suggestions are always welcome!
 
 ---
 
@@ -38,6 +38,21 @@ Adhrit is an open source Android APK reversing and analysis tool that can help s
         * Identify intent filters
         * Automated ADB payload generation for exported activities
     * **Bytecode analysis**
+        * **ICC**
+            * Dynamic Broadcast Receivers
+            * Empty Pending Intents
+            * Sticky Broadcasts 
+            * Unprotected Broadcast Receivers 
+        * **Web Issues**
+            * JavaScript Execution in WebViews
+            * HTTP Connections
+            * Unsafe Intent URL Resolving Implementation
+        * **Networking**
+            * Missing Server Certificate Validity Check
+            * Insecure SSL Socket Factory
+        * **Crypto Issues**
+            * Usage of ECB Block Cipher
+        
         * const-strings
         * CTF flags
         * URLs
