@@ -18,6 +18,10 @@ def cleaner(apk_name):
         os.system('rm -r Source-Java')
         print(Fore.BLUE + "\t[-] " + Fore.YELLOW + "REMOVED JAVA SOURCE")
 
+    if os.path.exists('Bytecode') and os.path.isdir('Bytecode'):
+        os.system('rm -r Bytecode')
+        print(Fore.BLUE + "\n\t[-] " + Fore.YELLOW + "REMOVED BYTECODE")
+
     if os.path.exists('Analysis') and os.path.isdir('Analysis'):
         os.system('rm -r Analysis')
         print(Fore.BLUE + "\t[-] " + Fore.YELLOW + "REMOVED ANALYSIS")
