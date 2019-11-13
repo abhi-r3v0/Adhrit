@@ -45,3 +45,5 @@ def parser():
 							pattern_receiver(filename, mvalue)
 						else:
 							pass
+
+	print(Fore.BLUE + "\n\t\t[INFO] Vulnerability References written to 'Vulnerabilities.txt'")
