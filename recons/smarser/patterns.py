@@ -40,6 +40,7 @@ def search_js_enabled(thefile, thelist):
 									if str(stat) == '0x1':
 										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile + "\t Line: " + str(foundat))
 										js_enabled_list.append(str(thefile))
+										return(js_enabled_list)
 										exit()
 									elif str(stat) == '0x0':
 										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "Javascript is disabled")
@@ -53,6 +54,7 @@ def search_js_enabled(thefile, thelist):
 def search_ecb(thefile, thelist):
 
 	ecb_usage_list = []
+	linecount = 0
 	# print(Fore.BLUE + "\n\t[!] " + Fore.YELLOW + "Checking for Crypto Issues")
 	if(os.path.exists('Bytecode')):
 
@@ -323,47 +325,47 @@ def pattern_receiver(thefile, thelist):
 
 		with open('vulnerablities.txt', 'a+') as vulnwrite:
 			cookie = cookie_overwrite(thefile, thelist)
-			if len(cookie) != 0:
+			if len(cookie) > 0:
 				vulnwrite.write("\n\nCookie: " + str(cookie))
 
 			unsafe_intent = unsafe_intent_url(thefile, thelist)
-			if len(unsafe_intent) != 0:
+			if len(unsafe_intent) > 0:
 				vulnwrite.write("\n\nUnsafe Intent:" + str(unsafe_intent))
 
 			http_connection = http_con(thefile, thelist)
-			if len(http_connection) != 0:
+			if len(http_connection) > 0:
 				vulnwrite.write("\n\nHTTP Connection:" + str(http_connection))
 
 			unenc_soc = unenc_socket_comm(thefile, thelist)
-			if len(unenc_soc) != 0:
+			if len(unenc_soc) > 0:
 				vulnwrite.write("\n\nUnencrypted Comm:" + str(unenc_soc))
 
 			insec_soc = insecure_socket_factory(thefile, thelist)
-			if len(insec_soc) != 0:
+			if len(insec_soc) > 0:
 				vulnwrite.write("\n\nInsecure Socket Factory:" + str(insec_soc))
 
 			tls_val = check_tls_validity(thefile, thelist)
-			if len(tls_val) != 0:
+			if len(tls_val) > 0:
 				vulnwrite.write("\n\nTLS Validity:" + str(tls_val))
 
 			sys_broad = sys_broadcast_receiver(thefile, thelist)
-			if len(sys_broad) != 0:
+			if len(sys_broad) > 0:
 				vulnwrite.write("\n\nSystem Broadcast Receiver:" + str(sys_broad))
 
 			empty_pend = empty_pending_intent(thefile, thelist)
-			if len(empty_pend) != 0:
+			if len(empty_pend) > 0:
 				vulnwrite.write("\n\nEmpty Pending Intent:" + str(empty_pend))
 
 			dyn_receiver = search_dynamic_receiver(thefile, thelist)
-			if len(dyn_receiver) != 0:
+			if len(dyn_receiver) > 0:
 				vulnwrite.write("\n\nDynamic Receiver:" + str(dyn_receiver))
 
 			ecb_instance = search_ecb(thefile, thelist)
-			if len(ecb_instance) != 0:
+			if len(ecb_instance) > 0:
 				vulnwrite.write("\n\nECB Instance:" + str(ecb_instance))
 
 			js_enable = search_js_enabled(thefile, thelist)
-			if len(js_enable) != 0:
+			if len(js_enable) > 0:
 				vulnwrite.write("\n\nJavaScript Enabled:" + str(js_enable))
 
 
