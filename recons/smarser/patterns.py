@@ -5,7 +5,9 @@ from colorama import Fore
 
 def search_js_enabled(thefile, thelist):
 
-	if(os.path.exists('Extracts')):
+	js_enabled_list = []
+
+	if(os.path.exists('Bytecode')):
 		linecount = 0
 		revlinecount = 0
 		for k in thelist:
@@ -36,34 +38,47 @@ def search_js_enabled(thefile, thelist):
 								if tosearch in revline:
 									stat = revline.split(',')[-1].strip()
 									if str(stat) == '0x1':
-										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile + "\t Line: " + str(foundat))
+										js_enabled_list.append(str(thefile))
 										exit()
 									elif str(stat) == '0x0':
 										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "Javascript is disabled")
 
 	else:
-		print("\n\t[!] Extracts not found!")
+		print("\n\t[!] Bytecode not found!")
+
+	return(js_enabled_list)
 
 
 def search_ecb(thefile, thelist):
 
+	ecb_usage_list = []
 	# print(Fore.BLUE + "\n\t[!] " + Fore.YELLOW + "Checking for Crypto Issues")
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 
 		for k in thelist:
 			for kkey, kvalue in k.items():
 				if "AES/ECB" in str(kvalue):
-					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "ECB cipher usage instance found \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+					searchfile = open(thefile, "r")
+					for line in searchfile:
+							linecount += 1
+							if 'AES/ECB' in line:
+								foundat = linecount
+								ecb_usage_list.append(str(thefile))
+
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "ECB cipher usage instance found \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile + "\t Line: " + str(foundat))
 
 	else:
-		print("\n\t[!] Extracts not found!")
+		print("\n\t[!] Bytecode not found!")
 
+	return(ecb_usage_list)
 
 
 def search_dynamic_receiver(thefile, thelist):
 
 	# print(Fore.BLUE + "\n\t[!] " + Fore.YELLOW + "Checking for Exported Dynamic Broadcast Receiver")
-	if(os.path.exists('Extracts')):
+	search_dynamic_list = []
+	if(os.path.exists('Bytecode')):
 		if not ('android/support' in str(thefile)):
 			for k in thelist:
 				flag = 0
@@ -76,11 +91,15 @@ def search_dynamic_receiver(thefile, thelist):
 							args = str(cval.strip('{').strip('}')).split(',')
 							if len(args) == 3:
 								print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Broadcast Receiver Exported \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+								search_dynamic_list.append(str(thefile))
+	return(search_dynamic_list)
 
 
 def empty_pending_intent(thefile, thelist):
 
-	if(os.path.exists('Extracts')):
+	empty_pend_list = []
+
+	if(os.path.exists('Bytecode')):
 		goto = 0
 		linecount = 0
 		foundat = 0
@@ -101,21 +120,30 @@ def empty_pending_intent(thefile, thelist):
 						if 'Landroid/app/PendingIntent' and 'getService' in line:
 							foundat = linecount
 							print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Empty Pending Intent Found \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+							empty_pend_list.append(str(thefile))
+
+	return(empty_pend_list)
 
 
 def sys_broadcast_receiver(thefile, thelist):
 
-	if(os.path.exists('Extracts')):
+	sys_broadcast_list = []
+
+	if(os.path.exists('Bytecode')):
 		for k in thelist:
 			for ckey, cval in k.items():
 				if(ckey == "to_method" and str(cval) == "sendStickyBroadcast"):
 					
 					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Sticky Broadcast Found \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+					sys_broadcast_list.append(str(thefile))
+
+	return(sys_broadcast_list)
 
 
 def check_tls_validity(thefile, thelist):
+	tls_validity_list = []
 	flag = 0
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 		for k in thelist:
 			for ckey, cval in k.items():
 				if(ckey == "to_class" and str(cval) == "Ljava/security/cert/X509Certificate"):
@@ -125,11 +153,15 @@ def check_tls_validity(thefile, thelist):
 					if ckey == "to_method":
 						if not str(cval) == "checkValidity":
 							print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Certificate Validity Checks Not Found\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+							tls_validity_list.append(str(thefile))
+
+	return(tls_validity_list)
 
 
 def insecure_socket_factory(thefile, thelist):
+	insecure_socket_list = []
 	flag = 0
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 		for k in thelist:
 			for ckey, cval in k.items():
 				if(ckey == "to_class" and str(cval) == "Landroid/net/SSLCertificateSocketFactory"):
@@ -138,6 +170,9 @@ def insecure_socket_factory(thefile, thelist):
 				if flag == 1:
 					if ckey == "to_method" and str(cval) == "getInsecure":
 						print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Insecure Hostname Verification Routine Found\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+						insecure_socket_list.append(str(thefile))
+
+	return(insecure_socket_list)
 						
 
 def unenc_socket_comm(thefile, thelist):
@@ -146,7 +181,7 @@ def unenc_socket_comm(thefile, thelist):
 	found = 0
 	flaginet = 0
 	flagssl = 0
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 		f = open(thefile, 'r')
 		linecount = 0
 		for theline in f:
@@ -160,11 +195,13 @@ def unenc_socket_comm(thefile, thelist):
 					if "Ljavax/net/ssl/SSLSocket" or "Ljavax/net/ssl/SSLSocket;->connect" or "Ljavax/net/ssl/SSLSocket;->isConnected" in theline:
 						flagssl += 1
 						list_of_unenc_soc.append(thefile)
+
+	return(list_of_unenc_soc)
 			
 
 def http_con(thefile, thelist):
 	list_of_http_con = []
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 		flag = 0
 		found = 0
 		instances = 0
@@ -176,10 +213,14 @@ def http_con(thefile, thelist):
 				flag += 1
 				found = linecount
 				print(Fore.RED + "\n\t\t[!] " + Fore.RED + "HTTP URLs Found\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+				list_of_http_con.append(str(thefile))
+
+	return(list_of_http_con)
 
 
 def unsafe_intent_url(thefile, thelist):
-	if(os.path.exists('Extracts')):
+	unsafe_intent_list = []
+	if(os.path.exists('Bytecode')):
 		foundintenturi = 0
 		foundaction = 0
 		foundpackage = 0
@@ -203,15 +244,18 @@ def unsafe_intent_url(thefile, thelist):
 
 		if foundaction == 1:
 			print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Unsafe URI Parsing! No URI Action Defined\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+			unsafe_intent_list.append(str(thefile))
 
 		if foundpackage == 1:
 			print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Unsafe URI Parsing! Package Verification Missing\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+			unsafe_intent_list.append(str(thefile))
 
+	return(unsafe_intent_list)
 
 
 def cookie_overwrite(thefile, thelist):
 	list_of_cookie_overwrite = []
-	if(os.path.exists('Extracts')):
+	if(os.path.exists('Bytecode')):
 		setcookiestat = 0
 		acceptcookie = 0
 		cookieusage = 0
@@ -254,25 +298,72 @@ def cookie_overwrite(thefile, thelist):
 								if tosearch in revline:
 									stat = revline.split(',')[-1].strip()
 									if str(stat) == '0x1':
+										list_of_cookie_overwrite.append(str(thefile))
 										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SetCookie is Enabled \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
 
+	return(list_of_cookie_overwrite)
 
 
 def pattern_receiver(thefile, thelist):
-	if(os.path.exists('Extracts')):
 
-		cookie_overwrite(thefile, thelist)
-		unsafe_intent_url(thefile, thelist)
-		http_con(thefile, thelist)
-		unenc_socket_comm(thefile, thelist)
-		insecure_socket_factory(thefile, thelist)
-		check_tls_validity(thefile, thelist)
-		sys_broadcast_receiver(thefile, thelist)
-		empty_pending_intent(thefile, thelist)
-		search_dynamic_receiver(thefile, thelist)
-		search_ecb(thefile, thelist)
-		search_js_enabled(thefile, thelist)
+	cookie = []
+	unsafe_intent = []
+	http_connection = []
+	unenc_soc = []
+	insec_soc = []
+	tls_val = []
+	sys_broad = []
+	empty_pend = []
+	dyn_receiver = []
+	ecb_instance = []
+	js_enable = []
 
 
+	if(os.path.exists('Bytecode')):
+
+		with open('vulnerablities.txt', 'a+') as vulnwrite:
+			cookie = cookie_overwrite(thefile, thelist)
+			if len(cookie) != 0:
+				vulnwrite.write("\n\nCookie: " + str(cookie))
+
+			unsafe_intent = unsafe_intent_url(thefile, thelist)
+			if len(unsafe_intent) != 0:
+				vulnwrite.write("\n\nUnsafe Intent:" + str(unsafe_intent))
+
+			http_connection = http_con(thefile, thelist)
+			if len(http_connection) != 0:
+				vulnwrite.write("\n\nHTTP Connection:" + str(http_connection))
+
+			unenc_soc = unenc_socket_comm(thefile, thelist)
+			if len(unenc_soc) != 0:
+				vulnwrite.write("\n\nUnencrypted Comm:" + str(unenc_soc))
+
+			insec_soc = insecure_socket_factory(thefile, thelist)
+			if len(insec_soc) != 0:
+				vulnwrite.write("\n\nInsecure Socket Factory:" + str(insec_soc))
+
+			tls_val = check_tls_validity(thefile, thelist)
+			if len(tls_val) != 0:
+				vulnwrite.write("\n\nTLS Validity:" + str(tls_val))
+
+			sys_broad = sys_broadcast_receiver(thefile, thelist)
+			if len(sys_broad) != 0:
+				vulnwrite.write("\n\nSystem Broadcast Receiver:" + str(sys_broad))
+
+			empty_pend = empty_pending_intent(thefile, thelist)
+			if len(empty_pend) != 0:
+				vulnwrite.write("\n\nEmpty Pending Intent:" + str(empty_pend))
+
+			dyn_receiver = search_dynamic_receiver(thefile, thelist)
+			if len(dyn_receiver) != 0:
+				vulnwrite.write("\n\nDynamic Receiver:" + str(dyn_receiver))
+
+			ecb_instance = search_ecb(thefile, thelist)
+			if len(ecb_instance) != 0:
+				vulnwrite.write("\n\nECB Instance:" + str(ecb_instance))
+
+			js_enable = search_js_enabled(thefile, thelist)
+			if len(js_enable) != 0:
+				vulnwrite.write("\n\nJavaScript Enabled:" + str(js_enable))
 
 
