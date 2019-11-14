@@ -46,3 +46,6 @@ def cleaner(apk_name):
 
     if os.path.exists('Manifest.xml'):
         os.system('rm -r Manifest.xml')
+
+    if os.path.exists('vulnerablities.txt'):
+        os.system('rm -r vulnerablities.txt')
