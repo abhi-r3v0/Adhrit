@@ -141,19 +141,25 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 
 Example:  
 
-~ python3 adhrit.py -a myapp.apk
+```python
+python3 adhrit.py -a myapp.apk
+```
 
 ADHRIT can now be run in two modes:
 
 #### Pentest Mode
 
-~ python3 adhrit.py -pen myapp.apk
+```python
+python3 adhrit.py -pen myapp.apk
+```
 
 #### Malware Analysis Mode
 
-~ python3 adhrit.py -mal myapp.apk
+```python
+python3 adhrit.py -mal myapp.apk
+```
 
-Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for complete details
+Refer to the detailed [documentation](http://www.hawkspawn.com/Adhrit) for complete details
 
 ---
 
