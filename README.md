@@ -113,7 +113,8 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
 2. Open ```config``` and input your VirusTotal API key without any quotes. ([Click here to know how to obtain your VT API key](https://community.mcafee.com/t5/Documents/How-to-get-a-VirusTotal-public-API-Key/ta-p/552797))
 3. Open a terminal and cd into the directory.
-4. Run ```python3 installer.py``` for installing the necessary tools.
+4. Run the ```installer script``` to install the necessary tools/dependencies:
+   ~ python3 installer.py
 
 ---
 
@@ -138,17 +139,19 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 1. Place the application (apk file) in the tool directory.
 2. Use ```python3 adhrit.py -h``` for usage help.
 
-Example:  ```python3 adhrit.py -a myapp.apk```
+Example:  
+
+~ python3 adhrit.py -a myapp.apk
 
 ADHRIT can now be run in two modes:
 
 #### Pentest Mode
 
-```python3 adhrit.py -pen myapp.apk```
+~ python3 adhrit.py -pen myapp.apk
 
 #### Malware Analysis Mode
 
-```python3 adhrit.py -mal myapp.apk```
+~ python3 adhrit.py -mal myapp.apk
 
 Refer to the detailed [documentation](https://neonsec.gitbook.io/adhrit/) for complete details
 
