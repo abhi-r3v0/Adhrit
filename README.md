@@ -159,7 +159,7 @@ python3 adhrit.py -pen myapp.apk
 python3 adhrit.py -mal myapp.apk
 ```
 
-Refer to the detailed [documentation](http://www.hawkspawn.com/Adhrit) for complete details
+Refer to the detailed [documentation](hhttps://github.com/abhi-r3v0/Adhrit/wiki) for complete details
 
 ---
 
