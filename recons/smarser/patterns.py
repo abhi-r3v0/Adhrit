@@ -211,11 +211,12 @@ def http_con(thefile, thelist):
 		linecount = 0
 		for theline in f:
 			linecount += 1
-			if 'http://' in theline:
-				flag += 1
-				found = linecount
-				print(Fore.RED + "\n\t\t[!] " + Fore.RED + "HTTP URLs Found\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
-				list_of_http_con.append(str(thefile))
+			if not (thefile.startswith('//')) or not (thefile.startswith('/*')):
+				if 'http://' in theline:
+					flag += 1
+					found = linecount
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "HTTP URLs Found\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+					list_of_http_con.append(str(thefile))
 
 	return(list_of_http_con)
 
