@@ -66,12 +66,6 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
         * VirusTotal scan
         * VirtualApp droppers scan
 
-* #### Dynamic Analysis
-    * Automatically setting up a testing environment
-    * Launching MainActivity
-    * Checking for root access in the emulator/device
-    * Dumping the runtime log
-
 * #### Miscellaneous
     * Rebuilding the APK
     * Signing the APK
