@@ -5,12 +5,11 @@
 [![saythanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/abhi-r3v0)
 ![pep8](https://img.shields.io/badge/PEP8-Optimised-yellow.svg)
 ![version](https://img.shields.io/badge/version-0.2-red.svg)
-[![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/abhi-r3v0)
-[![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 [![](https://img.shields.io/badge/OWASP-Seasides-lightgrey)](http://web.archive.org/web/20191206083012/https://www.owaspseasides.com/v/2019/tools-showcase/day-2-28-feb-2019)
 [![](https://img.shields.io/badge/ThreatCon-2019-lightgrey)](https://www.threatcon.io/)
 [![](https://img.shields.io/badge/Cysinfo-2017-lightgrey)](https://cysinfo.com/12th-meetup-analysis-android-apk-using-adhrit/)
-
+[![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/abhi-r3v0)
+[![](https://img.shields.io/twitter/follow/espadrine.svg?label=Follow&style=social)](https://twitter.com/0xADHRIT)
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fabhi-r3v0%2FAdhrit)
 
 Adhrit is an open source Android APK reversing and analysis suite. The tool is an effort to find an efficient solution to all the needs of mobile security testing and automation. Adhrit has been built with a focus on flexibility and mudularization. Adhrit currently uses the [Ghera](https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/) benchmarks to identify vulnerability patterns in Android applications. The project is subject to continuous updations and will incorporate the latest available methodologies and tools. Adhrit has been presented at conferences like [OWASP Seasides](https://www.owaspseasides.com/v/2019/tools-showcase/day-2-28-feb-2019), ThreatCon and Cysinfo. Feature requests and bug reports are always welcome!
