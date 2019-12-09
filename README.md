@@ -106,7 +106,7 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 2. Open ```config``` and input your VirusTotal API key without any quotes. ([Click here to know how to obtain your VT API key](https://community.mcafee.com/t5/Documents/How-to-get-a-VirusTotal-public-API-Key/ta-p/552797))
 3. Open a terminal and cd into the directory.
 4. Run the ```installer script``` to install the necessary tools/dependencies:
-   ~ python3 installer.py
+   ```python3 installer.py```
 
 ---
 
