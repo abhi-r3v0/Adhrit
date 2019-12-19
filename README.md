@@ -42,6 +42,7 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
         * Identify intent filters
         * Identify embedded deeplinks
         * Automated ADB payload generation for exported activities
+        
     * **Bytecode analysis**
         * **ICC**
             * Dynamic Broadcast Receivers
