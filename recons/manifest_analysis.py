@@ -16,6 +16,17 @@ def man_scanner():
     c2 = 0
     c3 = 0
     global main_act_name
+    found_action_view = None
+    default_found = 0
+    browsable_found = 0
+    data_found = 0
+
+    d1 = ''
+    deeplink_act_name = ''
+    deeplinks_count = 0
+
+    deeplinks = []
+
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST ANALYSIS")
@@ -220,6 +231,7 @@ def man_scanner():
                                 for child in activity:
                                     if child.tag == "action":
                                         for name, value in child.attrib.items():
+                                            # Searching for MainActivity
                                             if value.startswith("android.intent.action"):
                                                 if value == "android.intent.action.MAIN":
                                                     main_act_strip = intentvalue.split('.')
@@ -229,13 +241,50 @@ def man_scanner():
                                                 print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.BLUE + str(value))
                                             else:
                                                 print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "ACTION: " + Fore.BLUE + str(value))
+
+                                            # Search for embedded Deeplinks
+                                            if value.startswith("android.intent.action"):
+                                                if value == "android.intent.action.VIEW":
+                                                    deeplink_act_name = str(intentvalue)
+
+
                                     if child.tag == "category":
                                         for catname, catvalue in child.attrib.items():
-                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "CATEGORY: " + Fore.BLUE + str(catvalue))
+                                            if str(catvalue) == "android.intent.category.DEFAULT":
+                                                default_found = 1
+
+                                            if default_found == 1:
+                                                if str(catvalue) == "android.intent.category.BROWSABLE":
+                                                    browsable_found = 1
+                                                    deeplinks_count += 1
+
+                                            else:
+                                                print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "CATEGORY: " + Fore.BLUE + str(catvalue))
 
                                     if child.tag == "data":
                                         for dname, dvalue in child.attrib.items():
-                                            print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "TYPE: " + Fore.BLUE + str(dvalue))
+
+                                            if browsable_found:
+
+                                                if str(dname) == "{http://schemas.android.com/apk/res/android}scheme":
+                                                    d1 = d1 + str(dvalue)
+                                                    
+                                                if str(dname) == "{http://schemas.android.com/apk/res/android}host":
+                                                    d1 = d1 + "://" + str(dvalue)
+
+                                                if str(dname) == "{http://schemas.android.com/apk/res/android}path" or str(dname) == "{http://schemas.android.com/apk/res/android}pathPattern":
+                                                    d1 = d1 + str(dvalue)
+
+                                                    deeplinks.append(d1)
+
+                                            else:
+                                                print(Fore.RED + "\n\t\t[!] " + Fore.YELLOW + "TYPE: " + Fore.BLUE + str(dvalue))
+
+                                        if d1 != '':
+                                            print(Fore.RED + "\n\n\t[!] " + Fore.YELLOW + "Possible Deep links found for: " + Fore.BLUE + str(deeplink_act_name))
+                                            print(Fore.GREEN + "\n\t\t[+] " + d1)
+
+                                            d1 = ''
 
 
     # REPORT
@@ -252,6 +301,8 @@ def man_scanner():
     if act_count > 0:
         print(Fore.GREEN + "\n\t\t[!] " + str(act_count) + Fore.BLUE + " Activities found")
 
+    if deeplinks_count > 0:
+        print(Fore.GREEN + "\n\t\t[!] " + str(deeplinks_count) + Fore.BLUE + " Deeplinks found")
 
 
 def man_analyzer(apk_name):
