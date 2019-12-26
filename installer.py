@@ -10,7 +10,7 @@ class DepInstaller:
 
     def __init__(self):
         self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'toilet']
-        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2', 'r2pipe', 'smalisca']
+        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2', 'r2pipe', 'smalisca', 'cement==2.10.12']
         self.uninstalled = []
 
     def ins(self):
