@@ -259,6 +259,7 @@ def unsafe_intent_url(thefile, thelist):
 def cookie_overwrite(thefile, thelist):
 	list_of_cookie_overwrite = []
 	if(os.path.exists('Bytecode')):
+		prev_file = ''
 		setcookiestat = 0
 		acceptcookie = 0
 		cookieusage = 0
@@ -296,13 +297,22 @@ def cookie_overwrite(thefile, thelist):
 						tosearchfromline = linecount - foundat
 
 						for revline in reversed(list(open(thefile))):
+							prev_file = str(thefile)
 							revlinecount += 1
 							if revlinecount > tosearchfromline:
 								if tosearch in revline:
 									stat = revline.split(',')[-1].strip()
 									if str(stat) == '0x1':
 										list_of_cookie_overwrite.append(str(thefile))
-										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SetCookie is Enabled \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SetCookie is Enabled. Cookie overwrite possible \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+
+				if acceptcookie == 2:			
+					list_of_cookie_overwrite.append(str(thefile))
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Cookie overwrite possible \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+					continue
+
+				if acceptcookie == 0:
+					continue
 
 	return(list_of_cookie_overwrite)
 
@@ -325,9 +335,6 @@ def pattern_receiver(thefile, thelist):
 	if(os.path.exists('Bytecode')):
 
 		with open('vulnerablities.txt', 'a+') as vulnwrite:
-			cookie = cookie_overwrite(thefile, thelist)
-			if len(cookie) > 0:
-				vulnwrite.write("\n\nCookie: " + str(cookie))
 
 			unsafe_intent = unsafe_intent_url(thefile, thelist)
 			if len(unsafe_intent) > 0:
@@ -368,5 +375,9 @@ def pattern_receiver(thefile, thelist):
 			js_enable = search_js_enabled(thefile, thelist)
 			if len(js_enable) > 0:
 				vulnwrite.write("\n\nJavaScript Enabled:" + str(js_enable))
+
+			cookie = cookie_overwrite(thefile, thelist)
+			if len(cookie) > 0:
+				vulnwrite.write("\n\nCookie overwrite: " + str(cookie))
 
 
