@@ -317,6 +317,47 @@ def cookie_overwrite(thefile, thelist):
 	return(list_of_cookie_overwrite)
 
 
+def allow_file_from_url(thefile, thelist):
+	url_allowed_list = []
+
+	if(os.path.exists('Bytecode')):
+		linecount = 0
+		revlinecount = 0
+		for k in thelist:
+			flag = 0
+			for ckey, cval in k.items():
+
+				if(ckey == "to_method" and str(cval) == "setAllowFileAccessFromFileURLs"):
+					flag = 1
+
+				if flag == 1:
+					if(ckey == "local_args"):
+						varbool = str(cval.strip('{').strip('}')).split(',')[-1]
+
+						tosearch = 'const/4' + varbool
+
+						searchfile = open(thefile, "r")
+						
+						for line in searchfile:
+							linecount += 1
+							if 'setAllowFileAccessFromFileURLs' in line:
+								foundat = linecount
+
+						tosearchfromline = linecount - foundat
+
+						for revline in reversed(list(open(thefile))):
+							revlinecount += 1
+							if revlinecount > tosearchfromline:
+								if tosearch in revline:
+									stat = revline.split(',')[-1].strip()
+									if str(stat) == '0x1':
+										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "File Access from URLs Allowed \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile + "\t Line: " + str(foundat))
+										url_allowed_list.append(str(thefile))
+										return(url_allowed_list)
+										exit()
+									elif str(stat) == '0x0':
+										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "File Access from URLs Restricted")
+
 def pattern_receiver(thefile, thelist):
 
 	cookie = []
@@ -330,6 +371,8 @@ def pattern_receiver(thefile, thelist):
 	dyn_receiver = []
 	ecb_instance = []
 	js_enable = []
+	url_enable = []
+
 
 
 	if(os.path.exists('Bytecode')):
@@ -339,6 +382,10 @@ def pattern_receiver(thefile, thelist):
 			unsafe_intent = unsafe_intent_url(thefile, thelist)
 			if len(unsafe_intent) > 0:
 				vulnwrite.write("\n\nUnsafe Intent:" + str(unsafe_intent))
+
+			url_enable = allow_file_from_url(thefile, thelist)
+			if url_enable:
+				vulnwrite.write("\n\nFile Access from URL:" + str(url_enable))
 
 			http_connection = http_con(thefile, thelist)
 			if len(http_connection) > 0:
