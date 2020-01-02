@@ -41,7 +41,6 @@ def parser():
 				for j in values:
 					for mkey, mvalue in j.items():
 						if mkey == "calls":
-							# print("\n2" + str(mvalue))
 							pattern_receiver(filename, mvalue)
 						else:
 							pass
