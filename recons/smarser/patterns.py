@@ -358,6 +358,84 @@ def allow_file_from_url(thefile, thelist):
 									elif str(stat) == '0x0':
 										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "File Access from URLs Restricted")
 
+
+def allow_content_from_url(thefile, thelist):
+	content_allowed_list = []
+
+	if(os.path.exists('Bytecode')):
+		linecount = 0
+		revlinecount = 0
+		for k in thelist:
+			flag = 0
+			for ckey, cval in k.items():
+
+				if(ckey == "to_method" and str(cval) == "setAllowUniversalAccessFromFileURLs"):
+					flag = 1
+
+				if flag == 1:
+					if(ckey == "local_args"):
+						varbool = str(cval.strip('{').strip('}')).split(',')[-1]
+
+						tosearch = 'const/4' + varbool
+
+						searchfile = open(thefile, "r")
+						
+						for line in searchfile:
+							linecount += 1
+							if 'setAllowUniversalAccessFromFileURLs' in line:
+								foundat = linecount
+
+						tosearchfromline = linecount - foundat
+
+						for revline in reversed(list(open(thefile))):
+							revlinecount += 1
+							if revlinecount > tosearchfromline:
+								if tosearch in revline:
+									stat = revline.split(',')[-1].strip()
+									if str(stat) == '0x1':
+										print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Content Access from URLs Allowed. Malicious JS could access content providers \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile + "\t Line: " + str(foundat))
+										content_allowed_list.append(str(thefile))
+										return(content_allowed_list)
+										exit()
+									elif str(stat) == '0x0':
+										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "Content Access from URLs Restricted")
+
+
+def ssl_warning_ignore(thefile, thelist):
+	ssl_warn_list = []
+	webview_found = 0
+	sslerr_found = 0
+	sslerr_receiver_found = 0
+
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == "to_class" and str(cval) == "Landroid/webkit/SslErrorHandler"):
+				webview_found = 1
+
+			if webview_found == 1:
+				if(ckey == "to_method" and str(cval) == "proceed"):
+					ssl_warn_list.append(str(thefile))
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SSL Warnings Supressed! \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+	return(ssl_warn_list)
+
+
+def dynamic_invocation_weakchecks(thefile, thelist):
+	weak_checks_list = []
+	found_content_redsolver = 0 
+
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == "to_class" and str(cval) == "Landroid/content/ContentResolver"):
+				found_content_redsolver = 1
+
+			if found_content_redsolver == 1:
+				if(ckey == "to_method" and str(cval) == "call"):
+					weak_checks_list.append(str(thefile))
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Usage of 'Call' for ContentProvider! \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+
+	return(weak_checks_list)
+
+
 def pattern_receiver(thefile, thelist):
 
 	cookie = []
@@ -372,6 +450,9 @@ def pattern_receiver(thefile, thelist):
 	ecb_instance = []
 	js_enable = []
 	url_enable = []
+	content_enable = []
+	ssl_warn = []
+	dyn_weakchecks = []
 
 
 
@@ -386,6 +467,10 @@ def pattern_receiver(thefile, thelist):
 			url_enable = allow_file_from_url(thefile, thelist)
 			if url_enable:
 				vulnwrite.write("\n\nFile Access from URL:" + str(url_enable))
+
+			content_enable = allow_content_from_url(thefile, thelist)
+			if content_enable:
+				vulnwrite.write("\n\nContent Access from URL:" + str(content_enable))
 
 			http_connection = http_con(thefile, thelist)
 			if len(http_connection) > 0:
@@ -426,5 +511,13 @@ def pattern_receiver(thefile, thelist):
 			cookie = cookie_overwrite(thefile, thelist)
 			if len(cookie) > 0:
 				vulnwrite.write("\n\nCookie overwrite: " + str(cookie))
+
+			ssl_warn = ssl_warning_ignore(thefile, thelist)
+			if ssl_warning_ignore:
+				vulnwrite.write("\n\nSSL Warnings Ignored: " + str(ssl_warn))
+
+			dyn_weakchecks = dynamic_invocation_weakchecks(thefile, thelist)
+			if dyn_weakchecks:
+				vulnwrite.write("\n\nUsage of 'Call' for ContentProvider!")
 
 
