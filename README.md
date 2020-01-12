@@ -58,6 +58,9 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
             * File Access from URLs
             * Content Provider Access from URLs
             * Supressed SSL Warnings
+        * **Storage Issues**
+            * Non-parameterized SQL queries
+            * Usage of External Storage for application data
         * **Networking**
             * Missing Server Certificate Validity Check
             * Insecure SSL Socket Factory
