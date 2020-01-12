@@ -211,7 +211,7 @@ def http_con(thefile, thelist):
 		linecount = 0
 		for theline in f:
 			linecount += 1
-			if not (thefile.startswith('//')) or not (thefile.startswith('/*')):
+			if not (theline.startswith('//')) or not (theline.startswith('/*')):
 				if 'http://' in theline:
 					flag += 1
 					found = linecount
@@ -401,7 +401,7 @@ def allow_content_from_url(thefile, thelist):
 										print(Fore.GREEN + "\n\t\t[+] " + Fore.YELLOW + "Content Access from URLs Restricted")
 
 
-def ssl_warning_ignore(thefile, thelist):
+'''def ssl_warning_ignore(thefile, thelist):
 	ssl_warn_list = []
 	webview_found = 0
 	sslerr_found = 0
@@ -416,7 +416,7 @@ def ssl_warning_ignore(thefile, thelist):
 				if(ckey == "to_method" and str(cval) == "proceed"):
 					ssl_warn_list.append(str(thefile))
 					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SSL Warnings Supressed! \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
-	return(ssl_warn_list)
+	return(ssl_warn_list)'''
 
 
 def dynamic_invocation_weakchecks(thefile, thelist):
@@ -436,6 +436,36 @@ def dynamic_invocation_weakchecks(thefile, thelist):
 	return(weak_checks_list)
 
 
+def execSQL(thefile, thelist):
+	execsql_list = []
+	found_exec = 0
+
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == "to_class" and str(cval) == "Landroid/database/sqlite/SQLiteDatabase"):
+				found_exec = 1
+
+			if found_exec == 1:
+				if(ckey == "to_method" and str(cval) == "execSQL"):
+					execsql_list.append(str(thefile))
+					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Non-parameterized SQL queries. SQL injections possible!\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+	return(execsql_list)
+
+
+def ext_storage(thefile, thelist):
+	ext_storage_list = []
+	found_ext = 0
+
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == "to_method" and str(cval) == "getExternalFilesDir"):
+				print(Fore.RED + "\n\t\t[!] " + Fore.RED + "External Storage used for read/write. Data available to all apps. Make sure data is not sensitive!\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+				ext_storage_list.append(thefile)
+
+	return(ext_storage_list)
+	
+
+
 def pattern_receiver(thefile, thelist):
 
 	cookie = []
@@ -453,12 +483,23 @@ def pattern_receiver(thefile, thelist):
 	content_enable = []
 	ssl_warn = []
 	dyn_weakchecks = []
-
+	execsql = []
+	ext_storage_usage = []
 
 
 	if(os.path.exists('Bytecode')):
 
 		with open('vulnerablities.txt', 'a+') as vulnwrite:
+
+			ext_storage_usage = ext_storage(thefile, thelist)
+			if len(ext_storage_usage) > 0:
+				vulnwrite.write("\n\nExternal Storage used for read/write:" + str(ext_storage_usage))
+
+			execsql = execSQL(thefile, thelist)
+			if len(execsql) > 0:
+				vulnwrite.write("\n\nNon-parameterized SQL queries:" + str(execsql))
+
+			ext_storage(thefile, thelist)
 
 			unsafe_intent = unsafe_intent_url(thefile, thelist)
 			if len(unsafe_intent) > 0:
@@ -511,10 +552,6 @@ def pattern_receiver(thefile, thelist):
 			cookie = cookie_overwrite(thefile, thelist)
 			if len(cookie) > 0:
 				vulnwrite.write("\n\nCookie overwrite: " + str(cookie))
-
-			ssl_warn = ssl_warning_ignore(thefile, thelist)
-			if ssl_warning_ignore:
-				vulnwrite.write("\n\nSSL Warnings Ignored: " + str(ssl_warn))
 
 			dyn_weakchecks = dynamic_invocation_weakchecks(thefile, thelist)
 			if dyn_weakchecks:
