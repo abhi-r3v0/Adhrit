@@ -317,6 +317,10 @@ def man_analyzer(apk_name):
         os.system('rm AndroidManifest.xml')
         man_scanner()
 
+    elif os.path.exists('Bytecode') and os.path.isdir("Extracts"):
+        os.system('cp Bytecode/AndroidManifest.xml ../Manifest.xml')
+        man_scanner()
+
     elif os.path.abspath(apk_name).lower().endswith('.apk'):
         with zipfile.ZipFile(apk_name, 'r') as z:
             for name in z.namelist():
