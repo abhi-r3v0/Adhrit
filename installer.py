@@ -49,9 +49,10 @@ class DepInstaller:
         # MacOS Dependency Config             
         elif platform == "darwin":
 
-            print("\n[+]  Installing necessary tools on MAC")
+            print("\n[+]  Installing necessary tools on MacOS/Darwin")
             try:
                 os.system('brew cask install xquartz')
+                os.system('export HOMEBREW_NO_AUTO_UPDATE=1') # Set auto update of homebrew to false for this session
                 os.system('brew install toilet')
                 print("\n[+]  Installation of dependencies complete")
             except OSError:
