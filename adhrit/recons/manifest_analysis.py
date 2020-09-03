@@ -323,6 +323,42 @@ def man_scanner():
 			scanned_provider.append(' ')
 			iter_no += 1
 		# print(scanned_provider)
+
+		#Implicit Intent
+		print('Checking for Implicit Intent')
+		intent_fiter_dict = {}
+		sts_code = 0
+		intent_filter_parents = ["activity", "activity-alias", "service", "provider", "receiver" ]
+		for each_intent_filter_parent in intent_filter_parents:
+			single_intent_filter_obj = []
+			parent_elems = root.getiterator(each_intent_filter_parent)
+			for parent_elem  in parent_elems:
+				for each_intent_filter in list(parent_elem):
+					var_key = parent_elem.tag + ' : ' + parent_elem.attrib[name]
+					if var_key in intent_fiter_dict.keys():
+						single_intent_filter_obj.pop()
+						sts_code = 1
+						pass
+					else: 
+						if 'data : ' not in str(single_intent_filter_obj) and len(single_intent_filter_obj) > 1:
+							scanned_implicit_intent.extend(single_intent_filter_obj)
+						single_intent_filter_obj = []
+						single_intent_filter_obj.append(var_key)
+					for i in list(each_intent_filter):
+						var = str(i.tag) + ' : ' + str(i.get(name))
+						# print(var)
+						single_intent_filter_obj.append(var)
+					if 'data : ' not in str(single_intent_filter_obj) and len(single_intent_filter_obj) > 1:
+						if sts_code == 1:
+							intent_fiter_dict[var_key] = single_intent_filter_obj
+							single_intent_filter_obj.append(' ')
+						else:
+							intent_fiter_dict.__setitem__(var_key, single_intent_filter_obj)
+							single_intent_filter_obj.append(' ')
+			if 'data : ' not in str(single_intent_filter_obj) and len(single_intent_filter_obj) > 1:
+				scanned_implicit_intent.extend(single_intent_filter_obj)		
+		json_implicit_intent = json.dumps(intent_fiter_dict)
+
 		
 
 
