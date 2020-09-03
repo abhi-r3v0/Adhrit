@@ -128,7 +128,7 @@ def man_scanner():
 		print( "Listing all permissions.")
 		permissions = root.iter('uses-permission')
 		for perms in permissions:
-			c2 += 1
+			# c2 += 1
 			if not perms.attrib[name].startswith("android.permission"):                 # Custom permissions
 				# print(perms.attrib[name])
 				# JSON DATA
@@ -139,6 +139,34 @@ def man_scanner():
 				# JSON DATA
 				scanned_perms.append(perms.attrib[name])
 				json_perms = json.dumps(scanned_perms)
+
+		# List of activities
+		print("List of Activities")
+		act_lists = root.iter('activity') 
+		for activity in act_lists:
+			act_count += 1 
+			#  JSON DATA
+			scanned_acts.append(str(activity.attrib[name]))
+			json_acts = json.dumps(scanned_acts)	
+		act_alias_lists = root.iter('activity-alias') 		# appending Activity alias to activity list 
+		for activityalias in act_alias_lists:
+			act_count += 1 
+			# JSON DATA
+			scanned_acts.append(str(activityalias.attrib[name]))
+			json_acts = json.dumps(scanned_acts)
+
+
+		# List of exported activities
+		exp_act_list = root.iter('activity')
+		for activity in exp_act_list:
+			for act_key,act_val in activity.attrib.items():
+				if exported in act_key and act_val == 'true':
+					#JSON DATA
+					scanned_exported_acts.append(activity.attrib[name])
+					json_export_acts = json.dumps(scanned_exported_acts)
+		
+		if not scanned_exported_acts:
+			print("No exported activities found.")
 
 		
 
