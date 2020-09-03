@@ -198,6 +198,32 @@ def man_scanner():
 				json_receivers = json.dumps(scanned_receivers)
 				pass
 
+		# DeepLinks
+		intentFilter = root.findall("./application/activity/")
+		for eachIntentFilter in intentFilter:
+			newparent = eachIntentFilter
+			for action in newparent.iter('action'):
+				if action_VIEW in action.attrib[name]:
+					# print(action.attrib[name])
+					for category in newparent.iter('category'):
+						if category_BROWSABLE in category.attrib[name]:
+							for data in newparent.iter('data'):
+								deeplink = ''
+								deeplink = str(data.attrib[scheme]) + '://'+ str(data.attrib[host])
+								# print(data.attrib[host]+data.attrib[scheme]+data.attrib[path])   
+								if  pathPattern in data.attrib :
+									tmp = str(data.attrib[pathPattern])
+								elif path in data.attrib:
+									tmp = str(data.attrib[path])
+								else:
+									# print('no path or path prefix predifined')
+									tmp = ''
+								deeplinks_count +=1
+								deeplink += tmp
+								scanned_deeplinks.append(deeplink)
+								json_deeplinks = json.dumps(scanned_deeplinks)
+								# print(deeplink)
+
 		
 
 
