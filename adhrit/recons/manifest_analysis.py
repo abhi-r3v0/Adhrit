@@ -261,6 +261,34 @@ def man_scanner():
 			# scanned_taskaffinity.append(info)
 			# json_taskaffinity = json.dumps(scanned_taskaffinity)
 
+		# Services and Exp Services
+		print('Checking for Services')
+		ser_cnt = 0
+		sts_code = 0
+		service_list = root.iter('service')
+		for service in service_list:
+			sts_code = 0
+			ser_cnt += 1
+			for ser_key,ser_val in service.attrib.items():
+				if exported in ser_key and ser_val == 'true':
+					# print(f'{ser_cnt} ** {service.attrib[name]}')
+					sts_code = 1
+					# JSON DATA
+					scanned_exported_services.append(str(service.attrib[name])) 
+					json_export_services = json.dumps(scanned_exported_services)
+
+				if permission in ser_key:					#Custom Perm for services
+					var = service.tag +' : ' + str(service.attrib[permission])
+					if var not in scanned_custom_perms:
+						scanned_custom_perms.append(var)
+						json_custom_perms = json.dumps(scanned_custom_perms)
+				
+			if(sts_code != 1):
+				# print(f'{ser_cnt} * {service.attrib[name]}')
+				# JSON DATA
+				scanned_services.append(str(service.attrib[name]))
+				json_services = json.dumps(scanned_services)
+
 		
 
 
