@@ -105,6 +105,15 @@ def man_scanner():
 					else:
 						print('Backup Status: '+ str(' False'))
 
+		# Checking for debug flag
+		for debugattrib in backup_status:
+			for dbgstatus in debugattrib.attrib:
+				if dbgstatus == debuggable:
+					if debugattrib.attrib[dbgstatus] == "true":
+						print('Debug Status: '+ str(' True'))
+					else:
+						print('Debug Status: '+ str(' False'))
+
 
 	return str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
 
