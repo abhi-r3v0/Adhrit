@@ -168,6 +168,36 @@ def man_scanner():
 		if not scanned_exported_acts:
 			print("No exported activities found.")
 
+		# Checking for receivers
+		print("Checking for BroadcastReceivers")
+		rec_count = 0
+		sts_code = 0
+		receiver_list = root.iter('receiver')
+		for receiver in receiver_list:
+			sts_code = 0
+			rec_count += 1
+			for recv_key,recv_val in receiver.attrib.items():
+				if exported in recv_key and recv_val == 'true':         #exported broadcast receiver
+					# print(f'{rec_count}     {receiver.attrib[name]}')
+					sts_code = 1
+					# JSON DATA
+					scanned_exported_receivers.append(str(receiver.attrib[name]))
+					json_export_receivers = json.dumps(scanned_exported_receivers)
+				
+				if permission in recv_key:                              #custom permissions for broadcast receiver
+					# print(receiver.attrib[permission])
+					# JSON DATA
+					var = receiver.tag +' : ' + str(receiver.attrib[permission])
+					scanned_custom_perms.append(var)
+					json_custom_perms = json.dumps(scanned_custom_perms)
+		
+			if(sts_code !=1):
+				# print(f'{rec_count}     {receiver.attrib[name]}')
+				# JSON DATA
+				scanned_receivers.append(str(receiver.attrib[name]))
+				json_receivers = json.dumps(scanned_receivers)
+				pass
+
 		
 
 
