@@ -4,6 +4,7 @@ import os
 import zipfile
 import configparser
 import xml.etree.ElementTree as Et
+import json
 
 
 def man_scanner():
@@ -113,6 +114,33 @@ def man_scanner():
 						print('Debug Status: '+ str(' True'))
 					else:
 						print('Debug Status: '+ str(' False'))
+
+		# List of critical permissions
+		permissions = root.iter('uses-permission')
+		for perms in permissions:
+			if perms.attrib[name] in perm_severe:
+				# c3 += 1
+				#JSON DATA
+				scanned_critical_perms.append(perms.attrib[name])
+				json_critical_perms = json.dumps(scanned_critical_perms)
+		
+		# List of all permissions
+		print( "Listing all permissions.")
+		permissions = root.iter('uses-permission')
+		for perms in permissions:
+			c2 += 1
+			if not perms.attrib[name].startswith("android.permission"):                 # Custom permissions
+				# print(perms.attrib[name])
+				# JSON DATA
+				var = perms.tag +' : ' + str(perms.attrib[name])
+				scanned_custom_perms.append(var)
+				json_custom_perms = json.dumps(scanned_custom_perms)
+			else:                                                                       #normal permissions
+				# JSON DATA
+				scanned_perms.append(perms.attrib[name])
+				json_perms = json.dumps(scanned_perms)
+
+		
 
 
 	return str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
