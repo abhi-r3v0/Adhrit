@@ -55,6 +55,7 @@ def man_scanner():
 	exp_status = 0
 	act_count = 0
 	ta_count = 0
+	deeplinks_count = 0
 
 	print( "MANIFEST ANALYSIS")
 	perm_severe = {"android.permission.ACCESS_SUPERUSER",
@@ -223,6 +224,42 @@ def man_scanner():
 								scanned_deeplinks.append(deeplink)
 								json_deeplinks = json.dumps(scanned_deeplinks)
 								# print(deeplink)
+
+		# TaskAffinity
+		# Check in application tag
+		for affinity_status in backup_status:
+			for affkey, affval in affinity_status.attrib.items():
+				all_app_tags.append(str(affkey))
+				if affkey == taskAffinity:
+					if affval == "":
+						info = "Null predifined in application tag."
+						# JSON DATA
+						scanned_taskaffinity.append(info)
+						json_taskaffinity = json.dumps(scanned_taskaffinity)
+						pass
+					
+		# if taskAffinity not in all_app_tags:
+		# 	info = "The application tag has no taskAffinity set to NULL. Activities Hijackable!"
+		# 	# JSON DATA
+		# 	scanned_taskaffinity.append(info)
+		# 	json_taskaffinity = json.dumps(scanned_taskaffinity) 
+		
+		# Check in all activity tag
+		for activity in root.iter('activity'):
+			for affkey, affval in activity.attrib.items():
+				if taskAffinity in affkey:
+					ta_count += 1
+					info = str(activity.attrib[name])
+					# JSON DATA
+					scanned_taskaffinity.append(info)
+					json_taskaffinity = json.dumps(scanned_taskaffinity)
+					
+		
+		if ta_count == 0:
+			info = 'None of the activity tag has TaskAffinity predifined in it.'
+			 # JSON DATA
+			# scanned_taskaffinity.append(info)
+			# json_taskaffinity = json.dumps(scanned_taskaffinity)
 
 		
 
