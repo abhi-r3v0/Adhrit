@@ -69,24 +69,12 @@ def scan():
     
             return  response
 
-        # else:
-            # out = {
-            #     'status': HTTPStatus.CONFLICT,
-            #     'filename': uploaded_files.filename,
-            #     'message': f"{uploaded_files.filename} not saved successful."
-            #     }
-        # return jsonify(out)         #Just for debug
-    return "apk not sent properly"
+       
+    return jsonify(status_msg="apk not sent properly")
 
     
 
-# @app.route('/status')
-# def status_check():
-#     status = get_config_data('status')
-#     if str(status) == 'complete':
-#         return jsonify(status_msg="complete")
-#     else:
-#         return jsonify(status_msg="incomplete")
+
 
 @app.route('/')
 def func():
