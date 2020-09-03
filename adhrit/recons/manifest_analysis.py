@@ -288,7 +288,41 @@ def man_scanner():
 				# JSON DATA
 				scanned_services.append(str(service.attrib[name]))
 				json_services = json.dumps(scanned_services)
+		
+		# Provider
+		print('Checking for Content Providers')
+		pr_cnt = 0
+		sts_code = 0
+		pr_parent_dic = {}
+		pr_child_dic = {}
+		provider_list = root.iter('provider')
+		for provider in provider_list:
+			pr_child_dic = {}
+			pr_cnt += 1  
+			for pr_key, pr_val in provider.attrib.items():
+				pr_key = pr_key.partition('{http://schemas.android.com/apk/res/android}')[2]
+				pr_child_dic.__setitem__(pr_key, pr_val) 
+			# print(pr_child_dic)
+			pr_parent_dic.__setitem__(pr_cnt, pr_child_dic)
+		# print(pr_parent_dic)
 
+		json_provider = json.dumps(pr_parent_dic)
+		
+		name_loc = 0
+		iter_no = 0
+		for i in range(1,pr_cnt+1):
+			name_loc = iter_no 
+			for key, val in pr_parent_dic[i].items():
+				iter_no += 1
+				var = key + ' : ' + val
+				if key == 'name':
+					scanned_provider.insert(name_loc, var)
+				else:
+					scanned_provider.append(var)
+
+			scanned_provider.append(' ')
+			iter_no += 1
+		# print(scanned_provider)
 		
 
 
