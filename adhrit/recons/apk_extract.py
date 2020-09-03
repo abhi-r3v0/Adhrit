@@ -6,10 +6,10 @@ import traceback
 import zipfile
 from colorama import Fore
 
-from recons.enjarify import parsedex
-from recons.enjarify.jvm import writeclass
-from recons.enjarify.jvm.optimization import options
-from recons.enjarify.mutf8 import decode
+from adhrit.recons.enjarify import parsedex
+from adhrit.recons.enjarify.jvm import writeclass
+from adhrit.recons.enjarify.jvm.optimization import options
+from adhrit.recons.enjarify.mutf8 import decode
 
 
 # To know the contents of a package

@@ -3,8 +3,8 @@ import sys
 from colorama import Fore
 from smalisca.core.smalisca_main import SmaliscaApp
 from smalisca.modules.module_smali_parser import SmaliParser
-from recons.smarser.patterns import pattern_receiver
-from recons.smarser.patterns import search_ecb
+from adhrit.recons.smarser.patterns import pattern_receiver
+from adhrit.recons.smarser.patterns import search_ecb
 
 
 
