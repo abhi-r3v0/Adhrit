@@ -19,6 +19,7 @@ from adhrit.recons.native_recon import lib_pwn
 from adhrit.recons.dynamic import adb_con
 from adhrit.recons.clean import cleaner
 from adhrit.recons.root import check_root
+from adhrit.recons.reset import reset_scanid, reset_db
 
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @HawkSpawn )'
@@ -73,6 +74,14 @@ class Adhrit:
     @staticmethod
     def manifestanalyzer(apk_name):
         man_analyzer(apk_name)
+
+    @staticmethod
+    def resetdb():
+        reset_db()
+
+    @staticmethod
+    def reset_scan_id():
+        reset_scanid()
 
     # # Check for virtual app droppers
     # @staticmethod
@@ -151,10 +160,17 @@ def main():
     # Adhrit Welcome ASCII
     adhrit.welcome()
     apk_name = 'app.apk'
-    adhrit.cleanproject(apk_name)
-    adhrit.apkextractor(apk_name)
-    adhrit.manifestanalyzer(apk_name)
-    adhrit.cleanproject(apk_name)
+    # adhrit.cleanproject(apk_name)
+    # adhrit.apkextractor(apk_name)
+    # adhrit.manifestanalyzer(apk_name)
+    # adhrit.cleanproject(apk_name)
+
+    adhrit.resetdb()
+    adhrit.reset_scan_id()
+
+    
+
+
 
 
 
