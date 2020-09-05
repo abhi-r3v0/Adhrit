@@ -6,6 +6,7 @@ import configparser
 import xml.etree.ElementTree as Et
 import json
 from time import gmtime, strftime
+from adhrit.recons.dbaccess import dbconnection, create_datatable, insert_datatable
 
 
 def man_scanner():
@@ -372,6 +373,13 @@ def man_scanner():
 		
 	return dbconstatus, str(thescanid), str(tstamp), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
 
+def add_to_db(dbconstatus, thescanid, tstamp, json_perms, json_critical_perms, json_custom_perms, json_acts, json_export_acts, json_receivers, json_export_receivers, json_deeplinks, json_taskaffinity, json_services, json_export_services, json_provider, json_implicit_intent):
+
+	# Database Operations
+	create_datatable(dbconstatus)
+	datadetails = (str(thescanid), str(tstamp), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
+	addedornot = insert_datatable(dbconstatus, datadetails)
+
 def update_scanid():
 
 	# Updating config data
@@ -390,6 +398,6 @@ def man_analyzer(apk_name):
 	if os.path.exists("Manifest.xml"):
 
 		retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
-		(retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
+		add_to_db(retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
 		update_scanid()
 		# return retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent
