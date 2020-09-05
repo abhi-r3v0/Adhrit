@@ -5,6 +5,7 @@ import zipfile
 import configparser
 import xml.etree.ElementTree as Et
 import json
+from time import gmtime, strftime
 
 
 def man_scanner():
@@ -56,6 +57,15 @@ def man_scanner():
 	act_count = 0
 	ta_count = 0
 	deeplinks_count = 0
+
+	check_deps = configparser.ConfigParser()
+	check_deps.read('adhrit/config')
+	thescanid = check_deps.get('config-data', 'scan_id')
+	tstamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+	dbname = "adhrit.db"
+	scandetails = (str(thescanid), str(tstamp))
+
+	dbconstatus = dbconnection(dbname)
 
 	print( "MANIFEST ANALYSIS")
 	perm_severe = {"android.permission.ACCESS_SUPERUSER",
@@ -360,13 +370,26 @@ def man_scanner():
 		json_implicit_intent = json.dumps(intent_fiter_dict)
 
 		
+	return dbconstatus, str(thescanid), str(tstamp), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
 
+def update_scanid():
 
-	return str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
+	# Updating config data
 
+	update_config = configparser.ConfigParser()
+	update_config.read('adhrit/config')
+	thescanid = update_config.get('config-data', 'scan_id')
+	thescanid = int(thescanid) + 1 
+
+	update_config.set('config-data', 'scan_id', str(thescanid))
+	with open('adhrit/config', 'w') as updatedconf:
+			update_config.write(updatedconf)
+			
 
 def man_analyzer(apk_name):
 	if os.path.exists("Manifest.xml"):
 
-		retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
-		return retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent
+		retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
+		(retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
+		update_scanid()
+		# return retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent
