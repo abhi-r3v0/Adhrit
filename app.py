@@ -58,8 +58,7 @@ def scan():
             rows = getreport(thesid)
             response = jsonify(status_msg='Scanning Completed', scan_id = thesid,rows = rows,  status=HTTPStatus.OK)
             update_scanid()
-            return  response,{'Access-Control-Allow-Origin': '*'} 
-
+            return  response,{'Access-Control-Allow-Origin': '*'}
     return jsonify(status_msg="apk not sent properly")
 
     
