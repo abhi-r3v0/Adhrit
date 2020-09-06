@@ -19,7 +19,7 @@ def dbconnection(dbname):
 # Creating a table for storing permissions and activities
 def create_datatable(conn):
 	if conn is not None:
-		create_table = ''' CREATE TABLE IF NOT EXISTS DataDB(ScanId text PRIMARY KEY NOT NULL,  ScanDate text NOT NULL, Permission text, CriticalPerm text, CustomPerm text, Activity text, ExportedActivity text, BroadcastReceiver text, ExportedReceiver text, Deeplinks text, Taskaffinity text, Service text, ExportedService text, Provider text, ImplicitIntent text); '''
+		create_table = ''' CREATE TABLE IF NOT EXISTS DataDB(ScanId text PRIMARY KEY NOT NULL, Permission text, CriticalPerm text, CustomPerm text, Activity text, ExportedActivity text, BroadcastReceiver text, ExportedReceiver text, Deeplinks text, Taskaffinity text, Service text, ExportedService text, Provider text, ImplicitIntent text); '''
 		try:
 			c = conn.cursor()
 			c.execute(create_table)
@@ -32,7 +32,7 @@ def create_datatable(conn):
 # Inserting data into the data table
 def insert_datatable(conn, datadetails):
 	if conn is not None:
-		insert_table = ''' INSERT INTO DataDB(ScanId, ScanDate, Permission, CriticalPerm, CustomPerm, Activity, ExportedActivity, BroadcastReceiver, ExportedReceiver, Deeplinks, Taskaffinity, Service, ExportedService, Provider, ImplicitIntent) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); '''
+		insert_table = ''' INSERT INTO DataDB(ScanId, Permission, CriticalPerm, CustomPerm, Activity, ExportedActivity, BroadcastReceiver, ExportedReceiver, Deeplinks, Taskaffinity, Service, ExportedService, Provider, ImplicitIntent) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?); '''
 		try:
 			c = conn.cursor()
 			c.execute(insert_table, datadetails)
@@ -43,7 +43,16 @@ def insert_datatable(conn, datadetails):
 		return c.lastrowid
 
 
-
+# Query for select Statement
+def select_query(query):
+	con = sqlite3.connect('adhrit.db')
+	with con:
+		con.row_factory = sqlite3.Row
+		cur = con.cursor()
+		cur.execute(query)
+		rows = cur.fetchall()
+		return rows
+	
 
 
 # Query for the last scan details
