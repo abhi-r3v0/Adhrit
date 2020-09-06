@@ -26,7 +26,7 @@ def allowed_file(filename):
 
 def get_config_data(key):
     check_deps = configparser.ConfigParser()
-    check_deps.read('FlashBeam/config')                                         ####
+    check_deps.read('adhrit/config')                                         ####
     return check_deps.get('config-data', str(key))
 
 
@@ -42,30 +42,18 @@ def scan():
         if uploaded_files and allowed_file(uploaded_files.filename):
             # uploaded_files.save(os.path.join("uploads", uploaded_files.filename))
             uploaded_files.save(uploaded_files.filename)
-
-            out = {
-            'status': HTTPStatus.OK,
-            'filename': uploaded_files.filename,
-            'message': f"{uploaded_files.filename} saved successful."
-            }
-
-            # Renaming to cred_qa.apk
+            # Renaming to app.apk
             source =  uploaded_files.filename
             dest = 'app.apk'
             os.rename(source, dest)
             
             
-            # thesid = get_config_data('scan_id')
-            # check_deps = configparser.ConfigParser()
-            # check_deps.read('FlashBeam/config')                             ###
-            # check_deps.set('config-data', 'status', 'incomplete')
-            # with open('FlashBeam/config', 'w') as updatedconf:              ####
-            #     check_deps.write(updatedconf)
-
+            
             # thread_a = Compute(request.__copy__())
             # thread_a.start()
             main()
-            response = jsonify(status_msg='Scanning Completed',  status=HTTPStatus.OK)
+            thesid = get_config_data('scan_id')
+            response = jsonify(status_msg='Scanning Completed', scan_id = thesid,  status=HTTPStatus.OK)
     
             return  response
 
