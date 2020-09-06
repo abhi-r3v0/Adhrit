@@ -3,22 +3,15 @@ from flask import  Flask, render_template, request, jsonify
 from threading import Thread
 from http import HTTPStatus
 import os, configparser, time
-# from FlashBeam.modules.dbaccess import dbconnection
+from adhrit.recons.dbaccess import dbconnection, select_query
+from adhrit.recons.reset import reset_scanid, reset_db
+
 
 ALLOWED_EXTENSIONS = {'apk'}
 
 app = Flask(__name__)
 
-# class Compute(Thread):
-#     def __init__(self, request):
-#         Thread.__init__(self)
-        
 
-#     def run(self):
-#         print("Initiating")
-#         time.sleep(1)
-#         main()
-        
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -28,6 +21,19 @@ def get_config_data(key):
     check_deps = configparser.ConfigParser()
     check_deps.read('adhrit/config')                                         ####
     return check_deps.get('config-data', str(key))
+
+def update_scanid():
+
+	# Updating config data
+
+	update_config = configparser.ConfigParser()
+	update_config.read('adhrit/config')
+	thescanid = update_config.get('config-data', 'scan_id')
+	thescanid = int(thescanid) + 1 
+
+	update_config.set('config-data', 'scan_id', str(thescanid))
+	with open('adhrit/config', 'w') as updatedconf:
+			update_config.write(updatedconf)
 
 
 
@@ -40,21 +46,18 @@ def scan():
 
         uploaded_files = request.files["file"]
         if uploaded_files and allowed_file(uploaded_files.filename):
-            # uploaded_files.save(os.path.join("uploads", uploaded_files.filename))
             uploaded_files.save(uploaded_files.filename)
             # Renaming to app.apk
             source =  uploaded_files.filename
             dest = 'app.apk'
             os.rename(source, dest)
             
-            
-            
-            # thread_a = Compute(request.__copy__())
-            # thread_a.start()
+          
             main()
             thesid = get_config_data('scan_id')
-            response = jsonify(status_msg='Scanning Completed', scan_id = thesid,  status=HTTPStatus.OK)
-    
+            rows = getreport(thesid)
+            response = jsonify(status_msg='Scanning Completed', scan_id = thesid,rows = rows,  status=HTTPStatus.OK)
+            update_scanid()
             return  response
 
        
@@ -68,21 +71,23 @@ def scan():
 def func():
     return "Adhrt up and flying hiGh *-*"
 
-@app.route('/report/<int:scan_id>')
 def getreport(scan_id):
-#    sid = scan_id
-#    con = dbconnection('adhrit')
-#    cursor = conn.cursor()
-#    cursor.execute("SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid)
+   sid = scan_id
+   query = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
+   rows = select_query(query)
+   return rows   
     
-    #TODO
-    
-    return str(scan_id)
+@app.route("/reset")
+def reset():
+    reset_db()
+    reset_scanid
+    return jsonify(sts_msg = "Resetted db and Scan Id!")
+
     
 if __name__ == '__main__':
     app.run(debug=True)
 
 
-# curl -X POST -F file=@CREDv1.apk http://localhost:5000/scan
+# curl -X POST -F file=@app.apk http://localhost:5000/scan
 
 
