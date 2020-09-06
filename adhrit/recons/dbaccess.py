@@ -43,7 +43,13 @@ def insert_datatable(conn, datadetails):
 		return c.lastrowid
 
 
-
+# Query for select Statement
+def select_query(query):
+	connection = dbconnection('adhrit.db')
+	cur = connection.cursor()
+	cur.execute(query)
+	rows = cur.fetchall() 
+	return rows
 
 
 # Query for the last scan details
