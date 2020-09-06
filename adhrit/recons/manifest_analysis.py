@@ -380,18 +380,7 @@ def add_to_db(dbconstatus, thescanid, tstamp, json_perms, json_critical_perms, j
 	datadetails = (str(thescanid), str(tstamp), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
 	addedornot = insert_datatable(dbconstatus, datadetails)
 
-def update_scanid():
 
-	# Updating config data
-
-	update_config = configparser.ConfigParser()
-	update_config.read('adhrit/config')
-	thescanid = update_config.get('config-data', 'scan_id')
-	thescanid = int(thescanid) + 1 
-
-	update_config.set('config-data', 'scan_id', str(thescanid))
-	with open('adhrit/config', 'w') as updatedconf:
-			update_config.write(updatedconf)
 			
 
 def man_analyzer(apk_name):
@@ -399,5 +388,3 @@ def man_analyzer(apk_name):
 
 		retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
 		add_to_db(retdbstat, retscanid, rettstamp, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
-		update_scanid()
-		# return retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent
