@@ -56,6 +56,7 @@ def scan():
 		  
 			main()
 			thesid = get_config_data('scan_id')
+			# thesid = 1
 			rows = getreport(thesid)
 			response = rows, {'Access-Control-Allow-Origin': '*'}  
 			update_scanid()
@@ -73,19 +74,29 @@ def getreport(scan_id):
 		rowarray_list.append(d)
 	json_data = rowarray_list
 	data = json_data[0]
+	# print(data)
 
 	null_key_list = []
 	for key, value in data.items():
 		val_list = eval(value)
 		if not val_list:
-			# print(key)
 			null_key_list.append(key)
 
 	# removing all unused components
 	for key in null_key_list:
 		del data[key]
+	# print(data)
 
-	return data
+	return jsonify(data)
+			
+
+		
+	# # removing all unused components
+	# for key in null_key_list:
+	# 	del data[key]
+	# # print(data)
+
+	return "data"
 
 @app.route("/testbed")
 def test():
