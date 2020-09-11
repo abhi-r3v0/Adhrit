@@ -1,0 +1,21 @@
+<div class="conatiner" style="text-align: center;padding-top: 10px;">
+  <h3>Pen Test Report</h3>
+</div>
+
+<div *ngIf="res" class="container">
+  <div *ngFor="let item of res | keyvalue">
+    <div class="card">
+      <div class="card-header">
+        {{item.key}}
+      </div>
+      <div class="card-body">
+        <div *ngFor="let data of item.value">
+          <div class="alert border-secondary mb-3" >
+            {{data}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
