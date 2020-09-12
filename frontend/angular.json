@@ -24,7 +24,6 @@
               "src/assets"
             ],
             "styles": [
-
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
@@ -125,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "AdhritFrontEnd"
+    }
+  },
+  "defaultProject": "AdhritFrontEnd",
+  "cli": {
+    "analytics": "27fcaf20-b163-4879-9c63-c3b4e0f1ebd4"
+  }
 }

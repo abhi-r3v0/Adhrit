@@ -7,6 +7,8 @@ from adhrit.recons.dbaccess import dbconnection, select_query
 from adhrit.recons.reset import reset_scanid, reset_db
 import sqlite3
 
+from adhrit.recons.smarser.parser import parser
+import subprocess
 
 ALLOWED_EXTENSIONS = {'apk'}
 
@@ -145,21 +147,14 @@ def getreport(scan_id):
 
 @app.route("/testbed")
 def test():
-	pass
+	subprocess.call('python3 bytecode_scanner.py', shell=True)
+	return "ok"
 
-
-	return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
-
-
-
-
-
+	# return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
 
 @app.route('/')
 def func():
 	return "Adhrt up and flying hiGh *-*"
-
-
 
 
 @app.route("/reset")
@@ -170,7 +165,7 @@ def reset():
 
 	
 if __name__ == '__main__':
-	app.run(debug=True,)
+	app.run(debug=True)
 
 
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
