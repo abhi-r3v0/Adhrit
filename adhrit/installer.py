@@ -3,6 +3,7 @@
 import os
 import subprocess
 import configparser
+import appscript    
 from sys import platform
 
 
@@ -10,12 +11,12 @@ class DepInstaller:
 
     def __init__(self):
         self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'toilet']
-        self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'Jinja2', 'r2pipe', 'smalisca', 'cement==2.10.12']
+        self.pip_tools = ['Flask','PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'r2pipe', 'Flask', 'smalisca', 'cement==2.10.12' ]
         self.uninstalled = []
 
     def ins(self):
         confparser = configparser.ConfigParser()
-        confparser.read('config')
+        confparser.read('config')  
 
         # *nix Dependency Config
         if platform == "linux" or platform == "linux2":
