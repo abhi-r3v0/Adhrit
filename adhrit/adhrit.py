@@ -7,8 +7,6 @@ import argparse
 import configparser
 from colorama import Fore, Style
 from adhrit.recons.apk_extract import apk_info
-from adhrit.recons.vapp import vapp_find
-from adhrit.recons.virustotal import api_check
 from adhrit.recons.smali_extract import smali_de
 from adhrit.recons.smali_extract import smali_re
 from adhrit.recons.smali_extract import apk_sign
@@ -18,7 +16,6 @@ from adhrit.recons.smarser.parser import parser
 from adhrit.recons.native_recon import lib_pwn
 from adhrit.recons.dynamic import adb_con
 from adhrit.recons.clean import cleaner
-from adhrit.recons.root import check_root
 from adhrit.recons.reset import reset_scanid, reset_db
 
 
@@ -83,16 +80,6 @@ class Adhrit:
     def reset_scan_id():
         reset_scanid()
 
-    # # Check for virtual app droppers
-    # @staticmethod
-    # def vappsearch(apk_name):
-    #     vapp_find(apk_name)
-
-    # # Check if the APK has been identified by VirusTotal database
-    # @staticmethod
-    # def vtanalyzer(apk_name):
-    #     api_check(apk_name)
-
     # # Extract the source code of the APK in smali
     # @staticmethod
     # def smaliextractor(apk_name):
@@ -122,16 +109,6 @@ class Adhrit:
     # @staticmethod
     # def native_recon():
     #     lib_pwn()
-
-    # # Install the APK in an emulator and analyze its activities
-    # @staticmethod
-    # def dynamicanalysis(apk_name):
-    #     adb_con(apk_name)
-
-    # # Check for root access in the emulator/device
-    # @staticmethod
-    # def checkroot():
-    #     check_root()
 
 
 def main():

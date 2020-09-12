@@ -1,5 +1,5 @@
-<div class="conatiner" style="text-align: center;padding-top: 10px;">
-  <h3>Pen Test Report</h3>
+<div class="conatiner" style="text-align: center;">
+  <h3 style="font-color:black; margin-top: 6px;">Scan Report</h3>
 </div>
 
 <div *ngIf="res" class="container">
@@ -9,8 +9,8 @@
         {{item.key}}
       </div>
       <div class="card-body">
-        <div *ngFor="let data of item.value">
-          <div class="alert border-secondary mb-3" >
+        <div class="alert border-secondary mb-2">
+          <div *ngFor="let data of item.value">
             {{data}}
           </div>
         </div>
