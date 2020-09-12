@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sources":["index.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\nexport * from './public-api';\nexport { DIR_DOCUMENT_FACTORY as ɵangular_material_src_cdk_bidi_bidi_a } from './dir-document-token';\n"]}

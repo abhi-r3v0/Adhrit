@@ -1,0 +1,107 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: packages/core/src/render3/interfaces/container.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { HOST, NEXT, PARENT, T_HOST } from './view';
+/**
+ * Special location which allows easy identification of type. If we have an array which was
+ * retrieved from the `LView` and that array has `true` at `TYPE` location, we know it is
+ * `LContainer`.
+ * @type {?}
+ */
+export const TYPE = 1;
+/**
+ * Below are constants for LContainer indices to help us look up LContainer members
+ * without having to remember the specific indices.
+ * Uglify will inline these when minifying so there shouldn't be a cost.
+ * @type {?}
+ */
+export const ACTIVE_INDEX = 2;
+// PARENT and NEXT are indices 3 and 4
+// As we already have these constants in LView, we don't need to re-create them.
+/** @type {?} */
+export const MOVED_VIEWS = 5;
+// T_HOST is index 6
+// We already have this constants in LView, we don't need to re-create it.
+/** @type {?} */
+export const NATIVE = 7;
+/** @type {?} */
+export const VIEW_REFS = 8;
+/**
+ * Size of LContainer's header. Represents the index after which all views in the
+ * container will be inserted. We need to keep a record of current views so we know
+ * which views are already in the DOM (and don't need to be re-added) and so we can
+ * remove views from the DOM when they are no longer required.
+ * @type {?}
+ */
+export const CONTAINER_HEADER_OFFSET = 9;
+/** @enum {number} */
+const ActiveIndexFlag = {
+    /**
+     * Flag which signifies that the `LContainer` does not have any inline embedded views.
+     */
+    DYNAMIC_EMBEDDED_VIEWS_ONLY: -1,
+    /**
+     * Flag to signify that this `LContainer` may have transplanted views which need to be change
+     * detected. (see: `LView[DECLARATION_COMPONENT_VIEW])`.
+     *
+     * This flag once set is never unset for the `LContainer`. This means that when unset we can skip
+     * a lot of work in `refreshDynamicEmbeddedViews`. But when set we still need to verify
+     * that the `MOVED_VIEWS` are transplanted and on-push.
+     */
+    HAS_TRANSPLANTED_VIEWS: 1,
+    /**
+     * Number of bits to shift inline embedded views counter to make space for other flags.
+     */
+    SHIFT: 1,
+    /**
+     * When incrementing the active index for inline embedded views, the amount to increment to leave
+     * space for other flags.
+     */
+    INCREMENT: 2,
+};
+export { ActiveIndexFlag };
+/**
+ * The state associated with a container.
+ *
+ * This is an array so that its structure is closer to LView. This helps
+ * when traversing the view tree (which is a mix of containers and component
+ * views), so we can jump to viewOrContainer[NEXT] in the same way regardless
+ * of type.
+ * @record
+ */
+export function LContainer() { }
+if (false) {
+    /* Skipping unnamed member:
+    readonly[HOST]: RElement|RComment|LView;*/
+    /* Skipping unnamed member:
+    [TYPE]: true;*/
+    /* Skipping unnamed member:
+    [ACTIVE_INDEX]: ActiveIndexFlag;*/
+    /* Skipping unnamed member:
+    [PARENT]: LView;*/
+    /* Skipping unnamed member:
+    [NEXT]: LView|LContainer|null;*/
+    /* Skipping unnamed member:
+    [MOVED_VIEWS]: LView[]|null;*/
+    /* Skipping unnamed member:
+    [T_HOST]: TNode;*/
+    /* Skipping unnamed member:
+    readonly[NATIVE]:
+          RComment;*/
+    /* Skipping unnamed member:
+    [VIEW_REFS]: ViewRef[]|null;*/
+}
+// Note: This hack is necessary so we don't erroneously get a circular dependency
+// failure based on types.
+/** @type {?} */
+export const unusedValueExportToPlacateAjd = 1;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udGFpbmVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvY29yZS9zcmMvcmVuZGVyMy9pbnRlcmZhY2VzL2NvbnRhaW5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFhQSxPQUFPLEVBQUMsSUFBSSxFQUFTLElBQUksRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFDLE1BQU0sUUFBUSxDQUFDOzs7Ozs7O0FBUXpELE1BQU0sT0FBTyxJQUFJLEdBQUcsQ0FBQzs7Ozs7OztBQU1yQixNQUFNLE9BQU8sWUFBWSxHQUFHLENBQUM7Ozs7QUFLN0IsTUFBTSxPQUFPLFdBQVcsR0FBRyxDQUFDOzs7O0FBSzVCLE1BQU0sT0FBTyxNQUFNLEdBQUcsQ0FBQzs7QUFDdkIsTUFBTSxPQUFPLFNBQVMsR0FBRyxDQUFDOzs7Ozs7OztBQVExQixNQUFNLE9BQU8sdUJBQXVCLEdBQUcsQ0FBQzs7QUFReEMsTUFBa0IsZUFBZTtJQUMvQjs7T0FFRztJQUNILDJCQUEyQixJQUFLO0lBRWhDOzs7Ozs7O09BT0c7SUFDSCxzQkFBc0IsR0FBSTtJQUUxQjs7T0FFRztJQUNILEtBQUssR0FBSTtJQUdUOzs7T0FHRztJQUNILFNBQVMsR0FBYTtFQUN2Qjs7Ozs7Ozs7Ozs7QUFVRCxnQ0FpRUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFJRCxNQUFNLE9BQU8sNkJBQTZCLEdBQUcsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLlxuICpcbiAqIFVzZSBvZiB0aGlzIHNvdXJjZSBjb2RlIGlzIGdvdmVybmVkIGJ5IGFuIE1JVC1zdHlsZSBsaWNlbnNlIHRoYXQgY2FuIGJlXG4gKiBmb3VuZCBpbiB0aGUgTElDRU5TRSBmaWxlIGF0IGh0dHBzOi8vYW5ndWxhci5pby9saWNlbnNlXG4gKi9cblxuaW1wb3J0IHtWaWV3UmVmfSBmcm9tICcuLi8uLi9saW5rZXIvdmlld19yZWYnO1xuXG5pbXBvcnQge1ROb2RlfSBmcm9tICcuL25vZGUnO1xuaW1wb3J0IHtSQ29tbWVudCwgUkVsZW1lbnR9IGZyb20gJy4vcmVuZGVyZXInO1xuXG5pbXBvcnQge0hPU1QsIExWaWV3LCBORVhULCBQQVJFTlQsIFRfSE9TVH0gZnJvbSAnLi92aWV3JztcblxuXG4vKipcbiAqIFNwZWNpYWwgbG9jYXRpb24gd2hpY2ggYWxsb3dzIGVhc3kgaWRlbnRpZmljYXRpb24gb2YgdHlwZS4gSWYgd2UgaGF2ZSBhbiBhcnJheSB3aGljaCB3YXNcbiAqIHJldHJpZXZlZCBmcm9tIHRoZSBgTFZpZXdgIGFuZCB0aGF0IGFycmF5IGhhcyBgdHJ1ZWAgYXQgYFRZUEVgIGxvY2F0aW9uLCB3ZSBrbm93IGl0IGlzXG4gKiBgTENvbnRhaW5lcmAuXG4gKi9cbmV4cG9ydCBjb25zdCBUWVBFID0gMTtcbi8qKlxuICogQmVsb3cgYXJlIGNvbnN0YW50cyBmb3IgTENvbnRhaW5lciBpbmRpY2VzIHRvIGhlbHAgdXMgbG9vayB1cCBMQ29udGFpbmVyIG1lbWJlcnNcbiAqIHdpdGhvdXQgaGF2aW5nIHRvIHJlbWVtYmVyIHRoZSBzcGVjaWZpYyBpbmRpY2VzLlxuICogVWdsaWZ5IHdpbGwgaW5saW5lIHRoZXNlIHdoZW4gbWluaWZ5aW5nIHNvIHRoZXJlIHNob3VsZG4ndCBiZSBhIGNvc3QuXG4gKi9cbmV4cG9ydCBjb25zdCBBQ1RJVkVfSU5ERVggPSAyO1xuXG4vLyBQQVJFTlQgYW5kIE5FWFQgYXJlIGluZGljZXMgMyBhbmQgNFxuLy8gQXMgd2UgYWxyZWFkeSBoYXZlIHRoZXNlIGNvbnN0YW50cyBpbiBMVmlldywgd2UgZG9uJ3QgbmVlZCB0byByZS1jcmVhdGUgdGhlbS5cblxuZXhwb3J0IGNvbnN0IE1PVkVEX1ZJRVdTID0gNTtcblxuLy8gVF9IT1NUIGlzIGluZGV4IDZcbi8vIFdlIGFscmVhZHkgaGF2ZSB0aGlzIGNvbnN0YW50cyBpbiBMVmlldywgd2UgZG9uJ3QgbmVlZCB0byByZS1jcmVhdGUgaXQuXG5cbmV4cG9ydCBjb25zdCBOQVRJVkUgPSA3O1xuZXhwb3J0IGNvbnN0IFZJRVdfUkVGUyA9IDg7XG5cbi8qKlxuICogU2l6ZSBvZiBMQ29udGFpbmVyJ3MgaGVhZGVyLiBSZXByZXNlbnRzIHRoZSBpbmRleCBhZnRlciB3aGljaCBhbGwgdmlld3MgaW4gdGhlXG4gKiBjb250YWluZXIgd2lsbCBiZSBpbnNlcnRlZC4gV2UgbmVlZCB0byBrZWVwIGEgcmVjb3JkIG9mIGN1cnJlbnQgdmlld3Mgc28gd2Uga25vd1xuICogd2hpY2ggdmlld3MgYXJlIGFscmVhZHkgaW4gdGhlIERPTSAoYW5kIGRvbid0IG5lZWQgdG8gYmUgcmUtYWRkZWQpIGFuZCBzbyB3ZSBjYW5cbiAqIHJlbW92ZSB2aWV3cyBmcm9tIHRoZSBET00gd2hlbiB0aGV5IGFyZSBubyBsb25nZXIgcmVxdWlyZWQuXG4gKi9cbmV4cG9ydCBjb25zdCBDT05UQUlORVJfSEVBREVSX09GRlNFVCA9IDk7XG5cblxuLyoqXG4gKiBVc2VkIHRvIHRyYWNrOlxuICogIC0gSW5saW5lIGVtYmVkZGVkIHZpZXdzIChzZWU6IGDJtcm1ZW1iZWRkZWRWaWV3U3RhcnRgKVxuICogIC0gVHJhbnNwbGFudGVkIGBMVmlld2BzIChzZWU6IGBMVmlld1tERUNMQVJBVElPTl9DT01QT05FTlRfVklFV10pYFxuICovXG5leHBvcnQgY29uc3QgZW51bSBBY3RpdmVJbmRleEZsYWcge1xuICAvKipcbiAgICogRmxhZyB3aGljaCBzaWduaWZpZXMgdGhhdCB0aGUgYExDb250YWluZXJgIGRvZXMgbm90IGhhdmUgYW55IGlubGluZSBlbWJlZGRlZCB2aWV3cy5cbiAgICovXG4gIERZTkFNSUNfRU1CRURERURfVklFV1NfT05MWSA9IC0xLFxuXG4gIC8qKlxuICAgKiBGbGFnIHRvIHNpZ25pZnkgdGhhdCB0aGlzIGBMQ29udGFpbmVyYCBtYXkgaGF2ZSB0cmFuc3BsYW50ZWQgdmlld3Mgd2hpY2ggbmVlZCB0byBiZSBjaGFuZ2VcbiAgICogZGV0ZWN0ZWQuIChzZWU6IGBMVmlld1tERUNMQVJBVElPTl9DT01QT05FTlRfVklFV10pYC5cbiAgICpcbiAgICogVGhpcyBmbGFnIG9uY2Ugc2V0IGlzIG5ldmVyIHVuc2V0IGZvciB0aGUgYExDb250YWluZXJgLiBUaGlzIG1lYW5zIHRoYXQgd2hlbiB1bnNldCB3ZSBjYW4gc2tpcFxuICAgKiBhIGxvdCBvZiB3b3JrIGluIGByZWZyZXNoRHluYW1pY0VtYmVkZGVkVmlld3NgLiBCdXQgd2hlbiBzZXQgd2Ugc3RpbGwgbmVlZCB0byB2ZXJpZnlcbiAgICogdGhhdCB0aGUgYE1PVkVEX1ZJRVdTYCBhcmUgdHJhbnNwbGFudGVkIGFuZCBvbi1wdXNoLlxuICAgKi9cbiAgSEFTX1RSQU5TUExBTlRFRF9WSUVXUyA9IDEsXG5cbiAgLyoqXG4gICAqIE51bWJlciBvZiBiaXRzIHRvIHNoaWZ0IGlubGluZSBlbWJlZGRlZCB2aWV3cyBjb3VudGVyIHRvIG1ha2Ugc3BhY2UgZm9yIG90aGVyIGZsYWdzLlxuICAgKi9cbiAgU0hJRlQgPSAxLFxuXG5cbiAgLyoqXG4gICAqIFdoZW4gaW5jcmVtZW50aW5nIHRoZSBhY3RpdmUgaW5kZXggZm9yIGlubGluZSBlbWJlZGRlZCB2aWV3cywgdGhlIGFtb3VudCB0byBpbmNyZW1lbnQgdG8gbGVhdmVcbiAgICogc3BhY2UgZm9yIG90aGVyIGZsYWdzLlxuICAgKi9cbiAgSU5DUkVNRU5UID0gMSA8PCBTSElGVCxcbn1cblxuLyoqXG4gKiBUaGUgc3RhdGUgYXNzb2NpYXRlZCB3aXRoIGEgY29udGFpbmVyLlxuICpcbiAqIFRoaXMgaXMgYW4gYXJyYXkgc28gdGhhdCBpdHMgc3RydWN0dXJlIGlzIGNsb3NlciB0byBMVmlldy4gVGhpcyBoZWxwc1xuICogd2hlbiB0cmF2ZXJzaW5nIHRoZSB2aWV3IHRyZWUgKHdoaWNoIGlzIGEgbWl4IG9mIGNvbnRhaW5lcnMgYW5kIGNvbXBvbmVudFxuICogdmlld3MpLCBzbyB3ZSBjYW4ganVtcCB0byB2aWV3T3JDb250YWluZXJbTkVYVF0gaW4gdGhlIHNhbWUgd2F5IHJlZ2FyZGxlc3NcbiAqIG9mIHR5cGUuXG4gKi9cbmV4cG9ydCBpbnRlcmZhY2UgTENvbnRhaW5lciBleHRlbmRzIEFycmF5PGFueT4ge1xuICAvKipcbiAgICogVGhlIGhvc3QgZWxlbWVudCBvZiB0aGlzIExDb250YWluZXIuXG4gICAqXG4gICAqIFRoZSBob3N0IGNvdWxkIGJlIGFuIExWaWV3IGlmIHRoaXMgY29udGFpbmVyIGlzIG9uIGEgY29tcG9uZW50IG5vZGUuXG4gICAqIEluIHRoYXQgY2FzZSwgdGhlIGNvbXBvbmVudCBMVmlldyBpcyBpdHMgSE9TVC5cbiAgICovXG4gIHJlYWRvbmx5W0hPU1RdOiBSRWxlbWVudHxSQ29tbWVudHxMVmlldztcblxuICAvKipcbiAgICogVGhpcyBpcyBhIHR5cGUgZmllbGQgd2hpY2ggYWxsb3dzIHVzIHRvIGRpZmZlcmVudGlhdGUgYExDb250YWluZXJgIGZyb20gYFN0eWxpbmdDb250ZXh0YCBpbiBhblxuICAgKiBlZmZpY2llbnQgd2F5LiBUaGUgdmFsdWUgaXMgYWx3YXlzIHNldCB0byBgdHJ1ZWBcbiAgICovXG4gIFtUWVBFXTogdHJ1ZTtcblxuICAvKipcbiAgICogVGhlIG5leHQgYWN0aXZlIGluZGV4IGluIHRoZSB2aWV3cyBhcnJheSB0byByZWFkIG9yIHdyaXRlIHRvLiBUaGlzIGhlbHBzIHVzXG4gICAqIGtlZXAgdHJhY2sgb2Ygd2hlcmUgd2UgYXJlIGluIHRoZSB2aWV3cyBhcnJheS5cbiAgICogSW4gdGhlIGNhc2UgdGhlIExDb250YWluZXIgaXMgY3JlYXRlZCBmb3IgYSBWaWV3Q29udGFpbmVyUmVmLFxuICAgKiBpdCBpcyBzZXQgdG8gbnVsbCB0byBpZGVudGlmeSB0aGlzIHNjZW5hcmlvLCBhcyBpbmRpY2VzIGFyZSBcImFic29sdXRlXCIgaW4gdGhhdCBjYXNlLFxuICAgKiBpLmUuIHByb3ZpZGVkIGRpcmVjdGx5IGJ5IHRoZSB1c2VyIG9mIHRoZSBWaWV3Q29udGFpbmVyUmVmIEFQSS5cbiAgICpcbiAgICogVGhpcyBpcyB1c2VkIGJ5IGDJtcm1ZW1iZWRkZWRWaWV3U3RhcnRgIHRvIHRyYWNrIHdoaWNoIGBMVmlld2AgaXMgY3VycmVudGx5IGFjdGl2ZS5cbiAgICogQmVjYXVzZSBgybXJtWVtYmVkZGVkVmlld1N0YXJ0YCBpcyBub3QgZ2VuZXJhdGVkIGJ5IHRoZSBjb21waWxlciB0aGlzIGZlYXR1cmUgaXMgZXNzZW50aWFsbHlcbiAgICogdW51c2VkLlxuICAgKlxuICAgKiBUaGUgbG93ZXN0IGJpdCBzaWduYWxzIHRoYXQgdGhpcyBgTENvbnRhaW5lcmAgaGFzIHRyYW5zcGxhbnRlZCB2aWV3cyB3aGljaCBuZWVkIHRvIGJlIGNoYW5nZVxuICAgKiBkZXRlY3RlZCBhcyBwYXJ0IG9mIHRoZSBkZWNsYXJhdGlvbiBDRC4gKFNlZSBgTFZpZXdbREVDTEFSQVRJT05fQ09NUE9ORU5UX1ZJRVddYClcbiAgICovXG4gIFtBQ1RJVkVfSU5ERVhdOiBBY3RpdmVJbmRleEZsYWc7XG5cbiAgLyoqXG4gICAqIEFjY2VzcyB0byB0aGUgcGFyZW50IHZpZXcgaXMgbmVjZXNzYXJ5IHNvIHdlIGNhbiBwcm9wYWdhdGUgYmFja1xuICAgKiB1cCBmcm9tIGluc2lkZSBhIGNvbnRhaW5lciB0byBwYXJlbnRbTkVYVF0uXG4gICAqL1xuICBbUEFSRU5UXTogTFZpZXc7XG5cbiAgLyoqXG4gICAqIFRoaXMgYWxsb3dzIHVzIHRvIGp1bXAgZnJvbSBhIGNvbnRhaW5lciB0byBhIHNpYmxpbmcgY29udGFpbmVyIG9yIGNvbXBvbmVudFxuICAgKiB2aWV3IHdpdGggdGhlIHNhbWUgcGFyZW50LCBzbyB3ZSBjYW4gcmVtb3ZlIGxpc3RlbmVycyBlZmZpY2llbnRseS5cbiAgICovXG4gIFtORVhUXTogTFZpZXd8TENvbnRhaW5lcnxudWxsO1xuXG4gIC8qKlxuICAgKiBBIGNvbGxlY3Rpb24gb2Ygdmlld3MgY3JlYXRlZCBiYXNlZCBvbiB0aGUgdW5kZXJseWluZyBgPG5nLXRlbXBsYXRlPmAgZWxlbWVudCBidXQgaW5zZXJ0ZWQgaW50b1xuICAgKiBhIGRpZmZlcmVudCBgTENvbnRhaW5lcmAuIFdlIG5lZWQgdG8gdHJhY2sgdmlld3MgY3JlYXRlZCBmcm9tIGEgZ2l2ZW4gZGVjbGFyYXRpb24gcG9pbnQgc2luY2VcbiAgICogcXVlcmllcyBjb2xsZWN0IG1hdGNoZXMgZnJvbSB0aGUgZW1iZWRkZWQgdmlldyBkZWNsYXJhdGlvbiBwb2ludCBhbmQgX25vdF8gdGhlIGluc2VydGlvbiBwb2ludC5cbiAgICovXG4gIFtNT1ZFRF9WSUVXU106IExWaWV3W118bnVsbDtcblxuICAvKipcbiAgICogUG9pbnRlciB0byB0aGUgYFROb2RlYCB3aGljaCByZXByZXNlbnRzIHRoZSBob3N0IG9mIHRoZSBjb250YWluZXIuXG4gICAqL1xuICBbVF9IT1NUXTogVE5vZGU7XG5cbiAgLyoqIFRoZSBjb21tZW50IGVsZW1lbnQgdGhhdCBzZXJ2ZXMgYXMgYW4gYW5jaG9yIGZvciB0aGlzIExDb250YWluZXIuICovXG4gIHJlYWRvbmx5W05BVElWRV06XG4gICAgICBSQ29tbWVudDsgIC8vIFRPRE8obWlza28pOiByZW1vdmUgYXMgdGhpcyB2YWx1ZSBjYW4gYmUgZ290dGVuIGJ5IHVud3JhcHBpbmcgYFtIT1NUXWBcblxuICAvKipcbiAgICogQXJyYXkgb2YgYFZpZXdSZWZgcyB1c2VkIGJ5IGFueSBgVmlld0NvbnRhaW5lclJlZmBzIHRoYXQgcG9pbnQgdG8gdGhpcyBjb250YWluZXIuXG4gICAqXG4gICAqIFRoaXMgaXMgbGF6aWx5IGluaXRpYWxpemVkIGJ5IGBWaWV3Q29udGFpbmVyUmVmYCB3aGVuIHRoZSBmaXJzdCB2aWV3IGlzIGluc2VydGVkLlxuICAgKi9cbiAgW1ZJRVdfUkVGU106IFZpZXdSZWZbXXxudWxsO1xufVxuXG4vLyBOb3RlOiBUaGlzIGhhY2sgaXMgbmVjZXNzYXJ5IHNvIHdlIGRvbid0IGVycm9uZW91c2x5IGdldCBhIGNpcmN1bGFyIGRlcGVuZGVuY3lcbi8vIGZhaWx1cmUgYmFzZWQgb24gdHlwZXMuXG5leHBvcnQgY29uc3QgdW51c2VkVmFsdWVFeHBvcnRUb1BsYWNhdGVBamQgPSAxO1xuIl19

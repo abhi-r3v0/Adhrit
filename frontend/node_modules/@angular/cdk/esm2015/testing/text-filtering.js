@@ -1,0 +1,23 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Gets text of element excluding certain selectors within the element.
+ * @param element Element to get text from,
+ * @param excludeSelector Selector identifying which elements to exclude,
+ */
+export function _getTextWithExcludedElements(element, excludeSelector) {
+    var _a;
+    const clone = element.cloneNode(true);
+    const exclusions = clone.querySelectorAll(excludeSelector);
+    for (let i = 0; i < exclusions.length; i++) {
+        let child = exclusions[i];
+        (_a = child.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(child);
+    }
+    return (clone.textContent || '').trim();
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV4dC1maWx0ZXJpbmcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9zcmMvY2RrL3Rlc3RpbmcvdGV4dC1maWx0ZXJpbmcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7OztHQU1HO0FBRUg7Ozs7R0FJRztBQUNILE1BQU0sVUFBVSw0QkFBNEIsQ0FBQyxPQUFnQixFQUFFLGVBQXVCOztJQUNwRixNQUFNLEtBQUssR0FBRyxPQUFPLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBWSxDQUFDO0lBQ2pELE1BQU0sVUFBVSxHQUFHLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxlQUFlLENBQUMsQ0FBQztJQUMzRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsVUFBVSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUMxQyxJQUFJLEtBQUssR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDMUIsTUFBQSxLQUFLLENBQUMsVUFBVSwwQ0FBRSxXQUFXLENBQUMsS0FBSyxFQUFFO0tBQ3RDO0lBQ0QsT0FBTyxDQUFDLEtBQUssQ0FBQyxXQUFXLElBQUksRUFBRSxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7QUFDMUMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2VcbiAqIENvcHlyaWdodCBHb29nbGUgTExDIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4gKlxuICogVXNlIG9mIHRoaXMgc291cmNlIGNvZGUgaXMgZ292ZXJuZWQgYnkgYW4gTUlULXN0eWxlIGxpY2Vuc2UgdGhhdCBjYW4gYmVcbiAqIGZvdW5kIGluIHRoZSBMSUNFTlNFIGZpbGUgYXQgaHR0cHM6Ly9hbmd1bGFyLmlvL2xpY2Vuc2VcbiAqL1xuXG4vKipcbiAqIEdldHMgdGV4dCBvZiBlbGVtZW50IGV4Y2x1ZGluZyBjZXJ0YWluIHNlbGVjdG9ycyB3aXRoaW4gdGhlIGVsZW1lbnQuXG4gKiBAcGFyYW0gZWxlbWVudCBFbGVtZW50IHRvIGdldCB0ZXh0IGZyb20sXG4gKiBAcGFyYW0gZXhjbHVkZVNlbGVjdG9yIFNlbGVjdG9yIGlkZW50aWZ5aW5nIHdoaWNoIGVsZW1lbnRzIHRvIGV4Y2x1ZGUsXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBfZ2V0VGV4dFdpdGhFeGNsdWRlZEVsZW1lbnRzKGVsZW1lbnQ6IEVsZW1lbnQsIGV4Y2x1ZGVTZWxlY3Rvcjogc3RyaW5nKSB7XG4gIGNvbnN0IGNsb25lID0gZWxlbWVudC5jbG9uZU5vZGUodHJ1ZSkgYXMgRWxlbWVudDtcbiAgY29uc3QgZXhjbHVzaW9ucyA9IGNsb25lLnF1ZXJ5U2VsZWN0b3JBbGwoZXhjbHVkZVNlbGVjdG9yKTtcbiAgZm9yIChsZXQgaSA9IDA7IGkgPCBleGNsdXNpb25zLmxlbmd0aDsgaSsrKSB7XG4gICAgbGV0IGNoaWxkID0gZXhjbHVzaW9uc1tpXTtcbiAgICBjaGlsZC5wYXJlbnROb2RlPy5yZW1vdmVDaGlsZChjaGlsZCk7XG4gIH1cbiAgcmV0dXJuIChjbG9uZS50ZXh0Q29udGVudCB8fCAnJykudHJpbSgpO1xufVxuIl19

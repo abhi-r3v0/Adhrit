@@ -1,0 +1,1 @@
+{"version":3,"file":"ngx-spinner.d.ts","sources":["ngx-spinner.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\nexport * from './public_api';\nexport { SafeHtmlPipe as ɵa } from './lib/safe-html.pipe';\n"]}

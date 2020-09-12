@@ -1,0 +1,71 @@
+import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, Renderer2 } from '@angular/core';
+import { SlideComponent } from './slide.component';
+import { CarouselConfig } from './carousel.config';
+export declare enum Direction {
+    UNKNOWN = 0,
+    NEXT = 1,
+    PREV = 2
+}
+/**
+ * Base element to create carousel
+ */
+export declare class CarouselComponent implements OnDestroy, AfterViewInit {
+    protected el: ElementRef;
+    private cdRef;
+    private renderer;
+    SWIPE_ACTION: {
+        LEFT: string;
+        RIGHT: string;
+    };
+    _slidesList: QueryList<SlideComponent>;
+    get slides(): SlideComponent[];
+    private _destroy$;
+    protected currentInterval: any;
+    protected isPlaying: boolean;
+    protected destroyed: boolean;
+    protected animationEnd: boolean;
+    protected _currentActiveSlide: number;
+    protected carouselIndicators: any;
+    isBrowser: any;
+    noWrap: boolean;
+    noPause: boolean;
+    isControls: boolean;
+    keyboard: boolean;
+    class: String;
+    type: String;
+    animation: String;
+    activeSlideIndex: number;
+    allowSwipe: boolean;
+    activeSlideChange: EventEmitter<any>;
+    set activeSlide(index: number);
+    get activeSlide(): number;
+    protected _interval: number;
+    checkNavigation(): boolean;
+    checkDots(): boolean;
+    getImg(slide: any): any;
+    get interval(): number;
+    set interval(value: number);
+    get isBs4(): boolean;
+    constructor(config: CarouselConfig, el: ElementRef, platformId: string, cdRef: ChangeDetectorRef, renderer: Renderer2);
+    ngOnDestroy(): void;
+    ngAfterViewInit(): void;
+    swipe(action?: string): void;
+    nextSlide(force?: boolean): void;
+    previousSlide(force?: boolean): void;
+    protected fadeAnimation(goToIndex: number, direction?: any): void;
+    protected slideAnimation(goToIndex: number, direction: any): void;
+    selectSlide(index: number): void;
+    play(): void;
+    pause(): void;
+    getCurrentSlideIndex(): number;
+    isLast(index: number): boolean;
+    private findNextSlideIndex;
+    private _select;
+    private restartTimer;
+    private resetTimer;
+    protected hasClass(el: any, className: any): any;
+    protected classAdd(el: any, className: any): void;
+    protected removeClass(el: any, className: any): void;
+    keyboardControl(event: any): void;
+    focus(): void;
+}

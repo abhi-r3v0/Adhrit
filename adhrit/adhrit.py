@@ -7,8 +7,6 @@ import argparse
 import configparser
 from colorama import Fore, Style
 from adhrit.recons.apk_extract import apk_info
-from adhrit.recons.vapp import vapp_find
-from adhrit.recons.virustotal import api_check
 from adhrit.recons.smali_extract import smali_de
 from adhrit.recons.smali_extract import smali_re
 from adhrit.recons.smali_extract import apk_sign
@@ -18,9 +16,9 @@ from adhrit.recons.smarser.parser import parser
 from adhrit.recons.native_recon import lib_pwn
 from adhrit.recons.dynamic import adb_con
 from adhrit.recons.clean import cleaner
-from adhrit.recons.root import check_root
 from adhrit.recons.reset import reset_scanid, reset_db
-from adhrit.recons.smarser.parser import parser
+
+
 
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @HawkSpawn )'
@@ -84,57 +82,8 @@ class Adhrit:
 	def reset_scan_id():
 		reset_scanid()
 
-	# # Bytecode Analysis
-	# @staticmethod
-	# def bytecodeanalyzer():
-	# 	parser()
-
-	# # Check for virtual app droppers
-	# @staticmethod
-	# def vappsearch(apk_name):
-	#     vapp_find(apk_name)
-
-	# # Check if the APK has been identified by VirusTotal database
-	# @staticmethod
-	# def vtanalyzer(apk_name):
-	#     api_check(apk_name)
-
-	# # Extract the source code of the APK in smali
-	# @staticmethod
-	# def smaliextractor(apk_name):
-	#     smali_de(apk_name)
-
-
-
-	# # Recompile smali back into APK
-	# @staticmethod
-	# def smalirecompile(apk_name):
-	#     smali_re(apk_name)
-
-	# # Sign the apk with a generic signature. For educaational purposes only!
-	# @staticmethod
-	# def apk_signing(apk_name):
-	#     apk_sign(apk_name)
-
-	# # Check for string injection points
-	# @staticmethod
-	# def smali_inj(apk_name, flag_format=''):
-	#     inj_check(apk_name, flag_format)
-
-	# # Analyze native library
-	# @staticmethod
-	# def native_recon():
-	#     lib_pwn()
-
-	# # Install the APK in an emulator and analyze its activities
-	# @staticmethod
-	# def dynamicanalysis(apk_name):
-	#     adb_con(apk_name)
-
-	# # Check for root access in the emulator/device
-	# @staticmethod
-	# def checkroot():
-	#     check_root()
+	
+	
 
 
 def main():
@@ -144,9 +93,9 @@ def main():
 	adhrit.welcome()
 	apk_name = 'app.apk'
 	adhrit.apkextractor(apk_name)
-	# adhrit.manifestanalyzer(apk_name)
+	adhrit.manifestanalyzer(apk_name)
 	# adhrit.bytecodeanalyzer()
-	adhrit.cleanproject(apk_name)
+	# adhrit.cleanproject(apk_name)
 
 	# adhrit.resetdb()
 	# adhrit.reset_scan_id()

@@ -1,0 +1,17 @@
+var CollapseModule_1;
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { CollapseComponent } from './collapse.component';
+let CollapseModule = CollapseModule_1 = class CollapseModule {
+    static forRoot() {
+        return { ngModule: CollapseModule_1, providers: [] };
+    }
+};
+CollapseModule = CollapseModule_1 = __decorate([
+    NgModule({
+        declarations: [CollapseComponent],
+        exports: [CollapseComponent],
+    })
+], CollapseModule);
+export { CollapseModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sbGFwc2UubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1ib290c3RyYXAtbWQvIiwic291cmNlcyI6WyJsaWIvZnJlZS9jb2xsYXBzZS9jb2xsYXBzZS5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUF1QixNQUFNLGVBQWUsQ0FBQztBQUM5RCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQU16RCxJQUFhLGNBQWMsc0JBQTNCLE1BQWEsY0FBYztJQUNsQixNQUFNLENBQUMsT0FBTztRQUNuQixPQUFPLEVBQUUsUUFBUSxFQUFFLGdCQUFjLEVBQUUsU0FBUyxFQUFFLEVBQUUsRUFBRSxDQUFDO0lBQ3JELENBQUM7Q0FDRixDQUFBO0FBSlksY0FBYztJQUoxQixRQUFRLENBQUM7UUFDUixZQUFZLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztRQUNqQyxPQUFPLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztLQUM3QixDQUFDO0dBQ1csY0FBYyxDQUkxQjtTQUpZLGNBQWMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSwgTW9kdWxlV2l0aFByb3ZpZGVycyB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ29sbGFwc2VDb21wb25lbnQgfSBmcm9tICcuL2NvbGxhcHNlLmNvbXBvbmVudCc7XG5cbkBOZ01vZHVsZSh7XG4gIGRlY2xhcmF0aW9uczogW0NvbGxhcHNlQ29tcG9uZW50XSxcbiAgZXhwb3J0czogW0NvbGxhcHNlQ29tcG9uZW50XSxcbn0pXG5leHBvcnQgY2xhc3MgQ29sbGFwc2VNb2R1bGUge1xuICBwdWJsaWMgc3RhdGljIGZvclJvb3QoKTogTW9kdWxlV2l0aFByb3ZpZGVyczxDb2xsYXBzZU1vZHVsZT4ge1xuICAgIHJldHVybiB7IG5nTW9kdWxlOiBDb2xsYXBzZU1vZHVsZSwgcHJvdmlkZXJzOiBbXSB9O1xuICB9XG59XG4iXX0=

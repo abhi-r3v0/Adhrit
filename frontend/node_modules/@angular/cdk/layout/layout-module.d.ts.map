@@ -1,0 +1,1 @@
+{"version":3,"file":"layout-module.d.ts","sources":["layout-module.d.ts"],"names":[],"mappings":";AAAA;;;AACA","sourcesContent":["export declare class LayoutModule {\n}\n"]}

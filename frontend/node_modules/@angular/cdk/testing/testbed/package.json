@@ -1,0 +1,9 @@
+{
+  "name": "@angular/cdk/testing/testbed",
+  "main": "../../bundles/cdk-testing-testbed.umd.js",
+  "fesm2015": "../../fesm2015/testing/testbed.js",
+  "esm2015": "../../esm2015/testing/testbed/index.js",
+  "typings": "./index.d.ts",
+  "module": "../../fesm2015/testing/testbed.js",
+  "es2015": "../../fesm2015/testing/testbed.js"
+}

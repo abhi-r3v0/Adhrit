@@ -121,8 +121,6 @@ def apk_info(apk_name):
 	if os.path.isdir('manifest'):
 		os.system('cp manifest/AndroidManifest.xml Manifest.xml')
 		os.system('rm -rf manifest/')
-
-	
 		
 
 	# os.system('rm AndroidManifest.xml')

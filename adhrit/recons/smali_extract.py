@@ -104,23 +104,6 @@ def inj_check(apk_name, flag_format=''):
     if check == 1:
         print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + "Constant strings written to 'str_inj.txt' file in 'smali_analysis' directory\n")
 
-    print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SEARCHING FOR CTF FLAGS\n")
-    if flags:
-        with open("ctf_flags.txt", "a+") as ctf_file:
-            for flag in flags:
-                start = flag.find(flag_format)
-                end = flag[start:].find('}') + 1
-                if start is not -1 and flag[start:end] != "":
-                    flag_count += 1
-                    ctf_file.write("\n" + flag[start:end])
-                    if 0 < flag_count < 10:
-                        print("\n\t" + Fore.BLUE + "[>] " + Fore.YELLOW + flag[start:end])
-        if flag_count == 0:
-            print(Fore.RED + "\n\t[-] No flags found ")
-            exit(0)
-        print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + str(flag_count) + " flag formats found")
-        print(Fore.BLUE + "\n\t\t[+] " + Fore.YELLOW + "All the flags written to 'ctf_flags.txt' file in " + Fore.BLUE + "'smali_analysis'" + Fore.YELLOW + "directory")
 
     print(Fore.YELLOW + "\n--------------------------------------------------")
     print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SEARCHING FOR URLs\n\n")

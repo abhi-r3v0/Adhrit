@@ -1,0 +1,13 @@
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { BaseChartDirective } from './chart.directive';
+let ChartsModule = class ChartsModule {
+};
+ChartsModule = __decorate([
+    NgModule({
+        declarations: [BaseChartDirective],
+        exports: [BaseChartDirective],
+    })
+], ChartsModule);
+export { ChartsModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhcnQubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1ib290c3RyYXAtbWQvIiwic291cmNlcyI6WyJsaWIvZnJlZS9jaGFydHMvY2hhcnQubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRXpDLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBTXZELElBQWEsWUFBWSxHQUF6QixNQUFhLFlBQVk7Q0FBRyxDQUFBO0FBQWYsWUFBWTtJQUp4QixRQUFRLENBQUM7UUFDUixZQUFZLEVBQUUsQ0FBQyxrQkFBa0IsQ0FBQztRQUNsQyxPQUFPLEVBQUUsQ0FBQyxrQkFBa0IsQ0FBQztLQUM5QixDQUFDO0dBQ1csWUFBWSxDQUFHO1NBQWYsWUFBWSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IEJhc2VDaGFydERpcmVjdGl2ZSB9IGZyb20gJy4vY2hhcnQuZGlyZWN0aXZlJztcblxuQE5nTW9kdWxlKHtcbiAgZGVjbGFyYXRpb25zOiBbQmFzZUNoYXJ0RGlyZWN0aXZlXSxcbiAgZXhwb3J0czogW0Jhc2VDaGFydERpcmVjdGl2ZV0sXG59KVxuZXhwb3J0IGNsYXNzIENoYXJ0c01vZHVsZSB7fVxuIl19

@@ -1,0 +1,6 @@
+/**
+ * Generated bundle index. Do not edit.
+ */
+export * from './public_api';
+export { SafeHtmlPipe as ɵa } from './lib/safe-html.pipe';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmd4LXNwaW5uZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9wcm9qZWN0cy9uZ3gtc3Bpbm5lci9zcmMvbmd4LXNwaW5uZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLGNBQWMsQ0FBQztBQUU3QixPQUFPLEVBQUMsWUFBWSxJQUFJLEVBQUUsRUFBQyxNQUFNLHNCQUFzQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBHZW5lcmF0ZWQgYnVuZGxlIGluZGV4LiBEbyBub3QgZWRpdC5cbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL3B1YmxpY19hcGknO1xuXG5leHBvcnQge1NhZmVIdG1sUGlwZSBhcyDJtWF9IGZyb20gJy4vbGliL3NhZmUtaHRtbC5waXBlJzsiXX0=

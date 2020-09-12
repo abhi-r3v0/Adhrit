@@ -1,0 +1,19 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+export * from './table';
+export * from './cell';
+export * from './coalesced-style-scheduler';
+export * from './row';
+export * from './table-module';
+export * from './sticky-styler';
+export * from './can-stick';
+export * from './text-column';
+export * from './tokens';
+/** Re-export DataSource for a more intuitive experience for users of just the table. */
+export { DataSource } from '@angular/cdk/collections';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3NyYy9jZGsvdGFibGUvcHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7O0dBTUc7QUFFSCxjQUFjLFNBQVMsQ0FBQztBQUN4QixjQUFjLFFBQVEsQ0FBQztBQUN2QixjQUFjLDZCQUE2QixDQUFDO0FBQzVDLGNBQWMsT0FBTyxDQUFDO0FBQ3RCLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsY0FBYyxpQkFBaUIsQ0FBQztBQUNoQyxjQUFjLGFBQWEsQ0FBQztBQUM1QixjQUFjLGVBQWUsQ0FBQztBQUM5QixjQUFjLFVBQVUsQ0FBQztBQUV6Qix3RkFBd0Y7QUFDeEYsT0FBTyxFQUFDLFVBQVUsRUFBQyxNQUFNLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vdGFibGUnO1xuZXhwb3J0ICogZnJvbSAnLi9jZWxsJztcbmV4cG9ydCAqIGZyb20gJy4vY29hbGVzY2VkLXN0eWxlLXNjaGVkdWxlcic7XG5leHBvcnQgKiBmcm9tICcuL3Jvdyc7XG5leHBvcnQgKiBmcm9tICcuL3RhYmxlLW1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL3N0aWNreS1zdHlsZXInO1xuZXhwb3J0ICogZnJvbSAnLi9jYW4tc3RpY2snO1xuZXhwb3J0ICogZnJvbSAnLi90ZXh0LWNvbHVtbic7XG5leHBvcnQgKiBmcm9tICcuL3Rva2Vucyc7XG5cbi8qKiBSZS1leHBvcnQgRGF0YVNvdXJjZSBmb3IgYSBtb3JlIGludHVpdGl2ZSBleHBlcmllbmNlIGZvciB1c2VycyBvZiBqdXN0IHRoZSB0YWJsZS4gKi9cbmV4cG9ydCB7RGF0YVNvdXJjZX0gZnJvbSAnQGFuZ3VsYXIvY2RrL2NvbGxlY3Rpb25zJztcbiJdfQ==

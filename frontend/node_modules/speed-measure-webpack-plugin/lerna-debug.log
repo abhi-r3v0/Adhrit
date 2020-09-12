@@ -1,0 +1,85 @@
+0 silly input [ 'full-test' ]
+1 silly flags { _: [ 'run' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   script: 'full-test',
+1 silly flags   args: [] }
+2 verbose rootPath /Users/stephen/workspace/speed-measure-webpack-plugin
+3 info version 2.11.0
+4 silly existsSync /Users/stephen/workspace/speed-measure-webpack-plugin/VERSION
+5 silly initialize attempt
+6 silly initialize success
+7 silly execute attempt
+8 silly runScriptInDir full-test [] v1-plain
+9 silly getExecOpts { cwd:
+9 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v1-plain' }
+10 silly runScriptInDir full-test [] v2-plain
+11 silly getExecOpts { cwd:
+11 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v2-plain' }
+12 silly runScriptInDir full-test [] v3-circular-plugin
+13 silly getExecOpts { cwd:
+13 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v3-circular-plugin' }
+14 silly runScriptInDir full-test [] v3-hard-source-webpack-plugin
+15 silly getExecOpts { cwd:
+15 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v3-hard-source-webpack-plugin' }
+16 silly runScriptInDir full-test [] v3-plain
+17 silly getExecOpts { cwd:
+17 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v3-plain' }
+18 silly runScriptInDir full-test [] v3-stats
+19 silly getExecOpts { cwd:
+19 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v3-stats' }
+20 silly runScriptInDir full-test [] v4-circular-plugin
+21 silly getExecOpts { cwd:
+21 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v4-circular-plugin' }
+22 silly runScriptInDir full-test [] v4-hard-source-webpack-plugin
+23 silly getExecOpts { cwd:
+23 silly getExecOpts    '/Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v4-hard-source-webpack-plugin' }
+24 error full-test Errored while running script in 'v4-circular-plugin'
+25 error execute callback with error
+26 error Error: Command failed: npm run full-test
+26 error FAIL ./smp.test.js
+26 error   ● Test suite failed to run
+26 error
+26 error     TypeError: Cannot read property 'cwd' of undefined
+26 error
+26 error       at Object.getCacheKey (../../../node_modules/babel-jest/build/index.js:212:51)
+26 error
+26 error Test Suites: 1 failed, 1 total
+26 error Tests:       0 total
+26 error Snapshots:   0 total
+26 error Time:        0.391s
+26 error Ran all test suites matching /.\/smp.test.js/i.
+26 error npm ERR! code ELIFECYCLE
+26 error npm ERR! errno 1
+26 error npm ERR! v4-circular-plugin@0.0.1 test: `jest ./smp.test.js`
+26 error npm ERR! Exit status 1
+26 error npm ERR!
+26 error npm ERR! Failed at the v4-circular-plugin@0.0.1 test script.
+26 error npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+26 error
+26 error npm ERR! A complete log of this run can be found in:
+26 error npm ERR!     /Users/stephen/.npm/_logs/2020-03-23T00_04_18_311Z-debug.log
+26 error npm ERR! code ELIFECYCLE
+26 error npm ERR! errno 1
+26 error npm ERR! v4-circular-plugin@0.0.1 full-test: `npm run prepare && npm run test && npm run cleanup`
+26 error npm ERR! Exit status 1
+26 error npm ERR!
+26 error npm ERR! Failed at the v4-circular-plugin@0.0.1 full-test script.
+26 error npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+26 error
+26 error npm ERR! A complete log of this run can be found in:
+26 error npm ERR!     /Users/stephen/.npm/_logs/2020-03-23T00_04_18_453Z-debug.log
+26 error
+26 error > v4-circular-plugin@0.0.1 full-test /Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v4-circular-plugin
+26 error > npm run prepare && npm run test && npm run cleanup
+26 error
+26 error
+26 error > v4-circular-plugin@0.0.1 prepare /Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v4-circular-plugin
+26 error > cp -r ../../common/* .
+26 error
+26 error
+26 error > v4-circular-plugin@0.0.1 test /Users/stephen/workspace/speed-measure-webpack-plugin/__tests__/setups/v4-circular-plugin
+26 error > jest ./smp.test.js
+26 error
+26 error
+26 error     at Promise.all.then.arr (/Users/stephen/workspace/speed-measure-webpack-plugin/node_modules/lerna/node_modules/execa/index.js:236:11)

@@ -1,0 +1,46 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { DECLARATION_VIEW, T_HOST } from './interfaces/view';
+import { getParentInjectorViewOffset } from './util/injector_utils';
+/**
+ * If `startTNode.parent` exists and has an injector, returns TNode for that injector.
+ * Otherwise, unwraps a parent injector location number to find the view offset from the current
+ * injector, then walks up the declaration view tree until the TNode of the parent injector is
+ * found.
+ *
+ * @param location The location of the parent injector, which contains the view offset
+ * @param startView The LView instance from which to start walking up the view tree
+ * @param startTNode The TNode instance of the starting element
+ * @returns The TNode of the parent injector
+ */
+export function getParentInjectorTNode(location, startView, startTNode) {
+    // If there is an injector on the parent TNode, retrieve the TNode for that injector.
+    if (startTNode.parent && startTNode.parent.injectorIndex !== -1) {
+        // view offset is 0
+        const injectorIndex = startTNode.parent.injectorIndex;
+        let tNode = startTNode.parent;
+        // If tNode.injectorIndex === tNode.parent.injectorIndex, then the index belongs to a parent
+        // injector.
+        while (tNode.parent != null && injectorIndex == tNode.parent.injectorIndex) {
+            tNode = tNode.parent;
+        }
+        return tNode;
+    }
+    let viewOffset = getParentInjectorViewOffset(location);
+    // view offset is 1
+    let parentView = startView;
+    let parentTNode = startView[T_HOST];
+    // view offset is superior to 1
+    while (viewOffset > 1) {
+        parentView = parentView[DECLARATION_VIEW];
+        parentTNode = parentView[T_HOST];
+        viewOffset--;
+    }
+    return parentTNode;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9kZV91dGlsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcGFja2FnZXMvY29yZS9zcmMvcmVuZGVyMy9ub2RlX3V0aWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7OztHQU1HO0FBSUgsT0FBTyxFQUFDLGdCQUFnQixFQUFTLE1BQU0sRUFBQyxNQUFNLG1CQUFtQixDQUFDO0FBQ2xFLE9BQU8sRUFBQywyQkFBMkIsRUFBQyxNQUFNLHVCQUF1QixDQUFDO0FBRWxFOzs7Ozs7Ozs7O0dBVUc7QUFDSCxNQUFNLFVBQVUsc0JBQXNCLENBQ2xDLFFBQWtDLEVBQUUsU0FBZ0IsRUFBRSxVQUFpQjtJQUV6RSxxRkFBcUY7SUFDckYsSUFBSSxVQUFVLENBQUMsTUFBTSxJQUFJLFVBQVUsQ0FBQyxNQUFNLENBQUMsYUFBYSxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQy9ELG1CQUFtQjtRQUNuQixNQUFNLGFBQWEsR0FBRyxVQUFVLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQztRQUN0RCxJQUFJLEtBQUssR0FBRyxVQUFVLENBQUMsTUFBTSxDQUFDO1FBQzlCLDRGQUE0RjtRQUM1RixZQUFZO1FBQ1osT0FBTyxLQUFLLENBQUMsTUFBTSxJQUFJLElBQUksSUFBSSxhQUFhLElBQUksS0FBSyxDQUFDLE1BQU0sQ0FBQyxhQUFhLEVBQUU7WUFDMUUsS0FBSyxHQUFHLEtBQUssQ0FBQyxNQUFNLENBQUM7U0FDdEI7UUFDRCxPQUFPLEtBQUssQ0FBQztLQUNkO0lBQ0QsSUFBSSxVQUFVLEdBQUcsMkJBQTJCLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdkQsbUJBQW1CO0lBQ25CLElBQUksVUFBVSxHQUFHLFNBQVMsQ0FBQztJQUMzQixJQUFJLFdBQVcsR0FBRyxTQUFTLENBQUMsTUFBTSxDQUFpQixDQUFDO0lBQ3BELCtCQUErQjtJQUMvQixPQUFPLFVBQVUsR0FBRyxDQUFDLEVBQUU7UUFDckIsVUFBVSxHQUFHLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBRSxDQUFDO1FBQzNDLFdBQVcsR0FBRyxVQUFVLENBQUMsTUFBTSxDQUFpQixDQUFDO1FBQ2pELFVBQVUsRUFBRSxDQUFDO0tBQ2Q7SUFDRCxPQUFPLFdBQVcsQ0FBQztBQUNyQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAbGljZW5zZVxuICogQ29weXJpZ2h0IEdvb2dsZSBMTEMgQWxsIFJpZ2h0cyBSZXNlcnZlZC5cbiAqXG4gKiBVc2Ugb2YgdGhpcyBzb3VyY2UgY29kZSBpcyBnb3Zlcm5lZCBieSBhbiBNSVQtc3R5bGUgbGljZW5zZSB0aGF0IGNhbiBiZVxuICogZm91bmQgaW4gdGhlIExJQ0VOU0UgZmlsZSBhdCBodHRwczovL2FuZ3VsYXIuaW8vbGljZW5zZVxuICovXG5cbmltcG9ydCB7UmVsYXRpdmVJbmplY3RvckxvY2F0aW9ufSBmcm9tICcuL2ludGVyZmFjZXMvaW5qZWN0b3InO1xuaW1wb3J0IHtUQ29udGFpbmVyTm9kZSwgVEVsZW1lbnROb2RlLCBUTm9kZX0gZnJvbSAnLi9pbnRlcmZhY2VzL25vZGUnO1xuaW1wb3J0IHtERUNMQVJBVElPTl9WSUVXLCBMVmlldywgVF9IT1NUfSBmcm9tICcuL2ludGVyZmFjZXMvdmlldyc7XG5pbXBvcnQge2dldFBhcmVudEluamVjdG9yVmlld09mZnNldH0gZnJvbSAnLi91dGlsL2luamVjdG9yX3V0aWxzJztcblxuLyoqXG4gKiBJZiBgc3RhcnRUTm9kZS5wYXJlbnRgIGV4aXN0cyBhbmQgaGFzIGFuIGluamVjdG9yLCByZXR1cm5zIFROb2RlIGZvciB0aGF0IGluamVjdG9yLlxuICogT3RoZXJ3aXNlLCB1bndyYXBzIGEgcGFyZW50IGluamVjdG9yIGxvY2F0aW9uIG51bWJlciB0byBmaW5kIHRoZSB2aWV3IG9mZnNldCBmcm9tIHRoZSBjdXJyZW50XG4gKiBpbmplY3RvciwgdGhlbiB3YWxrcyB1cCB0aGUgZGVjbGFyYXRpb24gdmlldyB0cmVlIHVudGlsIHRoZSBUTm9kZSBvZiB0aGUgcGFyZW50IGluamVjdG9yIGlzXG4gKiBmb3VuZC5cbiAqXG4gKiBAcGFyYW0gbG9jYXRpb24gVGhlIGxvY2F0aW9uIG9mIHRoZSBwYXJlbnQgaW5qZWN0b3IsIHdoaWNoIGNvbnRhaW5zIHRoZSB2aWV3IG9mZnNldFxuICogQHBhcmFtIHN0YXJ0VmlldyBUaGUgTFZpZXcgaW5zdGFuY2UgZnJvbSB3aGljaCB0byBzdGFydCB3YWxraW5nIHVwIHRoZSB2aWV3IHRyZWVcbiAqIEBwYXJhbSBzdGFydFROb2RlIFRoZSBUTm9kZSBpbnN0YW5jZSBvZiB0aGUgc3RhcnRpbmcgZWxlbWVudFxuICogQHJldHVybnMgVGhlIFROb2RlIG9mIHRoZSBwYXJlbnQgaW5qZWN0b3JcbiAqL1xuZXhwb3J0IGZ1bmN0aW9uIGdldFBhcmVudEluamVjdG9yVE5vZGUoXG4gICAgbG9jYXRpb246IFJlbGF0aXZlSW5qZWN0b3JMb2NhdGlvbiwgc3RhcnRWaWV3OiBMVmlldywgc3RhcnRUTm9kZTogVE5vZGUpOiBURWxlbWVudE5vZGV8XG4gICAgVENvbnRhaW5lck5vZGV8bnVsbCB7XG4gIC8vIElmIHRoZXJlIGlzIGFuIGluamVjdG9yIG9uIHRoZSBwYXJlbnQgVE5vZGUsIHJldHJpZXZlIHRoZSBUTm9kZSBmb3IgdGhhdCBpbmplY3Rvci5cbiAgaWYgKHN0YXJ0VE5vZGUucGFyZW50ICYmIHN0YXJ0VE5vZGUucGFyZW50LmluamVjdG9ySW5kZXggIT09IC0xKSB7XG4gICAgLy8gdmlldyBvZmZzZXQgaXMgMFxuICAgIGNvbnN0IGluamVjdG9ySW5kZXggPSBzdGFydFROb2RlLnBhcmVudC5pbmplY3RvckluZGV4O1xuICAgIGxldCB0Tm9kZSA9IHN0YXJ0VE5vZGUucGFyZW50O1xuICAgIC8vIElmIHROb2RlLmluamVjdG9ySW5kZXggPT09IHROb2RlLnBhcmVudC5pbmplY3RvckluZGV4LCB0aGVuIHRoZSBpbmRleCBiZWxvbmdzIHRvIGEgcGFyZW50XG4gICAgLy8gaW5qZWN0b3IuXG4gICAgd2hpbGUgKHROb2RlLnBhcmVudCAhPSBudWxsICYmIGluamVjdG9ySW5kZXggPT0gdE5vZGUucGFyZW50LmluamVjdG9ySW5kZXgpIHtcbiAgICAgIHROb2RlID0gdE5vZGUucGFyZW50O1xuICAgIH1cbiAgICByZXR1cm4gdE5vZGU7XG4gIH1cbiAgbGV0IHZpZXdPZmZzZXQgPSBnZXRQYXJlbnRJbmplY3RvclZpZXdPZmZzZXQobG9jYXRpb24pO1xuICAvLyB2aWV3IG9mZnNldCBpcyAxXG4gIGxldCBwYXJlbnRWaWV3ID0gc3RhcnRWaWV3O1xuICBsZXQgcGFyZW50VE5vZGUgPSBzdGFydFZpZXdbVF9IT1NUXSBhcyBURWxlbWVudE5vZGU7XG4gIC8vIHZpZXcgb2Zmc2V0IGlzIHN1cGVyaW9yIHRvIDFcbiAgd2hpbGUgKHZpZXdPZmZzZXQgPiAxKSB7XG4gICAgcGFyZW50VmlldyA9IHBhcmVudFZpZXdbREVDTEFSQVRJT05fVklFV10hO1xuICAgIHBhcmVudFROb2RlID0gcGFyZW50Vmlld1tUX0hPU1RdIGFzIFRFbGVtZW50Tm9kZTtcbiAgICB2aWV3T2Zmc2V0LS07XG4gIH1cbiAgcmV0dXJuIHBhcmVudFROb2RlO1xufVxuIl19

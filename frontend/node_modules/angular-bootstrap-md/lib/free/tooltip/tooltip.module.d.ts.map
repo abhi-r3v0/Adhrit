@@ -1,0 +1,1 @@
+{"version":3,"file":"tooltip.module.d.ts","sources":["tooltip.module.d.ts"],"names":[],"mappings":"AAAA;;;;;AACA;AACA;;;AACA","sourcesContent":["import { ModuleWithProviders } from '@angular/core';\nexport declare class TooltipModule {\n    static forRoot(): ModuleWithProviders<TooltipModule>;\n}\n"]}

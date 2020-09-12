@@ -1,0 +1,17 @@
+var WavesModule_1;
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { WavesDirective } from './waves-effect.directive';
+let WavesModule = WavesModule_1 = class WavesModule {
+    static forRoot() {
+        return { ngModule: WavesModule_1, providers: [] };
+    }
+};
+WavesModule = WavesModule_1 = __decorate([
+    NgModule({
+        declarations: [WavesDirective],
+        exports: [WavesDirective],
+    })
+], WavesModule);
+export { WavesModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2F2ZXMubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1ib290c3RyYXAtbWQvIiwic291cmNlcyI6WyJsaWIvZnJlZS93YXZlcy93YXZlcy5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUF1QixNQUFNLGVBQWUsQ0FBQztBQUM5RCxPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0sMEJBQTBCLENBQUM7QUFNMUQsSUFBYSxXQUFXLG1CQUF4QixNQUFhLFdBQVc7SUFDZixNQUFNLENBQUMsT0FBTztRQUNuQixPQUFPLEVBQUUsUUFBUSxFQUFFLGFBQVcsRUFBRSxTQUFTLEVBQUUsRUFBRSxFQUFFLENBQUM7SUFDbEQsQ0FBQztDQUNGLENBQUE7QUFKWSxXQUFXO0lBSnZCLFFBQVEsQ0FBQztRQUNSLFlBQVksRUFBRSxDQUFDLGNBQWMsQ0FBQztRQUM5QixPQUFPLEVBQUUsQ0FBQyxjQUFjLENBQUM7S0FDMUIsQ0FBQztHQUNXLFdBQVcsQ0FJdkI7U0FKWSxXQUFXIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmdNb2R1bGUsIE1vZHVsZVdpdGhQcm92aWRlcnMgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFdhdmVzRGlyZWN0aXZlIH0gZnJvbSAnLi93YXZlcy1lZmZlY3QuZGlyZWN0aXZlJztcblxuQE5nTW9kdWxlKHtcbiAgZGVjbGFyYXRpb25zOiBbV2F2ZXNEaXJlY3RpdmVdLFxuICBleHBvcnRzOiBbV2F2ZXNEaXJlY3RpdmVdLFxufSlcbmV4cG9ydCBjbGFzcyBXYXZlc01vZHVsZSB7XG4gIHB1YmxpYyBzdGF0aWMgZm9yUm9vdCgpOiBNb2R1bGVXaXRoUHJvdmlkZXJzPFdhdmVzTW9kdWxlPiB7XG4gICAgcmV0dXJuIHsgbmdNb2R1bGU6IFdhdmVzTW9kdWxlLCBwcm92aWRlcnM6IFtdIH07XG4gIH1cbn1cbiJdfQ==
