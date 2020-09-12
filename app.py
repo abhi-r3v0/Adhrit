@@ -5,6 +5,7 @@ from http import HTTPStatus
 import os, configparser, time
 from adhrit.recons.dbaccess import dbconnection, select_query
 from adhrit.recons.reset import reset_scanid, reset_db
+from adhrit.recons.clean import cleaner
 import sqlite3
 
 from adhrit.recons.smarser.parser import parser
@@ -12,8 +13,18 @@ import subprocess
 
 ALLOWED_EXTENSIONS = {'apk'}
 
+
 app = Flask(__name__)
 
+class Compute(Thread):
+	def __init__(self, request):
+		Thread.__init__(self)
+		
+
+	def run(self):
+		print("Running bytecode Analyser")
+		subprocess.call('python3 bytecode_scanner.py', shell=True)
+		set_config_data('bytecode_scan_status', 'complete')
 
 
 def allowed_file(filename):
@@ -25,47 +36,12 @@ def get_config_data(key):
 	check_deps.read('adhrit/config')                                         
 	return check_deps.get('config-data', str(key))
 
-def update_scanid():
-
-	# Updating config data
-
+def set_config_data(key, value):
 	update_config = configparser.ConfigParser()
 	update_config.read('adhrit/config')
-	thescanid = update_config.get('config-data', 'scan_id')
-	thescanid = int(thescanid) + 1 
-
-	update_config.set('config-data', 'scan_id', str(thescanid))
+	update_config.set('config-data', str(key), str(value))
 	with open('adhrit/config', 'w') as updatedconf:
 			update_config.write(updatedconf)
-
-
-
-@app.route('/scan',  methods=['POST'])
-def scan():
-	if request.method == 'POST':
-		if 'file' not in request.files:
-			flash('No file part')
-			return HTTPStatus.NO_CONTENT
-
-		uploaded_files = request.files["file"]
-		if uploaded_files and allowed_file(uploaded_files.filename):
-			uploaded_files.save(uploaded_files.filename)
-			# Renaming to app.apk
-			source =  uploaded_files.filename
-			dest = 'app.apk'
-			os.rename(source, dest)
-			
-		  
-			main()
-			thesid = get_config_data('scan_id')
-			print(thesid)
-			response = getreport(thesid)
-			# print(type(response))
-			# print(response)
-
-			update_scanid()
-			return  response,200,{'Access-Control-Allow-Origin': '*'} 
-	return jsonify(status_msg="apk not sent properly")
 
 
 def getreport(scan_id):
@@ -76,13 +52,10 @@ def getreport(scan_id):
 	for row in rows:
 		d = dict(zip(row.keys(), row))   # a dict with column names as keys
 		rowarray_list.append(d)
-	# json_data = json.dumps(rowarray_list)
-	# data = json.loads(json_data)
-	# data = rowarray_list[0]
 	json_data = rowarray_list
 	data = json_data[0]
 
-	print(data)
+	# print(data)
 
 	null_key_list = []
 	for key, value in data.items():
@@ -142,14 +115,54 @@ def getreport(scan_id):
 				provider_obj_list = []
 			key = 'Provider'
 			response.__setitem__(key, tmp_providers)
-
 	return response
+
+
+
+@app.route('/scan',  methods=['POST'])
+def scan():
+	if request.method == 'POST':
+		if 'file' not in request.files:
+			flash('No file part')
+			return HTTPStatus.NO_CONTENT
+
+		uploaded_files = request.files["file"]
+		if uploaded_files and allowed_file(uploaded_files.filename):
+			uploaded_files.save(uploaded_files.filename)
+			# Renaming to app.apk
+			source =  uploaded_files.filename
+			dest = 'app.apk'
+			os.rename(source, dest)
+			
+			set_config_data('bytecode_scan_status', 'incomplete')
+			thread_a = Compute(request.__copy__())
+			thread_a.start()
+			main()
+			while(True):
+				time.sleep(2)
+				if get_config_data('bytecode_scan_status') == 'complete':
+					cleaner('app.apk')
+					break
+
+			thesid = get_config_data('scan_id')
+			response = getreport(thesid)
+			# print(type(response))
+			# print(response)
+			thesid = int(thesid) + 1
+			set_config_data('scan_id', str(thesid))
+			return response,200, {'Access-Control-Allow-Origin': '*'}
+			# return  response,200,{'Access-Control-Allow-Origin': '*'} 
+	return jsonify(status_msg="apk not sent properly")
+
+
+
 
 @app.route("/testbed")
 def test():
-	subprocess.call('python3 bytecode_scanner.py', shell=True)
-	return "ok"
-
+	thesid = get_config_data('scan_id')
+	thesid = int(thesid) + 1
+	set_config_data('scan_id', str(thesid))
+	return str(thesid)
 	# return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
 
 @app.route('/')
