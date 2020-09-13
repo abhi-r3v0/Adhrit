@@ -5,6 +5,8 @@ from http import HTTPStatus
 import os, configparser, time
 from adhrit.recons.dbaccess import dbconnection, select_query
 from adhrit.recons.reset import reset_scanid, reset_db
+from subprocess import call
+from adhrit.recons.clean import cleaner
 import sqlite3
 
 
@@ -12,7 +14,15 @@ ALLOWED_EXTENSIONS = {'apk'}
 
 app = Flask(__name__)
 
+class Compute(Thread):
+	def __init__(self, request):
+		Thread.__init__(self)
+		
 
+	def run(self):
+		print("Running bytecode Analyser")
+		call('python3 bytecode_scanner.py', shell=True)
+		set_config_data('bytecode_scan_status', "complete")
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -23,18 +33,25 @@ def get_config_data(key):
 	check_deps.read('adhrit/config')                                         
 	return check_deps.get('config-data', str(key))
 
-def update_scanid():
-
-	# Updating config data
-
+def set_config_data(key, value):
 	update_config = configparser.ConfigParser()
 	update_config.read('adhrit/config')
-	thescanid = update_config.get('config-data', 'scan_id')
-	thescanid = int(thescanid) + 1 
-
-	update_config.set('config-data', 'scan_id', str(thescanid))
+	update_config.set('config-data', str(key), str(value))
 	with open('adhrit/config', 'w') as updatedconf:
 			update_config.write(updatedconf)
+
+# def update_scanid():
+
+# 	# Updating config data
+
+# 	update_config = configparser.ConfigParser()
+# 	update_config.read('adhrit/config')
+# 	thescanid = update_config.get('config-data', 'scan_id')
+# 	thescanid = int(thescanid) + 1 
+
+# 	update_config.set('config-data', 'scan_id', str(thescanid))
+# 	with open('adhrit/config', 'w') as updatedconf:
+# 			update_config.write(updatedconf)
 
 
 
@@ -53,48 +70,70 @@ def scan():
 			dest = 'app.apk'
 			os.rename(source, dest)
 			
-		  
-			main()
-			thesid = get_config_data('scan_id')
-			print(thesid)
+			# set_config_data('bytecode_scan_status', 'incomplete')
+			# thread_a = Compute(request.__copy__())
+			# thread_a.start()
+			# main()
+			# while(True):
+			# 	time.sleep(2)
+			# 	if get_config_data('bytecode_scan_status') == 'complete':
+			# 		# cleaner('app.apk')
+			# 		break
+			# thesid = get_config_data('scan_id')
+			thesid = str(1)
 			response = getreport(thesid)
-			# print(type(response))
+			print(type(response))
 			# print(response)
 
-			update_scanid()
+			# thesid = int(thesid) + 1
+			# set_config_data('scan_id', str(thesid))
 			return  response,200,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")
 
-
-def getreport(scan_id):
-	sid = scan_id
-	query = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
+def data_from_db(query):
 	rows = select_query(query)
+	rowarray_list = []
+
 	rowarray_list = []
 	for row in rows:
 		d = dict(zip(row.keys(), row))   # a dict with column names as keys
 		rowarray_list.append(d)
-	# json_data = json.dumps(rowarray_list)
-	# data = json.loads(json_data)
-	# data = rowarray_list[0]
 	json_data = rowarray_list
 	data = json_data[0]
+	return data
 
-	print(data)
-
+def null_elimination(data):
 	null_key_list = []
 	for key, value in data.items():
 		val_list = eval(value)
 		if not val_list:
 			# print(key)
 			null_key_list.append(key)
-
+	
 	# removing all unused components
 	for key in null_key_list:
 		del data[key]
+	return data
+	
+
+def getreport(scan_id):
+	sid = scan_id
+	query_manifest = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
+	query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `ScanId` = '%s'" % sid
+
+	manifest_data = data_from_db(query_manifest)
+	bytecode_data = data_from_db(query_bytecode)
+
+
+	manifest_newdata = null_elimination(manifest_data)
+	bytecode_newdata = null_elimination(bytecode_data)
+
+	print(bytecode_newdata)
+	
 
 	response = {}
-	for key, value in data.items():
+	#Sorting manifest data
+	for key, value in manifest_newdata.items():
 		val_list = eval(value)
 		if key == 'Activity':
 			response.__setitem__(key, val_list)
@@ -140,6 +179,8 @@ def getreport(scan_id):
 				provider_obj_list = []
 			key = 'Provider'
 			response.__setitem__(key, tmp_providers)
+
+		
 
 	return response
 
