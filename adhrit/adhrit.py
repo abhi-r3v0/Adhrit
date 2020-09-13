@@ -133,7 +133,7 @@ def main():
     apk_name = 'app.apk'
     adhrit.apkextractor(apk_name)
     adhrit.manifestanalyzer(apk_name)
-    adhrit.cleanproject(apk_name)
+    # adhrit.cleanproject(apk_name)
 
     # adhrit.resetdb()
     # adhrit.reset_scan_id()
