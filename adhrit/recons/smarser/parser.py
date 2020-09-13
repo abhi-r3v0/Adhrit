@@ -44,21 +44,6 @@ def add_to_db():
 
 
 
-#def slacking():
-#
-#	slack_prep('FILE ACCESS VIA URLs', set_of_url_allowed_list, toslackstring)
-#	slack_prep('CONTENT ACCESS VIA URLs', set_of_content_allowed_list, toslackstring)
-#	slack_prep('UNENCRYPTED SOCKET COMMUNICATIONS', set_of_list_of_unenc_soc, toslackstring)
-#	slack_prep('INSECURE SOCKET FACTORY', set_of_insecure_socket_list, toslackstring)
-#	slack_prep('NO TLS VALIDITY CHECKS', set_of_tls_validity_list, toslackstring)
-#	slack_prep('STICKY BROADCASTS', set_of_sys_broadcast_list, toslackstring)
-#	slack_prep('EMPTY PENDING INTENTS', set_of_empty_pend_list, toslackstring)
-#	slack_prep('DYNAMIC/EXPORTED BROADCAST RECEIVERS', set_of_search_dynamic, toslackstring)
-#	slack_prep('ECB INSTANCES', set_of_ecb, toslackstring)
-#	slack_prep('JAVASCRIPT ENABLED', set_of_js, toslackstring)
-#	slack_prep('OVERWRITABLE COOKIE', set_of_list_of_cookie_overwrite, toslackstring)
-#	slack_prep('WEAK DYNAMIC INVOCATION CHECKS ON CONTENT PROVIDERS', set_of_weak_checks_list, toslackstring)
-
 
 def parser():
 
@@ -179,7 +164,6 @@ def parser():
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Usage of 'Call' for ContentProvider! \n")
 	printer(set_of_weak_checks_list)
 
-#	slacking()
-
+	add_to_db()
 
 	print(Fore.BLUE + "\n\t\t[INFO] Vulnerability References written to 'Vulnerabilities.txt'")
