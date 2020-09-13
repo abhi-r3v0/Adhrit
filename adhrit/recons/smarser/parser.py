@@ -5,7 +5,7 @@ from smalisca.core.smalisca_main import SmaliscaApp
 from smalisca.modules.module_smali_parser import SmaliParser
 from adhrit.recons.smarser.patterns import pattern_receiver
 from adhrit.recons.smarser.patterns import search_ecb
-#from modules.slack_push import slack_prep
+from adhrit.recons.dbaccess import dbconnection, create_bytecode_table, insert_bytecodetable
 
 
 set_of_js = set()
@@ -23,7 +23,6 @@ set_of_content_allowed_list = set()
 set_of_ssl_warn_list = set()
 set_of_weak_checks_list = set()
 
-#toslackstring = '```'
 
 
 def printer(xset):
@@ -34,10 +33,19 @@ def printer(xset):
 def set_updater(theset, thepattern):
 	theset.remove(thepattern)
 
+def add_to_db():
+	dbname = "adhrit.db"
+	dbconstatus = dbconnection(dbname)
+	create_bytecode_table(dbconstatus)
+	thesid = 1
+	datadetails = (str(thesid), str(list(set_of_unsafe_intent_list)), str(list(set_of_url_allowed_list)), str(list(set_of_content_allowed_list)), str(list(set_of_list_of_unenc_soc)), str(list(set_of_insecure_socket_list)), str(list(set_of_tls_validity_list)), str(list(set_of_sys_broadcast_list)), str(list(set_of_empty_pend_list)), str(list(set_of_search_dynamic)), str(list(set_of_ecb)), str(list(set_of_js)), str(list(set_of_list_of_cookie_overwrite)), str(list(set_of_weak_checks_list)))
+	addedornot = insert_bytecodetable(dbconstatus, datadetails)
+
+
+
 
 #def slacking():
 #
-#	slack_prep('UNSAFE INTENT URLs', set_of_unsafe_intent_list, toslackstring)
 #	slack_prep('FILE ACCESS VIA URLs', set_of_url_allowed_list, toslackstring)
 #	slack_prep('CONTENT ACCESS VIA URLs', set_of_content_allowed_list, toslackstring)
 #	slack_prep('UNENCRYPTED SOCKET COMMUNICATIONS', set_of_list_of_unenc_soc, toslackstring)
