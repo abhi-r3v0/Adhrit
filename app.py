@@ -83,33 +83,33 @@ def getreport(scan_id):
 	for key, value in manifest_newdata.items():
 		val_list = eval(value)
 		if key == 'Activity':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Activities", val_list)
 		if key == 'ExportedActivity':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Exported Activities", val_list)
 		if key == 'BroadcastReceiver':
 			response.__setitem__(key, val_list)
 		if key == 'ExportedReceiver':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Broadcast Receivers", val_list)
 		if key == 'Permission':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Permissions", val_list)
 		if key == 'CriticalPerm':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Critical Permissions", val_list)
 		if key == 'CustomPerm':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Custom Permissions", val_list)
 		if key == 'Deeplinks':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Deeplinks", val_list)
 		if key == 'Service':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Services", val_list)
 		if key == 'ExportedService':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Exported Services", val_list)
 		if key == 'Taskaffinity':
-			response.__setitem__(key, val_list)
+			response.__setitem__("Task Affinity", val_list)
 		if key == 'ImplicitIntent':
 			tmp_imp_intents = []
 			for key in val_list.keys():
 				tmp_imp_intents.extend(val_list[key])
 			key = 'ImplicitIntent'
-			response.__setitem__(key, tmp_imp_intents)
+			response.__setitem__("Implicit Intents", tmp_imp_intents)
 		if key == 'Provider':
 			tmp_providers = []
 			provider_obj_list = []	
@@ -228,7 +228,7 @@ def test():
 
 @app.route('/')
 def func():
-	return "Adhrt up and flying hiGh *-*"
+	return "Adhrit up and flying hiGh *-*"
 
 
 
