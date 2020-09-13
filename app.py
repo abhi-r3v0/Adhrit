@@ -30,14 +30,14 @@ def allowed_file(filename):
 
 def get_config_data(key):
 	check_deps = configparser.ConfigParser()
-	check_deps.read('adhrit/config')                                         
+	check_deps.read('config')                                         
 	return check_deps.get('config-data', str(key))
 
 def set_config_data(key, value):
 	update_config = configparser.ConfigParser()
-	update_config.read('adhrit/config')
+	update_config.read('config')
 	update_config.set('config-data', str(key), str(value))
-	with open('adhrit/config', 'w') as updatedconf:
+	with open('config', 'w') as updatedconf:
 			update_config.write(updatedconf)
 
 def data_from_db(query):
@@ -46,7 +46,7 @@ def data_from_db(query):
 
 	rowarray_list = []
 	for row in rows:
-		d = dict(zip(row.keys(), row))   # a dict with column names as keys
+		d = dict(zip(row.keys(), row))   
 		rowarray_list.append(d)
 	json_data = rowarray_list
 	data = json_data[0]
@@ -205,11 +205,14 @@ def scan():
 			thesid = get_config_data('scan_id')
 			thesid = str(1)
 			response = getreport(thesid)
-			print(type(response))
+			# print(type(response))
 			# print(response)
 
 			thesid = int(thesid) + 1
 			set_config_data('scan_id', str(thesid))
+
+			os.system('rm app.apk')
+
 			return  response,200,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")
 
@@ -217,12 +220,7 @@ def scan():
 @app.route("/testbed")
 def test():
 	pass
-
-
 	return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
-
-
-
 
 
 
