@@ -94,7 +94,7 @@ def query_datatable(conn):
 def truncate_table(conn):
 	if conn is not None:
 		truncateDataDB = ''' DELETE FROM DataDB '''
-		truncateBytecodeDB = ''' DELETE FROM DataDB '''
+		truncateBytecodeDB = ''' DELETE FROM BytecodeDB '''
 		try:
 			c = conn.cursor()
 			c.execute(truncateDataDB)

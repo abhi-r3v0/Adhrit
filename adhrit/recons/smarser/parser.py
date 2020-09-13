@@ -1,4 +1,4 @@
-import os 
+import os, configparser
 import sys
 from colorama import Fore
 from smalisca.core.smalisca_main import SmaliscaApp
@@ -23,7 +23,10 @@ set_of_content_allowed_list = set()
 set_of_ssl_warn_list = set()
 set_of_weak_checks_list = set()
 
-
+def get_config_data(key):
+	check_deps = configparser.ConfigParser()
+	check_deps.read('adhrit/config')                                         
+	return check_deps.get('config-data', str(key))
 
 def printer(xset):
 	for x in xset:
@@ -37,7 +40,7 @@ def add_to_db():
 	dbname = "adhrit.db"
 	dbconstatus = dbconnection(dbname)
 	create_bytecode_table(dbconstatus)
-	thesid = 1
+	thesid = get_config_data('scan_id')
 	datadetails = (str(thesid), str(list(set_of_unsafe_intent_list)), str(list(set_of_url_allowed_list)), str(list(set_of_content_allowed_list)), str(list(set_of_list_of_unenc_soc)), str(list(set_of_insecure_socket_list)), str(list(set_of_tls_validity_list)), str(list(set_of_sys_broadcast_list)), str(list(set_of_empty_pend_list)), str(list(set_of_search_dynamic)), str(list(set_of_ecb)), str(list(set_of_js)), str(list(set_of_list_of_cookie_overwrite)), str(list(set_of_weak_checks_list)))
 	addedornot = insert_bytecodetable(dbconstatus, datadetails)
 
