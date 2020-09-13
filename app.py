@@ -40,56 +40,6 @@ def set_config_data(key, value):
 	with open('adhrit/config', 'w') as updatedconf:
 			update_config.write(updatedconf)
 
-# def update_scanid():
-
-# 	# Updating config data
-
-# 	update_config = configparser.ConfigParser()
-# 	update_config.read('adhrit/config')
-# 	thescanid = update_config.get('config-data', 'scan_id')
-# 	thescanid = int(thescanid) + 1 
-
-# 	update_config.set('config-data', 'scan_id', str(thescanid))
-# 	with open('adhrit/config', 'w') as updatedconf:
-# 			update_config.write(updatedconf)
-
-
-
-@app.route('/scan',  methods=['POST'])
-def scan():
-	if request.method == 'POST':
-		if 'file' not in request.files:
-			flash('No file part')
-			return HTTPStatus.NO_CONTENT
-
-		uploaded_files = request.files["file"]
-		if uploaded_files and allowed_file(uploaded_files.filename):
-			uploaded_files.save(uploaded_files.filename)
-			# Renaming to app.apk
-			source =  uploaded_files.filename
-			dest = 'app.apk'
-			os.rename(source, dest)
-			
-			# set_config_data('bytecode_scan_status', 'incomplete')
-			# thread_a = Compute(request.__copy__())
-			# thread_a.start()
-			# main()
-			# while(True):
-			# 	time.sleep(2)
-			# 	if get_config_data('bytecode_scan_status') == 'complete':
-			# 		# cleaner('app.apk')
-			# 		break
-			# thesid = get_config_data('scan_id')
-			thesid = str(1)
-			response = getreport(thesid)
-			print(type(response))
-			# print(response)
-
-			# thesid = int(thesid) + 1
-			# set_config_data('scan_id', str(thesid))
-			return  response,200,{'Access-Control-Allow-Origin': '*'} 
-	return jsonify(status_msg="apk not sent properly")
-
 def data_from_db(query):
 	rows = select_query(query)
 	rowarray_list = []
@@ -126,13 +76,10 @@ def getreport(scan_id):
 
 
 	manifest_newdata = null_elimination(manifest_data)
-	bytecode_newdata = null_elimination(bytecode_data)
-
-	print(bytecode_newdata)
-	
+	bytecode_newdata = null_elimination(bytecode_data)	
 
 	response = {}
-	#Sorting manifest data
+	#Sorting manifest data for response
 	for key, value in manifest_newdata.items():
 		val_list = eval(value)
 		if key == 'Activity':
@@ -180,9 +127,92 @@ def getreport(scan_id):
 			key = 'Provider'
 			response.__setitem__(key, tmp_providers)
 
-		
+	#Sorting manifest data for response
+	response1 = {}
+	for key, value in bytecode_newdata.items():
+		val_list = eval(value)
+		if key == 'Unsafe_Intent_Urls':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'File_Access_Via_Urls':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Content_Access_Via_Urls':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Unencrypted_Socket_Communications':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Insecure_Socket_Factory':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'No_Tls_Validity_Checks':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Sticky_Broadcasts':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Empty_Pending_Intents':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Dynamic_or_exported_Broadcast_Receivers':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Ecb_Instances':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Javascript_Enabled':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Overwritable_Cookie':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+			
 
+	response.update(response1)
+		
 	return response
+
+
+
+@app.route('/scan',  methods=['POST'])
+def scan():
+	if request.method == 'POST':
+		if 'file' not in request.files:
+			flash('No file part')
+			return HTTPStatus.NO_CONTENT
+
+		uploaded_files = request.files["file"]
+		if uploaded_files and allowed_file(uploaded_files.filename):
+			uploaded_files.save(uploaded_files.filename)
+			# Renaming to app.apk
+			source =  uploaded_files.filename
+			dest = 'app.apk'
+			os.rename(source, dest)
+			
+			set_config_data('bytecode_scan_status', 'incomplete')
+			thread_a = Compute(request.__copy__())
+			thread_a.start()
+			main()
+			while(True):
+				time.sleep(2)
+				if get_config_data('bytecode_scan_status') == 'complete':
+					# cleaner('app.apk')
+					break
+			thesid = get_config_data('scan_id')
+			thesid = str(1)
+			response = getreport(thesid)
+			print(type(response))
+			# print(response)
+
+			thesid = int(thesid) + 1
+			set_config_data('scan_id', str(thesid))
+			return  response,200,{'Access-Control-Allow-Origin': '*'} 
+	return jsonify(status_msg="apk not sent properly")
+
 
 @app.route("/testbed")
 def test():
