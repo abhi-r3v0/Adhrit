@@ -40,7 +40,6 @@ if dep_check == 'complete':
 		try:
 			req = requests.get(url)
 			if req.status_code == 200:
-				print('Check point 1')
 				a.communicate(input=b'\n')
 				os.chdir(working_dir)
 				break
@@ -56,7 +55,6 @@ if dep_check == 'complete':
 			try:
 				req = requests.get(url)
 				if req.status_code == 200:
-					print('Check point 1')
 					b.communicate(input=b'\n')
 					break
 			except ConnectionError as e:    # This is the correct syntax

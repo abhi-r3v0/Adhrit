@@ -200,10 +200,9 @@ def scan():
 			while(True):
 				time.sleep(2)
 				if get_config_data('bytecode_scan_status') == 'complete':
-					# cleaner('app.apk')
+					cleaner('app.apk')
 					break
 			thesid = get_config_data('scan_id')
-			thesid = str(1)
 			response = getreport(thesid)
 			# print(type(response))
 			# print(response)
@@ -239,7 +238,7 @@ def reset():
 
 	
 if __name__ == '__main__':
-	app.run(debug=True,)
+	app.run(debug=True, use_reloader=False)
 
 
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
