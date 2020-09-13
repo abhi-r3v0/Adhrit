@@ -48,13 +48,7 @@ class Adhrit:
         print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
 
 
-    check_deps = configparser.ConfigParser()
-    check_deps.read('adhrit/config')
-    if check_deps.get('config-data', 'dependencies_status') == 'incomplete':
-        print(Fore.RED + "\n[ERROR] Not all the necessary tools are installed! Please run " + Fore.YELLOW + 'python3 installer.py' + Fore.RED + " again")
-        exit()
-    else:
-        pass
+
 
     print("\n\n")
 

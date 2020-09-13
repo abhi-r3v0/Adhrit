@@ -60,7 +60,7 @@ def man_scanner():
 	deeplinks_count = 0
 
 	check_deps = configparser.ConfigParser()
-	check_deps.read('adhrit/config')
+	check_deps.read('config')
 	thescanid = check_deps.get('config-data', 'scan_id')
 	tstamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 	dbname = "adhrit.db"
