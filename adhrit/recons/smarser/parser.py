@@ -25,7 +25,7 @@ set_of_weak_checks_list = set()
 
 def get_config_data(key):
 	check_deps = configparser.ConfigParser()
-	check_deps.read('adhrit/config')                                         
+	check_deps.read('config')                                         
 	return check_deps.get('config-data', str(key))
 
 def printer(xset):

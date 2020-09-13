@@ -7,9 +7,9 @@ from adhrit.recons.dbaccess import dbconnection, truncate_table
 def reset_scanid():
 	print("\n")
 	update_config = configparser.ConfigParser()
-	update_config.read('adhrit/config')
+	update_config.read('config')
 	update_config.set('config-data', 'scan_id', '1')
-	with open('adhrit/config', 'w') as updatedconf:
+	with open('config', 'w') as updatedconf:
             update_config.write(updatedconf)
 	print("SCAN ID HAS BEEN RESET")
 
