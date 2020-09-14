@@ -11,6 +11,8 @@ Analysis/
 Extracts/
 apk/
 .idea/
+node_modules/
+__pycache__/
 smali_analysis/*
 Manifest.xml
 settings.json
