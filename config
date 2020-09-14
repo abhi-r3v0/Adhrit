@@ -1,6 +1,6 @@
 [config-data]
 vt_api_key = 
-dependencies_status = complete
+dependencies_status = incomplete
 emulator_path = #optional
 scan_id = 1
 bytecode_scan_status = complete

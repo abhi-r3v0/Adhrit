@@ -204,9 +204,6 @@ def scan():
 					break
 			thesid = get_config_data('scan_id')
 			response = getreport(thesid)
-			# print(type(response))
-			# print(response)
-
 			thesid = int(thesid) + 1
 			set_config_data('scan_id', str(thesid))
 
@@ -219,7 +216,7 @@ def scan():
 @app.route("/testbed")
 def test():
 	pass
-	return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
+	# return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
 
 
 
@@ -238,7 +235,7 @@ def reset():
 
 	
 if __name__ == '__main__':
-	app.run(debug=True, use_reloader=False)
+	app.run(debug=True)
 
 
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
