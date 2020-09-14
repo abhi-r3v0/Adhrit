@@ -20,7 +20,10 @@ url_allowed_list = set()
 content_allowed_list = set()
 ssl_warn_list = set()
 weak_checks_list = set()
+execsql_list = set()
 
+sharedpref_list = set()
+sqlite_usage_list = set()
 
 slack_unsafe_intent = []
 slack_allow_file = []
@@ -470,9 +473,23 @@ def execSQL(thefile, thelist):
 
 			if found_exec == 1:
 				if(ckey == "to_method" and str(cval) == "execSQL"):
-					execsql_list.append(str(thefile))
+					execsql_list.add(str(thefile))
 					print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Non-parameterized SQL queries. SQL injections possible!\n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
-	return(execsql_list)
+
+
+def getSharedPrefsUsage(thefile, thelist):
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == 'to_class' and str(cval) == 'Landroid/content/SharedPreferences'):
+				sharedpref_list.add(str(thefile))
+				
+
+def getSqliteUsage(thefile, thelist):
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == 'to_class' and str(cval) == 'Landroid/database/sqlite/SQLiteDatabase'):
+				sqlite_usage_list.add(str(thefile))
+
 
 
 def pattern_receiver(thefile, thelist):
@@ -524,7 +541,16 @@ def pattern_receiver(thefile, thelist):
 		weak_checks_list.add('DYNAMIC_WEAK_CHECKS')
 		dynamic_invocation_weakchecks(thefile, thelist)
 
+		# execsql_list.add('EXECSQL_USAGE')
+		# execSQL(thefile, thelist)
 
-	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list)
+		sharedpref_list.add('SHAREDPREFS_USAGE')
+		getSharedPrefsUsage(thefile, thelist)
+
+		sqlite_usage_list.add('SQLITE_USAGE')
+		getSqliteUsage(thefile, thelist)
+
+
+	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, sharedpref_list, sqlite_usage_list)
 
 

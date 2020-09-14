@@ -170,6 +170,15 @@ def getreport(scan_id):
 		if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
 			key = key.replace('_',' ')
 			response1.__setitem__(key, val_list)
+		if key == 'execSQL_used':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'SharedPrefs_usage':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
+		if key == 'SQLite_DB_usage':
+			key = key.replace('_',' ')
+			response1.__setitem__(key, val_list)
 			
 
 	response.update(response1)

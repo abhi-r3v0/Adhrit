@@ -22,6 +22,10 @@ set_of_url_allowed_list = set()
 set_of_content_allowed_list = set()
 set_of_ssl_warn_list = set()
 set_of_weak_checks_list = set()
+set_of_execsql_used = set()
+set_of_sharedprefs_used = set()
+set_of_sqli_used = set()
+
 
 def get_config_data(key):
 	check_deps = configparser.ConfigParser()
@@ -41,7 +45,7 @@ def add_to_db():
 	dbconstatus = dbconnection(dbname)
 	create_bytecode_table(dbconstatus)
 	thesid = get_config_data('scan_id')
-	datadetails = (str(thesid), str(list(set_of_unsafe_intent_list)), str(list(set_of_url_allowed_list)), str(list(set_of_content_allowed_list)), str(list(set_of_list_of_unenc_soc)), str(list(set_of_insecure_socket_list)), str(list(set_of_tls_validity_list)), str(list(set_of_sys_broadcast_list)), str(list(set_of_empty_pend_list)), str(list(set_of_search_dynamic)), str(list(set_of_ecb)), str(list(set_of_js)), str(list(set_of_list_of_cookie_overwrite)), str(list(set_of_weak_checks_list)))
+	datadetails = (str(thesid), str(list(set_of_unsafe_intent_list)), str(list(set_of_url_allowed_list)), str(list(set_of_content_allowed_list)), str(list(set_of_list_of_unenc_soc)), str(list(set_of_insecure_socket_list)), str(list(set_of_tls_validity_list)), str(list(set_of_sys_broadcast_list)), str(list(set_of_empty_pend_list)), str(list(set_of_search_dynamic)), str(list(set_of_ecb)), str(list(set_of_js)), str(list(set_of_list_of_cookie_overwrite)), str(list(set_of_weak_checks_list)), str(list(set_of_execsql_used)), str(list(set_of_sharedprefs_used)), str(list(set_of_sqli_used)))
 	addedornot = insert_bytecodetable(dbconstatus, datadetails)
 
 
@@ -124,6 +128,15 @@ def parser():
 									if 'DYNAMIC_WEAK_CHECKS' in x:
 										set_of_weak_checks_list.update(i)
 
+									if 'EXECSQL_USAGE' in x:
+										set_of_execsql_used.update(i)
+
+									if 'SHAREDPREFS_USAGE' in x:
+										set_of_sharedprefs_used.update(i)
+
+									if 'SQLITE_USAGE' in x:
+										set_of_sqli_used.update(i)
+
 						else:
 							pass
 
@@ -140,7 +153,9 @@ def parser():
 	set_updater(set_of_url_allowed_list, 'FILE_FROM_URL')
 	set_updater(set_of_content_allowed_list, 'CONTENT_FROM_URL')
 	set_updater(set_of_weak_checks_list, 'DYNAMIC_WEAK_CHECKS')
-
+	# set_updater(set_of_execsql_used, 'EXECSQL_USAGE')
+	set_updater(set_of_sharedprefs_used, 'SHAREDPREFS_USAGE')
+	set_updater(set_of_sqli_used, 'SQLITE_USAGE')
 
 
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n")
@@ -166,6 +181,13 @@ def parser():
 	printer(set_of_content_allowed_list)
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Usage of 'Call' for ContentProvider! \n")
 	printer(set_of_weak_checks_list)
+	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Usage of 'execSQL'! \n")
+	printer(set_of_execsql_used)
+
+	print(Fore.YELLOW + "\n\t\t[!] " + Fore.RED + "SharedPreference has been used \n")
+	printer(set_of_sharedprefs_used)
+	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SQLite DB used\n")
+	printer(set_of_sqli_used)
 
 	add_to_db()
 
