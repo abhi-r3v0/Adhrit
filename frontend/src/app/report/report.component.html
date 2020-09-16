@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-3" style="background-color: #444444">
     <div>
-      <h3>Report</h3>
+      <h3 style="text-align:center; color:white;">Report</h3>
     </div>
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <a (click)="getManifestData()" class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Manifest Scan</a>
@@ -13,7 +13,7 @@
   <div class="col-9">
     <div class="tab-content" id="v-pills-tabContent">
       <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-        <div *ngFor="let item of reportmanifest | keyvalue">
+        <div *ngFor="let item of report | keyvalue">
           <div class="row">
           <div class="col-12">
             <!-- Default box -->
@@ -34,7 +34,7 @@
                 <div class="alert border-secondary mb-2">
                   <ul>
                   <div *ngFor="let data of item.value">
-                     <li> {{data}}</li>
+                     {{data}}
                   </div>
                   </ul>
                 </div>
@@ -48,7 +48,7 @@
         
       </div>
       <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <div *ngFor="let item of reportbytecode | keyvalue">
+        <div *ngFor="let item of report | keyvalue">
           <div class="row">
           <div class="col-12">
             <!-- Default box -->
@@ -69,7 +69,7 @@
                 <div class="alert border-secondary mb-2">
                   <ul>
                   <div *ngFor="let data of item.value">
-                     <li> {{data}}</li>
+                     {{data}}
                   </div>
                   </ul>
                 </div>
@@ -82,7 +82,7 @@
         </div>
     </div>
      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-      <div *ngFor="let item of reportsecrets | keyvalue">
+      <div *ngFor="let item of report | keyvalue">
         <div class="row">
         <div class="col-12">
           <!-- Default box -->
@@ -103,7 +103,7 @@
               <div class="alert border-secondary mb-2">
                 <ul>
                 <div *ngFor="let data of item.value">
-                   <li> {{data}}</li>
+                   {{data}}
                 </div>
                 </ul>
               </div>

@@ -63,6 +63,8 @@ def url_scanner():
 
 	final_urls = []
 
+	ignore_urls = ['http://schemas.android.com/apk/res/android']
+
 	print("\n[+] Scanning URLs\n")
 	url_regex = 'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 	urls = []
@@ -89,7 +91,8 @@ def url_scanner():
 	if urls:
 		for url in urls:
 			if (str(url.split()[2][1:-1]).startswith('https://') or str(url.split()[2][1:-1]).startswith('http://')):
-				final_urls.append(url.split()[2][1:-1])
+				if(str(url.split()[2][1:-1]).startswith('https://') != 'http://schemas.android.com/apk/res/android'):
+					final_urls.append(url.split()[2][1:-1])
 
 	return final_urls
 
@@ -102,7 +105,7 @@ def get_config_data(key):
 
 def secret_scanner():
 
-	api_keys = ['abc', 'xyz']
+	api_keys = ['zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx', 'AJ782r143ttvbr8wqRZ17uxz']
 
 	dbname = 'adhrit.db'
 	dbconstatus = dbconnection(dbname)
