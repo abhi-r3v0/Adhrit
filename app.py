@@ -66,122 +66,121 @@ def null_elimination(data):
 	return data
 	
 
-def getreport(scan_id):
+def getreport(scan_id,scan_type):
 	sid = scan_id
-	query_manifest = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
-	query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `ScanId` = '%s'" % sid
-
-	manifest_data = data_from_db(query_manifest)
-	bytecode_data = data_from_db(query_bytecode)
-
-
-	manifest_newdata = null_elimination(manifest_data)
-	bytecode_newdata = null_elimination(bytecode_data)	
-
 	response = {}
-	#Sorting manifest data for response
-	for key, value in manifest_newdata.items():
-		val_list = eval(value)
-		if key == 'Activity':
-			response.__setitem__("Activities", val_list)
-		if key == 'ExportedActivity':
-			response.__setitem__("Exported Activities", val_list)
-		if key == 'BroadcastReceiver':
-			response.__setitem__(key, val_list)
-		if key == 'ExportedReceiver':
-			response.__setitem__("Broadcast Receivers", val_list)
-		if key == 'Permission':
-			response.__setitem__("Permissions", val_list)
-		if key == 'CriticalPerm':
-			response.__setitem__("Critical Permissions", val_list)
-		if key == 'CustomPerm':
-			response.__setitem__("Custom Permissions", val_list)
-		if key == 'Deeplinks':
-			response.__setitem__("Deeplinks", val_list)
-		if key == 'Service':
-			response.__setitem__("Services", val_list)
-		if key == 'ExportedService':
-			response.__setitem__("Exported Services", val_list)
-		if key == 'Taskaffinity':
-			response.__setitem__("Task Affinity", val_list)
-		if key == 'ImplicitIntent':
-			tmp_imp_intents = []
-			for key in val_list.keys():
-				tmp_imp_intents.extend(val_list[key])
-			key = 'ImplicitIntent'
-			response.__setitem__("Implicit Intents", tmp_imp_intents)
-		if key == 'Provider':
-			tmp_providers = []
-			provider_obj_list = []	
-			for key_parent,value_parent in val_list.items():
-				for key, value in value_parent.items():
-					if key == 'name':
-						temp = key + ' : ' + value
-						provider_obj_list.insert(0, temp)
-					else:
-						temp = key + ' : ' + value
-					provider_obj_list.append(temp)
-				provider_obj_list.append("")
-				tmp_providers.extend(provider_obj_list)
-				provider_obj_list = []
-			key = 'Provider'
-			response.__setitem__(key, tmp_providers)
 
-	#Sorting manifest data for response
-	response1 = {}
-	for key, value in bytecode_newdata.items():
-		val_list = eval(value)
-		if key == 'Unsafe_Intent_Urls':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'File_Access_Via_Urls':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Content_Access_Via_Urls':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Unencrypted_Socket_Communications':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Insecure_Socket_Factory':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'No_Tls_Validity_Checks':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Sticky_Broadcasts':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Empty_Pending_Intents':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Dynamic_or_exported_Broadcast_Receivers':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Ecb_Instances':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Javascript_Enabled':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Overwritable_Cookie':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'execSQL_used':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'SharedPrefs_usage':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-		if key == 'SQLite_DB_usage':
-			key = key.replace('_',' ')
-			response1.__setitem__(key, val_list)
-			
+	if scan_type =="manifest":
+		query_manifest = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
+		manifest_data = data_from_db(query_manifest)
+		manifest_newdata = null_elimination(manifest_data)
 
-	response.update(response1)
+		#Sorting manifest data for response
+		for key, value in manifest_newdata.items():
+			val_list = eval(value)
+			if key == 'Activity':
+				response.__setitem__("Activities", val_list)
+			if key == 'ExportedActivity':
+				response.__setitem__("Exported Activities", val_list)
+			if key == 'BroadcastReceiver':
+				response.__setitem__(key, val_list)
+			if key == 'ExportedReceiver':
+				response.__setitem__("Broadcast Receivers", val_list)
+			if key == 'Permission':
+				response.__setitem__("Permissions", val_list)
+			if key == 'CriticalPerm':
+				response.__setitem__("Critical Permissions", val_list)
+			if key == 'CustomPerm':
+				response.__setitem__("Custom Permissions", val_list)
+			if key == 'Deeplinks':
+				response.__setitem__("Deeplinks", val_list)
+			if key == 'Service':
+				response.__setitem__("Services", val_list)
+			if key == 'ExportedService':
+				response.__setitem__("Exported Services", val_list)
+			if key == 'Taskaffinity':
+				response.__setitem__("Task Affinity", val_list)
+			if key == 'ImplicitIntent':
+				tmp_imp_intents = []
+				for key in val_list.keys():
+					tmp_imp_intents.extend(val_list[key])
+				key = 'ImplicitIntent'
+				response.__setitem__("Implicit Intents", tmp_imp_intents)
+			if key == 'Provider':
+				tmp_providers = []
+				provider_obj_list = []	
+				for key_parent,value_parent in val_list.items():
+					for key, value in value_parent.items():
+						if key == 'name':
+							temp = key + ' : ' + value
+							provider_obj_list.insert(0, temp)
+						else:
+							temp = key + ' : ' + value
+						provider_obj_list.append(temp)
+					provider_obj_list.append("")
+					tmp_providers.extend(provider_obj_list)
+					provider_obj_list = []
+				key = 'Provider'
+				response.__setitem__(key, tmp_providers)
+
+	elif scan_type =="bytecode":
+		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `ScanId` = '%s'" % sid
+		bytecode_data = data_from_db(query_bytecode)
+		bytecode_newdata = null_elimination(bytecode_data)
+
+		#Sorting manifest data for response
+		for key, value in bytecode_newdata.items():
+			val_list = eval(value)
+			if key == 'Unsafe_Intent_Urls':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'File_Access_Via_Urls':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Content_Access_Via_Urls':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Unencrypted_Socket_Communications':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Insecure_Socket_Factory':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'No_Tls_Validity_Checks':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Sticky_Broadcasts':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Empty_Pending_Intents':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Dynamic_or_exported_Broadcast_Receivers':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Ecb_Instances':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Javascript_Enabled':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Overwritable_Cookie':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'execSQL_used':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'SharedPrefs_usage':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+			if key == 'SQLite_DB_usage':
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list)
+		
+
 		
 	return response
 
@@ -212,14 +211,22 @@ def scan():
 					cleaner('app.apk')
 					break
 			thesid = get_config_data('scan_id')
-			response = getreport(thesid)
+			response = jsonify(status_code=HTTPStatus.OK, scan_id=thesid)
+			# response = getreport(thesid)
 			thesid = int(thesid) + 1
 			set_config_data('scan_id', str(thesid))
 
-			os.system('rm app.apk')
+			# os.system('rm app.apk')
+			# response =jsonify{"status_code" = HTTPStatus.OK, "scan_id"= thesid} 
 
-			return  response,200,{'Access-Control-Allow-Origin': '*'} 
+			return  response	,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")
+
+@app.route("/report/<scan_id>/<scan_type>")
+def report(scan_id, scan_type):
+	response = getreport(scan_id, scan_type)
+	a = scan_id + ' : ' + scan_type
+	return response
 
 
 @app.route("/testbed")
@@ -244,7 +251,7 @@ def reset():
 
 	
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, use_reloader=False)
 
 
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
