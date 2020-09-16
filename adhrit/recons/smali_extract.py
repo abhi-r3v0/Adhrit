@@ -46,19 +46,15 @@ def apk_sign(apk_name):
 
 
 # noinspection PyUnusedLocal,PyUnusedLocal,PyUnusedLocal
-def inj_check(apk_name, flag_format=''):
-    snamesplit = apk_name.split('.')[0]
-    if os.path.isdir('Bytecode') == 0:
-        print(Fore.RED + "\n\t[!] bytecode not found. Extracting")
-        smali_de(apk_name)
+def inj_check():
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "CHECKING FOR BYTECODE INJECTIONS\n\n")
+    print(Fore.GREEN + "[INFO] " + Fore.BLUE + "Scanning for hardcoded secrets\n\n")
     inj_points = 0
     flag_count = 0
     check = 0
     url_count = 0
     urls = []
-    smali_dir = 'smali'
+    smali_dir = 'Bytecode'
     flag_regex = re.compile(r"" + str(flag_format) + "{[a-z0-9]}*", re.IGNORECASE)
     url_regex = 'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
     flags = []

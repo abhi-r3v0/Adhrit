@@ -11,7 +11,7 @@ def lib_pwn():
     n = 0
     str_list = []
     print(Fore.YELLOW + "\n--------------------------------------------------")
-    binfilepath = glob.glob('Extracts/lib/arme*')
+    binfilepath = glob.glob('Bytecode/lib/arme*')
     if len(binfilepath) > 0:
         binfilepath = binfilepath[0]
         if os.path.exists(binfilepath):
@@ -61,5 +61,8 @@ def lib_pwn():
 
         else:
             print(Fore.RED + "\t[!] " + Fore.YELLOW + "Lib not found!")
+
+
+        return str_list
         
 

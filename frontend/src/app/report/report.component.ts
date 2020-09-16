@@ -48,7 +48,7 @@ export class ReportComponent implements OnInit {
 }
 
 getSecretData(){
-  this.scanType="secret";
+  this.scanType="secrets";
  this.apkDataService.getReportData(this.res.scan_id,this.scanType).subscribe(data => {
    this.report=data;
    console.log(data)

@@ -66,11 +66,11 @@ def null_elimination(data):
 	return data
 	
 
-def getreport(scan_id,scan_type):
+def getreport(scan_id, scan_type):
 	sid = scan_id
 	response = {}
 
-	if scan_type =="manifest":
+	if scan_type == "manifest":
 		query_manifest = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
 		manifest_data = data_from_db(query_manifest)
 		manifest_newdata = null_elimination(manifest_data)
@@ -123,7 +123,7 @@ def getreport(scan_id,scan_type):
 				key = 'Provider'
 				response.__setitem__(key, tmp_providers)
 
-	elif scan_type =="bytecode":
+	elif scan_type == "bytecode":
 		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `ScanId` = '%s'" % sid
 		bytecode_data = data_from_db(query_bytecode)
 		bytecode_newdata = null_elimination(bytecode_data)
@@ -179,7 +179,23 @@ def getreport(scan_id,scan_type):
 			if key == 'SQLite_DB_usage':
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
-		
+
+
+	elif scan_type == "secrets":
+		query_secrets = "SELECT * FROM `SecretsDB` WHERE `ScanId` = '%s'" % sid
+		secrets_data = data_from_db(query_secrets)
+		secrets_newdata = null_elimination(secrets_data)
+
+		#Sorting manifest data for response
+		for key, value in secrets_newdata.items():
+			val_list = eval(value)
+			if key == 'Urls':
+				response.__setitem__('URLs', val_list)
+			if key == 'Strings':
+				response.__setitem__(key, val_list)
+			if key == 'Api_keys':
+				key = key.replace('_',' ')
+				response.__setitem__('API Keys', val_list)
 
 		
 	return response
@@ -226,7 +242,7 @@ def scan():
 def report(scan_id, scan_type):
 	response = getreport(scan_id, scan_type)
 	a = scan_id + ' : ' + scan_type
-	return response,{'Access-Control-Allow-Origin': '*'} 
+	return response,{'Access-Control-Allow-Origin': '*'}
 
 
 @app.route("/testbed")

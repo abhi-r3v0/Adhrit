@@ -1,4 +1,5 @@
 from adhrit.recons.smarser.parser import parser
+from adhrit.recons.secrets import secret_scanner
 from colorama import Fore
 import os
 
@@ -11,4 +12,4 @@ os.system(smalicmd)
 if os.path.isdir('Bytecode'):
     print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Extraction complete")
     parser()
-
+    secret_scanner()

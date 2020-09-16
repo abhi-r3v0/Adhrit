@@ -36,7 +36,15 @@ def create_bytecode_table(conn):
 		except Error as e:
 			print(e)
 
-
+# Creating a table for storing data from Secrets Scanning
+def create_secrets_table(conn):
+	if conn is not None:
+		create_table = ''' CREATE TABLE IF NOT EXISTS SecretsDB(ScanId text PRIMARY KEY NOT NULL, Urls text, Strings text, Api_keys text); '''
+		try:
+			c = conn.cursor()
+			c.execute(create_table)
+		except Error as e:
+			print(e)
 
 
 # Inserting data into the data table
@@ -55,6 +63,18 @@ def insert_datatable(conn, datadetails):
 def insert_bytecodetable(conn, datadetails):
 	if conn is not None:
 		insert_table = ''' INSERT INTO BytecodeDB(ScanId, Unsafe_Intent_Urls, File_Access_Via_Urls, Content_Access_Via_Urls, Unencrypted_Socket_Communications, Insecure_Socket_Factory, No_Tls_Validity_Checks, Sticky_Broadcasts, Empty_Pending_Intents, Dynamic_or_exported_Broadcast_Receivers, Ecb_Instances, Javascript_Enabled, Overwritable_Cookie, Weak_Dynamic_Invocation_Checks_On_Content_Providers, execSQL_used, SharedPrefs_usage, SQLite_DB_usage) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); '''
+		try:
+			c = conn.cursor()
+			c.execute(insert_table, datadetails)
+			conn.commit()
+		except Error as e:
+			print(e)
+		return c.lastrowid
+
+# Inserting data into the Secrets table
+def insert_secretstable(conn, datadetails):
+	if conn is not None:
+		insert_table = ''' INSERT INTO SecretsDB(ScanId, Urls, Strings, Api_keys) VALUES(?,?,?,?); '''
 		try:
 			c = conn.cursor()
 			c.execute(insert_table, datadetails)
