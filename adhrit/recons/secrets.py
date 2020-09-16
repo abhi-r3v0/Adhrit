@@ -61,10 +61,12 @@ def lib_pwn():
 
 def url_scanner():
 
+	final_urls = []
+
 	print("\n[+] Scanning URLs\n")
 	url_regex = 'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 	urls = []
-	dirname = 'Bytecode'
+	dirname = 'Bytecode/smali'
 	ignore_dirs = ['android', 'org', 'google', 'localytics', 'unknown', 'lib', 'AndroidManifest.xml', 'original']
 	for dirList, subdirList, subfiles in os.walk(dirname):
 			# noinspection PyAssignmentToLoopOrWithParameter
@@ -79,12 +81,17 @@ def url_scanner():
 
 	for dirList, subdirList, subfiles in os.walk(dirname):
 		for files in subfiles:
-			with open(os.path.abspath(os.path.join(dirList, files)), 'rb') as f:
+			with open(os.path.abspath(os.path.join(dirList, files)), 'r') as f:
 				for lines in f:
-					if re.search(url_regex, str(lines)):
+					if re.search(url_regex, lines):
 						urls.append(lines)
+						
+	if urls:
+		for url in urls:
+			if (str(url.split()[2][1:-1]).startswith('https://') or str(url.split()[2][1:-1]).startswith('http://')):
+				final_urls.append(url.split()[2][1:-1])
 
-	return urls
+	return final_urls
 
 
 def get_config_data(key):
@@ -95,19 +102,21 @@ def get_config_data(key):
 
 def secret_scanner():
 
-	api_keys = []
-	urls = []
-	strings_from_lib = []
+	api_keys = ['abc', 'xyz']
 
 	dbname = 'adhrit.db'
 	dbconstatus = dbconnection(dbname)
 	thesid = get_config_data('scan_id')
 
 	urls = url_scanner()
+
 	strings_from_lib = lib_pwn()
+	print(str(strings_from_lib))
+
+	print(str(api_keys))
 
 	create_secrets_table(dbconstatus)
-	allsecrets = (str(thesid), str(urls), str(strings_from_lib), str(api_keys))
+	allsecrets = (str(thesid), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
 	addtotable = insert_secretstable(dbconstatus, allsecrets)
 
 

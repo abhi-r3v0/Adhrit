@@ -14,7 +14,9 @@ export class ReportComponent implements OnInit {
   constructor(private apkDataService:ApkDataService) { }
   res:any
   test:any
-  report:any
+  reportmanifest:any
+  reportbytecode:any
+  reportsecrets:any
   scanType="";
   ngOnInit(): void {
     this.res=this.apkDataService.scannedData;
@@ -33,7 +35,7 @@ export class ReportComponent implements OnInit {
      getManifestData(){
        this.scanType="manifest";
       this.apkDataService.getReportData(this.res.scan_id,this.scanType).subscribe(data => {
-        this.report=data;
+        this.reportmanifest=data;
         console.log(data)
         console.log("Manifest Scan:"+data)
       });
@@ -41,7 +43,7 @@ export class ReportComponent implements OnInit {
   getBytecodeData(){
     this.scanType="bytecode";
    this.apkDataService.getReportData(this.res.scan_id,this.scanType).subscribe(data => {
-     this.report=data;
+     this.reportbytecode=data;
      console.log(data)
      console.log("bytecode Scan:"+data)
    });
@@ -50,7 +52,7 @@ export class ReportComponent implements OnInit {
 getSecretData(){
   this.scanType="secrets";
  this.apkDataService.getReportData(this.res.scan_id,this.scanType).subscribe(data => {
-   this.report=data;
+   this.reportsecrets=data;
    console.log(data)
    console.log("Manifest Scan:"+data)
  });
