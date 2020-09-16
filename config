@@ -2,6 +2,6 @@
 vt_api_key = 
 dependencies_status = incomplete
 emulator_path = #optional
-scan_id = 2
+scan_id = 15
 bytecode_scan_status = complete
 

@@ -226,7 +226,7 @@ def scan():
 def report(scan_id, scan_type):
 	response = getreport(scan_id, scan_type)
 	a = scan_id + ' : ' + scan_type
-	return response
+	return response,{'Access-Control-Allow-Origin': '*'} 
 
 
 @app.route("/testbed")

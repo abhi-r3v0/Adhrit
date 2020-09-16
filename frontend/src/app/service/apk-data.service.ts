@@ -22,7 +22,7 @@ export class ApkDataService {
     
 }
 
-  getReport(){
-    return this.http.get(`http://127.0.0.1:5000/testbed`)
+  getReportData(scanId,scanType){
+    return this.http.get(`http://127.0.0.1:5000/report/${scanId}/${scanType}`)
   }
 }
