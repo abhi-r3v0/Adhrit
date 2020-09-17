@@ -21,6 +21,10 @@ def cleaner(apk_name):
     if os.path.exists('Bytecode') and os.path.isdir('Bytecode'):
         os.system('rm -r Bytecode')
         print(Fore.BLUE + "\n\t[-] " + Fore.YELLOW + "REMOVED BYTECODE")
+    
+    if os.path.exists('api_scan') and os.path.isdir('api_scan'):
+        os.system('rm -r api_scan')
+        print(Fore.BLUE + "\n\t[-] " + Fore.YELLOW + "REMOVED BYTECODE")
 
     if os.path.exists('Analysis') and os.path.isdir('Analysis'):
         os.system('rm -r Analysis')
@@ -46,6 +50,7 @@ def cleaner(apk_name):
 
     if os.path.exists('Manifest.xml'):
         os.system('rm -r Manifest.xml')
+    
 
     if os.path.exists('vulnerablities.txt'):
         os.system('rm -r vulnerablities.txt')

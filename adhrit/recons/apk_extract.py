@@ -116,11 +116,18 @@ def apk_info(apk_name):
 	print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST DUMP")
 	# os.chdir('..')
 	# os.system('rm AndroidManifest.xml')
-	print(os.system('pwd'))
+	# print(os.system('pwd'))
 	mandmp = 'java -jar adhrit/tools/apktool.jar d -f app.apk -o manifest'
 	os.system(mandmp)
+	os.system('mkdir api_scan')
 	if os.path.isdir('manifest'):
 		os.system('cp manifest/AndroidManifest.xml Manifest.xml')
+		os.system('cp manifest/AndroidManifest.xml api_scan/manifest.xml')
+		os.system('cp manifest/res/values/strings.xml api_scan/strings.xml')
+		os.system('cp -a manifest/smali api_scan/smali')
+
+		
+
 		os.system('rm -rf manifest/')
 		
 

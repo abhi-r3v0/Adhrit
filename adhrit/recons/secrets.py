@@ -102,23 +102,46 @@ def get_config_data(key):
 	check_deps.read('config')
 	return check_deps.get('config-data', str(key))
 
+def api_scanner():
+	api_lists = []
+	print("\n[+] Scanning API keys\n")
+	root_dir = os.getcwd() + '/api_scan/'
+	#Append the remaining regex here
+	regex_dic = {'Google Maps API': re.compile(r'\bAIza.{35}\b')}
+
+	scan_lists = [glob.glob(root_dir + "/**/*.smali", recursive = True), glob.glob(root_dir + "*.xml")]
+	for scan_list in scan_lists:
+		for file_path in scan_list:
+			with open(file_path) as file:
+				for line in file:
+					for key in regex_dic:
+						match =  regex_dic[key].findall(line)
+						if match:
+							api = "".join(match)
+							file_name = file_path.rsplit('/', 1)[1]
+							api_val = str(key) + ' : ' + str(file_name) + ' ['+api+']'
+							api_lists.append(api_val)
+	return api_lists
+
+
 
 def secret_scanner():
 
-	api_keys = ['zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx', 'AJ782r143ttvbr8wqRZ17uxz']
+	api_keys = []
 
 	dbname = 'adhrit.db'
 	dbconstatus = dbconnection(dbname)
+	create_secrets_table(dbconstatus)
 	thesid = get_config_data('scan_id')
 
 	urls = url_scanner()
 
-	strings_from_lib = lib_pwn()
+	# strings_from_lib = lib_pwn()
+	strings_from_lib = ""
 	print(str(strings_from_lib))
-
+	api_keys.append(api_scanner())
 	print(str(api_keys))
 
-	create_secrets_table(dbconstatus)
 	allsecrets = (str(thesid), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
 	addtotable = insert_secretstable(dbconstatus, allsecrets)
 
