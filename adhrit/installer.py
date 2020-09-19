@@ -31,6 +31,13 @@ class DepInstaller:
 
 			for j in self.pip_tools:
 				try:
+					if j == 'r2pipe':
+						os.system('git clone https://github.com/radareorg/radare2.git')
+						working_dir = os.getcwd()
+						os.chdir(working_dir + '/radare2/sys')
+						os.system('chmod + install.sh')
+						os.system('./install.sh')
+						os.chdir(working_dir)
 					subprocess.check_output(['sudo', 'pip3', 'install', j], stderr=subprocess.PIPE)
 					print("\t[+] Installed " + j)
 				except subprocess.CalledProcessError:
@@ -87,6 +94,14 @@ class DepInstaller:
 			
 			try:
 				for j in self.pip_tools:
+					if j == 'r2pipe':
+						os.system('git clone https://github.com/radareorg/radare2.git')
+						working_dir = os.getcwd()
+						os.chdir(working_dir + '/radare2/sys')
+						os.system('chmod + install.sh')
+						os.system('./install.sh')
+						os.chdir(working_dir)
+						os.system('rm -rf radare2/')
 					subprocess.check_output(['sudo', 'pip3', 'install', j], stderr=subprocess.PIPE)
 					print("\t[+] Installed " + j)
 
