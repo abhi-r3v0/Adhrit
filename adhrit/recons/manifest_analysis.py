@@ -24,6 +24,7 @@ def man_scanner():
 	scanned_services = []
 	scanned_provider = []
 	scanned_implicit_intent = []
+	scanned_application_info = []
 
 	json_acts = []
 	json_export_acts = []
@@ -38,6 +39,7 @@ def man_scanner():
 	json_services = []
 	json_provider = []
 	json_implicit_intent = [] 
+	json_application_info = []
 
 	all_app_tags = []
 
@@ -106,7 +108,10 @@ def man_scanner():
 		root = tree.getroot()
 		for pkg_attribs in root.attrib:
 			if pkg_attribs == "package":
-				pkg_name = root.attrib[pkg_attribs]
+				pkg_name = "Package Name: " + str(root.attrib[pkg_attribs])
+				scanned_application_info.append(pkg_name)
+				
+
 		
 		# Checking for backup status
 		backup_status = root.findall("application")
@@ -114,18 +119,21 @@ def man_scanner():
 			for bckp in acts.attrib:
 				if bckp == allow_backup:
 					if acts.attrib[bckp] == "true":
-						print('Backup Status: '+ str(' True'))
+						backup_status = 'Backup Status: '+ str(' True')
 					else:
-						print('Backup Status: '+ str(' False'))
+						backup_status = 'Backup Status: '+ str(' False')
+					scanned_application_info.append(backup_status)
 
 		# Checking for debug flag
 		for debugattrib in backup_status:
 			for dbgstatus in debugattrib.attrib:
 				if dbgstatus == debuggable:
 					if debugattrib.attrib[dbgstatus] == "true":
-						print('Debug Status: '+ str(' True'))
+						debug_status = 'Debug Status: '+ str(' True')
 					else:
-						print('Debug Status: '+ str(' False'))
+						debug_status = 'Debug Status: '+ str(' False')
+					scanned_application_info.append(debug_status)
+					json_application_info = json.dumps(scanned_application_info)
 
 		# List of critical permissions
 		permissions = root.iter('uses-permission')
@@ -371,13 +379,13 @@ def man_scanner():
 		json_implicit_intent = json.dumps(intent_fiter_dict)
 
 		
-	return dbconstatus, str(thescanid), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
+	return dbconstatus, str(thescanid), str(json_application_info), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
 
-def add_to_db(dbconstatus, thescanid, json_perms, json_critical_perms, json_custom_perms, json_acts, json_export_acts, json_receivers, json_export_receivers, json_deeplinks, json_taskaffinity, json_services, json_export_services, json_provider, json_implicit_intent):
+def add_to_db(dbconstatus, thescanid, json_application_info ,json_perms, json_critical_perms, json_custom_perms, json_acts, json_export_acts, json_receivers, json_export_receivers, json_deeplinks, json_taskaffinity, json_services, json_export_services, json_provider, json_implicit_intent):
 
 	# Database Operations
 	create_datatable(dbconstatus)
-	datadetails = (str(thescanid), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
+	datadetails = (str(thescanid), str(json_application_info), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
 	addedornot = insert_datatable(dbconstatus, datadetails)
 
 
@@ -386,5 +394,5 @@ def add_to_db(dbconstatus, thescanid, json_perms, json_critical_perms, json_cust
 def man_analyzer(apk_name):
 	if os.path.exists("Manifest.xml"):
 
-		retdbstat, retscanid, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
-		add_to_db(retdbstat, retscanid, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
+		retdbstat, retscanid, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
+		add_to_db(retdbstat, retscanid, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
