@@ -151,10 +151,7 @@ This will automatically launch the Web interface where the APK can be uploaded a
 ### Awesome tools:
 
 * [apktool](https://ibotpeaches.github.io/Apktool/)
-* [jarsigner](https://github.com/appium/sign)
-* [AXML2Printer](https://code.google.com/archive/p/android4me/downloads)
 * [jd-cli](https://github.com/kwart/jd-cmd)
-* [aapt](https://developer.android.com/studio/command-line/index.html)
 * [Enjarify](https://github.com/google/enjarify)
 * [Ghera](https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/)
 * [Smalisca](https://github.com/dorneanu/smalisca)
