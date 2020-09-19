@@ -230,7 +230,10 @@ def man_scanner():
 						if category_BROWSABLE in category.attrib[name]:
 							for data in newparent.iter('data'):
 								deeplink = ''
-								deeplink = str(data.attrib[scheme]) + '://'+ str(data.attrib[host])
+								if host in data.attrib:
+									deeplink = str(data.attrib[scheme]) + '://'+ str(data.attrib[host])
+								else:
+									deeplink = str(data.attrib[scheme])
 								# print(data.attrib[host]+data.attrib[scheme]+data.attrib[path])   
 								if  pathPattern in data.attrib :
 									tmp = str(data.attrib[pathPattern])
