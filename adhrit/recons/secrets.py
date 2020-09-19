@@ -136,8 +136,7 @@ def secret_scanner():
 
 	urls = url_scanner()
 
-	# strings_from_lib = lib_pwn()
-	strings_from_lib = ""
+	strings_from_lib = lib_pwn()
 	print(str(strings_from_lib))
 	api_keys.append(api_scanner())
 	print(str(api_keys))

@@ -77,10 +77,8 @@ def getreport(scan_id, scan_type):
 
 		#Sorting manifest data for response
 		for key, value in manifest_newdata.items():
-			print(key)
 			val_list = eval(value)
 			if key == 'ApplicationInfo':
-				print(val_list)
 				response.__setitem__("Application Information", val_list)
 			if key == 'Activity':
 				response.__setitem__("Activities", val_list)
@@ -251,9 +249,10 @@ def report(scan_id, scan_type):
 
 @app.route("/testbed")
 def test():
-	scanid ='1'
+	# scanid ='1'
 	
-	return getreport(scanid, 'manifest')
+	# return getreport(scanid, 'manifest')
+	pass
 
 
 

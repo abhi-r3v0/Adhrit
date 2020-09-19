@@ -40,15 +40,24 @@ def printer(xset):
 def set_updater(theset, thepattern):
 	theset.remove(thepattern)
 
+def sortify(sets):
+	newsets = []
+	for i in sets:
+		tmp = '/'.join(i.split('/')[3:])
+		tmp = tmp.replace('.smali','.java')
+		newsets.append(tmp)
+	return newsets
+
+
+	pass
+
 def add_to_db():
 	dbname = "adhrit.db"
 	dbconstatus = dbconnection(dbname)
 	create_bytecode_table(dbconstatus)
 	thesid = get_config_data('scan_id')
-	datadetails = (str(thesid), str(list(set_of_unsafe_intent_list)), str(list(set_of_url_allowed_list)), str(list(set_of_content_allowed_list)), str(list(set_of_list_of_unenc_soc)), str(list(set_of_insecure_socket_list)), str(list(set_of_tls_validity_list)), str(list(set_of_sys_broadcast_list)), str(list(set_of_empty_pend_list)), str(list(set_of_search_dynamic)), str(list(set_of_ecb)), str(list(set_of_js)), str(list(set_of_list_of_cookie_overwrite)), str(list(set_of_weak_checks_list)), str(list(set_of_execsql_used)), str(list(set_of_sharedprefs_used)), str(list(set_of_sqli_used)))
+	datadetails = (str(thesid), str(sortify(set_of_unsafe_intent_list)), str(sortify(set_of_url_allowed_list)), str(sortify(set_of_content_allowed_list)), str(sortify(set_of_list_of_unenc_soc)), str(sortify(set_of_insecure_socket_list)), str(sortify(set_of_tls_validity_list)), str(sortify(set_of_sys_broadcast_list)), str(sortify(set_of_empty_pend_list)), str(sortify(set_of_search_dynamic)), str(sortify(set_of_ecb)), str(sortify(set_of_js)), str(sortify(set_of_list_of_cookie_overwrite)), str(sortify(set_of_weak_checks_list)), str(sortify(set_of_execsql_used)), str(sortify(set_of_sharedprefs_used)), str(sortify(set_of_sqli_used)))
 	addedornot = insert_bytecodetable(dbconstatus, datadetails)
-
-
 
 
 
