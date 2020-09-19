@@ -148,25 +148,6 @@ This will automatically launch the Web interface where the APK can be uploaded a
 
 ---
 
-### Blogs:
-
-* #####  [bi0s: Android APK Reconnaissance Tool](https://amritabi0s.wordpress.com/2017/09/24/adhrit-android-apk-reconnaissance-tool)
----
-
-
-### Video:
-
-* #### [Bug Bounty Tutorial](https://musicnew.site/musicnew/jsnjIhgyB10/android-pentest-tutorial-1-decompile-apk-easily-bug-bounty-2018)
-
-<p align="left">
-  <img width="500" height="310" src="https://github.com/abhi-r3v0/Adhrit/blob/master/Docs/images/8.png">
-</p>
-
-
-* #### [Solving a simple mobile CTF challenge](https://www.youtube.com/watch?v=yeEp-opeRjM)
-
----
-
 ### Awesome tools:
 
 * [apktool](https://ibotpeaches.github.io/Apktool/)
