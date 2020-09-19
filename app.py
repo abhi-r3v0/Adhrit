@@ -77,7 +77,11 @@ def getreport(scan_id, scan_type):
 
 		#Sorting manifest data for response
 		for key, value in manifest_newdata.items():
+			print(key)
 			val_list = eval(value)
+			if key == 'ApplicationInfo':
+				print(val_list)
+				response.__setitem__("Application Information", val_list)
 			if key == 'Activity':
 				response.__setitem__("Activities", val_list)
 			if key == 'ExportedActivity':
@@ -247,8 +251,9 @@ def report(scan_id, scan_type):
 
 @app.route("/testbed")
 def test():
-	pass
-	# return 'testBEd',200,{'Access-Control-Allow-Origin': '*'} 
+	scanid ='1'
+	
+	return getreport(scanid, 'manifest')
 
 
 
@@ -267,7 +272,7 @@ def reset():
 
 	
 if __name__ == '__main__':
-	app.run(debug=True, use_reloader=False)
+	app.run(debug=True, use_reloader=True)
 
 
 # curl -X POST -F file=@app.apk http://localhost:5000/scan

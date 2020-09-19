@@ -125,13 +125,14 @@ def man_scanner():
 					scanned_application_info.append(backup_status)
 
 		# Checking for debug flag
-		for debugattrib in backup_status:
-			for dbgstatus in debugattrib.attrib:
-				if dbgstatus == debuggable:
-					if debugattrib.attrib[dbgstatus] == "true":
+		debug_status = root.findall("application")
+		for app_attribs in debug_status:
+			for dbug in app_attribs.attrib:
+				if dbug == debuggable :
+					if app_attribs.attrib[dbug] == "true":
 						debug_status = 'Debug Status: '+ str(' True')
 					else:
-						debug_status = 'Debug Status: '+ str(' False')
+						debug_status = 'Debug Status: '+ str(' False')	
 					scanned_application_info.append(debug_status)
 					json_application_info = json.dumps(scanned_application_info)
 
@@ -246,10 +247,12 @@ def man_scanner():
 
 		# TaskAffinity
 		# Check in application tag
-		for affinity_status in backup_status:
+		task_affinity= root.findall("application")
+		for affinity_status in task_affinity:
 			for affkey, affval in affinity_status.attrib.items():
-				all_app_tags.append(str(affkey))
 				if affkey == taskAffinity:
+					print( affkey)
+					print(affval)
 					if affval == "":
 						info = "Null predifined in application tag."
 						# JSON DATA
