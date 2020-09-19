@@ -111,17 +111,17 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 
 ---
 
-### Process
-
-![1](Docs/images/process.png)
-
----
-
 ### Usage:
 
 ```python3 run.py```
 
 This will automatically launch the Web interface where the APK can be uploaded and the report will be generated.
+
+---
+
+### Process
+
+![1](Docs/images/process.png)
 
 ---
 
