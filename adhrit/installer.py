@@ -101,7 +101,6 @@ class DepInstaller:
 						os.system('chmod + install.sh')
 						os.system('./install.sh')
 						os.chdir(working_dir)
-						os.system('rm -rf radare2/')
 					subprocess.check_output(['sudo', 'pip3', 'install', j], stderr=subprocess.PIPE)
 					print("\t[+] Installed " + j)
 

@@ -81,15 +81,15 @@ def getreport(scan_id, scan_type):
 			if key == 'ApplicationInfo':
 				response.__setitem__("Application Information", val_list)
 			if key == 'Activity':
-				response.__setitem__("Activities", val_list)
+				response.__setitem__("List of all Activities", val_list)
 			if key == 'ExportedActivity':
-				response.__setitem__("Exported Activities", val_list)
+				response.__setitem__("List of Exported Activities", val_list)
 			if key == 'BroadcastReceiver':
 				response.__setitem__(key, val_list)
 			if key == 'ExportedReceiver':
-				response.__setitem__("Broadcast Receivers", val_list)
+				response.__setitem__("List of Broadcast Receivers", val_list)
 			if key == 'Permission':
-				response.__setitem__("Permissions", val_list)
+				response.__setitem__("List of all Permissions", val_list)
 			if key == 'CriticalPerm':
 				response.__setitem__("Critical Permissions", val_list)
 			if key == 'CustomPerm':
