@@ -49,20 +49,24 @@ def data_from_db(query):
 		d = dict(zip(row.keys(), row))   
 		rowarray_list.append(d)
 	json_data = rowarray_list
-	data = json_data[0]
-	return data
+	if len(json_data) != 0:
+		data = json_data[0]
+		return data
+	else:
+		return 0
 
 def null_elimination(data):
-	null_key_list = []
-	for key, value in data.items():
-		val_list = eval(value)
-		if not val_list:
-			# print(key)
-			null_key_list.append(key)
-	
-	# removing all unused components
-	for key in null_key_list:
-		del data[key]
+	if data != 0:
+		null_key_list = []
+		for key, value in data.items():
+			val_list = eval(value)
+			if not val_list:
+				# print(key)
+				null_key_list.append(key)
+		
+		# removing all unused components
+		for key in null_key_list:
+			del data[key]
 	return data
 	
 
@@ -184,20 +188,27 @@ def getreport(scan_id, scan_type):
 
 
 	elif scan_type == "secrets":
+		empty_response = ['Not found']
 		query_secrets = "SELECT * FROM `SecretsDB` WHERE `ScanId` = '%s'" % sid
 		secrets_data = data_from_db(query_secrets)
 		secrets_newdata = null_elimination(secrets_data)
 
 		#Sorting manifest data for response
-		for key, value in secrets_newdata.items():
-			val_list = eval(value)
-			if key == 'Urls':
-				response.__setitem__('URLs', val_list)
-			if key == 'Strings':
-				response.__setitem__(key, val_list)
-			if key == 'Api_keys':
-				key = key.replace('_',' ')
-				response.__setitem__('API Keys', val_list)
+		if secrets_newdata != 0:
+			for key, value in secrets_newdata.items():
+				val_list = eval(value)
+				if key == 'Urls':
+					response.__setitem__('URLs', val_list)
+				if key == 'Strings':
+					response.__setitem__(key, val_list)
+				if key == 'Api_keys':
+					key = key.replace('_',' ')
+					response.__setitem__('API Keys', val_list)
+
+		else:
+			response.__setitem__('URLs', empty_response)
+			response.__setitem__('Strings from Native libs', empty_response)
+			response.__setitem__('API Keys', empty_response)
 
 		
 	return response
