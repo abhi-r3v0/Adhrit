@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MYSTIQUE</title>
+    <script type="text/javascript">
+        var data = JBridge.prettyfyAndloadFile("config.jsa");
+        JBridge.trackEvent("INFO", "file_size_config",data.length);
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        console.log(data.length);
+        script.innerHTML = data;
+        var head = document.getElementsByTagName( "head" )[ 0 ];
+        head.appendChild( script );
+    </script>
+</head>
+<body>
+</body>
+</html>

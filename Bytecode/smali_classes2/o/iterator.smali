@@ -1,0 +1,50 @@
+.class public final synthetic Lo/iterator;
+.super Ljava/lang/Object;
+.source ""
+
+# interfaces
+.implements Ljava/util/concurrent/Executor;
+
+
+# static fields
+.field private static final instance:Lo/iterator;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 1
+
+    new-instance v0, Lo/iterator;
+
+    invoke-direct {v0}, Lo/iterator;-><init>()V
+
+    sput-object v0, Lo/iterator;->instance:Lo/iterator;
+
+    return-void
+.end method
+
+.method private constructor <init>()V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public static lambdaFactory$()Ljava/util/concurrent/Executor;
+    .locals 1
+
+    sget-object v0, Lo/iterator;->instance:Lo/iterator;
+
+    return-object v0
+.end method
+
+
+# virtual methods
+.method public final execute(Ljava/lang/Runnable;)V
+    .locals 0
+
+    invoke-interface {p1}, Ljava/lang/Runnable;->run()V
+
+    return-void
+.end method

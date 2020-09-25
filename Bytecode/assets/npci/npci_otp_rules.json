@@ -1,0 +1,22 @@
+[
+  {
+  "sender": ["[a-zA-Z]+"],
+  "message": "is your OTP",
+  "otp": "\\d{6}"
+  },
+  {
+    "sender": ["[a-zA-Z]+"],
+    "message": "OTP is",
+    "otp": "\\d{6}"
+  },
+  {
+    "sender": ["[a-zA-Z]+"],
+    "message": "one time password is",
+    "otp": "\\d{6}"
+  },
+  {
+    "sender": ["[a-zA-Z]+"],
+    "message": "is your one time password",
+    "otp": "\\d{6}"
+  }
+]
