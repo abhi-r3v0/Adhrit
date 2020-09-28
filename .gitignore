@@ -8,6 +8,7 @@
 smali_copy/
 Adhrit.db
 Source-Java/
+Bytecode/
 radare2/
 Analysis/
 Extracts/
