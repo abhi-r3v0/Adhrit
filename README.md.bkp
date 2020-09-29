@@ -19,10 +19,46 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 ### Features:
 
 * #### Manifest Analysis
+	* Package name, debug and backup status
+    * Exported components (activities, services, providers and receivers)
+    * Deeplinks
+    * Implicit intent filters
+    * Critical permissions
 
 * #### Bytecode Analysis
+	* **Usage Analysis**
+		* SQLite DBs
+		* SharedPreferences
+
+	* **Vulnerability Analysis**
+		* **ICC**
+            * Dynamic Broadcast Receivers
+            * Empty Pending Intents
+            * Sticky Broadcasts 
+            * Unprotected Broadcast Receivers
+            * Weak Dynamic Invocation Checks
+        * **Web Issues**
+            * JavaScript Execution in WebViews
+            * HTTP Connections
+            * Unsafe Intent URL Resolving Implementation
+            * Overwritable Cookie
+            * File Access from URLs
+            * Content Provider Access from URLs
+            * Supressed SSL Warnings
+        * **Storage Issues**
+            * Non-parameterized SQL queries
+            * Usage of External Storage for application data
+        * **Networking**
+            * Missing Server Certificate Validity Check
+            * Insecure SSL Socket Factory
+        * **Crypto Issues**
+            * Usage of ECB Block Cipher
 
 * #### Secrets Analysis
+	* URLs (IPv4, IPv6)
+	* API tokens (Slack, AWS, Fabric, All Google API keys, Stripe, Twilio, Twitter)
+	* Strings from native libraries
+	* Others (emails, basic auth creds, MD5 hashes)
 
 
 ### Screenshots:
