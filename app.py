@@ -202,7 +202,6 @@ def getreport(scan_id, scan_type):
 				if key == 'Strings':
 					response.__setitem__(key, val_list)
 				if key == 'Api_keys':
-					key = key.replace('_',' ')
 					response.__setitem__('API Keys', val_list)
 
 		else:

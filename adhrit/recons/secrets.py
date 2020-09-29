@@ -143,7 +143,7 @@ def api_scanner():
 						if match:
 							api = "".join(match)
 							file_name = file_path.rsplit('/', 1)[1]
-							api_val = str(key) + ' : ' + str(file_name) + ' ['+api+']'
+							api_val = str(key) + ':' + str(file_name) + '['+api+']'
 							api_lists.append(api_val)
 	return api_lists
 
