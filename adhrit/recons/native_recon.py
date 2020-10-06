@@ -6,6 +6,12 @@ from colorama import Fore, Style
 
 
 
+def isBase64(s):
+    try:
+        return base64.b64encode(base64.b64decode(s)) == s
+    except Exception:
+        return False
+
 def lib_pwn():
 
     n = 0
@@ -42,16 +48,18 @@ def lib_pwn():
 
                 print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "All Strings\n")
                 allstrings = r.syscmdj('rabin2 -j -z ' + thelibfile)
+                print(allstrings)
 
                 print(Fore.YELLOW)
                 for key, value in allstrings.items():
                     for valuedict in value:
                         for i,j in valuedict.items():
                             if(i == 'string'):
-                                n +=1
-                                str_list.append(str(base64.b64decode(j)))
-                                if n < 15:
-                                    print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j)))
+                                if(isBase64(j)):
+                                    n +=1
+                                    str_list.append(str(base64.b64decode(j)))
+                                    # if n < 15:
+                                    #     print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j)))
                                 
                 print(Fore.BLUE + "\t\n[+] " + Fore.YELLOW + str(n) + " strings found. Writing all strings to " + Fore.BLUE + "native_stings.txt")
                 with open('native_stings.txt', 'a+') as ns:

@@ -9,6 +9,12 @@ from adhrit.recons.dbaccess import dbconnection, create_secrets_table, insert_se
 
 decode_str_list = []
 
+def isBase64(s):
+    try:
+        return base64.b64encode(base64.b64decode(s)) == s
+    except Exception:
+        return False
+
 def lib_pwn():
 	n = 0
 	if os.path.exists('Bytecode'):
@@ -43,7 +49,7 @@ def lib_pwn():
 					print(r.cmd('fs'))
 
 					print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "All Strings\n")
-					allstrings = r.syscmdj('rabin2 -j -z ' + thelibfile)
+					allstrings = r.cmdj('rabin2 -z -j ' + thelibfile)
 
 					print(Fore.YELLOW)
 					if allstrings != None:
@@ -51,9 +57,10 @@ def lib_pwn():
 							for valuedict in value:
 								for i,j in valuedict.items():
 									if(i == 'string'):
-										n +=1
-										print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j))[2:-1])
-										decode_str_list.append(str(base64.b64decode(j))[2:-1])
+										if(isBase64(j)):
+											n +=1
+											# print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j))[2:-1])
+											decode_str_list.append(str(base64.b64decode(j))[2:-1])
 
 	return decode_str_list
 
