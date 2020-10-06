@@ -1,8 +1,7 @@
 ![Logo](Docs/logo/bannernew.png)
 
-![INDIA](https://img.shields.io/badge/From-India-orange.svg) <!-- ![BUILD STATUS](https://travis-ci.org/abhi-r3v0/Adhrit.svg?branch=master)-->
-
- [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
+![INDIA](https://img.shields.io/badge/From-India-orange.svg) 
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://www.github.com/abhi-r3v0/Adhrit)
 [![](https://img.shields.io/badge/Blackhat-Asia%202020-lightgrey)](https://www.blackhat.com/asia-20/arsenal/schedule/#adhrit-android-security-suite-18907)
 [![](https://img.shields.io/badge/OWASP-Seasides-lightgrey)](http://web.archive.org/web/20191206083012/https://www.owaspseasides.com/v/2019/tools-showcase/day-2-28-feb-2019)
 [![](https://img.shields.io/badge/ThreatCon-2019-lightgrey)](https://www.threatcon.io/)
