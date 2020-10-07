@@ -74,6 +74,8 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 1. Dowload the zip or clone the package and extract the tool ( ```git clone https://github.com/abhi-r3v0/Adhrit.git``` ).
 2. Run ```python3 run.py```
 
+The script automatically identifies if you're running Adhrit for the first time and will install all the dependencies & libraries required by the tool. 
+
 ---
 
 ### Presentations / Conferences:
