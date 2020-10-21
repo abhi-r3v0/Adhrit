@@ -51,23 +51,27 @@ def sortify(sets):
 
 	pass
 
-def add_to_db():
+def add_to_db(hash_of_apk):
 	dbname = "adhrit.db"
+	hash_of_apk = hash_of_apk
 	dbconstatus = dbconnection(dbname)
 	create_bytecode_table(dbconstatus)
-	thesid = get_config_data('scan_id')
-	datadetails = (str(thesid), str(sortify(set_of_unsafe_intent_list)), str(sortify(set_of_url_allowed_list)), str(sortify(set_of_content_allowed_list)), str(sortify(set_of_list_of_unenc_soc)), str(sortify(set_of_insecure_socket_list)), str(sortify(set_of_tls_validity_list)), str(sortify(set_of_sys_broadcast_list)), str(sortify(set_of_empty_pend_list)), str(sortify(set_of_search_dynamic)), str(sortify(set_of_ecb)), str(sortify(set_of_js)), str(sortify(set_of_list_of_cookie_overwrite)), str(sortify(set_of_weak_checks_list)), str(sortify(set_of_execsql_used)), str(sortify(set_of_sharedprefs_used)), str(sortify(set_of_sqli_used)))
+	datadetails = (str(hash_of_apk), str(sortify(set_of_unsafe_intent_list)), str(sortify(set_of_url_allowed_list)), str(sortify(set_of_content_allowed_list)), str(sortify(set_of_list_of_unenc_soc)), str(sortify(set_of_insecure_socket_list)), str(sortify(set_of_tls_validity_list)), str(sortify(set_of_sys_broadcast_list)), str(sortify(set_of_empty_pend_list)), str(sortify(set_of_search_dynamic)), str(sortify(set_of_ecb)), str(sortify(set_of_js)), str(sortify(set_of_list_of_cookie_overwrite)), str(sortify(set_of_weak_checks_list)), str(sortify(set_of_execsql_used)), str(sortify(set_of_sharedprefs_used)), str(sortify(set_of_sqli_used)))
 	addedornot = insert_bytecodetable(dbconstatus, datadetails)
 
 
 
-def parser():
+def parser(hash_of_apk):
 
 	receiver_set = set()
 	printflag = 0
 
 	print(Fore.YELLOW + "\n\n--------------------------------------------------")
 	print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SCANNING FOR VULNERABILITIES\n")
+
+	path = hash_of_apk
+	os.chdir(path)
+
 
 	filename =  None
 	app = SmaliscaApp()
@@ -198,6 +202,9 @@ def parser():
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SQLite DB used\n")
 	printer(set_of_sqli_used)
 
-	add_to_db()
+	path = os.getcwd() + '/..'
+
+	os.chdir(path)
+	add_to_db(hash_of_apk)
 
 	print(Fore.BLUE + "\n\t\t[INFO] Vulnerability References written to 'Vulnerabilities.txt'")

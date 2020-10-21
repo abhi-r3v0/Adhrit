@@ -1,13 +1,16 @@
+from sqlite3.dbapi2 import Cursor
+import threading
 from adhrit.adhrit import main
 from flask import Flask, json, jsonify, render_template, request
 from threading import Thread
 from http import HTTPStatus
 import os, configparser, time
-from adhrit.recons.dbaccess import dbconnection, select_query
-from adhrit.recons.reset import reset_scanid, reset_db
+from adhrit.recons.dbaccess import create_status_table, dbconnection, select_query
+from adhrit.recons.reset import reset_db
 from subprocess import call
 from adhrit.recons.clean import cleaner
-import sqlite3
+import sqlite3, hashlib
+
 
 
 ALLOWED_EXTENSIONS = {'apk'}
@@ -21,24 +24,24 @@ class Compute(Thread):
 
 	def run(self):
 		print("Running bytecode Analyser")
-		call('python3 bytecode_scanner.py', shell=True)
-		set_config_data('bytecode_scan_status', "complete")
+		global hash_of_apk
+		cmd = 'python3 bytecode_scanner.py ' + str(hash_of_apk)
+		call(cmd, shell=True)
+		
+		
 
 def allowed_file(filename):
 	return '.' in filename and \
 		   filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def get_config_data(key):
-	check_deps = configparser.ConfigParser()
-	check_deps.read('config')                                         
-	return check_deps.get('config-data', str(key))
+def get_hash():
+		sha256_hash = hashlib.sha256()
+		with open('app.apk',"rb") as f:
+			for byte_block in iter(lambda: f.read(4096),b""):
+				sha256_hash.update(byte_block)
+			return str(sha256_hash.hexdigest())
 
-def set_config_data(key, value):
-	update_config = configparser.ConfigParser()
-	update_config.read('config')
-	update_config.set('config-data', str(key), str(value))
-	with open('config', 'w') as updatedconf:
-			update_config.write(updatedconf)
+
 
 def data_from_db(query):
 	rows = select_query(query)
@@ -59,6 +62,8 @@ def null_elimination(data):
 	if data != 0:
 		null_key_list = []
 		for key, value in data.items():
+			if 'Hash' in key:
+				continue
 			val_list = eval(value)
 			if not val_list:
 				# print(key)
@@ -68,19 +73,35 @@ def null_elimination(data):
 		for key in null_key_list:
 			del data[key]
 	return data
+
+def status_checker(hash_of_apk):
+	dbname = "adhrit.db"
+	conn = dbconnection(dbname)
+	create_status_table(conn)
+	Cursor = conn.cursor()
+	query = "SELECT Status from `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
+	
+	Cursor.execute(query)
+	data=Cursor.fetchone()
+	if data is None:
+		return "Not Scanned Yet"
+	else:
+		return data[0]
 	
 
-def getreport(scan_id, scan_type):
-	sid = scan_id
+def getreport(hash_key, scan_type):
+	
 	response = {}
 
 	if scan_type == "manifest":
-		query_manifest = "SELECT * FROM `DataDB` WHERE `ScanId` = '%s'" % sid
+		query_manifest = "SELECT * FROM `DataDB` WHERE `Hash` = '%s'" % str(hash_key)
 		manifest_data = data_from_db(query_manifest)
 		manifest_newdata = null_elimination(manifest_data)
 
 		#Sorting manifest data for response
 		for key, value in manifest_newdata.items():
+			if 'Hash' in key:
+				continue
 			val_list = eval(value)
 			if key == 'ApplicationInfo':
 				response.__setitem__("Application Information", val_list)
@@ -130,12 +151,14 @@ def getreport(scan_id, scan_type):
 				response.__setitem__(key, tmp_providers)
 
 	elif scan_type == "bytecode":
-		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `ScanId` = '%s'" % sid
+		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
 		bytecode_data = data_from_db(query_bytecode)
 		bytecode_newdata = null_elimination(bytecode_data)
 
 		#Sorting manifest data for response
 		for key, value in bytecode_newdata.items():
+			if 'Hash' in key:
+				continue
 			val_list = eval(value)
 			if key == 'Unsafe_Intent_Urls':
 				key = key.replace('_',' ')
@@ -189,13 +212,15 @@ def getreport(scan_id, scan_type):
 
 	elif scan_type == "secrets":
 		empty_response = ['Not found']
-		query_secrets = "SELECT * FROM `SecretsDB` WHERE `ScanId` = '%s'" % sid
+		query_secrets = "SELECT * FROM `SecretsDB` WHERE `Hash` = '%s'" % str(hash_key)
 		secrets_data = data_from_db(query_secrets)
 		secrets_newdata = null_elimination(secrets_data)
 
 		#Sorting manifest data for response
 		if secrets_newdata != 0:
 			for key, value in secrets_newdata.items():
+				if 'Hash' in key:
+					continue
 				val_list = eval(value)
 				if key == 'Urls':
 					response.__setitem__('URLs', val_list)
@@ -229,40 +254,52 @@ def scan():
 			dest = 'app.apk'
 			os.rename(source, dest)
 			
-			set_config_data('bytecode_scan_status', 'incomplete')
-			thread_a = Compute(request.__copy__())
-			thread_a.start()
-			main()
+			global hash_of_apk
+			hash_of_apk = get_hash()
+			status = status_checker(hash_of_apk)
+			if "Completed" not in status:
+				if "Not Scanned Yet" not in status:
+					dbname = "adhrit.db"
+					conn = dbconnection(dbname)
+					Cursor = conn.cursor()
+					query = "DELETE FROM `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
+					Cursor.execute(query)
+				thread_a = Compute(request.__copy__())
+				thread_a.start()
+				main(hash_of_apk)
+			
 			while(True):
 				time.sleep(2)
-				if get_config_data('bytecode_scan_status') == 'complete':
-					cleaner('app.apk')
+				status = status_checker(hash_of_apk)
+				if status == 'Completed':
+					cleaner(hash_of_apk)
 					break
-			thesid = get_config_data('scan_id')
-			response = jsonify(status_code=HTTPStatus.OK, scan_id=thesid)
-			# response = getreport(thesid)
-			thesid = int(thesid) + 1
-			set_config_data('scan_id', str(thesid))
 
-			# os.system('rm app.apk')
-			# response =jsonify{"status_code" = HTTPStatus.OK, "scan_id"= thesid} 
+			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
+			os.system('rm app.apk')
 
 			return  response	,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")
 
-@app.route("/report/<scan_id>/<scan_type>")
-def report(scan_id, scan_type):
-	response = getreport(scan_id, scan_type)
-	a = scan_id + ' : ' + scan_type
+@app.route("/report/<hash_key>/<scan_type>")
+def report(hash_key, scan_type):
+	response = getreport(hash_key, scan_type)
 	return response,{'Access-Control-Allow-Origin': '*'}
+
+
+
+		
+
+
 
 
 @app.route("/testbed")
 def test():
-	# scanid ='1'
+	hash_of_apk = 'e5d9a4fcdabbe0a723cb28581762cf64ac36d8408efd3ce4f81a7b8f4706913'
+	return status_checker(hash_of_apk)
 	
-	# return getreport(scanid, 'manifest')
-	pass
+	
+
 
 
 
@@ -272,16 +309,15 @@ def func():
 
 
 
-
 @app.route("/reset")
 def reset():
 	reset_db()
-	reset_scanid()
 	return jsonify(sts_msg = "Resetted db and Scan Id!")
 
 	
 if __name__ == '__main__':
-	app.run(debug=True, use_reloader=True)
+	global hash_of_apk
+	app.run(debug=False, use_reloader=True,threaded=False , processes=2)
 
-
+#threaded=True,
 # curl -X POST -F file=@app.apk http://localhost:5000/scan

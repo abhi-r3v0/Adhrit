@@ -9,7 +9,7 @@ from time import gmtime, strftime
 from adhrit.recons.dbaccess import dbconnection, create_datatable, insert_datatable
 
 
-def man_scanner():
+def man_scanner(hash_of_apk):
 	global pkg_name
 	scanned_acts = []
 	scanned_perms = []
@@ -63,10 +63,8 @@ def man_scanner():
 
 	check_deps = configparser.ConfigParser()
 	check_deps.read('config')
-	thescanid = check_deps.get('config-data', 'scan_id')
 	tstamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 	dbname = "adhrit.db"
-	scandetails = (str(thescanid), str(tstamp))
 
 	dbconstatus = dbconnection(dbname)
 
@@ -101,7 +99,7 @@ def man_scanner():
 				   "android.permission.WRITE_CONTACTS"
 				   }
 
-	xmlfile = 'Manifest.xml'
+	xmlfile = hash_of_apk+'/Manifest.xml'
 	if os.path.exists(xmlfile):
 		print("Manifest found. Starting analysis\n")
 		tree = Et.parse(xmlfile)
@@ -385,20 +383,21 @@ def man_scanner():
 		json_implicit_intent = json.dumps(intent_fiter_dict)
 
 		
-	return dbconstatus, str(thescanid), str(json_application_info), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
+	return dbconstatus,  str(json_application_info), str(json_perms),  str(json_critical_perms), str(json_custom_perms),  str(json_acts),  str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent)
 
-def add_to_db(dbconstatus, thescanid, json_application_info ,json_perms, json_critical_perms, json_custom_perms, json_acts, json_export_acts, json_receivers, json_export_receivers, json_deeplinks, json_taskaffinity, json_services, json_export_services, json_provider, json_implicit_intent):
+def add_to_db(dbconstatus, hash_of_apk, json_application_info ,json_perms, json_critical_perms, json_custom_perms, json_acts, json_export_acts, json_receivers, json_export_receivers, json_deeplinks, json_taskaffinity, json_services, json_export_services, json_provider, json_implicit_intent):
 
 	# Database Operations
 	create_datatable(dbconstatus)
-	datadetails = (str(thescanid), str(json_application_info), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
+	datadetails = (str(hash_of_apk), str(json_application_info), str(json_perms), str(json_critical_perms), str(json_custom_perms), str(json_acts), str(json_export_acts), str(json_receivers), str(json_export_receivers), str(json_deeplinks), str(json_taskaffinity), str(json_services), str(json_export_services), str(json_provider), str(json_implicit_intent))		
 	addedornot = insert_datatable(dbconstatus, datadetails)
 
 
 			
 
-def man_analyzer(apk_name):
-	if os.path.exists("Manifest.xml"):
+def man_analyzer(apk_name, hash_of_apk):
+	path = hash_of_apk + '/Manifest.xml'
+	if os.path.exists(path):
 
-		retdbstat, retscanid, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner()
-		add_to_db(retdbstat, retscanid, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)
+		retdbstat, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner(hash_of_apk)
+		add_to_db(retdbstat, hash_of_apk, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent)

@@ -156,23 +156,30 @@ def api_scanner():
 
 
 
-def secret_scanner():
+def secret_scanner(hash_of_apk):
 
 	api_keys = []
 
 	dbname = 'adhrit.db'
 	dbconstatus = dbconnection(dbname)
 	create_secrets_table(dbconstatus)
-	thesid = get_config_data('scan_id')
+
+
+	path = hash_of_apk
+	os.chdir(path)
 
 	urls = url_scanner()
 
 	strings_from_lib = lib_pwn()
-	print(str(strings_from_lib))
+	# print(str(strings_from_lib))
 	api_keys.append(api_scanner())
-	print(str(api_keys))
+	# print(str(api_keys))
+	path = os.getcwd() + '/..'
+	os.chdir(path)
+	
 
-	allsecrets = (str(thesid), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
+
+	allsecrets = (str(hash_of_apk), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
 	addtotable = insert_secretstable(dbconstatus, allsecrets)
 
 

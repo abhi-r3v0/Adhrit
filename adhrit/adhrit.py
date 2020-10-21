@@ -16,7 +16,7 @@ from adhrit.recons.smarser.parser import parser
 from adhrit.recons.native_recon import lib_pwn
 from adhrit.recons.dynamic import adb_con
 from adhrit.recons.clean import cleaner
-from adhrit.recons.reset import reset_scanid, reset_db
+from adhrit.recons.reset import reset_db
 
 
 __author__ = 'Abhishek J M ( jmabhishek4@gmail.com, @HawkSpawn )'
@@ -59,20 +59,18 @@ class Adhrit:
 
     # Extract All the contents of the APK into a directory
     @staticmethod
-    def apkextractor(apk_name):
-        apk_info(apk_name)
+    def apkextractor(apk_name, hash_of_apk):
+        apk_info(apk_name, hash_of_apk)
 
     @staticmethod
-    def manifestanalyzer(apk_name):
-        man_analyzer(apk_name)
+    def manifestanalyzer(apk_name, hash_of_apk):
+        man_analyzer(apk_name, hash_of_apk)
 
     @staticmethod
     def resetdb():
         reset_db()
 
-    @staticmethod
-    def reset_scan_id():
-        reset_scanid()
+
 
     # # Extract the source code of the APK in smali
     # @staticmethod
@@ -105,7 +103,7 @@ class Adhrit:
     #     lib_pwn()
 
 
-def main():
+def main(hash_key):
     adhrit = Adhrit()
     # parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
     # parser.add_argument("-pen", help="Run ADHRIT in pentest mode")
@@ -131,12 +129,14 @@ def main():
     # Adhrit Welcome ASCII
     adhrit.welcome()
     apk_name = 'app.apk'
-    adhrit.apkextractor(apk_name)
-    adhrit.manifestanalyzer(apk_name)
+    hash_of_apk = hash_key
+    adhrit.apkextractor(apk_name, hash_of_apk)
+    adhrit.manifestanalyzer(apk_name, hash_of_apk)
+   
+   
     # adhrit.cleanproject(apk_name)
 
     # adhrit.resetdb()
-    # adhrit.reset_scan_id()
 
     
 
@@ -213,5 +213,5 @@ def main():
     #     adhrit.manifestanalyzer(args.l)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main(hash_key)
