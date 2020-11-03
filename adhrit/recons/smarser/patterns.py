@@ -41,10 +41,6 @@ slack_weak_dyn_checks = []
 
 toslackstring = '```'
 
-
-webhook_url = 'https://hooks.slack.com/services/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'
-
-
 def search_js_enabled(thefile, thelist):
 
 	if(os.path.exists('Bytecode')):
