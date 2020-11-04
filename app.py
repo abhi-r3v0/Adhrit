@@ -87,6 +87,11 @@ def status_checker(hash_of_apk):
 		return "Not Scanned Yet"
 	else:
 		return data[0]
+
+def get_description(key):
+	with open('description.json') as f:
+  		desc = json.load(f)
+	return desc[key]
 	
 
 def getreport(hash_key, scan_type):
@@ -106,32 +111,44 @@ def getreport(hash_key, scan_type):
 			if key == 'ApplicationInfo':
 				response.__setitem__("Application Information", val_list)
 			if key == 'Activity':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("List of all Activities", val_list)
 			if key == 'ExportedActivity':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("List of Exported Activities", val_list)
 			if key == 'BroadcastReceiver':
+				val_list.insert(0,get_description(key))
 				response.__setitem__(key, val_list)
 			if key == 'ExportedReceiver':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("List of Broadcast Receivers", val_list)
 			if key == 'Permission':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("List of all Permissions", val_list)
 			if key == 'CriticalPerm':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Critical Permissions", val_list)
 			if key == 'CustomPerm':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Custom Permissions", val_list)
 			if key == 'Deeplinks':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Deeplinks", val_list)
 			if key == 'Service':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Services", val_list)
 			if key == 'ExportedService':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Exported Services", val_list)
 			if key == 'Taskaffinity':
+				val_list.insert(0,get_description(key))
 				response.__setitem__("Task Affinity", val_list)
 			if key == 'ImplicitIntent':
 				tmp_imp_intents = []
 				for key in val_list.keys():
 					tmp_imp_intents.extend(val_list[key])
 				key = 'ImplicitIntent'
+				tmp_imp_intents.insert(0,get_description(key))
 				response.__setitem__("Implicit Intents", tmp_imp_intents)
 			if key == 'Provider':
 				tmp_providers = []
@@ -148,6 +165,7 @@ def getreport(hash_key, scan_type):
 					tmp_providers.extend(provider_obj_list)
 					provider_obj_list = []
 				key = 'Provider'
+				tmp_providers.insert(0,get_description(key))
 				response.__setitem__(key, tmp_providers)
 
 	elif scan_type == "bytecode":
@@ -161,51 +179,67 @@ def getreport(hash_key, scan_type):
 				continue
 			val_list = eval(value)
 			if key == 'Unsafe_Intent_Urls':
-				key = key.replace('_',' ')
+				val_list.insert(0,get_description(key))
+				key = key.replace('_',' ')	
 				response.__setitem__(key, val_list)
 			if key == 'File_Access_Via_Urls':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Content_Access_Via_Urls':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Unencrypted_Socket_Communications':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Insecure_Socket_Factory':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'No_Tls_Validity_Checks':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Sticky_Broadcasts':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Empty_Pending_Intents':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Dynamic_or_exported_Broadcast_Receivers':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Ecb_Instances':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Javascript_Enabled':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Overwritable_Cookie':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'execSQL_used':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'SharedPrefs_usage':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'SQLite_DB_usage':
+				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 
@@ -223,10 +257,13 @@ def getreport(hash_key, scan_type):
 					continue
 				val_list = eval(value)
 				if key == 'Urls':
+					val_list.insert(0,get_description(key))
 					response.__setitem__('URLs', val_list)
 				if key == 'Strings':
+					val_list.insert(0,get_description(key))
 					response.__setitem__(key, val_list)
 				if key == 'Api_keys':
+					val_list.insert(0,get_description(key))
 					response.__setitem__('API Keys', val_list)
 
 		else:
@@ -295,17 +332,14 @@ def report(hash_key, scan_type):
 
 @app.route("/testbed")
 def test():
-	hash_of_apk = 'e5d9a4fcdabbe0a723cb28581762cf64ac36d8408efd3ce4f81a7b8f4706913'
-	return status_checker(hash_of_apk)
-	
-	
+	return "test bed"
 
 
 
 
 @app.route('/')
 def func():
-	return "Adhrit up and flying hiGh *-*"
+	return "Adhrit up and running *-*"
 
 
 
