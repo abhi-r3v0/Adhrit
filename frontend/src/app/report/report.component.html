@@ -27,14 +27,22 @@
           <div class="col-12">
             <!-- Default box -->
             <div class="card text-white bg-dark mb-3">
-                <div class="card-header">
-                  <h3 class="card-title">{{item.key}}</h3>
+                <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                  <h4 class="card-title">{{item.key}}</h4>
               </div>
               <div class="card-body">
                 <div class="alert border-secondary mb-2">
                   <ul>
-                  <div *ngFor="let data of item.value">
-                     {{data}}
+                    <div *ngFor="let data of item.value;let indexOfelement=index;">
+                      <div *ngIf="indexOfelement==0;else values">
+                        {{data}}
+                        <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                      </div>
+                      <ng-template #values>
+                        <div>
+                          {{data}}
+                        </div>
+                      </ng-template>
                   </div>
                   </ul>
                 </div>
@@ -53,14 +61,22 @@
           <div class="col-12">
             <!-- Default box -->
             <div class="card text-white bg-dark mb-3">
-                <div class="card-header">
-                  <h3 class="card-title">{{item.key}}</h3>
+                <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                  <h4 class="card-title">{{item.key}}</h4>
               </div>
               <div class="card-body">
                 <div class="alert border-secondary mb-2">
                   <ul>
-                  <div *ngFor="let data of item.value">
-                     {{data}}
+                    <div *ngFor="let data of item.value;let indexOfelement=index;">
+                      <div *ngIf="indexOfelement==0;else values">
+                        {{data}}
+                        <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                      </div>
+                      <ng-template #values>
+                        <div>
+                          {{data}}
+                        </div>
+                      </ng-template>
                   </div>
                   </ul>
                 </div>
@@ -78,14 +94,22 @@
         <div class="col-12">
           <!-- Default box -->
           <div class="card text-white bg-dark mb-3">
-              <div class="card-header">
-                <h3 class="card-title">{{item.key}}</h3>
+              <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                <h4 class="card-title">{{item.key}}</h4>
             </div>
             <div class="card-body">
               <div class="alert border-secondary mb-2">
                 <ul>
-                <div *ngFor="let data of item.value">
-                   {{data}}
+                <div *ngFor="let data of item.value;let indexOfelement=index;">
+                    <div *ngIf="indexOfelement==0;else values">
+                      {{data}}
+                      <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                    </div>
+                    <ng-template #values>
+                      <div>
+                        {{data}}
+                      </div>
+                    </ng-template>
                 </div>
                 </ul>
               </div>

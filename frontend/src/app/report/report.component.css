@@ -2,3 +2,13 @@
 	padding-top: 10px;
 	font: sans-serif;
 }
+
+
+.nav-pills .nav-link.active  {
+	
+	background-color: rgba(9, 199, 199, 0.829);
+  }
+
+.nav-pills .nav-link{
+	color: azure;
+  }
