@@ -6,7 +6,6 @@
 import argparse
 import configparser
 from colorama import Fore, Style
-from adhrit.recons.apk_extract import apk_info
 from adhrit.recons.smali_extract import smali_de
 from adhrit.recons.smali_extract import smali_re
 from adhrit.recons.smali_extract import apk_sign
@@ -25,192 +24,178 @@ __version__ = "0.2"
 
 class Adhrit:
 
-    def __init__(self):
-        self.apk_name = ""
+	def __init__(self):
+		self.apk_name = ""
 
-    @staticmethod
-    def welcome():
-        print(Fore.RED + Style.BRIGHT)
-        print("          ####  #######      ##      ##  ########    ##  ############")
-        print("         ## ##  ##     ##    ##      ##  ##     ##   ##       ##")
-        print("        ##  ##  ##      ##   ##      ##  ##      ##  ##       ##")
-        print("       ##   ##  ##       ##  ##      ##  ##      ##  ##       ##")
-        print("      ##    ##  ##       ##  ##      ##  ##     ##   ##       ##")
-        print("     #########  ##       ##  ##########  ##   ##     ##       ##")
-        print("    ##      ##  ##       ##  ##      ##  ##  ##      ##       ##")
-        print("   ##       ##  ##       ##  ##      ##  ##   ##     ##       ##")
-        print("  ##        ##  ##      ##   ##      ##  ##    ##    ##       ##")
-        print(" ##         ##  ##     ##    ##      ##  ##     ##   ##       ##")
-        print("##          ##  #######      ##      ##  ##      ##  ##       ##")
-        print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
-        print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
-        print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
-        print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
-
-
-
-
-    print("\n\n")
-
-    # Clean the tool directory for a new project
-    @staticmethod
-    def cleanproject(apk_name):
-        cleaner(apk_name)
-
-    # Extract All the contents of the APK into a directory
-    @staticmethod
-    def apkextractor(apk_name, hash_of_apk):
-        apk_info(apk_name, hash_of_apk)
-
-    @staticmethod
-    def manifestanalyzer(apk_name, hash_of_apk):
-        man_analyzer(apk_name, hash_of_apk)
-
-    @staticmethod
-    def resetdb():
-        reset_db()
+	@staticmethod
+	def welcome():
+		print(Fore.RED + Style.BRIGHT)
+		print("          ####  #######      ##      ##  ########    ##  ############")
+		print("         ## ##  ##     ##    ##      ##  ##     ##   ##       ##")
+		print("        ##  ##  ##      ##   ##      ##  ##      ##  ##       ##")
+		print("       ##   ##  ##       ##  ##      ##  ##      ##  ##       ##")
+		print("      ##    ##  ##       ##  ##      ##  ##     ##   ##       ##")
+		print("     #########  ##       ##  ##########  ##   ##     ##       ##")
+		print("    ##      ##  ##       ##  ##      ##  ##  ##      ##       ##")
+		print("   ##       ##  ##       ##  ##      ##  ##   ##     ##       ##")
+		print("  ##        ##  ##      ##   ##      ##  ##    ##    ##       ##")
+		print(" ##         ##  ##     ##    ##      ##  ##     ##   ##       ##")
+		print("##          ##  #######      ##      ##  ##      ##  ##       ##")
+		print(Fore.YELLOW + Style.BRIGHT + "\n\n| Project\t\t:\t" + Fore.GREEN + "www.github.com/abhi-r3v0/Adhrit")
+		print(Fore.YELLOW + Style.BRIGHT + "| Twitter\t\t:\t" + Fore.GREEN + "@0xADHRIT")
+		print(Fore.YELLOW + Style.BRIGHT + "| Author\t\t:\t" + Fore.GREEN + __author__)
+		print(Fore.YELLOW + Style.BRIGHT + "| Version\t\t:\t" + Fore.GREEN + __version__)
 
 
 
-    # # Extract the source code of the APK in smali
-    # @staticmethod
-    # def smaliextractor(apk_name):
-    #     smali_de(apk_name)
 
-    # # Bytecode Analysis
-    # @staticmethod
-    # def bytecodeanalyzer():
-    #     parser()
+	print("\n\n")
 
-    # # Recompile smali back into APK
-    # @staticmethod
-    # def smalirecompile(apk_name):
-    #     smali_re(apk_name)
+	# # Extract the source code of the APK in smali
+	# @staticmethod
+	# def smaliextractor(apk_name):
+	#     smali_de(apk_name)
 
-    # # Sign the apk with a generic signature. For educaational purposes only!
-    # @staticmethod
-    # def apk_signing(apk_name):
-    #     apk_sign(apk_name)
+	# # Bytecode Analysis
+	# @staticmethod
+	# def bytecodeanalyzer():
+	#     parser()
 
-    # # Check for string injection points
-    # @staticmethod
-    # def smali_inj(apk_name, flag_format=''):
-    #     inj_check(apk_name, flag_format)
+	# # Recompile smali back into APK
+	# @staticmethod
+	# def smalirecompile(apk_name):
+	#     smali_re(apk_name)
 
-    # # Analyze native library
-    # @staticmethod
-    # def native_recon():
-    #     lib_pwn()
+	# # Sign the apk with a generic signature. For educaational purposes only!
+	# @staticmethod
+	# def apk_signing(apk_name):
+	#     apk_sign(apk_name)
+
+	# # Check for string injection points
+	# @staticmethod
+	# def smali_inj(apk_name, flag_format=''):
+	#     inj_check(apk_name, flag_format)
+
+	# # Analyze native library
+	# @staticmethod
+	# def native_recon():
+	#     lib_pwn()
+
+	
+	@staticmethod
+	def cleanproject(apk_name):
+		cleaner(apk_name)
+
+	@staticmethod
+	def manifestanalyzer(apk_name, hash_of_apk):
+		man_analyzer(apk_name, hash_of_apk)
 
 
-def main(hash_key):
-    adhrit = Adhrit()
-    # parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
-    # parser.add_argument("-pen", help="Run ADHRIT in pentest mode")
-    # parser.add_argument("-mal", help="Run ADHRIT in malware analysis mode")
-    # parser.add_argument("-c", help="Clean up for a new project")
-    # parser.add_argument("-a", help="Dump package info and extract contents")
-    # parser.add_argument("-x", help="Extract APK contents only")
-    # parser.add_argument("-p", help="Check for virtual apps")
-    # parser.add_argument("-s", help="Source code of the APK in Smali")
-    # parser.add_argument("-b", help="Recompile smali back into APK")
-    # parser.add_argument("-m", help="Sign the APK")
-    # parser.add_argument("-i", help="Check for injection points")
-    # parser.add_argument("-pwn", help="Scan for vulnerabilities", action="store_true")
-    # parser.add_argument("--flag", help="Check for CTF flags")
-    # parser.add_argument("-w", help="Welcome :P", action='store_true')
-    # parser.add_argument("-v", help="Check footprints in VirusTotal database")
-    # parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
-    # parser.add_argument("-cr", help="Check device root status", action='store_true')
-    # parser.add_argument("-l", help="Extract, parse and analyze manifest")
-    # parser.add_argument("-r", help="Analyze native library", action='store_true')
-    # args = parser.parse_args()
+def main(hash_of_apk):
+	adhrit = Adhrit()
+	# parser = argparse.ArgumentParser(description="Android Dynamic Handling, Reversing and Instrumentation Toolkit")
+	# parser.add_argument("-pen", help="Run ADHRIT in pentest mode")
+	# parser.add_argument("-mal", help="Run ADHRIT in malware analysis mode")
+	# parser.add_argument("-c", help="Clean up for a new project")
+	# parser.add_argument("-a", help="Dump package info and extract contents")
+	# parser.add_argument("-x", help="Extract APK contents only")
+	# parser.add_argument("-p", help="Check for virtual apps")
+	# parser.add_argument("-s", help="Source code of the APK in Smali")
+	# parser.add_argument("-b", help="Recompile smali back into APK")
+	# parser.add_argument("-m", help="Sign the APK")
+	# parser.add_argument("-i", help="Check for injection points")
+	# parser.add_argument("-pwn", help="Scan for vulnerabilities", action="store_true")
+	# parser.add_argument("--flag", help="Check for CTF flags")
+	# parser.add_argument("-w", help="Welcome :P", action='store_true')
+	# parser.add_argument("-v", help="Check footprints in VirusTotal database")
+	# parser.add_argument("-d", help="Analyse the behaviour dynamically in a VM")
+	# parser.add_argument("-cr", help="Check device root status", action='store_true')
+	# parser.add_argument("-l", help="Extract, parse and analyze manifest")
+	# parser.add_argument("-r", help="Analyze native library", action='store_true')
+	# args = parser.parse_args()
 
-    # Adhrit Welcome ASCII
-    adhrit.welcome()
-    apk_name = 'app.apk'
-    hash_of_apk = hash_key
-    adhrit.apkextractor(apk_name, hash_of_apk)
-    adhrit.manifestanalyzer(apk_name, hash_of_apk)
+	# Adhrit Welcome ASCII
+	adhrit.welcome()
+	apk_name = 'app.apk'
+	adhrit.manifestanalyzer(apk_name, hash_of_apk)
    
    
-    # adhrit.cleanproject(apk_name)
+	# adhrit.cleanproject(apk_name)
 
-    # adhrit.resetdb()
 
-    
-
+	
 
 
 
 
-    # if args.pen:
-    #     adhrit.cleanproject(args.pen)
-    #     adhrit.apkextractor(args.pen)
-    #     adhrit.native_recon()
-    #     adhrit.manifestanalyzer(args.pen)
-    #     adhrit.smaliextractor(args.pen)
-    #     adhrit.bytecodeanalyzer()
-    #     adhrit.smali_inj(args.pen)
 
-    # if args.mal:
-    #     adhrit.vtanalyzer(args.mal)
-    #     adhrit.vappsearch(args.mal)
+	# if args.pen:
+	#     adhrit.cleanproject(args.pen)
+	#     adhrit.apkextractor(args.pen)
+	#     adhrit.native_recon()
+	#     adhrit.manifestanalyzer(args.pen)
+	#     adhrit.smaliextractor(args.pen)
+	#     adhrit.bytecodeanalyzer()
+	#     adhrit.smali_inj(args.pen)
 
-    # if args.c:
-    #     adhrit.cleanproject(args.c)
+	# if args.mal:
+	#     adhrit.vtanalyzer(args.mal)
+	#     adhrit.vappsearch(args.mal)
 
-    # if args.a:
-    #     adhrit.cleanproject(args.a)
-    #     adhrit.vtanalyzer(args.a)
-    #     adhrit.apkextractor(args.a)
-    #     adhrit.manifestanalyzer(args.a)
-    #     adhrit.native_recon()
-    #     adhrit.vappsearch(args.a)
-    #     adhrit.smaliextractor(args.a)
-    #     adhrit.smali_inj(args.a)
-    #     adhrit.bytecodeanalyzer()
+	# if args.c:
+	#     adhrit.cleanproject(args.c)
 
-    # elif args.x:
-    #     adhrit.cleanproject(args.x)
-    #     adhrit.apkextractor(args.x)
+	# if args.a:
+	#     adhrit.cleanproject(args.a)
+	#     adhrit.vtanalyzer(args.a)
+	#     adhrit.apkextractor(args.a)
+	#     adhrit.manifestanalyzer(args.a)
+	#     adhrit.native_recon()
+	#     adhrit.vappsearch(args.a)
+	#     adhrit.smaliextractor(args.a)
+	#     adhrit.smali_inj(args.a)
+	#     adhrit.bytecodeanalyzer()
 
-    # elif args.p:
-    #     adhrit.vappsearch(args.p)
+	# elif args.x:
+	#     adhrit.cleanproject(args.x)
+	#     adhrit.apkextractor(args.x)
 
-    # elif args.s:
-    #     adhrit.smaliextractor(args.s)
+	# elif args.p:
+	#     adhrit.vappsearch(args.p)
 
-    # elif args.b:
-    #     adhrit.smalirecompile(args.b)
+	# elif args.s:
+	#     adhrit.smaliextractor(args.s)
 
-    # elif args.m:
-    #     adhrit.welcome()
-    #     adhrit.apk_signing(args.m)
+	# elif args.b:
+	#     adhrit.smalirecompile(args.b)
 
-    # elif args.i:
-    #     adhrit.smali_inj(args.i, args.flag)
+	# elif args.m:
+	#     adhrit.welcome()
+	#     adhrit.apk_signing(args.m)
 
-    # elif args.pwn:
-    #     adhrit.bytecodeanalyzer()
+	# elif args.i:
+	#     adhrit.smali_inj(args.i, args.flag)
 
-    # elif args.r:
-    #     adhrit.native_recon()
+	# elif args.pwn:
+	#     adhrit.bytecodeanalyzer()
 
-    # elif args.w:
-    #     adhrit.welcome()
+	# elif args.r:
+	#     adhrit.native_recon()
 
-    # elif args.v:
-    #     adhrit.vtanalyzer(args.v)
+	# elif args.w:
+	#     adhrit.welcome()
 
-    # elif args.d:
-    #     adhrit.dynamicanalysis(args.d)
+	# elif args.v:
+	#     adhrit.vtanalyzer(args.v)
 
-    # elif args.cr:
-    #     adhrit.checkroot()
+	# elif args.d:
+	#     adhrit.dynamicanalysis(args.d)
 
-    # elif args.l:
-    #     adhrit.manifestanalyzer(args.l)
+	# elif args.cr:
+	#     adhrit.checkroot()
+
+	# elif args.l:
+	#     adhrit.manifestanalyzer(args.l)
 
 
 # if __name__ == "__main__":

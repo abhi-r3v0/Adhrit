@@ -6,10 +6,13 @@ from threading import Thread
 from http import HTTPStatus
 import os, configparser, time
 from adhrit.recons.dbaccess import create_status_table, dbconnection, select_query
+from adhrit.recons.apk_extract import extraction
 from adhrit.recons.reset import reset_db
 from subprocess import call
 from adhrit.recons.clean import cleaner
 import sqlite3, hashlib
+from shutil import rmtree 
+
 
 
 
@@ -301,19 +304,24 @@ def scan():
 					Cursor = conn.cursor()
 					query = "DELETE FROM `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
 					Cursor.execute(query)
-				thread_a = Compute(request.__copy__())
-				thread_a.start()
-				main(hash_of_apk)
 			
-			while(True):
-				time.sleep(2)
-				status = status_checker(hash_of_apk)
-				if status == 'Completed':
-					cleaner(hash_of_apk)
-					break
+				pwd = os.getcwd() 
+				path = str(pwd) + '/'+hash_of_apk
+				rmtree(path, ignore_errors = True)	
+				extraction('app.apk',hash_of_apk)	
+				# thread_a = Compute(request.__copy__())
+				# thread_a.start()
+				# main(hash_of_apk)
+			
+			# while(True):
+			# 	time.sleep(2)
+			# 	status = status_checker(hash_of_apk)
+			# 	if status == 'Completed':
+			# 		cleaner(hash_of_apk)
+			# 		break
 
 			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
-			os.system('rm app.apk')
+			# os.system('rm app.apk')
 
 			return  response	,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")

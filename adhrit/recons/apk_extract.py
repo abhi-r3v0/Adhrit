@@ -5,15 +5,114 @@ import os
 import traceback
 import zipfile
 from colorama import Fore
-
+from shutil import rmtree
 from adhrit.recons.enjarify import parsedex
 from adhrit.recons.enjarify.jvm import writeclass
 from adhrit.recons.enjarify.jvm.optimization import options
 from adhrit.recons.enjarify.mutf8 import decode
 
 
+
 # To know the contents of a package
-def apk_info(apk_name, hash_of_apk):
+def extraction(apk_name, hash_of_apk):
+
+	print(Fore.YELLOW + "\n--------------------------------------------------")
+	print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST DUMP")
+	pwd = os.getcwd()
+	path = str(pwd) + '/'+hash_of_apk
+
+	os.makedirs(hash_of_apk)
+	print('dir created')
+	os.chdir(path)
+	mandmp = 'java -jar ../adhrit/tools/apktool.jar d -sf ../app.apk -o ./manifest'
+	os.system(mandmp)
+	if os.path.isdir('manifest'):
+		os.system('cp manifest/AndroidManifest.xml Manifest.xml')
+		if os.path.isfile('manifest/res/values/strings.xml'):
+			os.system('cp manifest/res/values/strings.xml strings.xml')
+	os.system('rm -rf manifest/')
+
+
+	print(Fore.YELLOW + "\n--------------------------------------------------")
+	print(Fore.GREEN + "[INFO] " + Fore.BLUE + "BYTECODE DUMP\n")
+
+	smalicmd = 'java -jar ../adhrit/tools/apktool.jar d  -rf ../app.apk -o ./Bytecode'
+	os.system(smalicmd)
+	path = path + '/Bytecode'
+	if os.path.isdir(path):
+		print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Extraction complete")
+		print(Fore.YELLOW + "\n--------------------------------------------------")
+		print(Fore.GREEN + "[INFO] " + Fore.BLUE + "REMOVING UNWANTED FILES\n")
+
+		files_in_dir = os.listdir(path)
+		files_req = ['lib']
+		for files in files_in_dir:
+			if 'smali' in files:
+				files_req.append(files)
+
+		for files in files_in_dir:
+			if files not in files_req:
+				files = path+'/'+files
+				try:
+					os.remove(files)
+				except:
+					rmtree(files, ignore_errors = True)
+		ignore_dirs = ['android', 'androidx', 'kotlin', 'kotlinx']
+		files_in_dir = os.listdir(path)
+		for files in files_in_dir:
+			if 'smali' in files:
+				files_sub_directory = os.listdir(path+'/'+files)
+				for f in files_sub_directory:
+					if f in ignore_dirs:
+						rmtree(path+'/'+files+'/'+f)
+
+		path = path + '/../..'
+		os.chdir(path)
+
+
+
+
+	
+
+	
+	# try:
+	# 	if not os.path.exists(path):
+	# 		os.makedirs(hash_of_apk)
+	# 		print('dir created')
+	# 		os.chdir(path)
+	# 		mandmp = 'java -jar ../adhrit/tools/apktool.jar d -sf ../app.apk -o ./manifest'
+	# 		os.system(mandmp)
+	# 		if os.path.isdir('manifest'):
+	# 			os.system('cp manifest/AndroidManifest.xml Manifest.xml')
+	# 			os.system('cp manifest/AndroidManifest.xml api_scan/Manifest.xml')
+	# 			if os.path.isfile('manifest/res/values/strings.xml'):
+	# 				os.system('cp manifest/res/values/strings.xml strings.xml')
+	# 				os.system('cp manifest/res/values/strings.xml api_scan/strings.xml')
+	# 		os.system('rm -rf manifest/')
+	# 		path = path + '/..'
+	# 		os.chdir(path)
+			
+	# except OSError as err:
+	# 	print('dir exist')
+
+	# 	cmd ='rm -rf '+ hash_of_apk
+	# 	os.system(cmd)
+
+	# 	os.makedirs(hash_of_apk)
+	# 	print('dir created')
+	# 	os.chdir(path)
+	# 	mandmp = 'java -jar ../adhrit/tools/apktool.jar d -sf ../app.apk -o ./manifest'
+	# 	os.system(mandmp)
+	# 	if os.path.isdir('manifest'):
+	# 		os.system('cp manifest/AndroidManifest.xml Manifest.xml')
+	# 		os.system('cp manifest/res/values/strings.xml strings.xml')	
+	# 	os.system('rm -rf manifest/')
+	# 	path = path + '/..'
+	# 	os.chdir(path)
+
+
+
+
 
 # 	nlc = 0
 # 	apk = zipfile.ZipFile(apk_name, 'r')
@@ -112,45 +211,7 @@ def apk_info(apk_name, hash_of_apk):
 # 		print(Fore.RED + "\n\t[-] No native libraries found")
 # 	print("\n")
 
-	print(Fore.YELLOW + "\n--------------------------------------------------")
-	print(Fore.GREEN + "[INFO] " + Fore.BLUE + "MANIFEST DUMP")
-	pwd = os.getcwd()
-	path = str(pwd) + '/'+hash_of_apk
-	try:
-		if not os.path.exists(path):
-			os.makedirs(hash_of_apk)
-			print('dir created')
-			os.chdir(path)
-			mandmp = 'java -jar ../adhrit/tools/apktool.jar d -sf ../app.apk -o ./manifest'
-			os.system(mandmp)
-			if os.path.isdir('manifest'):
-				os.system('cp manifest/AndroidManifest.xml Manifest.xml')
-				os.system('cp manifest/AndroidManifest.xml api_scan/Manifest.xml')
-				if os.path.isfile('manifest/res/values/strings.xml'):
-					os.system('cp manifest/res/values/strings.xml strings.xml')
-					os.system('cp manifest/res/values/strings.xml api_scan/strings.xml')
-			os.system('rm -rf manifest/')
-			path = path + '/..'
-			os.chdir(path)
-			
-	except OSError as err:
-		print('dir exist')
-
-		cmd ='rm -rf '+ hash_of_apk
-		os.system(cmd)
-
-		os.makedirs(hash_of_apk)
-		print('dir created')
-		os.chdir(path)
-		mandmp = 'java -jar ../adhrit/tools/apktool.jar d -sf ../app.apk -o ./manifest'
-		os.system(mandmp)
-		if os.path.isdir('manifest'):
-			os.system('cp manifest/AndroidManifest.xml Manifest.xml')
-			os.system('cp manifest/res/values/strings.xml strings.xml')	
-		os.system('rm -rf manifest/')
-		path = path + '/..'
-		os.chdir(path)
-
+	
 
 	
 		

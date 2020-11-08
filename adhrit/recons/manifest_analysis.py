@@ -396,7 +396,7 @@ def add_to_db(dbconstatus, hash_of_apk, json_application_info ,json_perms, json_
 			
 
 def man_analyzer(apk_name, hash_of_apk):
-	path = hash_of_apk + '/Manifest.xml'
+	path =  hash_of_apk + '/Manifest.xml'
 	if os.path.exists(path):
 
 		retdbstat, retappinfo, retjperm, retjcriticalperm, retjcustomperm, retjacts, retjexportedacts, retjrecvs, retjexportedrecvs, retjdeep, retjtaskaff, retjserv, retjexpserv, retjprovider, retjintent  = man_scanner(hash_of_apk)
