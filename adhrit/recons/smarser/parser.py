@@ -8,6 +8,7 @@ from adhrit.recons.smarser.patterns import search_ecb
 from adhrit.recons.dbaccess import dbconnection, create_bytecode_table, insert_bytecodetable
 
 
+
 set_of_js = set()
 set_of_ecb = set()
 set_of_search_dynamic = set()

@@ -68,38 +68,25 @@ def lib_pwn():
 
 def url_scanner():
 
+	print("\n[+] Scanning URLs\n")
+	root_dir = os.getcwd() 
+	scan_lists = [ glob.glob(root_dir + "/*.xml"), glob.glob(root_dir + "/*.txt")]
+	url_regex = r"(http|ftp|https|file):\/\/([\w\-_]+(?:(?:\.[\w\-_]+)+))([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?"
+	ignore_url = ["http://schemas.android.com/"]
 	final_urls = []
 
-	ignore_urls = ['http://schemas.android.com/apk/res/android']
-
-	print("\n[+] Scanning URLs\n")
-	url_regex = 'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
-	urls = []
-	dirname = 'Bytecode/smali'
-	ignore_dirs = ['android', 'org', 'google', 'localytics', 'unknown', 'lib', 'AndroidManifest.xml', 'original']
-	for dirList, subdirList, subfiles in os.walk(dirname):
-			# noinspection PyAssignmentToLoopOrWithParameter
-			for subfiles in ignore_dirs:
-				os.system('rm -r ' + subfiles + ' 2> /dev/null')
-			# noinspection PyAssignmentToLoopOrWithParameter
-			for subdirList in ignore_dirs:
-				os.system('rm -r ' + subdirList + ' 2> /dev/null')
-			# noinspection PyAssignmentToLoopOrWithParameter
-			for dirList in ignore_dirs:
-				os.system('rm -r ' + dirList + ' 2> /dev/null')
-
-	for dirList, subdirList, subfiles in os.walk(dirname):
-		for files in subfiles:
-			with open(os.path.abspath(os.path.join(dirList, files)), 'r') as f:
-				for lines in f:
-					if re.search(url_regex, lines):
-						urls.append(lines)
-						
-	if urls:
-		for url in urls:
-			if (str(url.split()[2][1:-1]).startswith('https://') or str(url.split()[2][1:-1]).startswith('http://')):
-				if(str(url.split()[2][1:-1]) != 'http://schemas.android.com/apk/res/android'):
-					final_urls.append(url.split()[2][1:-1])
+	for scan_list in scan_lists:
+		for file_path in scan_list:
+			with open(file_path) as file:
+				for line in file:
+					match = re.compile(url_regex).findall(line)
+					if match:
+						tup = match[0]
+						url = str(tup[0])+'://'+(str(tup[1])+str(tup[2])) 
+						if any(ignore in url for ignore in ignore_url):
+							continue
+						else:
+							final_urls.append(url)
 
 	return final_urls
 
@@ -140,7 +127,7 @@ def api_scanner():
 				'Heroku	OAuth 2.0': re.compile(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b')}
 
 
-	scan_lists = [glob.glob(root_dir + "/**/*.smali", recursive = True), glob.glob(root_dir + "*.xml")]
+	scan_lists = [glob.glob(root_dir + "/**/*.smali", recursive = True), glob.glob(root_dir + "/*.xml")]
 	for scan_list in scan_lists:
 		for file_path in scan_list:
 			with open(file_path) as file:
@@ -170,16 +157,20 @@ def secret_scanner(hash_of_apk):
 
 	urls = url_scanner()
 
-	strings_from_lib = lib_pwn()
+
+	for i in urls:
+		print(i)
+
+	# strings_from_lib = lib_pwn()
 	# print(str(strings_from_lib))
-	api_keys.append(api_scanner())
+	# api_keys.append(api_scanner())
 	# print(str(api_keys))
-	path = os.getcwd() + '/..'
-	os.chdir(path)
+	# path = os.getcwd() + '/..'
+	# os.chdir(path)
 	
 
 
-	allsecrets = (str(hash_of_apk), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
-	addtotable = insert_secretstable(dbconstatus, allsecrets)
+	# allsecrets = (str(hash_of_apk), str(list(urls)), str(list(strings_from_lib)), str(list(api_keys)))
+	# addtotable = insert_secretstable(dbconstatus, allsecrets)
 
 
