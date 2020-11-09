@@ -69,7 +69,6 @@ def null_elimination(data):
 				continue
 			val_list = eval(value)
 			if not val_list:
-				# print(key)
 				null_key_list.append(key)
 		
 		# removing all unused components
@@ -260,6 +259,7 @@ def getreport(hash_key, scan_type):
 					continue
 				val_list = eval(value)
 				if key == 'Urls':
+					print(type(val_list))
 					val_list.insert(0,get_description(key))
 					response.__setitem__('URLs', val_list)
 				if key == 'Strings':
@@ -303,25 +303,26 @@ def scan():
 					conn = dbconnection(dbname)
 					Cursor = conn.cursor()
 					query = "DELETE FROM `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
+					print('Ohh yeah')
 					Cursor.execute(query)
 			
 				pwd = os.getcwd() 
 				path = str(pwd) + '/'+hash_of_apk
 				rmtree(path, ignore_errors = True)	
 				extraction('app.apk',hash_of_apk)	
-				# thread_a = Compute(request.__copy__())
-				# thread_a.start()
-				# main(hash_of_apk)
+				thread_a = Compute(request.__copy__())
+				thread_a.start()
+				main(hash_of_apk)
 			
-			# while(True):
-			# 	time.sleep(2)
-			# 	status = status_checker(hash_of_apk)
-			# 	if status == 'Completed':
-			# 		cleaner(hash_of_apk)
-			# 		break
+			while(True):
+				time.sleep(2)
+				status = status_checker(hash_of_apk)
+				if status == 'Completed':
+					cleaner(hash_of_apk)
+					break
 
 			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
-			# os.system('rm app.apk')
+			os.system('rm app.apk')
 
 			return  response	,{'Access-Control-Allow-Origin': '*'} 
 	return jsonify(status_msg="apk not sent properly")

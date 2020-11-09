@@ -7,38 +7,9 @@ import os, sys
 import app
 
 hash_of_apk = sys.argv[1]
+# hash_of_apk = "e5a25722c889560b37a79617f307ad9b2f6fcf05d0aa5ff29bb5be5ebc387101"
 parser(hash_of_apk)
 secret_scanner(hash_of_apk)
-
-
-# extraction('app.apk', hash_of_apk)
-
-# print(Fore.YELLOW + "\n--------------------------------------------------")
-# print(Fore.GREEN + "[INFO] " + Fore.BLUE + "SOURCE EXTRATION IN SMALI\n")
-
-# smalicmd = 'java -jar adhrit/tools/apktool.jar d  -rf app.apk -o '+hash_of_apk+'/Bytecode'
-# os.system(smalicmd)
-# path = hash_of_apk + '/Bytecode'
-# if os.path.isdir(path):
-# 	print(Fore.BLUE + "\n\t[+] " + Fore.YELLOW + "Extraction complete")
-
-# 	cmd = 'mkdir ./'+hash_of_apk+'/api_scan/'
-# 	os.system(cmd)
-# 	# cmd = 'mkdir ./'+hash_of_apk+'/api_scan/smali/'
-# 	# os.system(cmd)
-
-# 	smali_path = path + '/smali ' 
-# 	cmd = 'cp -a ' + smali_path + hash_of_apk + '/api_scan/smali/'
-# 	os.system(cmd)
-# 	cmd = 'cp ' + hash_of_apk + '/Manifest.xml ./'+hash_of_apk+'/api_scan/'
-# 	os.system(cmd)
-# 	p = os.getcwd() + '/'+hash_of_apk+'/strings.xml'
-# 	if os.path.isfile(p):
-# 		cmd = 'cp ' + hash_of_apk + '/strings.xml ./'+hash_of_apk+'/api_scan/'
-# 		os.system(cmd)
-
-
-
 
 
 
