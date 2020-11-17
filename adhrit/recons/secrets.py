@@ -117,27 +117,15 @@ def api_scanner():
 	regex_dic = {'Google Maps API': re.compile(r'\bAIza.{35}\b'),
 				'Twitter Access Token': re.compile(r'\b[1-9][ 0-9]+-\(0-9a-zA-Z]{40}\b'), 
 				'Facebook Access Token': re.compile(r'\bEAACEdEose0cBA[0-9A-Za-z]+\b'), 
-				'Facebook OAuth 2.0': re.compile(r'\b[A-Za-z0-9]{125}\b'), 
-				'Instagram OAuth 2.0':re.compile(r'\b[0-9a-fA-F]{7}.[0-9a-fA-F]{32}\b'), 
-				'GitHub OAuth 2.0': re.compile(r'\b[0-9a-fA-F]{40}\b'), 
 				'Gmail OAuth 2.0': re.compile(r'\b[0-9(+-[0-9A-Za-z_]{32}.apps.qooqleusercontent.com\b'), 
-				'Foursquare	Secret Key': re.compile(r'\bR_[0-9a-f]{32}\b'),
-				'Picatic API Key': re.compile(r'\bsk_live_[0-9a-z]{32}\b'),
-				'Stripe	Standard API Key': re.compile(r'\bsk_live_\(0-9a-zA-Z]{24}\b'),
 				'Stripe	Restricted API Key': re.compile(r'\bsk_live_\(0-9a-zA-Z]{24}\b'),
-				'Square	Access Token': re.compile(r'\bsqOatp-[0-9A-Za-z-_]{22}\b'),
 				'Square	OAuth Secret': re.compile(r'\bq0csp-[ 0-9A-Za-z-_]{43}\b'),
 				'Paypal/Braintree Access Token': re.compile(r'\baccess_token,production$[0-9a-z]{161[0-9a,]{32}\b'),
 				'Amazon Marketing Services Auth Token': re.compile(r'\bamzn.mws]{8}-[0-9a-f]{4}-10-9a-f1{4}-[0-9a,]{4}-[0-9a-f]{12}\b'),
 				'Twilio	API Key': re.compile(r'\b55[0-9a-fA-F]{32}\b'),
-				'MailGun API Key': re.compile(r'\bkey-[0-9a-zA-Z]{32}\b'),
-				'MailChimp	API Key': re.compile(r'\b[0-9a-f]{32}-us[0-9]{1,2}\b'),
 				'Slack	API Key': re.compile(r'\bxox.-[0-9]{12}-[0-9]{12}-[0-9a-zA-Z]{24}\b'),
-				'AWS Access Key ID': re.compile(r'\bAKIA[0-9A-Z]{16}\b'),
-				'GCP OAuth 2.0': re.compile(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b'),
-				'GCP API Key': re.compile(r'\b[A-Za-z0-9_]{21}--[A-Za-z0-9_]{8}\b'),
-				'Heroku	API Key': re.compile(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b'),
-				'Heroku	OAuth 2.0': re.compile(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b')}
+				'AWS Access Key ID': re.compile(r'\bAKIA[0-9A-Z]{16}\b')
+				}
 
 
 	scan_lists = [glob.glob(root_dir + "/**/*.smali", recursive = True), glob.glob(root_dir + "/*.xml")]
