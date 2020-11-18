@@ -229,9 +229,9 @@ def getreport(hash_key, scan_type):
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 
-	elif scan_type == 'vulnerabilities': 
-		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
-		bytecode_data = data_from_db(query_bytecode)
+	elif scan_type == "vulnerabilities": 
+		query_vulns = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
+		bytecode_data = data_from_db(query_vulns)
 		bytecode_newdata = null_elimination(bytecode_data)		
 		
 
@@ -290,8 +290,8 @@ def getreport(hash_key, scan_type):
 				if 'Hash' in key:
 					continue
 				val_list = eval(value)
+				print(type(val_list))
 				if key == 'Urls':
-					print(type(val_list))
 					val_list.insert(0,get_description(key))
 					response.__setitem__('URLs', val_list)
 				if key == 'Strings':
@@ -392,7 +392,7 @@ def reset():
 	
 if __name__ == '__main__':
 	global hash_of_apk
-	app.run(debug=False, use_reloader=True,threaded=False , processes=2)
+	app.run(debug=True, use_reloader=True,threaded=False , processes=2)
 
 #threaded=True,
 # curl -X POST -F file=@app.apk http://localhost:5000/scan

@@ -31,10 +31,6 @@ def lib_pwn():
 				print(Fore.GREEN + "\n\n[INFO]" + Fore.BLUE + " Analyzing " + Fore.GREEN + thelibfile)
 
 				r = r2pipe.open(thelibfile)
-				print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "Lib info")
-				print(Fore.YELLOW)
-				print("\t")
-				print(r.cmd('i'))
 				
 				print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "Seaching for AES keys")
 				print(Fore.YELLOW)
@@ -44,11 +40,6 @@ def lib_pwn():
 					print(Fore.GREEN + "\t[!] " + Fore.YELLOW + "No AES Keys found\n")
 				else:
 					print(Fore.YELLOW + aeskeys + "\n")
-
-				print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "[*] Sections")
-				print(Fore.YELLOW)
-				print("\t")
-				print(r.cmd('fs'))
 
 				print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "All Strings\n")
 				allstrings = r.cmdj('rabin2 -z -j ' + thelibfile)
@@ -61,7 +52,7 @@ def lib_pwn():
 								if(i == 'string'):
 									if(isBase64(j)):
 										n +=1
-										# print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j))[2:-1])
+										print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j))[2:-1])
 										decode_str_list.append(str(base64.b64decode(j))[2:-1])
 
 	return decode_str_list

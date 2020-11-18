@@ -7,7 +7,7 @@ import os, sys
 import app
 
 hash_of_apk = sys.argv[1]
-# hash_of_apk = "e5a25722c889560b37a79617f307ad9b2f6fcf05d0aa5ff29bb5be5ebc387101"
+# hash_of_apk = "e5d9a4fcdabbe0a723cbb28581762cf64ac36d8408efd3ce4f81a7b8f4706913"
 parser(hash_of_apk)
 secret_scanner(hash_of_apk)
 
