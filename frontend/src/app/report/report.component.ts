@@ -16,6 +16,7 @@ export class ReportComponent implements OnInit {
   reportmanifest: any
   reportbytecode: any
   reportsecrets: any
+  reportvulns: any
   scanType = "";
   ngOnInit(): void {
     this.res = this.apkDataService.scannedData;
@@ -61,7 +62,7 @@ export class ReportComponent implements OnInit {
     this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
       this.reportsecrets = data;
       console.log(data)
-      console.log("Manifest Scan:" + data)
+      console.log("Secrets Scan:" + data)
     });
   }
 
@@ -71,9 +72,9 @@ export class ReportComponent implements OnInit {
   this.reportsecrets = null;
   this.scanType = "vulnerabilities";
   this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
-  this.reportsecrets = data;
+  this.reportvulns = data;
   console.log(data)
-  console.log("Manifest Scan:" + data)
+  console.log("Vulns Scan:" + data)
 });
   }
 }

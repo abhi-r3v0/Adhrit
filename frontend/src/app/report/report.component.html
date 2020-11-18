@@ -1,163 +1,163 @@
 <div class="row" style="height: auto;">
-  <div class="col-2 bg-dark mb-3;">
-    <br>
-    <div>
-      <h3 style="text-align:center; color:white;">REPORT</h3>
-    </div>
-    <hr class="style3">
+    <div class="col-2 bg-dark mb-3;">
+        <br>
+        <div>
+            <h3 style="text-align:center; color:white;">REPORT</h3>
+        </div>
+        <hr class="style3">
 
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tab" aria-orientation="vertical" style="align-content: center;">
-      <a (click)="getManifestData()" class="nav-link active" id="v-pills-home-tab" data-toggle="tab" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" style="align-content: center;">
-        <span style="padding-left: 35px; padding-right: 35px; border-radius: 25em;">Manifest</span></a>
-      <hr class="style1">
-      <a (click)="getBytecodeData()" class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-        <span class="caret" style="padding-left: 35px; padding-right: 35px;">Bytecode</span></a>
-      <hr class="style1">
-      <a (click)="getVulnerabilitiesData()" class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-        <span class="caret" style="padding-left: 35px; padding-right: 35px;">Vulnerabilities</span></a>
-      <hr class="style1">
-      <a (click)="getSecretData()" class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-        <span class="caret" style="padding-left: 35px; padding-right: 35px;">Secrets</span></a>
-      <hr class="style1">
-      <!--<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> -->
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tab" aria-orientation="vertical" style="align-content: center;">
+            <a (click)="getManifestData()" class="nav-link active" id="v-pills-home-tab" data-toggle="tab" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" style="align-content: center;">
+                <span style="padding-left: 35px; padding-right: 35px; border-radius: 25em;">Manifest</span></a>
+            <hr class="style1">
+            <a (click)="getBytecodeData()" class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                <span class="caret" style="padding-left: 35px; padding-right: 35px;">Bytecode</span></a>
+            <hr class="style1">
+            <a (click)="getVulnerabilitiesData()" class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                <span class="caret" style="padding-left: 35px; padding-right: 35px;">Vulnerabilities</span></a>
+            <hr class="style1">
+            <a (click)="getSecretData()" class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                <span class="caret" style="padding-left: 35px; padding-right: 35px;">Secrets</span></a>
+            <hr class="style1">
+            <!--<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> -->
+        </div>
     </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-        <div *ngFor="let item of reportmanifest | keyvalue">
-          <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card text-white bg-dark mb-3">
-                <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
-                  <h4 class="card-title">{{item.key}}</h4>
-              </div>
-              <div class="card-body">
-                <div class="alert border-secondary mb-2">
-                  <ul>
-                    <div *ngFor="let data of item.value;let indexOfelement=index;">
-                      <div *ngIf="indexOfelement==0;else values">
-                        {{data}}
-                        <hr style="background-color:rgba(9, 199, 199, 0.829);">
-                      </div>
-                      <ng-template #values>
-                        <div>
-                          {{data}}
+    <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div *ngFor="let item of reportmanifest | keyvalue">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Default box -->
+                            <div class="card text-white bg-dark mb-3">
+                                <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                                    <h4 class="card-title">{{item.key}}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert border-secondary mb-2">
+                                        <ul>
+                                            <div *ngFor="let data of item.value;let indexOfelement=index;">
+                                                <div *ngIf="indexOfelement==0;else values">
+                                                    {{data}}
+                                                    <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                                                </div>
+                                                <ng-template #values>
+                                                    <div>
+                                                        {{data}}
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <!-- /.card-footer-->
+                            </div>
+                            <!-- /.card -->
                         </div>
-                      </ng-template>
-                  </div>
-                  </ul>
+                    </div>
+
                 </div>
-              </div>
-              <!-- /.card-body -->
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-        
-      </div>
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <div *ngFor="let item of reportbytecode | keyvalue">
-          <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card text-white bg-dark mb-3">
-                <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
-                  <h4 class="card-title">{{item.key}}</h4>
-              </div>
-              <div class="card-body">
-                <div class="alert border-secondary mb-2">
-                  <ul>
-                    <div *ngFor="let data of item.value;let indexOfelement=index;">
-                      <div *ngIf="indexOfelement==0;else values">
-                        {{data}}
-                        <hr style="background-color:rgba(9, 199, 199, 0.829);">
-                      </div>
-                      <ng-template #values>
-                        <div>
-                          {{data}}
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div *ngFor="let item of reportbytecode | keyvalue">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Default box -->
+                                <div class="card text-white bg-dark mb-3">
+                                    <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                                        <h4 class="card-title">{{item.key}}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert border-secondary mb-2">
+                                            <ul>
+                                                <div *ngFor="let data of item.value;let indexOfelement=index;">
+                                                    <div *ngIf="indexOfelement==0;else values">
+                                                        {{data}}
+                                                        <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                                                    </div>
+                                                    <ng-template #values>
+                                                        <div>
+                                                            {{data}}
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <!-- /.card-footer-->
+                                </div>
+                                <!-- /.card -->
+                            </div>
                         </div>
-                      </ng-template>
-                  </div>
-                  </ul>
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-      <div *ngFor="let item of reportbytecode | keyvalue">
-        <div class="row">
-        <div class="col-12">
-          <!-- Default box -->
-          <div class="card text-white bg-dark mb-3">
-              <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
-                <h4 class="card-title">{{item.key}}</h4>
-            </div>
-            <div class="card-body">
-              <div class="alert border-secondary mb-2">
-                <ul>
-                  <div *ngFor="let data of item.value;let indexOfelement=index;">
-                    <div *ngIf="indexOfelement==0;else values">
-                      {{data}}
-                      <hr style="background-color:rgba(9, 199, 199, 0.829);">
                     </div>
-                    <ng-template #values>
-                      <div>
-                        {{data}}
-                      </div>
-                    </ng-template>
-                </div>
-                </ul>
-              </div>
-            </div>
-            <!-- /.card-body -->
-            <!-- /.card-footer-->
-          </div>
-          <!-- /.card -->
-        </div>
-      </div>
-  </div>
-     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-      <div *ngFor="let item of reportsecrets | keyvalue">
-        <div class="row">
-        <div class="col-12">
-          <!-- Default box -->
-          <div class="card text-white bg-dark mb-3">
-              <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
-                <h4 class="card-title">{{item.key}}</h4>
-            </div>
-            <div class="card-body">
-              <div class="alert border-secondary mb-2">
-                <ul>
-                <div *ngFor="let data of item.value;let indexOfelement=index;">
-                    <div *ngIf="indexOfelement==0;else values">
-                      {{data}}
-                      <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div *ngFor="let item of reportvulns | keyvalue">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Default box -->
+                                    <div class="card text-white bg-dark mb-3">
+                                        <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                                            <h4 class="card-title">{{item.key}}</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="alert border-secondary mb-2">
+                                                <ul>
+                                                    <div *ngFor="let data of item.value;let indexOfelement=index;">
+                                                        <div *ngIf="indexOfelement==0;else values">
+                                                            {{data}}
+                                                            <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                                                        </div>
+                                                        <ng-template #values>
+                                                            <div>
+                                                                {{data}}
+                                                            </div>
+                                                        </ng-template>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <!-- /.card-footer-->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                            <div *ngFor="let item of reportsecrets | keyvalue">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Default box -->
+                                        <div class="card text-white bg-dark mb-3">
+                                            <div class="card-header" style="background-color:rgba(9, 199, 199, 0.829);">
+                                                <h4 class="card-title">{{item.key}}</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="alert border-secondary mb-2">
+                                                    <ul>
+                                                        <div *ngFor="let data of item.value;let indexOfelement=index;">
+                                                            <div *ngIf="indexOfelement==0;else values">
+                                                                {{data}}
+                                                                <hr style="background-color:rgba(9, 199, 199, 0.829);">
+                                                            </div>
+                                                            <ng-template #values>
+                                                                <div>
+                                                                    {{data}}
+                                                                </div>
+                                                            </ng-template>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <!-- /.card-footer-->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> -->
+                        </div>
                     </div>
-                    <ng-template #values>
-                      <div>
-                        {{data}}
-                      </div>
-                    </ng-template>
                 </div>
-                </ul>
-              </div>
-            </div>
-            <!-- /.card-body -->
-            <!-- /.card-footer-->
-          </div>
-          <!-- /.card -->
-        </div>
-      </div>
-     </div>
-     <!-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> -->
-    </div>
-  </div>
-</div>
