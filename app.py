@@ -233,8 +233,7 @@ def getreport(hash_key, scan_type):
 		query_bytecode = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
 		bytecode_data = data_from_db(query_bytecode)
 		bytecode_newdata = null_elimination(bytecode_data)		
-		# val_list = ['1','2']
-		# response.__setitem__("key", val_list)
+		
 
 		#Sorting Vulnerability data for response
 		for key, value in bytecode_newdata.items():
@@ -286,9 +285,6 @@ def getreport(hash_key, scan_type):
 		secrets_data = data_from_db(query_secrets)
 		secrets_newdata = null_elimination(secrets_data)
 
-		response.__setitem__("key", "val_list")
-
-		#Sorting manifest data for response
 		if secrets_newdata != 0:
 			for key, value in secrets_newdata.items():
 				if 'Hash' in key:
