@@ -1,0 +1,18 @@
+{
+    "Task Affinity": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/TaskAffinity-ActivityHijack-Lean/",
+    "Implicit Pending Intent": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/ImplicitPendingIntent-IntentHijack-Lean/",
+    "Unsafe_Intent_Urls": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Web/UnsafeIntentURLImpl-InformationExposure-Lean/",
+    "File_Access_Via_Urls": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Web/WebViewAllowFileAccess-UnauthorizedFileAccess-Lean/",
+    "Content_Access_Via_Urls": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Web/WebViewAllowContentAccess-UnauthorizedFileAccess-Lean/",
+    "Unencrypted_Socket_Communications": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Networking/UnEncryptedSocketComm-MITM-Lean/",
+    "Insecure_Socket_Factory": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Networking/InsecureSSLSocketFactory-MITM-Lean/",
+    "No_Tls_Validity_Checks": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Networking/CheckValidity-InformationExposure-Lean/",
+    "Sticky_Broadcasts": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/StickyBroadcast-DataInjection-Lean/",
+    "Empty_Pending_Intents": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/EmptyPendingIntent-PrivEscalation-Lean/",
+    "Dynamic_or_exported_Broadcast_Receivers": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/DynamicRegBroadcastReceiver-UnrestrictedAccess-Lean/",
+    "Ecb_Instances": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Crypto/BlockCipher-ECB-InformationExposure-Lean/",
+    "Javascript_Enabled": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Web/JavaScriptExecution-CodeInjection-Lean/",
+    "Overwritable_Cookie": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Web/WebView-CookieOverwrite-Lean/",
+    "Weak_Dynamic_Invocation_Checks_On_Content_Providers": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/ICC/WeakChecksOnDynamicInvocation-DataInjection-Lean/",
+    "execSQL_used": "https://bitbucket.org/secure-it-i/android-app-vulnerability-benchmarks/src/master/Storage/SQLite-execSQL-Lean/"
+}

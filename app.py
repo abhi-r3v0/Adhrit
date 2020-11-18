@@ -94,6 +94,11 @@ def get_description(key):
 	with open('description.json') as f:
   		desc = json.load(f)
 	return desc[key]
+
+def get_link(key): 
+	with open('links.json') as f:
+  		link = json.load(f)
+	return link[key]
 	
 
 def getreport(hash_key, scan_type):
@@ -182,58 +187,73 @@ def getreport(hash_key, scan_type):
 			val_list = eval(value)
 			if key == 'Unsafe_Intent_Urls':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')	
 				response.__setitem__(key, val_list)
 			if key == 'File_Access_Via_Urls':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Content_Access_Via_Urls':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Unencrypted_Socket_Communications':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Insecure_Socket_Factory':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'No_Tls_Validity_Checks':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Sticky_Broadcasts':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Empty_Pending_Intents':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
+				val_list.append(get_link(key))
 				response.__setitem__(key, val_list)
 			if key == 'Dynamic_or_exported_Broadcast_Receivers':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Ecb_Instances':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Javascript_Enabled':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Overwritable_Cookie':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'Weak_Dynamic_Invocation_Checks_On_Content_Providers':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'execSQL_used':
 				val_list.insert(0,get_description(key))
+				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 			if key == 'SharedPrefs_usage':
