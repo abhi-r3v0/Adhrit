@@ -35,6 +35,7 @@ export class ReportComponent implements OnInit {
   getManifestData() {
     this.reportbytecode = null;
     this.reportsecrets = null;
+    this.reportvulns = null;
     this.scanType = "manifest";
     this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
       this.reportmanifest = data;
@@ -42,6 +43,7 @@ export class ReportComponent implements OnInit {
       console.log("Manifest Scan:" + data)
     });
   }
+
   getBytecodeData() {
     this.reportmanifest = null;
     this.reportbytecode = null;
@@ -58,6 +60,7 @@ export class ReportComponent implements OnInit {
     this.reportmanifest = null;
     this.reportbytecode = null;
     this.reportsecrets = null;
+    this.reportvulns = null;
     this.scanType = "secrets";
     this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
       this.reportsecrets = data;
@@ -67,14 +70,15 @@ export class ReportComponent implements OnInit {
   }
 
   getVulnerabilitiesData() { 
-  this.reportmanifest = null;
-  this.reportbytecode = null;
-  this.reportsecrets = null;
-  this.scanType = "vulnerabilities";
-  this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
-  this.reportvulns = data;
-  console.log(data)
-  console.log("Vulns Scan:" + data)
-});
+    this.reportmanifest = null;
+    this.reportbytecode = null;
+    this.reportvulns = null;
+    this.reportsecrets = null;
+    this.scanType = "vulns";
+    this.apkDataService.getReportData(this.res.hash_key, this.scanType).subscribe(data => {
+      this.reportvulns = data;
+      console.log(data)
+      console.log("Vulns Scan:" + data)
+    });
   }
 }

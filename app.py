@@ -229,54 +229,51 @@ def getreport(hash_key, scan_type):
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
 
-	elif scan_type == "vulnerabilities": 
-		query_vulns = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
-		bytecode_data = data_from_db(query_vulns)
-		bytecode_newdata = null_elimination(bytecode_data)		
-		
 
+	elif scan_type == "vulns": 
+		query_vulns = "SELECT * FROM `BytecodeDB` WHERE `Hash` = '%s'" % str(hash_key)
+		vuln_data = data_from_db(query_vulns)
+		vuln_newdata = null_elimination(vuln_data)		
 		#Sorting Vulnerability data for response
-		for key, value in bytecode_newdata.items():
+		for key, value in vuln_newdata.items():
 			if 'Hash' in key:
 				continue
-			val_list = eval(value)
+			val_list_vulns = eval(value)
 			if key == 'Overwritable_Cookie':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'File_Access_Via_Urls':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'Content_Access_Via_Urls':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'Ecb_Instances':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'Unencrypted_Socket_Communications':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'Insecure_Socket_Factory':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
+				response.__setitem__(key, val_list_vulns)
 			if key == 'Empty_Pending_Intents':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
-				val_list.append(get_link(key))
-				response.__setitem__(key, val_list)
-			
+				response.__setitem__(key, val_list_vulns)
 
 
 	elif scan_type == "secrets":
