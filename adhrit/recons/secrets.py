@@ -46,14 +46,11 @@ def lib_pwn():
 
 				print(Fore.YELLOW)
 				if allstrings != None:
-					for key, value in allstrings.items():
-						for valuedict in value:
-							for i,j in valuedict.items():
-								if(i == 'string'):
-									if(isBase64(j)):
-										n +=1
-										print(Fore.BLUE + "\t[" + str(n) + "] " + Fore.YELLOW + str(base64.b64decode(j))[2:-1])
-										decode_str_list.append(str(base64.b64decode(j))[2:-1])
+					for val_list in allstrings.values():
+						for json_data in val_list:
+							for key, value in json_data.items():
+								if key == 'type' and value == 'utf32le':
+									decode_str_list.append(json_data['string'])
 
 	return decode_str_list
 

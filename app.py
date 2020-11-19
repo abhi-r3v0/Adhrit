@@ -332,7 +332,6 @@ def scan():
 					conn = dbconnection(dbname)
 					Cursor = conn.cursor()
 					query = "DELETE FROM `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
-					print('Ohh yeah')
 					Cursor.execute(query)
 			
 				pwd = os.getcwd() 
@@ -347,7 +346,7 @@ def scan():
 				time.sleep(2)
 				status = status_checker(hash_of_apk)
 				if status == 'Completed':
-					cleaner(hash_of_apk)
+					# cleaner(hash_of_apk)
 					break
 
 			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
