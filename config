@@ -1,4 +1,4 @@
 [config-data]
-dependencies_status = complete
+dependencies_status = incomplete
 emulator_path = #optional
 
