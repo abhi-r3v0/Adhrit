@@ -1,3 +1,4 @@
+from adhrit.adhrit import main
 import configparser
 import os
 import re
@@ -5,8 +6,8 @@ import r2pipe
 import base64
 import glob
 from colorama import Fore, Style
-from adhrit.recons.dbaccess import dbconnection, create_secrets_table, insert_secretstable
-
+import concurrent.futures
+from adhrit.recons.dbaccess import dbconnection, create_secrets_table, insert_secretstable, insert_statustable
 decode_str_list = []
 
 def isBase64(s):
@@ -40,6 +41,8 @@ def lib_pwn():
 					print(Fore.GREEN + "\t[!] " + Fore.YELLOW + "No AES Keys found\n")
 				else:
 					print(Fore.YELLOW + aeskeys + "\n")
+					tmp = f"AES key(s) found are : {aeskeys}"
+					decode_str_list.append(tmp)
 
 				print(Fore.GREEN + "\n[INFO] " + Fore.BLUE +  "All Strings\n")
 				allstrings = r.cmdj('rabin2 -z -j ' + thelibfile)
@@ -143,12 +146,19 @@ def secret_scanner(hash_of_apk):
 
 	path = hash_of_apk
 	os.chdir(path)
-	urls = url_scanner()
+
+	with concurrent.futures.ProcessPoolExecutor() as executor:
+		p1 = executor.submit(url_scanner)
+		p2 = executor.submit(api_scanner)
+		p3 = executor.submit(lib_pwn)
 	
-	strings_from_lib = lib_pwn()
-	# print(str(strings_from_lib))
-	api_keys.extend(api_scanner())
-	# print(str(api_keys))
+	urls = p1.result()
+	strings_from_lib = p3.result()
+	key = p2.result()
+	api_keys.extend(key)
+
+	print(strings_from_lib)
+	
 	path = os.getcwd() + '/..'
 	os.chdir(path)
 	
@@ -156,5 +166,12 @@ def secret_scanner(hash_of_apk):
 
 	allsecrets = (str(hash_of_apk), str(list(urls)), str(strings_from_lib), str(list(api_keys)))
 	addtotable = insert_secretstable(dbconstatus, allsecrets)
+
+
+	#--------------------------------
+	dbname = "adhrit.db"
+	dbconstatus = dbconnection(dbname)
+	query = f"UPDATE StatusDB SET Secrets='complete' WHERE Hash='{hash_of_apk}';"
+	addedornot = insert_statustable(dbconstatus, query)
 
 
