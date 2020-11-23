@@ -4,34 +4,26 @@ from adhrit.adhrit import main
 from flask import Flask, json, jsonify, render_template, request
 from threading import Thread
 from http import HTTPStatus
+import multiprocessing
 import os, configparser, time
 from adhrit.recons.dbaccess import create_status_table, dbconnection, select_query
 from adhrit.recons.apk_extract import extraction
 from adhrit.recons.reset import reset_db
+from adhrit.recons.smarser.parser import parser
+from adhrit.recons.secrets import secret_scanner
 from subprocess import call
 from adhrit.recons.clean import cleaner
 import sqlite3, hashlib
 from shutil import rmtree 
+from sqlite3 import Error
+
 
 
 
 
 ALLOWED_EXTENSIONS = {'apk'}
 
-app = Flask(__name__)
-
-class Compute(Thread):
-	def __init__(self, request):
-		Thread.__init__(self)
-		
-
-	def run(self):
-		print("Running bytecode Analyser")
-		global hash_of_apk
-		cmd = 'python3 bytecode_scanner.py ' + str(hash_of_apk)
-		call(cmd, shell=True)
-		
-		
+app = Flask(__name__)		
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -76,19 +68,42 @@ def null_elimination(data):
 			del data[key]
 	return data
 
-def status_checker(hash_of_apk):
+def query_on_StatusDB(hash_of_apk):
 	dbname = "adhrit.db"
 	conn = dbconnection(dbname)
 	create_status_table(conn)
 	Cursor = conn.cursor()
-	query = "SELECT Status from `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
-	
+	query = "SELECT Hash, Manifest, Bytecode, Secrets  from `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)	
 	Cursor.execute(query)
 	data=Cursor.fetchone()
 	if data is None:
-		return "Not Scanned Yet"
+		query = f"INSERT INTO StatusDB(Hash, Manifest, Bytecode, Secrets) values('{hash_of_apk}', 'incomplete', 'incomplete', 'incomplete')"
+		Cursor.execute(query)
+		conn.commit()
+		query = "SELECT Hash, Manifest, Bytecode, Secrets  from `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)	
+		Cursor.execute(query)
+		data=Cursor.fetchone()
+		result ={'hash_of_apk': data[0], 'manifest':data[1], 'bytecode':data[2], 'secrets' : data[3]}
+		return result
 	else:
-		return data[0]
+		result ={'hash_of_apk': data[0], 'manifest':data[1], 'bytecode':data[2], 'secrets' : data[3]}
+		return result
+
+def del_row(hash_of_apk):
+	dbname = "adhrit.db"
+	conn = dbconnection(dbname)
+	query1 = f"DELETE FROM DataDB WHERE Hash = '{hash_of_apk}'"
+	query2 = f"DELETE FROM BytecodeDB WHERE Hash = '{hash_of_apk}'"
+	query3 = f"DELETE FROM SecretsDB WHERE Hash = '{hash_of_apk}'"
+	try:
+		Cursor = conn.cursor()
+		Cursor.execute(query1)
+		Cursor.execute(query2)
+		Cursor.execute(query3)
+		conn.commit()
+	except Error as e:
+			print(e)
+
 
 def get_description(key):
 	with open('description.json') as f:
@@ -287,7 +302,7 @@ def getreport(hash_key, scan_type):
 				if 'Hash' in key:
 					continue
 				val_list = eval(value)
-				print(type(val_list))
+				# print(type(val_list))
 				if key == 'Urls':
 					val_list.insert(0,get_description(key))
 					response.__setitem__('URLs', val_list)
@@ -312,7 +327,6 @@ def getreport(hash_key, scan_type):
 def scan():
 	if request.method == 'POST':
 		if 'file' not in request.files:
-			flash('No file part')
 			return HTTPStatus.NO_CONTENT
 
 		uploaded_files = request.files["file"]
@@ -325,29 +339,26 @@ def scan():
 			
 			global hash_of_apk
 			hash_of_apk = get_hash()
-			status = status_checker(hash_of_apk)
-			if "Completed" not in status:
-				if "Not Scanned Yet" not in status:
-					dbname = "adhrit.db"
-					conn = dbconnection(dbname)
-					Cursor = conn.cursor()
-					query = "DELETE FROM `StatusDB` WHERE `Hash` = '%s'" % str(hash_of_apk)
-					Cursor.execute(query)
-			
-				pwd = os.getcwd() 
+			status_hash_of_apk = query_on_StatusDB(hash_of_apk)   # Creates a row if Hash is not found else return the values
+			if 'incomplete' in status_hash_of_apk.values():
+				del_row(hash_of_apk)
+				pwd = os.getcwd()
 				path = str(pwd) + '/'+hash_of_apk
-				rmtree(path, ignore_errors = True)	
+				rmtree(path, ignore_errors = True)
 				extraction('app.apk',hash_of_apk)	
-				thread_a = Compute(request.__copy__())
-				thread_a.start()
+				p1 = multiprocessing.Process(target=parser, args=[hash_of_apk])
+				p1.start()
+				secret_scanner(hash_of_apk)
 				main(hash_of_apk)
-			
-			while(True):
-				time.sleep(2)
-				status = status_checker(hash_of_apk)
-				if status == 'Completed':
-					# cleaner(hash_of_apk)
-					break
+				p1.join()
+
+				while(True):
+					time.sleep(2)
+					status = query_on_StatusDB(hash_of_apk)
+					if 'incomplete' not in status.values():
+						cleaner(hash_of_apk)
+						break
+
 
 			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
 			os.system('rm app.apk')
@@ -362,14 +373,19 @@ def report(hash_key, scan_type):
 
 
 
-		
-
-
 
 
 @app.route("/testbed")
 def test():
-	return "test bed"
+	hash_of_apk = '123'
+	a=query_on_StatusDB(hash_of_apk)
+	# if 'incomplete' in a.values():
+	# 	try:
+	# 		os.rmdir(hash_of_apk)
+	# 	except OSError as error: 
+	# 		pass
+	# 	del_row(hash_of_apk)
+	return a['bytecode']
 
 
 
@@ -388,7 +404,7 @@ def reset():
 	
 if __name__ == '__main__':
 	global hash_of_apk
-	app.run(debug=True, use_reloader=True,threaded=False , processes=2)
+	app.run(debug=True, use_reloader=True,threaded=False , processes=4)
 
 #threaded=True,
 # curl -X POST -F file=@app.apk http://localhost:5000/scan

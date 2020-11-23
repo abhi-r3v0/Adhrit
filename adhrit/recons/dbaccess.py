@@ -18,7 +18,7 @@ def dbconnection(dbname):
 # Creating a table for storing permissions and activities
 def create_datatable(conn):
 	if conn is not None:
-		create_table = ''' CREATE TABLE IF NOT EXISTS DataDB(Hash text  NOT NULL, ApplicationInfo text, Permission text, CriticalPerm text, CustomPerm text, Activity text, ExportedActivity text, BroadcastReceiver text, ExportedReceiver text, Deeplinks text, Taskaffinity text, Service text, ExportedService text, Provider text, ImplicitIntent text); '''
+		create_table = ''' CREATE TABLE IF NOT EXISTS DataDB(Hash text  NOT NULL PRIMARY KEY, ApplicationInfo text, Permission text, CriticalPerm text, CustomPerm text, Activity text, ExportedActivity text, BroadcastReceiver text, ExportedReceiver text, Deeplinks text, Taskaffinity text, Service text, ExportedService text, Provider text, ImplicitIntent text); '''
 		try:
 			c = conn.cursor()
 			c.execute(create_table)
@@ -29,7 +29,7 @@ def create_datatable(conn):
 # Creating a table for storing data from Bytecode Scanning
 def create_bytecode_table(conn):
 	if conn is not None:
-		create_table = ''' CREATE TABLE IF NOT EXISTS BytecodeDB(Hash text  NOT NULL, Unsafe_Intent_Urls text, File_Access_Via_Urls text, Content_Access_Via_Urls text, Unencrypted_Socket_Communications text, Insecure_Socket_Factory text, No_Tls_Validity_Checks text, Sticky_Broadcasts text, Empty_Pending_Intents text, Dynamic_or_exported_Broadcast_Receivers text, Ecb_Instances text, Javascript_Enabled text, Overwritable_Cookie text, Weak_Dynamic_Invocation_Checks_On_Content_Providers text, execSQL_used text, SharedPrefs_usage text, SQLite_DB_usage text); '''
+		create_table = ''' CREATE TABLE IF NOT EXISTS BytecodeDB(Hash text  NOT NULL PRIMARY KEY, Unsafe_Intent_Urls text, File_Access_Via_Urls text, Content_Access_Via_Urls text, Unencrypted_Socket_Communications text, Insecure_Socket_Factory text, No_Tls_Validity_Checks text, Sticky_Broadcasts text, Empty_Pending_Intents text, Dynamic_or_exported_Broadcast_Receivers text, Ecb_Instances text, Javascript_Enabled text, Overwritable_Cookie text, Weak_Dynamic_Invocation_Checks_On_Content_Providers text, execSQL_used text, SharedPrefs_usage text, SQLite_DB_usage text); '''
 		try:
 			c = conn.cursor()
 			c.execute(create_table)
@@ -50,7 +50,7 @@ def create_secrets_table(conn):
 # Creating a table for storing the status of the scan
 def create_status_table(conn):
 	if conn is not None:
-		create_table = ''' CREATE TABLE IF NOT EXISTS StatusDB(Hash text  NOT NULL, Status text); '''
+		create_table = ''' CREATE TABLE IF NOT EXISTS StatusDB(Hash text  NOT NULL PRIMARY KEY, Manifest text, Bytecode text, Secrets text); '''
 		try:
 			c = conn.cursor()
 			c.execute(create_table)
@@ -96,16 +96,27 @@ def insert_secretstable(conn, datadetails):
 		return c.lastrowid
 
 # Inserting data into the Secrets table
-def insert_statustable(conn, datadetails):
+def insert_statustable(conn, query):
 	if conn is not None:
-		insert_table = ''' INSERT INTO StatusDB(Hash, Status) VALUES(?,?); '''
 		try:
 			c = conn.cursor()
-			c.execute(insert_table, datadetails)
+			c.execute(query)
 			conn.commit()
 		except Error as e:
 			print(e)
 		return c.lastrowid
+
+
+# def insert_statustable(conn, datadetails):
+# 	if conn is not None:
+# 		insert_table = ''' INSERT INTO StatusDB(Hash, Status) VALUES(?,?); '''
+# 		try:
+# 			c = conn.cursor()
+# 			c.execute(insert_table, datadetails)
+# 			conn.commit()
+# 		except Error as e:
+# 			print(e)
+# 		return c.lastrowid
 
 # Query for select Statement
 def select_query(query):
@@ -132,3 +143,4 @@ def truncate_table(conn):
 			conn.commit()
 		except Error as e:
 			print(e)
+

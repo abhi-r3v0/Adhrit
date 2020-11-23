@@ -11,6 +11,7 @@ from adhrit.recons.smali_extract import smali_re
 from adhrit.recons.smali_extract import apk_sign
 from adhrit.recons.smali_extract import inj_check
 from adhrit.recons.manifest_analysis import man_analyzer
+from adhrit.recons.dbaccess import dbconnection, insert_statustable
 from adhrit.recons.smarser.parser import parser
 from adhrit.recons.native_recon import lib_pwn
 from adhrit.recons.dynamic import adb_con
@@ -118,9 +119,14 @@ def main(hash_of_apk):
 	adhrit.welcome()
 	apk_name = 'app.apk'
 	adhrit.manifestanalyzer(apk_name, hash_of_apk)
+
+	#--------------------------------
+	dbname = "adhrit.db"
+	dbconstatus = dbconnection(dbname)
+	query = f"UPDATE StatusDB SET Manifest='complete' WHERE Hash='{hash_of_apk}';"
+	addedornot = insert_statustable(dbconstatus, query)
    
    
-	# adhrit.cleanproject(apk_name)
 
 
 	

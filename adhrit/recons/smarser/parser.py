@@ -5,7 +5,7 @@ from smalisca.core.smalisca_main import SmaliscaApp
 from smalisca.modules.module_smali_parser import SmaliParser
 from adhrit.recons.smarser.patterns import pattern_receiver
 from adhrit.recons.smarser.patterns import search_ecb
-from adhrit.recons.dbaccess import dbconnection, create_bytecode_table, insert_bytecodetable
+from adhrit.recons.dbaccess import dbconnection, create_bytecode_table, insert_bytecodetable, insert_statustable
 
 
 
@@ -209,3 +209,9 @@ def parser(hash_of_apk):
 	add_to_db(hash_of_apk)
 
 	print(Fore.BLUE + "\n\t\t[INFO] Vulnerability References written to 'Vulnerabilities.txt'")
+
+	#--------------------------------
+	dbname = "adhrit.db"
+	dbconstatus = dbconnection(dbname)
+	query = f"UPDATE StatusDB SET Bytecode = 'complete' WHERE Hash='{hash_of_apk}';"
+	addedornot = insert_statustable(dbconstatus, query)
