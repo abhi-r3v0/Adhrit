@@ -13,7 +13,7 @@
     "Taskaffinity": "Malicious apps can register with same affinity as the registered activity. This could lead to a phishing attack.",
     "ImplicitIntent": "Implicit pending intents that do not define the components to be sent can be hijacked by 3rd party apps",
     "Provider": "List of all the providers used in the app",
-    "Unsafe_Intent_Urls": "Loading URLs from intents onto webviews without sanitising may load malicious pages in the app's context.",
+    "Unsafe_Intent_Urls": "Parsing URIs without verifying package could be exploited by malicious apps by getting URIs parsed from the benign app's context.",
     "File_Access_Via_Urls": "The webview allows access to local files. Without input filtering, 3rd party sites will be able to access files from the device.",
     "Content_Access_Via_Urls": "JavaScript from 3rd parties can access the app's content providers",
     "Unencrypted_Socket_Communications": "Transmits data over HTTP. This can lead to MiTM attacks",
