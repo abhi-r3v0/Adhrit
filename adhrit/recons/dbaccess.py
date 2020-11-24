@@ -107,17 +107,6 @@ def insert_statustable(conn, query):
 		return c.lastrowid
 
 
-# def insert_statustable(conn, datadetails):
-# 	if conn is not None:
-# 		insert_table = ''' INSERT INTO StatusDB(Hash, Status) VALUES(?,?); '''
-# 		try:
-# 			c = conn.cursor()
-# 			c.execute(insert_table, datadetails)
-# 			conn.commit()
-# 		except Error as e:
-# 			print(e)
-# 		return c.lastrowid
-
 # Query for select Statement
 def select_query(query):
 	con = sqlite3.connect('adhrit.db')

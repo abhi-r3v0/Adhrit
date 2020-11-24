@@ -1,6 +1,6 @@
 from sqlite3.dbapi2 import Cursor
 import threading
-from adhrit.adhrit import main
+from adhrit.adhrit import main, welcome
 from flask import Flask, json, jsonify, render_template, request
 from threading import Thread
 from http import HTTPStatus
@@ -16,6 +16,8 @@ from adhrit.recons.clean import cleaner
 import sqlite3, hashlib
 from shutil import rmtree 
 from sqlite3 import Error
+from colorama import Fore
+
 
 
 
@@ -340,6 +342,7 @@ def scan():
 			global hash_of_apk
 			hash_of_apk = get_hash()
 			status_hash_of_apk = query_on_StatusDB(hash_of_apk)   # Creates a row if Hash is not found else return the values
+			welcome()
 			if 'incomplete' in status_hash_of_apk.values():
 				del_row(hash_of_apk)
 				pwd = os.getcwd()
@@ -358,7 +361,8 @@ def scan():
 					if 'incomplete' not in status.values():
 						cleaner(hash_of_apk)
 						break
-
+			else:
+				print(Fore.GREEN + "[INFO] Scanning was already done for this apk, fetching data from db!\n" + Fore.BLUE)
 
 			response = jsonify(status_code=HTTPStatus.OK, hash_key=hash_of_apk)
 			os.system('rm app.apk')
@@ -377,15 +381,7 @@ def report(hash_key, scan_type):
 
 @app.route("/testbed")
 def test():
-	hash_of_apk = '123'
-	a=query_on_StatusDB(hash_of_apk)
-	# if 'incomplete' in a.values():
-	# 	try:
-	# 		os.rmdir(hash_of_apk)
-	# 	except OSError as error: 
-	# 		pass
-	# 	del_row(hash_of_apk)
-	return a['bytecode']
+	pass
 
 
 
