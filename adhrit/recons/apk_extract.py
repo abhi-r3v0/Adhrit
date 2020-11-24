@@ -1,6 +1,7 @@
 # !/usr/bin/env python3
 
 import os
+from time import sleep
 from colorama import Fore
 from shutil import rmtree
 
@@ -51,14 +52,11 @@ def extraction(apk_name, hash_of_apk):
 					os.remove(files)
 				except:
 					rmtree(files, ignore_errors = True)
-		ignore_dirs = ['android', 'androidx', 'kotlin', 'kotlinx']
-		files_in_dir = os.listdir(path)
-		for files in files_in_dir:
-			if 'smali' in files:
-				files_sub_directory = os.listdir(path+'/'+files)
-				for f in files_sub_directory:
-					if f in ignore_dirs:
-						rmtree(path+'/'+files+'/'+f)
+		ignore_dirs = ['androidx','gms', 'appsflyer', 'installreferrer', 'ads' 'kotlin', 'kotlinx','fonts', 'crashlytics']
+		for root, dirs, files in os.walk(path, topdown=True):
+			for d in dirs:
+				if d in ignore_dirs:
+					rmtree(os.path.join(root, d))
 
 		path = path + '/../..'
 		os.chdir(path)
