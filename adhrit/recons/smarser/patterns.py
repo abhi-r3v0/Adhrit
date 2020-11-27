@@ -459,9 +459,7 @@ def ext_storage(thefile, thelist):
 
 
 def execSQL(thefile, thelist):
-	execsql_list = []
 	found_exec = 0
-
 	for k in thelist:
 		for ckey, cval in k.items():
 			if(ckey == "to_class" and str(cval) == "Landroid/database/sqlite/SQLiteDatabase"):
@@ -537,8 +535,8 @@ def pattern_receiver(thefile, thelist):
 		weak_checks_list.add('DYNAMIC_WEAK_CHECKS')
 		dynamic_invocation_weakchecks(thefile, thelist)
 
-		# execsql_list.add('EXECSQL_USAGE')
-		# execSQL(thefile, thelist)
+		execsql_list.add('EXECSQL_USAGE')
+		execSQL(thefile, thelist)
 
 		sharedpref_list.add('SHAREDPREFS_USAGE')
 		getSharedPrefsUsage(thefile, thelist)
@@ -547,6 +545,6 @@ def pattern_receiver(thefile, thelist):
 		getSqliteUsage(thefile, thelist)
 
 
-	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, sharedpref_list, sqlite_usage_list)
+	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, execsql_list, sharedpref_list, sqlite_usage_list)
 
 

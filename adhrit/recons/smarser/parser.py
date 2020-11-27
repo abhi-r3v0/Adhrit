@@ -167,7 +167,7 @@ def parser(hash_of_apk):
 	set_updater(set_of_url_allowed_list, 'FILE_FROM_URL')
 	set_updater(set_of_content_allowed_list, 'CONTENT_FROM_URL')
 	set_updater(set_of_weak_checks_list, 'DYNAMIC_WEAK_CHECKS')
-	# set_updater(set_of_execsql_used, 'EXECSQL_USAGE')
+	set_updater(set_of_execsql_used, 'EXECSQL_USAGE')
 	set_updater(set_of_sharedprefs_used, 'SHAREDPREFS_USAGE')
 	set_updater(set_of_sqli_used, 'SQLITE_USAGE')
 
