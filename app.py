@@ -217,11 +217,6 @@ def getreport(hash_key, scan_type):
 				val_list.append(get_link(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
-			if key == 'execSQL_used':
-				val_list.insert(0,get_description(key))
-				val_list.append(get_link(key))
-				key = key.replace('_',' ')
-				response.__setitem__(key, val_list)
 			if key == 'Dynamic_or_exported_Broadcast_Receivers':
 				val_list.insert(0,get_description(key))
 				val_list.append(get_link(key))
@@ -277,6 +272,11 @@ def getreport(hash_key, scan_type):
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list_vulns)
 			if key == 'Unencrypted_Socket_Communications':
+				val_list_vulns.insert(0,get_description(key))
+				val_list_vulns.append(get_link(key))
+				key = key.replace('_',' ')
+				response.__setitem__(key, val_list_vulns)
+			if key == 'execSQL_used':
 				val_list_vulns.insert(0,get_description(key))
 				val_list_vulns.append(get_link(key))
 				key = key.replace('_',' ')
@@ -400,7 +400,9 @@ def reset():
 	
 if __name__ == '__main__':
 	global hash_of_apk
-	app.run(debug=True, use_reloader=True,threaded=False , processes=4)
+	# from waitress import serve
+	# serve(app, host = '127.0.0.1', port=5000)
+	app.run(debug=False, use_reloader=True,threaded=False , processes=4)
 
 #threaded=True,
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
