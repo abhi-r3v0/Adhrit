@@ -354,7 +354,7 @@ def man_scanner(hash_of_apk):
 		intent_filter_parents = ["activity", "activity-alias", "service", "provider", "receiver" ]
 		for each_intent_filter_parent in intent_filter_parents:
 			single_intent_filter_obj = []
-			parent_elems = root.getiterator(each_intent_filter_parent)
+			parent_elems = root.iter(each_intent_filter_parent)
 			for parent_elem  in parent_elems:
 				for each_intent_filter in list(parent_elem):
 					var_key = parent_elem.tag + ' : ' + parent_elem.attrib[name]
