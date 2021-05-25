@@ -228,7 +228,7 @@ def http_con(thefile, thelist):
 		linecount = 0
 		for theline in f:
 			linecount += 1
-			if not (thefile.startswith('//')) or not (thefile.startswith('/*')):
+			if not (theline.startswith('//')) or not (theline.startswith('/*')):
 				if 'http://' in theline:
 					flag += 1
 					found = linecount
