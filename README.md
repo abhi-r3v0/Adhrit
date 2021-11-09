@@ -76,6 +76,13 @@ Adhrit is an open source Android APK reversing and analysis suite. The tool is a
 
 The script automatically identifies if you're running Adhrit for the first time and will install all the dependencies & libraries required by the tool. 
 
+### Docker
+
+```
+docker-compose up
+```
+Then visit [http://127.0.0.1:4200](http://127.0.0.1:4200)
+
 ---
 
 ### Presentations / Conferences:

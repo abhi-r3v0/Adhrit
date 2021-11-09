@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: adhrit
+    ports:
+      - "5000:5000"
+      - "4200:4200"

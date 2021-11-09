@@ -402,7 +402,7 @@ if __name__ == '__main__':
 	global hash_of_apk
 	# from waitress import serve
 	# serve(app, host = '127.0.0.1', port=5000)
-	app.run(debug=False, use_reloader=True,threaded=False , processes=4)
+	app.run(debug=False, use_reloader=True,threaded=False , processes=4, host='0.0.0.0')
 
 #threaded=True,
 # curl -X POST -F file=@app.apk http://localhost:5000/scan
