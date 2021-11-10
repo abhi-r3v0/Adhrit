@@ -31,5 +31,7 @@
     "SQLite_DB_usage": "The application uses SQLite DB to store data in the device. If sensitive data is stored, it will be accessible on rooted devices to all the applications.",
     "Urls": "List of all the URL's used in the app.",
     "Strings": "List of all the hardcoded strings in the native libraries.",
-    "Api_keys": "List of all the exposed API key(s) in the app"
+    "Api_keys": "List of all the exposed API key(s) in the app",
+    "Internal_Storage_usage": "The application uses internal sotrage. If sensitive data is stored, it will be accessible on rooted devices.",
+    "Keystore_usage": "The application uses Keystore. Make sure best security practices are followed. Recommendations: AES in GCM mode"
 }

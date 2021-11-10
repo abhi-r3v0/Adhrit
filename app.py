@@ -242,6 +242,14 @@ def getreport(hash_key, scan_type):
 				val_list.insert(0,get_description(key))
 				key = key.replace('_',' ')
 				response.__setitem__(key, val_list)
+			if key == 'Internal_Storage_usage':		
+				val_list.insert(0,get_description(key))		
+				key = key.replace('_',' ')		
+				response.__setitem__(key, val_list)		
+			if key == 'Keystore_usage':		
+				val_list.insert(0,get_description(key))		
+				key = key.replace('_',' ')		
+				response.__setitem__(key, val_list)
 
 
 	elif scan_type == "vulns": 

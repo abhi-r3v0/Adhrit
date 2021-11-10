@@ -29,7 +29,7 @@ def create_datatable(conn):
 # Creating a table for storing data from Bytecode Scanning
 def create_bytecode_table(conn):
 	if conn is not None:
-		create_table = ''' CREATE TABLE IF NOT EXISTS BytecodeDB(Hash text  NOT NULL PRIMARY KEY, Unsafe_Intent_Urls text, File_Access_Via_Urls text, Content_Access_Via_Urls text, Unencrypted_Socket_Communications text, Insecure_Socket_Factory text, No_Tls_Validity_Checks text, Sticky_Broadcasts text, Empty_Pending_Intents text, Dynamic_or_exported_Broadcast_Receivers text, Ecb_Instances text, Javascript_Enabled text, Overwritable_Cookie text, Weak_Dynamic_Invocation_Checks_On_Content_Providers text, execSQL_used text, SharedPrefs_usage text, SQLite_DB_usage text); '''
+		create_table = ''' CREATE TABLE IF NOT EXISTS BytecodeDB(Hash text  NOT NULL PRIMARY KEY, Unsafe_Intent_Urls text, File_Access_Via_Urls text, Content_Access_Via_Urls text, Unencrypted_Socket_Communications text, Insecure_Socket_Factory text, No_Tls_Validity_Checks text, Sticky_Broadcasts text, Empty_Pending_Intents text, Dynamic_or_exported_Broadcast_Receivers text, Ecb_Instances text, Javascript_Enabled text, Overwritable_Cookie text, Weak_Dynamic_Invocation_Checks_On_Content_Providers text, execSQL_used text, SharedPrefs_usage text, SQLite_DB_usage text, Internal_Storage_usage text, Keystore_usage text); '''
 		try:
 			c = conn.cursor()
 			c.execute(create_table)
@@ -73,7 +73,7 @@ def insert_datatable(conn, datadetails):
 # Inserting data into the Bytecode table
 def insert_bytecodetable(conn, datadetails):
 	if conn is not None:
-		insert_table = ''' INSERT INTO BytecodeDB(Hash, Unsafe_Intent_Urls, File_Access_Via_Urls, Content_Access_Via_Urls, Unencrypted_Socket_Communications, Insecure_Socket_Factory, No_Tls_Validity_Checks, Sticky_Broadcasts, Empty_Pending_Intents, Dynamic_or_exported_Broadcast_Receivers, Ecb_Instances, Javascript_Enabled, Overwritable_Cookie, Weak_Dynamic_Invocation_Checks_On_Content_Providers, execSQL_used, SharedPrefs_usage, SQLite_DB_usage) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); '''
+		insert_table = ''' INSERT INTO BytecodeDB(Hash, Unsafe_Intent_Urls, File_Access_Via_Urls, Content_Access_Via_Urls, Unencrypted_Socket_Communications, Insecure_Socket_Factory, No_Tls_Validity_Checks, Sticky_Broadcasts, Empty_Pending_Intents, Dynamic_or_exported_Broadcast_Receivers, Ecb_Instances, Javascript_Enabled, Overwritable_Cookie, Weak_Dynamic_Invocation_Checks_On_Content_Providers, execSQL_used, SharedPrefs_usage, SQLite_DB_usage, Internal_Storage_usage, Keystore_usage) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); '''
 		try:
 			c = conn.cursor()
 			c.execute(insert_table, datadetails)
