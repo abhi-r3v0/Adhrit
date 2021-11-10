@@ -1,0 +1,12 @@
+JIRA:
+    url: "https://dreamplug.atlassian.net"
+    title: "Adhrit - Android Security Suite Report"
+    token: "" #jira-token
+    slack_token: ""
+    keyword: "" #used to identify the tickets from JIRA
+    project: "SECAUTO" #jira-project-name
+    adhrit_ip: ""
+
+
+#For token [jira-token]
+# echo -n example@mail.com:token | base64

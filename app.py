@@ -377,6 +377,51 @@ def report(hash_key, scan_type):
 	response = getreport(hash_key, scan_type)
 	return response,{'Access-Control-Allow-Origin': '*'}
 
+@app.route("/jirascan", methods=['POST'])
+def jira():
+	if request.method == 'POST':
+		url = request.form['url']
+		config_file = configparser.ConfigParser()
+		config_file.read('config')                                         
+		token = config_file.get('config-data', 'adhrit_slack_token')
+		headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
+		try:
+			r = requests.get(url, headers=headers)
+			with open('app.apk', 'wb') as f:
+				for chunk in r.iter_content(chunk_size=1024):
+					if chunk: f.write(chunk)
+			global hash_of_apk
+			hash_of_apk = get_hash()
+			status_hash_of_apk = query_on_StatusDB(hash_of_apk)
+			welcome()
+			if 'incomplete' in status_hash_of_apk.values():
+				del_row(hash_of_apk)
+				pwd = os.getcwd()
+				path = str(pwd) + '/'+hash_of_apk
+				rmtree(path, ignore_errors = True)
+				extraction('app.apk',hash_of_apk)	
+				p1 = multiprocessing.Process(target=parser, args=[hash_of_apk])
+				p1.start()
+				secret_scanner(hash_of_apk)
+				main(hash_of_apk)
+				p1.join()
+
+				while(True):
+					time.sleep(2)
+					status = query_on_StatusDB(hash_of_apk)
+					if 'incomplete' not in status.values():
+						cleaner(hash_of_apk)
+						break
+			else:
+				print(Fore.GREEN + "[INFO] Scanning was already done for this apk, fetching data from db!\n" + Fore.BLUE)
+			response = jsonify(status_code=HTTPStatus.OK, download_status="complete", hash_key=hash_of_apk)
+			os.system('rm app.apk')
+		except Exception as e:
+			response = jsonify(status_code=HTTPStatus.REQUEST_TIMEOUT, download_status="incomplete")
+
+	return response
+
+
 @app.route("/slack_scan", methods=['POST','GET'])
 def jarvis():
 	if request.method == 'POST':
