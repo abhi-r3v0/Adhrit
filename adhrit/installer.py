@@ -55,7 +55,7 @@ class DepInstaller:
 
 			print("\n[+]  Installing necessary tools on MAC")
 			try:
-			    os.system('brew cask install xquartz')
+			    os.system('brew install --cask xquartz')
 			    os.system('brew install toilet')
 			    print("\n[+]  Installation of dependencies complete")
 			except OSError:
@@ -65,7 +65,7 @@ class DepInstaller:
 
 			print("\n[+]  Installing Android debug tools ")
 			try:
-			    os.system('brew cask install android-platform-tools')
+			    os.system('brew install --cask android-platform-tools')
 			    print("\n[+]  Installation of Android tools complete")
 			except OSError:
 			    print("\n[!]  Error installing Android tools")
