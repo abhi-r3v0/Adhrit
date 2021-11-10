@@ -59,7 +59,7 @@ def add_to_db(hash_of_apk):
 	hash_of_apk = hash_of_apk
 	dbconstatus = dbconnection(dbname)
 	create_bytecode_table(dbconstatus)
-	datadetails = (str(hash_of_apk), str(sortify(set_of_unsafe_intent_list)), str(sortify(set_of_url_allowed_list)), str(sortify(set_of_content_allowed_list)), str(sortify(set_of_list_of_unenc_soc)), str(sortify(set_of_insecure_socket_list)), str(sortify(set_of_tls_validity_list)), str(sortify(set_of_sys_broadcast_list)), str(sortify(set_of_empty_pend_list)), str(sortify(set_of_search_dynamic)), str(sortify(set_of_ecb)), str(sortify(set_of_js)), str(sortify(set_of_list_of_cookie_overwrite)), str(sortify(set_of_weak_checks_list)), str(sortify(set_of_execsql_used)), str(sortify(set_of_sharedprefs_used)), str(sortify(set_of_sqli_used)))
+	datadetails = (str(hash_of_apk), str(sortify(set_of_unsafe_intent_list)), str(sortify(set_of_url_allowed_list)), str(sortify(set_of_content_allowed_list)), str(sortify(set_of_list_of_unenc_soc)), str(sortify(set_of_insecure_socket_list)), str(sortify(set_of_tls_validity_list)), str(sortify(set_of_sys_broadcast_list)), str(sortify(set_of_empty_pend_list)), str(sortify(set_of_search_dynamic)), str(sortify(set_of_ecb)), str(sortify(set_of_js)), str(sortify(set_of_list_of_cookie_overwrite)), str(sortify(set_of_weak_checks_list)), str(sortify(set_of_execsql_used)))
 	addedornot = insert_bytecodetable(dbconstatus, datadetails)
 
 
@@ -178,8 +178,8 @@ def parser(hash_of_apk):
 	set_updater(set_of_execsql_used, 'EXECSQL_USAGE')
 	set_updater(set_of_sharedprefs_used, 'SHAREDPREFS_USAGE')
 	set_updater(set_of_sqli_used, 'SQLITE_USAGE')
-	set_updater(set_of_int_storage_used, 'INT_STORAGE_USAGE')
-	set_updater(set_of_keystore_used, 'KEYSTORE_USAGE')
+	# set_updater(set_of_int_storage_used, 'INT_STORAGE_USAGE')
+	# set_updater(set_of_keystore_used, 'KEYSTORE_USAGE')
 
 
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n")
@@ -211,10 +211,10 @@ def parser(hash_of_apk):
 	printer(set_of_sharedprefs_used)
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SQLite DB used\n")
 	printer(set_of_sqli_used)
-	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Internal storage used\n")
-	printer(set_of_int_storage_used)
-	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Keystore used\n")
-	printer(set_of_keystore_used)
+	# print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Internal storage used\n")
+	# printer(set_of_int_storage_used)
+	# print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Keystore used\n")
+	# printer(set_of_keystore_used)
 
 
 	path = os.getcwd() + '/..'

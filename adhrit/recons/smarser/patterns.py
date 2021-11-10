@@ -571,6 +571,6 @@ def pattern_receiver(thefile, thelist):
 		getKeyStoreUsage(thefile, thelist)
 
 
-	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, execsql_list, sharedpref_list, sqlite_usage_list, int_storage_list, keystore_list)
+	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, execsql_list, sharedpref_list, sqlite_usage_list)
 
 
