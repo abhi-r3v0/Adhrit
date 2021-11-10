@@ -9,7 +9,7 @@ from sys import platform
 class DepInstaller:
 
 	def __init__(self):
-		self.apt_tools = ['python-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'toilet']
+		self.apt_tools = ['python3-pip', 'python3-setuptools', 'python3-pip', 'android-tools-adb', 'toilet']
 		self.pip_tools = ['PrettyTable', 'requests', 'progressbar2', 'colorama', 'urllib3', 'r2pipe', 'smalisca', 'cement==2.10.12', 'Flask==1.1.2' ]
 		self.uninstalled = []
 	
@@ -22,13 +22,25 @@ class DepInstaller:
 			print("\n[+]  Installing necessary tools on Linux\n")
 			for i in self.apt_tools:
 				try:
-					subprocess.check_output(['sudo', 'apt-get', '-f', 'install', i], stderr=subprocess.PIPE)
+					subprocess.check_output(['sudo', 'apt-get', 'install', '-y', i], stderr=subprocess.PIPE)
 					print("\t[+] Installed " + i)
 				except subprocess.CalledProcessError:
 					print("\t\t[!] Error installing " + i + ". Please install manually: 'sudo apt-get -f install " + i + "'")
 					self.uninstalled.append(i)
 					pass
-
+			
+			print("\n[+]  Installing node dependencies ")
+			try:
+				working_dir = os.getcwd()
+				os.chdir(working_dir + '/frontend')
+				os.system('npm install')
+				os.chdir(working_dir)
+				print("\n[+]  Installation of node dependencies complete")
+				os.system("npm install -g @angular/cli")
+			except OSError:
+				print("\n[!]  Error installing node dependencies")
+				self.uninstalled.append("node-dependencies")
+			
 			for j in self.pip_tools:
 				try:
 					if j == 'r2pipe':

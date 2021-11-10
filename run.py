@@ -51,7 +51,7 @@ if dep_check == 'complete':
 	os.system('sudo lsof -t -i tcp:4200 | xargs kill -9') #To kill any ng s if present
 	working_dir = os.getcwd()
 	os.chdir(working_dir + '/frontend')
-	a = Popen(['ng s &'], stdin=PIPE, shell=True)
+	a = Popen(['ng','s','--host','0.0.0.0'])
 	while(True):
 		url = 'http://localhost:4200/'
 		try:
