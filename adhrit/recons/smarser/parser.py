@@ -26,6 +26,8 @@ set_of_weak_checks_list = set()
 set_of_execsql_used = set()
 set_of_sharedprefs_used = set()
 set_of_sqli_used = set()
+set_of_int_storage_used = set()
+set_of_keystore_used = set()
 
 
 def get_config_data(key):
@@ -151,6 +153,12 @@ def parser(hash_of_apk):
 									if 'SQLITE_USAGE' in x:
 										set_of_sqli_used.update(i)
 
+									if 'INT_STORAGE_USAGE' in x:
+										set_of_int_storage_used.update(i)
+
+									if 'KEYSTORE_USAGE' in x:
+										set_of_keystore_used.update(i)
+
 						else:
 							pass
 
@@ -170,6 +178,8 @@ def parser(hash_of_apk):
 	set_updater(set_of_execsql_used, 'EXECSQL_USAGE')
 	set_updater(set_of_sharedprefs_used, 'SHAREDPREFS_USAGE')
 	set_updater(set_of_sqli_used, 'SQLITE_USAGE')
+	set_updater(set_of_int_storage_used, 'INT_STORAGE_USAGE')
+	set_updater(set_of_keystore_used, 'KEYSTORE_USAGE')
 
 
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Javascript is enabled \n")
@@ -197,11 +207,15 @@ def parser(hash_of_apk):
 	printer(set_of_weak_checks_list)
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Usage of 'execSQL'! \n")
 	printer(set_of_execsql_used)
-
 	print(Fore.YELLOW + "\n\t\t[!] " + Fore.RED + "SharedPreference has been used \n")
 	printer(set_of_sharedprefs_used)
 	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "SQLite DB used\n")
 	printer(set_of_sqli_used)
+	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Internal storage used\n")
+	printer(set_of_int_storage_used)
+	print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Keystore used\n")
+	printer(set_of_keystore_used)
+
 
 	path = os.getcwd() + '/..'
 

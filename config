@@ -1,5 +1,5 @@
 [config-data]
-dependencies_status = incomplete
+dependencies_status = complete
 emulator_path = #optional
 adhrit_slack_token = #This slack token fetches the apk uploaded on to slack from the slack link provided on JIRA tickets, Also this same token is being used for slack-apk scanning.
 

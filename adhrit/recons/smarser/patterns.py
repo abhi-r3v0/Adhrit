@@ -24,6 +24,8 @@ execsql_list = set()
 
 sharedpref_list = set()
 sqlite_usage_list = set()
+int_storage_list = set()
+keystore_list = set()
 
 slack_unsafe_intent = []
 slack_allow_file = []
@@ -485,6 +487,24 @@ def getSqliteUsage(thefile, thelist):
 				sqlite_usage_list.add(str(thefile))
 
 
+def getIntStorageUsage(thefile, thelist):
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == "to_method" and str(cval) == "getFilesDir"):
+				print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Internal Storage used \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+				int_storage_list.add(str(thefile))
+
+
+def getKeyStoreUsage(thefile, thelist):
+	flag = 0
+	flag2 = 0
+	for k in thelist:
+		for ckey, cval in k.items():
+			if(ckey == 'to_class' and str(cval) == 'Ljavax/crypto/KeyGenerator'):
+				flag = 1
+				print(Fore.RED + "\n\t\t[!] " + Fore.RED + "Keystore used \n\t\t" + Fore.BLUE + "File: " + Fore.YELLOW + thefile)
+				keystore_list.add(str(thefile))
+
 
 def pattern_receiver(thefile, thelist):
 
@@ -544,7 +564,13 @@ def pattern_receiver(thefile, thelist):
 		sqlite_usage_list.add('SQLITE_USAGE')
 		getSqliteUsage(thefile, thelist)
 
+		int_storage_list.add('INT_STORAGE_USAGE')
+		getIntStorageUsage(thefile, thelist)
 
-	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, execsql_list, sharedpref_list, sqlite_usage_list)
+		keystore_list.add('KEYSTORE_USAGE')
+		getKeyStoreUsage(thefile, thelist)
+
+
+	return(js_enabled_list, ecb_usage_list, search_dynamic_list, empty_pend_list, sys_broadcast_list, tls_validity_list, insecure_socket_list, list_of_unenc_soc, unsafe_intent_list, list_of_cookie_overwrite, url_allowed_list, content_allowed_list, weak_checks_list, execsql_list, sharedpref_list, sqlite_usage_list, int_storage_list, keystore_list)
 
 
