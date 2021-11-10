@@ -17,6 +17,8 @@ import sqlite3, hashlib
 from shutil import rmtree 
 from sqlite3 import Error
 from colorama import Fore
+import requests
+
 
 
 
@@ -375,13 +377,190 @@ def report(hash_key, scan_type):
 	response = getreport(hash_key, scan_type)
 	return response,{'Access-Control-Allow-Origin': '*'}
 
+@app.route("/slack_scan", methods=['POST','GET'])
+def jarvis():
+	if request.method == 'POST':
+		request_data = request.json
+		channel_id = request_data['channel']
+		ts = request_data['ts']
+		config_file = configparser.ConfigParser()
+		config_file.read('config')    
+		token = config_file.get('config-data', 'adhrit_slack_token')    
+		header = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
+		url = f"https://slack.com/api/conversations.history?channel={channel_id}"
+		r = requests.get(url, headers=header)
+		conversation_history = r.json()
+		messages = conversation_history["messages"]
+		for each_messages in messages:
+			for key,value in each_messages.items():
+				if 'ts' in key and ts in value:
+					if 'files' in each_messages.keys():
+						for file in each_messages['files']:
+							url = file['url_private_download']
+					elif 'attachments' in each_messages.keys():
+						for attachment in each_messages['attachments']:
+							for file in attachment['files']:
+								url = file['url_private_download']
+		
+		
+		if 'https://slack.com/api/conversations.history?channel=' in url:
+			print(f"{ts}")
+			print("wrong ts passed")
+			return "wrong ts passed"
+		try:
+			token = config_file.get('config-data', 'adhrit_slack_token')
+			headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
+			r = requests.get(url, headers=headers)
+			with open('app.apk', 'wb') as f:
+				for chunk in r.iter_content(chunk_size=1024):
+					if chunk: f.write(chunk)	
+			global hash_of_apk
+			hash_of_apk = get_hash()
+			status_hash_of_apk = query_on_StatusDB(hash_of_apk)
+			try:
+				welcome()
+				if 'incomplete' in status_hash_of_apk.values():
+					del_row(hash_of_apk)
+					pwd = os.getcwd()
+					path = str(pwd) + '/'+hash_of_apk
+					rmtree(path, ignore_errors = True)
+					extraction('app.apk',hash_of_apk)	
+					p1 = multiprocessing.Process(target=parser, args=[hash_of_apk])
+					p1.start()
+					secret_scanner(hash_of_apk)
+					main(hash_of_apk)
+					p1.join()
+
+					while(True):
+						time.sleep(2)
+						status = query_on_StatusDB(hash_of_apk)
+						if 'incomplete' not in status.values():
+							cleaner(hash_of_apk)
+							break
+			except Exception as e:
+				msg = "An Exception has been Caught on Jarvis-Adhrit Integration: \n```" + str(traceback.format_exc()) + "```"
+				print(msg)
+				return "Scanning incomplete"
+			
+			print("Fetching results")
+			jarvis_token = config_file.get('config-data', 'jarvis_slack_tocken')
+			headers = {'Authorization': f'Bearer {jarvis_token}', 'Content-Type': 'application/json'}
+			#Fetching results
+			# msg ="Adhrit - Android Security Suite Report" + "\n\n"
+			message = "\n*Manifest Analysis*" "\n\n"
+
+			report_manifest = getreport(hash_of_apk, 'manifest')
+			for key, val in report_manifest.items():
+				if not "Implicit Intents" in key:
+					if len(message) < 3000:
+						message += f"`{key}`\n\n"
+						if "Application Information" in key:
+							message += "```"
+							for i in val:
+								message += f"{i}\n"
+							message +="```\n\n"
+						else:
+							message += "```"
+							for i in val[1:]:
+								message += f"{i}\n"
+							message += "```\n\n"
+						
+						pass
+					else:
+						tmp_msg = f"`{key}`\n\n"
+						tmp_msg += "```"
+						for i in val[1:]:
+							tmp_msg += f"{i}\n"
+						tmp_msg += "```\n\n"
+						data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+						req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+						message = tmp_msg
+
+			data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+			req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+			message = ''
+
+			message += "\n\n*Hardcoded Secrets*\n\n"
+			report_secrets = getreport(hash_of_apk, 'secrets')
+			for key,val in report_secrets.items():
+				if len(message) < 3700:
+					message += f"`{key}`\n"
+					message += "```"
+					for i in val[1:]:
+						if len(message) >3700:
+							message += "```"
+							data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+							req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+							message = "```"
+						message += f"{i}\n"
+					message += "```\n\n"
+				else: 
+					tmp_msg = f"`{key}`\n\n"
+					tmp_msg += "```"
+					for i in val[1:]:
+						tmp_msg += f"{i}\n"
+					tmp_msg += "```\n\n"
+					data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+					req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+					message = tmp_msg
+			
+			data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+			req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+			message = ''
 
 
+			message += "\n\n*Vulnerable Patterns identified*\n\n"
+			report_vulns = getreport(hash_of_apk, 'vulns')
+			for key,val in report_vulns.items():
+				if len(message) < 3500:
+					message += f"`{key}`\n"
+					message += "```"
+					for i in val[1:]:
+						message += f"{i}\n"
+					message += "```\n\n"
+				else:
+					tmp_msg = f"`{key}`\n\n"
+					tmp_msg += "```"
+					for i in val[1:]:
+						tmp_msg += f"{i}\n"
+					tmp_msg += "```\n\n"
+					data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+					req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+					message = tmp_msg
+
+			message += "\n\n*Recon*\n\n"
+			report_recon = getreport(hash_of_apk, 'bytecode')
+			for key,val in report_recon.items():
+				if len(message) < 3000:
+					message += f"`{key}`\n"
+					message += "```"
+					for i in val[1:]:
+						if len(message) >3700:
+							message += "```"
+							data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+							req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+							message = "```"
+						message += f"{i}\n"
+					message += "```\n\n"
+				else:
+					tmp_msg = f"`{key}`\n\n"
+					tmp_msg += "```"
+					for i in val[1:]:
+						tmp_msg += f"{i}\n"
+					tmp_msg += "```\n\n"
+					data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+					req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
+					message = tmp_msg
+
+			data = {"text": message, "channel":  channel_id, "thread_ts": ts}
+			req = requests.post("https://slack.com/api/chat.postMessage", headers=headers, data=json.dumps(data))
 
 
-@app.route("/testbed")
-def test():
-	pass
+			return str(HTTPStatus.OK)
+
+		except:
+			pass
+		return "fail"	
 
 
 

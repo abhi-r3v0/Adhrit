@@ -1,0 +1,7 @@
+def adhrit_scan(self, ts, channel, user):
+        data = {"ts": ts, "channel": channel}
+        # Respond mesage to slack with "Initiating ADHRIT scan :alert:"
+        req = requests.post(self.config['adhrit']['url'], json=data)  #url = hosted adhrit ip
+        if "wrong" in req.text:   #"wrong is the response when the scanning failed"
+            # Handling
+        return

@@ -2,7 +2,7 @@ from adhrit.installer import main
 import configparser, webbrowser
 from subprocess import Popen, PIPE
 from sys import platform
-import os,time
+import os,time, requests
 try:
 	import requests
 	from requests.exceptions import ConnectionError
