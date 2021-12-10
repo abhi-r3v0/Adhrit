@@ -5,7 +5,7 @@ from flask import Flask, json, jsonify, render_template, request
 from threading import Thread
 from http import HTTPStatus
 import multiprocessing
-import os, configparser, time
+import os, configparser, time, yaml
 from adhrit.recons.dbaccess import create_status_table, dbconnection, select_query
 from adhrit.recons.apk_extract import extraction
 from adhrit.recons.reset import reset_db
@@ -389,9 +389,10 @@ def report(hash_key, scan_type):
 def jira():
 	if request.method == 'POST':
 		url = request.form['url']
-		config_file = configparser.ConfigParser()
-		config_file.read('config')                                         
-		token = config_file.get('config-data', 'adhrit_slack_token')
+		path = os.getcwd()
+		with open(path + "/config.yaml", "r") as ymlfile:
+			config = yaml.load(ymlfile, Loader=yaml.FullLoader)
+		token = config['ADHRIT']['adhrit_slack_token']
 		headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
 		try:
 			r = requests.get(url, headers=headers)
@@ -436,9 +437,10 @@ def jarvis():
 		request_data = request.json
 		channel_id = request_data['channel']
 		ts = request_data['ts']
-		config_file = configparser.ConfigParser()
-		config_file.read('config')    
-		token = config_file.get('config-data', 'adhrit_slack_token')    
+		path = os.getcwd()
+		with open(path + "/config.yaml", "r") as ymlfile:
+			config = yaml.load(ymlfile, Loader=yaml.FullLoader)
+		token = config['ADHRIT']['adhrit_slack_token']   
 		header = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
 		url = f"https://slack.com/api/conversations.history?channel={channel_id}"
 		r = requests.get(url, headers=header)
@@ -461,7 +463,7 @@ def jarvis():
 			print("wrong ts passed")
 			return "wrong ts passed"
 		try:
-			token = config_file.get('config-data', 'adhrit_slack_token')
+			token = config['ADHRIT']['adhrit_slack_token'] 
 			headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': f'Bearer {token}'}
 			r = requests.get(url, headers=headers)
 			with open('app.apk', 'wb') as f:
@@ -496,7 +498,7 @@ def jarvis():
 				return "Scanning incomplete"
 			
 			print("Fetching results")
-			jarvis_token = config_file.get('config-data', 'jarvis_slack_tocken')
+			jarvis_token = config['ADHRIT']['jarvis_slack_tocken']
 			headers = {'Authorization': f'Bearer {jarvis_token}', 'Content-Type': 'application/json'}
 			#Fetching results
 			# msg ="Adhrit - Android Security Suite Report" + "\n\n"
@@ -616,7 +618,28 @@ def jarvis():
 		return "fail"	
 
 
+@app.route("/settings", methods=['POST'])
+def settings():
+	if request.method == 'POST':
+		data = request.data
+		json_data = json.loads(data)
+		path = os.getcwd()
+		with open(path + "/config.yaml", "w") as ymlfile:
+			yaml.dump(json_data, ymlfile, allow_unicode=True)
+	return str(HTTPStatus.OK)
 
+
+@app.route('/getsettings')
+def getsettings():
+	path = os.getcwd()
+	with open(path + "/config.yaml", "r") as ymlfile:
+		config = yaml.load(ymlfile, Loader=yaml.FullLoader) 
+	json_data = json.dumps(config)
+	return json_data
+	
+
+
+	return "Adhrit up and running *-*"
 
 @app.route('/')
 def func():
